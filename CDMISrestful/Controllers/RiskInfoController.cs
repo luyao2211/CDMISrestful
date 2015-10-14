@@ -19,7 +19,7 @@ namespace CDMISrestful.Controllers
         /// <param name="PlanNo"></param>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/Evaluations/GetValueByPlanNoAndId")]
+        [Route("Api/v1/RiskInfo/Plan/{PlanNo}/Task/{Id}")]
         public string GetValueByPlanNoAndId(string PlanNo, string Id)
         {
             return repository.GetValueByPlanNoAndId(PlanNo, Id);
@@ -29,7 +29,7 @@ namespace CDMISrestful.Controllers
         /// 获取血压等级字典表的所有信息 LY 2015-10-13
         /// </summary>
         /// <returns></returns>
-        [Route("Api/v1/Users/Evaluations/GetBPGrades")]
+        [Route("Api/v1/RiskInfo/GetBPGrades")]
         public List<MstBloodPressure> GetBPGrades()
         {
             return repository.GetBPGrades();
@@ -40,7 +40,7 @@ namespace CDMISrestful.Controllers
         /// </summary>
         /// <param name="SBP"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/Evaluations/GetDescription")]
+        [Route("Api/v1/RiskInfo/GetDescription")]
         public string GetDescription(int SBP)
         {
             return repository.GetDescription(SBP);
@@ -59,6 +59,7 @@ namespace CDMISrestful.Controllers
         /// <param name="TerminalIP"></param>
         /// <param name="DeviceType"></param>
         /// <returns></returns>
+        
         [Route("Api/v1/Users/{UserId}/Evaluations/PostRiskResult")]
         public HttpResponseMessage PostRiskResult(string UserId, string AssessmentType, string AssessmentName, DateTime AssessmentTime, string Result, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
