@@ -65,6 +65,10 @@ namespace CDMISrestful.DataMethod
             {
                 VitalInfo item = new VitalInfo();
                 InterSystems.Data.CacheTypes.CacheSysList list = null;
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
                 list = Ps.VitalSigns.GetVitalSignDates(pclsCache.CacheConnectionObject, UserId, date, Num);
                 if (list != null)
                 {

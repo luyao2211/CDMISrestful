@@ -1,0 +1,114 @@
+2015/10/13 19:41:03	test-PC   	::1             	ERR	VitalInfoMethod.GetVitalSignDates                           	数据库操作异常！ error information : Connection not open
+   在 InterSystems.Data.CacheClient.CacheADOConnection.ExceptionIfNotOpen()
+   在 InterSystems.Data.CacheClient.CacheConnection.GetMtdSignature()
+   在 Ps.VitalSigns.GetVitalSignDates(CacheConnection conn, String UserId, Nullable`1 Date, Nullable`1 Num)
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetVitalSignDates(DataConnection pclsCache, String UserId, Int32 date, Int32 Num) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 68
+2015/10/13 19:41:05	test-PC   	::1             	ERR	                                                            	数据库连接失败！ error information : Cache Security Error
+   在 InterSystems.Data.CacheClient.CacheADOConnection.Open()
+   在 InterSystems.Data.CacheClient.CacheConnection.Open(Boolean useCache)
+   在 InterSystems.Data.CacheClient.CacheConnection.Open()
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 51
+2015/10/13 19:41:05	test-PC   	::1             	ERR	VitalInfoMethod.GetTypedSignDetailByPeriod                  	数据库操作异常！ error information : Cache Security Error
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 69
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetTypedSignDetailByPeriod(DataConnection pclsCache, String UserId, String ItemType, String ItemCode, Int32 StartDate, Int32 EndDate) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 104
+2015/10/13 19:41:06	test-PC   	::1             	ERR	                                                            	数据库连接失败！ error information : Cache Security Error
+   在 InterSystems.Data.CacheClient.CacheADOConnection.Open()
+   在 InterSystems.Data.CacheClient.CacheConnection.Open(Boolean useCache)
+   在 InterSystems.Data.CacheClient.CacheConnection.Open()
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 51
+2015/10/13 19:41:07	test-PC   	::1             	ERR	VitalInfoMethod.GetTypedSignDetailByPeriod                  	数据库操作异常！ error information : Cache Security Error
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 69
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetTypedSignDetailByPeriod(DataConnection pclsCache, String UserId, String ItemType, String ItemCode, Int32 StartDate, Int32 EndDate) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 104
+2015/10/13 19:41:09	test-PC   	::1             	ERR	                                                            	数据库连接失败！ error information : Cache Security Error
+   在 InterSystems.Data.CacheClient.CacheADOConnection.Open()
+   在 InterSystems.Data.CacheClient.CacheConnection.Open(Boolean useCache)
+   在 InterSystems.Data.CacheClient.CacheConnection.Open()
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 51
+2015/10/13 19:41:09	test-PC   	::1             	ERR	VitalInfoMethod.GetTypedSignDetailByPeriod                  	数据库操作异常！ error information : Cache Security Error
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 69
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetTypedSignDetailByPeriod(DataConnection pclsCache, String UserId, String ItemType, String ItemCode, Int32 StartDate, Int32 EndDate) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 104
+2015/10/13 19:41:09	test-PC   	::1             	ERR	GetSignsDetailByPeriod                                      	WebService调用异常！ error information : 未将对象引用设置到对象的实例。
+   在 CDMISrestful.Models.VitalInfoRepository.GetSignsDetailByPeriod(String PatientId, String Module, Int32 StartDate, Int32 Num) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\Models\VitalInfoRepository.cs:行号 77
+2015/10/13 19:42:10	test-PC   	::1             	ERR	VitalInfoMethod.GetVitalSignDates                           	数据库操作异常！ error information : Connection not open
+   在 InterSystems.Data.CacheClient.CacheADOConnection.ExceptionIfNotOpen()
+   在 InterSystems.Data.CacheClient.CacheConnection.GetMtdSignature()
+   在 Ps.VitalSigns.GetVitalSignDates(CacheConnection conn, String UserId, Nullable`1 Date, Nullable`1 Num)
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetVitalSignDates(DataConnection pclsCache, String UserId, Int32 date, Int32 Num) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 68
+2015/10/13 19:42:24	test-PC   	::1             	ERR	                                                            	数据库连接失败！ error information : Cache Security Error
+   在 InterSystems.Data.CacheClient.CacheADOConnection.Open()
+   在 InterSystems.Data.CacheClient.CacheConnection.Open(Boolean useCache)
+   在 InterSystems.Data.CacheClient.CacheConnection.Open()
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 51
+2015/10/13 19:42:24	test-PC   	::1             	ERR	VitalInfoMethod.GetTypedSignDetailByPeriod                  	数据库操作异常！ error information : Cache Security Error
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 69
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetTypedSignDetailByPeriod(DataConnection pclsCache, String UserId, String ItemType, String ItemCode, Int32 StartDate, Int32 EndDate) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 104
+2015/10/13 19:43:29	test-PC   	::1             	ERR	                                                            	数据库连接失败！ error information : Cache Security Error
+   在 InterSystems.Data.CacheClient.CacheADOConnection.Open()
+   在 InterSystems.Data.CacheClient.CacheConnection.Open(Boolean useCache)
+   在 InterSystems.Data.CacheClient.CacheConnection.Open()
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 51
+2015/10/13 19:43:29	test-PC   	::1             	ERR	VitalInfoMethod.GetTypedSignDetailByPeriod                  	数据库操作异常！ error information : Cache Security Error
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 69
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetTypedSignDetailByPeriod(DataConnection pclsCache, String UserId, String ItemType, String ItemCode, Int32 StartDate, Int32 EndDate) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 104
+2015/10/13 19:43:37	test-PC   	::1             	ERR	                                                            	数据库连接失败！ error information : Cache Security Error
+   在 InterSystems.Data.CacheClient.CacheADOConnection.Open()
+   在 InterSystems.Data.CacheClient.CacheConnection.Open(Boolean useCache)
+   在 InterSystems.Data.CacheClient.CacheConnection.Open()
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 51
+2015/10/13 19:43:37	test-PC   	::1             	ERR	VitalInfoMethod.GetTypedSignDetailByPeriod                  	数据库操作异常！ error information : Cache Security Error
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 69
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetTypedSignDetailByPeriod(DataConnection pclsCache, String UserId, String ItemType, String ItemCode, Int32 StartDate, Int32 EndDate) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 104
+2015/10/13 19:49:12	test-PC   	::1             	ERR	VitalInfoMethod.GetVitalSignDates                           	数据库操作异常！ error information : Connection not open
+   在 InterSystems.Data.CacheClient.CacheADOConnection.ExceptionIfNotOpen()
+   在 InterSystems.Data.CacheClient.CacheConnection.GetMtdSignature()
+   在 Ps.VitalSigns.GetVitalSignDates(CacheConnection conn, String UserId, Nullable`1 Date, Nullable`1 Num)
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetVitalSignDates(DataConnection pclsCache, String UserId, Int32 date, Int32 Num) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 68
+2015/10/13 19:49:36	test-PC   	::1             	ERR	                                                            	数据库连接失败！ error information : Cache Security Error
+   在 InterSystems.Data.CacheClient.CacheADOConnection.Open()
+   在 InterSystems.Data.CacheClient.CacheConnection.Open(Boolean useCache)
+   在 InterSystems.Data.CacheClient.CacheConnection.Open()
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 51
+2015/10/13 19:49:36	test-PC   	::1             	ERR	VitalInfoMethod.GetTypedSignDetailByPeriod                  	数据库操作异常！ error information : Cache Security Error
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 69
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetTypedSignDetailByPeriod(DataConnection pclsCache, String UserId, String ItemType, String ItemCode, Int32 StartDate, Int32 EndDate) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 104
+2015/10/13 19:49:46	test-PC   	::1             	ERR	                                                            	数据库连接失败！ error information : Cache Security Error
+   在 InterSystems.Data.CacheClient.CacheADOConnection.Open()
+   在 InterSystems.Data.CacheClient.CacheConnection.Open(Boolean useCache)
+   在 InterSystems.Data.CacheClient.CacheConnection.Open()
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 51
+2015/10/13 19:49:46	test-PC   	::1             	ERR	VitalInfoMethod.GetTypedSignDetailByPeriod                  	数据库操作异常！ error information : Cache Security Error
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 69
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetTypedSignDetailByPeriod(DataConnection pclsCache, String UserId, String ItemType, String ItemCode, Int32 StartDate, Int32 EndDate) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 104
+2015/10/13 19:49:56	test-PC   	::1             	ERR	                                                            	数据库连接失败！ error information : Cache Security Error
+   在 InterSystems.Data.CacheClient.CacheADOConnection.Open()
+   在 InterSystems.Data.CacheClient.CacheConnection.Open(Boolean useCache)
+   在 InterSystems.Data.CacheClient.CacheConnection.Open()
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 51
+2015/10/13 19:49:56	test-PC   	::1             	ERR	VitalInfoMethod.GetTypedSignDetailByPeriod                  	数据库操作异常！ error information : Cache Security Error
+   在 CDMISrestful.CommonLibrary.DataConnection.Connect() 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\CommonLibrary\DataConnection.cs:行号 69
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetTypedSignDetailByPeriod(DataConnection pclsCache, String UserId, String ItemType, String ItemCode, Int32 StartDate, Int32 EndDate) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 104
+2015/10/13 19:51:46	test-PC   	::1             	ERR	VitalInfoMethod.GetVitalSignDates                           	数据库操作异常！ error information : Connection not open
+   在 InterSystems.Data.CacheClient.CacheADOConnection.ExceptionIfNotOpen()
+   在 InterSystems.Data.CacheClient.CacheConnection.GetMtdSignature()
+   在 Ps.VitalSigns.GetVitalSignDates(CacheConnection conn, String UserId, Nullable`1 Date, Nullable`1 Num)
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetVitalSignDates(DataConnection pclsCache, String UserId, Int32 date, Int32 Num) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 68
+2015/10/13 19:56:41	test-PC   	::1             	ERR	VitalInfoMethod.GetVitalSignDates                           	数据库操作异常！ error information : Connection not open
+   在 InterSystems.Data.CacheClient.CacheADOConnection.ExceptionIfNotOpen()
+   在 InterSystems.Data.CacheClient.CacheConnection.GetMtdSignature()
+   在 Ps.VitalSigns.GetVitalSignDates(CacheConnection conn, String UserId, Nullable`1 Date, Nullable`1 Num)
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetVitalSignDates(DataConnection pclsCache, String UserId, Int32 date, Int32 Num) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 68
+2015/10/13 20:04:33	test-PC   	::1             	ERR	VitalInfoMethod.GetVitalSignDates                           	数据库操作异常！ error information : Connection not open
+   在 InterSystems.Data.CacheClient.CacheADOConnection.ExceptionIfNotOpen()
+   在 InterSystems.Data.CacheClient.CacheConnection.GetMtdSignature()
+   在 Ps.VitalSigns.GetVitalSignDates(CacheConnection conn, String UserId, Nullable`1 Date, Nullable`1 Num)
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetVitalSignDates(DataConnection pclsCache, String UserId, Int32 date, Int32 Num) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 68
+2015/10/13 20:06:17	test-PC   	::1             	ERR	VitalInfoMethod.GetVitalSignDates                           	数据库操作异常！ error information : Connection not open
+   在 InterSystems.Data.CacheClient.CacheADOConnection.ExceptionIfNotOpen()
+   在 InterSystems.Data.CacheClient.CacheConnection.GetMtdSignature()
+   在 Ps.VitalSigns.GetVitalSignDates(CacheConnection conn, String UserId, Nullable`1 Date, Nullable`1 Num)
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetVitalSignDates(DataConnection pclsCache, String UserId, Int32 date, Int32 Num) 位置 f:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\DataMethod\VitalInfoMethod.cs:行号 68
+2015/10/13 20:10:08	test-PC   	::1             	ERR	VitalInfoMethod.GetVitalSignDates                           	数据库操作异常！ error information : Connection not open
+   在 InterSystems.Data.CacheClient.CacheADOConnection.ExceptionIfNotOpen()
+   在 InterSystems.Data.CacheClient.CacheConnection.GetMtdSignature()
+   在 Ps.VitalSigns.GetVitalSignDates(CacheConnection conn, String UserId, Nullable`1 Date, Nullable`1 Num)
+   在 CDMISrestful.DataMethod.VitalInfoMethod.GetVitalSignDates(DataConnection pclsCache, String UserId, Int32 date, Int32 Num)

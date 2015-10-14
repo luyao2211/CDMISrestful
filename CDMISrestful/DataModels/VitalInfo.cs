@@ -54,27 +54,27 @@ namespace CDMISrestful.DataModels
         /// <summary>
         /// 用户Id
         /// </summary>
-        [Required(ErrorMessage = "请传入用户Id")]
+
         public string UserId { get; set; }
         /// <summary>
         /// 记录日期
         /// </summary>
-        [Required(ErrorMessage = "请输入记录日期")]
+
         public string RecordDate{ get; set; }
         /// <summary>
         /// 记录时间
         /// </summary>
-        [Required(ErrorMessage = "请输入记录时间")]        
+    
         public string RecordTime { get; set; }
         /// <summary>
         /// 记录类型
         /// </summary>
-        [Required(ErrorMessage = "请输入体征大类")]                
+                
         public string ItemType { get; set; }
         /// <summary>
         /// 记录项目
         /// </summary>
-        [Required(ErrorMessage = "请输入体征名称")]                        
+                      
         public string ItemCode { get; set; }
         /// <summary>
         /// 项目数据

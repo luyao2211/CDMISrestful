@@ -6,6 +6,8 @@ using System.Text.RegularExpressions;
 using System.Web;
 using CDMISrestful.CommonLibrary;
 using CDMISrestful.DataMethod;
+using CDMISrestful.DataModels;
+using CDMISrestful.DataViewModels;
 using InterSystems.Data.CacheClient;
 
 namespace CDMISrestful.Models
@@ -16,6 +18,10 @@ namespace CDMISrestful.Models
         DataConnection pclsCache = new DataConnection();
         UsersMethod usersMethod = new UsersMethod();
         CommonMethod commonMethod = new CommonMethod();
+        PlanInfoMethod planInfoMethod = new PlanInfoMethod();
+        VitalInfoMethod vitalInfoMethod = new VitalInfoMethod();
+        ModuleInfoMethod moduleInfoMethod = new ModuleInfoMethod();
+        DictMethod dictMethod = new DictMethod();
 
         public string IsUserValid(string userId, string password)
         {
@@ -190,7 +196,523 @@ namespace CDMISrestful.Models
             ret = usersMethod.ChangePassword(pclsCache, UserId, OldPassword, NewPassword, revUserId, TerminalName, TerminalIP, DeviceType);
             return ret;
         }
-		
+
+        public PatientsDataSet GetPatientsList(string DoctorId, string ModuleType, int Plan, int Compliance, int Goal)
+        {
+            int patientTotalCount = 0;  //某个模块下的患者总数
+            int planCount = 0;          //已有计划的患者数
+            int complianceCount = 0;    //依从的患者数
+            int goalCount = 0;          //达标的患者数
+            double planRate = 0;
+            double complianceRateTotal = 0;
+            double goalRate = 0;
+
+            RateTable DT_Rates = new RateTable();
+
+            List<PatientListTable> DT_PatientList = new List<PatientListTable>();
+
+            List<PatientPlan> DT_Patients = new List<PatientPlan>();
+            //DT_Patients.Columns.Add(new DataColumn("PatientId", typeof(string)));
+            //DT_Patients.Columns.Add(new DataColumn("PlanNo", typeof(string)));
+            //DT_Patients.Columns.Add(new DataColumn("StartDate", typeof(string)));
+            //DT_Patients.Columns.Add(new DataColumn("EndDate", typeof(string)));
+            //DT_Patients.Columns.Add(new DataColumn("TotalDays", typeof(string)));
+            //DT_Patients.Columns.Add(new DataColumn("RemainingDays", typeof(string)));
+            //DT_Patients.Columns.Add(new DataColumn("Status", typeof(string)));
+
+            PatientsDataSet DS_Patients = new PatientsDataSet();
+
+            try
+            {
+                int nowDate = commonMethod.GetServerDate(pclsCache);
+                DT_Patients = planInfoMethod.GetPatientsPlanByDoctorId(pclsCache, DoctorId, ModuleType);
+                if (DT_Patients != null)
+                    patientTotalCount = DT_Patients.Count;
+                else
+                    return DS_Patients;
+
+                //foreach (DataRow item in DT_Patients)
+                //{
+                for (int i = 0; i < patientTotalCount; i++)
+                {
+                    string patientId = DT_Patients[i].PatientId; // item["PatientId"].ToString();
+                    string planNo = DT_Patients[i].PlanNo;  //item["PlanNo"].ToString();
+                    if (planNo != "")
+                    {
+                        planCount++;
+                    }
+
+                    //HavePlan 0 1 2
+                    if ((Plan == 1 && planNo == "") || (Plan == 2 && planNo != ""))
+                    {
+                        continue;
+                    }
+                    string startDate = DT_Patients[i].StartDate;   //item["StartDate"].ToString();
+                    string totalDays = DT_Patients[i].TotalDays;   //item["TotalDays"].ToString();
+                    string remainingDays = DT_Patients[i].RemainingDays;   //item["RemainingDays"].ToString();
+                    string status = DT_Patients[i].Status;   //item["Status"].ToString();
+
+                    double process = 0.0;
+                    double complianceRate = 0.0;
+                    //VitalSign
+                    List<string> vitalsigns = new List<string>();
+
+                    if (planNo != "")
+                    {
+                        complianceRate = planInfoMethod.GetComplianceByDay(pclsCache, patientId, nowDate, planNo);
+                        if (complianceRate > 0)
+                        {
+                            complianceCount++;
+                        }
+                        if (complianceRate < 0)
+                        {
+                            complianceRate = 0;
+                        }
+                        //Compliance
+                        if (Compliance == 1 && complianceRate <= 0)
+                        {
+                            continue;
+                        }
+                        if (Compliance == 2 && complianceRate > 0)
+                        {
+                            continue;
+                        }
+
+                        //Vitalsign 
+                        string itemType = "Bloodpressure";
+                        string itemCode = "Bloodpressure_1";
+                        int recordDate = nowDate; //nowDate
+                        //recordDate = 20150422;
+                        bool goalFlag = false;
+                        VitalInfo list = vitalInfoMethod.GetSignByDay(pclsCache, patientId, itemType, itemCode, recordDate);
+                        if (list != null)
+                        {
+                            vitalsigns.Add(list.Value);
+                        }
+                        else
+                        {
+                            //   vitalsigns.Add("115");
+                            //ZAM 2015-6-17
+                            vitalsigns.Add("");
+                        }
+
+                        TargetByCode targetlist = planInfoMethod.GetTargetByCode(pclsCache, planNo, itemType, itemCode);
+                        if (targetlist != null)
+                        {
+                            vitalsigns.Add(targetlist.Origin);  //index 4 for Origin value
+                            vitalsigns.Add(targetlist.Value);  //index 3 for target value
+                        }
+                        else
+                        {
+                            //vitalsigns.Add("200");
+                            //vitalsigns.Add("120");
+                            //ZAM 2015-6-17
+                            vitalsigns.Add("");
+                            vitalsigns.Add("");
+                        }
+                        //非法数据判断 zam 2015-5-18
+                        if (list != null && targetlist != null)
+                        {
+                            double m, n;
+                            bool misNumeric = double.TryParse(list.Value.ToString(), out m);
+                            bool nisNumeric = double.TryParse(targetlist.Value.ToString(), out n);
+                            if (misNumeric && nisNumeric)
+                            {
+                                //if (Convert.ToInt32(list[2]) <= Convert.ToInt32(targetlist[3])) //已达标
+                                if (m <= n)
+                                {
+                                    goalCount++;
+                                    goalFlag = true;
+                                }
+                            }
+                        }
+                        //Goal 
+                        if (Goal == 1 && goalFlag == false)
+                        {
+                            continue;
+                        }
+                        if (Goal == 2 && goalFlag == true)
+                        {
+                            continue;
+                        }
+
+                        //非法数据判断 zam 2015-5-18
+                        if (startDate != "" && totalDays != "" && remainingDays != "")
+                        {
+                            double m, n;
+                            bool misNumeric = double.TryParse(totalDays, out m);
+                            bool nisNumeric = double.TryParse(remainingDays, out n);
+
+                            if (misNumeric && nisNumeric)
+                            {
+                                //process = (Convert.ToDouble(totalDays) - Convert.ToDouble(remainingDays)) / Convert.ToDouble(totalDays);
+                                process = m != 0.0 ? (m - n) / m : 0;
+                            }
+
+                        }
+                    }
+
+                    //PhotoAddress
+                    string photoAddress = "";
+                    PatDetailInfo patientInfolist = moduleInfoMethod.PsBasicInfoDetailGetPatientDetailInfo(pclsCache, patientId);
+                    if (patientInfolist != null)
+                    {
+                        photoAddress = patientInfolist.PhotoAddress;
+
+                    }
+
+                    string patientName = "";
+                    patientName = usersMethod.GetNameByUserId(pclsCache, patientId);
+                    DT_PatientList[i].PatientId = patientId;
+                    DT_PatientList[i].PatientName = patientName;
+                    DT_PatientList[i].photoAddress = photoAddress;
+                    DT_PatientList[i].PlanNo = planNo;
+                    DT_PatientList[i].StartDate = startDate;
+                    DT_PatientList[i].Process = process;
+                    DT_PatientList[i].RemainingDays = remainingDays;
+                    DT_PatientList[i].VitalSign = vitalsigns;
+                    DT_PatientList[i].ComplianceRate = complianceRate;
+                    DT_PatientList[i].TotalDays = totalDays;
+                    DT_PatientList[i].Status = status;
+
+                }
+                DS_Patients.DT_PatientList = DT_PatientList;
+                //The main rates for Plan, Compliance , Goal
+                planRate = patientTotalCount != 0 ? (double)planCount / patientTotalCount : 0;
+                complianceRateTotal = planCount != 0 ? (double)complianceCount / planCount : 0;
+                goalRate = planCount != 0 ? (double)goalCount / planCount : 0;
+                DT_Rates.PlanRate = planRate;
+                DT_Rates.ComplianceRate = complianceRateTotal;
+                DT_Rates.GoalRate = goalRate;
+
+                DS_Patients.DT_Rates = DT_Rates;
+                return DS_Patients;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetPatientsByDoctorId", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+        }
+
+        public int Verification(string userId, string ValidateCode, string PwType)
+        {
+            int ret = 0;
+            var valiCode = "test";
+            if (userId != "" && ValidateCode != "")
+            {
+                string userID = usersMethod.GetIDByInput(pclsCache, PwType, userId);
+                if (userID != "")
+                {
+                    if (ValidateCode == valiCode)
+                    {
+                        //window.localStorage.setItem("ID",userID);	
+                        //window.localStorage.setItem("Key","Verification");
+                        ret = 1; //location.href = "ResetPassword-Pad.html";
+                    }
+                    else
+                    {
+                        ret = 2; // "验证码错误！";
+                    }
+                }
+                else
+                {
+                    ret = 3;    // "用户名不存在！";
+                }
+            }
+            else if (userId == "")
+            {
+                ret = 4; // "用户名不能为空！";
+            }
+            else if (ValidateCode == "")
+            {
+                ret = 5;  // "验证码不能为空！";
+            }
+            return ret;
+        }
+
+        public int ResetPassword(string NewPassword, string ConfirmPassword, string UserId, string Key, string Device, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int ret = 0;
+            string OldPassword = "#*bme319*#";
+            if (NewPassword != "" && ConfirmPassword != "" && NewPassword == ConfirmPassword)
+            {
+                int test = usersMethod.ChangePassword(pclsCache, UserId, OldPassword, NewPassword, revUserId, TerminalName, TerminalIP, DeviceType);
+                if (test == 1)
+                {
+                    if (Key == "LogOn")
+                    {
+
+                        if (Device == "Pad")
+                        {
+                            ret = 1; // "首次重置密码成功，即将进入系统 -- HomePage.html";
+                        }
+                        else if (Device == "Phone")
+                        {
+                            ret = 2; // "首次重置密码成功，即将进入系统 -- TaskMenu.html";
+                        }
+                    }
+                    else if (Key == "Verification")
+                    {
+                        if (Device == "Pad")
+                        {
+                            ret = 3; //  "LogOn-Pad.html";
+                        }
+                        else if (Device == "Phone")
+                        {
+                            ret = 4; //  "LogOn-Phone.html";
+                        }
+
+                    }
+                }
+            }
+            else if (NewPassword == "")
+            {
+                ret = 5; //"新密码不能为空！";
+            }
+            else if (ConfirmPassword == "")
+            {
+                ret = 6; // "请再次输入新密码！";
+            }
+            else if (NewPassword != ConfirmPassword)
+            {
+                ret = 7; // "两次输入的密码不同，请再次确认新密码！";
+
+            }
+            return ret;
+        }
+
+        public PatBasicInfo GetPatBasicInfo(string UserId)
+        {
+            try
+            {
+                string module = "";
+                PatBasicInfo patientInfo = new PatBasicInfo();
+                PatientBasicInfo patientList = usersMethod.GetPatientBasicInfo(pclsCache, UserId);
+                patientInfo.UserId = UserId;
+                if (patientList != null)
+                {
+                    patientInfo.UserName = patientList.UserName;
+                    patientInfo.Age = patientList.Age;
+                    patientInfo.Gender = patientList.Gender;
+                    patientInfo.BloodType = patientList.BloodType;
+                    patientInfo.InsuranceType = patientList.InsuranceType;
+                    patientInfo.Birthday = patientList.Birthday;
+                    patientInfo.GenderText = patientList.GenderText;
+                    patientInfo.BloodTypeText = patientList.BloodTypeText;
+                    patientInfo.InsuranceTypeText = patientList.InsuranceTypeText;
+                }
+
+                List<TypeAndName> modules = moduleInfoMethod.PsBasicInfoDetailGetModulesByPID(pclsCache, UserId);
+                for (int i = 0; i < modules.Count; i++)
+                {
+                    module = module + "|" + modules[i].Name;
+                }
+                if (module != "")
+                {
+                    module = module.Substring(1, module.Length - 1);
+                }
+                patientInfo.Module = module;
+                return patientInfo;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetPatBasicInfo", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw ex;
+            }
+        }
+
+        public PatientDetailInfo GetPatientDetailInfo(string UserId)
+        {
+            try
+            {
+                string module = "";
+                PatientDetailInfo PatientDetailInfo = new PatientDetailInfo();
+                PatDetailInfo GetPatientDetailInfoList = moduleInfoMethod.PsBasicInfoDetailGetPatientDetailInfo(pclsCache, UserId);
+                PatientDetailInfo.UserId = UserId;
+                if (GetPatientDetailInfoList != null)
+                {
+                    PatientDetailInfo.PhoneNumber = GetPatientDetailInfoList.PhoneNumber;
+                    if (PatientDetailInfo.PhoneNumber == null)
+                    {
+                        PatientDetailInfo.PhoneNumber = "";
+                    }
+                    PatientDetailInfo.HomeAddress = GetPatientDetailInfoList.HomeAddress;
+                    if (PatientDetailInfo.HomeAddress == null)
+                    {
+                        PatientDetailInfo.HomeAddress = "";
+                    }
+                    PatientDetailInfo.Occupation = GetPatientDetailInfoList.Occupation;
+                    if (PatientDetailInfo.Occupation == null)
+                    {
+                        PatientDetailInfo.Occupation = "";
+                    }
+                    PatientDetailInfo.Nationality = GetPatientDetailInfoList.Nationality;
+                    if (PatientDetailInfo.Nationality == null)
+                    {
+                        PatientDetailInfo.Nationality = "";
+                    }
+                    PatientDetailInfo.EmergencyContact = GetPatientDetailInfoList.EmergencyContact;
+                    if (PatientDetailInfo.EmergencyContact == null)
+                    {
+                        PatientDetailInfo.EmergencyContact = "";
+                    }
+                    PatientDetailInfo.EmergencyContactPhoneNumber = GetPatientDetailInfoList.EmergencyContactPhoneNumber;
+                    if (PatientDetailInfo.EmergencyContactPhoneNumber == null)
+                    {
+                        PatientDetailInfo.EmergencyContactPhoneNumber = "";
+                    }
+                    PatientDetailInfo.PhotoAddress = GetPatientDetailInfoList.PhotoAddress;
+                    if (PatientDetailInfo.PhotoAddress == null)
+                    {
+                        PatientDetailInfo.PhotoAddress = "";
+                    }
+                    PatientDetailInfo.IDNo = GetPatientDetailInfoList.IDNo;
+                    if (PatientDetailInfo.IDNo == null)
+                    {
+                        PatientDetailInfo.IDNo = "";
+                    }
+                    PatientDetailInfo.Height = GetPatientDetailInfoList.Height;
+                    if (PatientDetailInfo.Height == null)
+                    {
+                        PatientDetailInfo.Height = "";
+                    }
+                    PatientDetailInfo.Weight = GetPatientDetailInfoList.Weight;
+                    if (PatientDetailInfo.Weight == null)
+                    {
+                        PatientDetailInfo.Weight = "";
+                    }
+                }
+
+                List<TypeAndName> modules = moduleInfoMethod.PsBasicInfoDetailGetModulesByPID(pclsCache, UserId);
+                for (int i = 0; i < modules.Count; i++)
+                {
+                    module = module + "|" + modules[i].Name;
+                }
+                if (module != "")
+                {
+                    module = module.Substring(1, module.Length - 1);
+                }
+                PatientDetailInfo.Module = module;
+                return PatientDetailInfo;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.BasicInfoDetail.GetPatientDetailInfo", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+
+        }
+        public PatientALLBasicInfo GetUserBasicInfo(string UserId)
+        {
+            try
+            {
+                string module = "";
+                PatientALLBasicInfo UserBasicInfo = new PatientALLBasicInfo();
+                UserBasicInfo GetUserBasicInfoList = usersMethod.GetUserBasicInfo(pclsCache, UserId);
+                UserBasicInfo.UserId = UserId;
+                if (GetUserBasicInfoList != null)
+                {
+                    UserBasicInfo.UserName = GetUserBasicInfoList.UserName;
+                    UserBasicInfo.Birthday = Convert.ToInt32(GetUserBasicInfoList.Birthday);
+                    UserBasicInfo.Gender = GetUserBasicInfoList.Gender;
+                    UserBasicInfo.BloodType = GetUserBasicInfoList.BloodType;
+                    UserBasicInfo.IDNo = GetUserBasicInfoList.IDNo;
+                    UserBasicInfo.DoctorId = GetUserBasicInfoList.DoctorId;
+                    UserBasicInfo.InsuranceType = GetUserBasicInfoList.InsuranceType;
+                    UserBasicInfo.InvalidFlag = Convert.ToInt32(GetUserBasicInfoList.InvalidFlag);
+                }
+
+                List<TypeAndName> modules = moduleInfoMethod.PsBasicInfoDetailGetModulesByPID(pclsCache, UserId);
+                for (int i = 0; i < modules.Count; i++)
+                {
+                    module = module + "|" + modules[i].Name;
+                }
+                if (module != "")
+                {
+                    module = module.Substring(1, module.Length - 1);
+                }
+                UserBasicInfo.Module = module;
+                return UserBasicInfo;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.BasicInfo.GetUserBasicInfo", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+
+        }
+
+        public DocInfoDetail GetDoctorDetailInfo(string UserId)
+        {
+            return moduleInfoMethod.PsDoctorInfoDetailGetDoctorInfoDetail(pclsCache, UserId);
+        }
+        public List<TypeAndName> GetTypeList(string Category)
+        {
+            return dictMethod.CmMstTypeGetTypeList(pclsCache, Category);
+        }
+        public DoctorInfo GetDoctorInfo(string DoctorId)
+        {
+            return usersMethod.GetDoctorInfo(pclsCache, DoctorId);
+        }
+        public int SetDoctorInfoDetail(string Doctor, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            try
+            {
+                int IsSaved = 2;
+                IsSaved = moduleInfoMethod.PsDoctorInfoDetailSetData(pclsCache, Doctor, CategoryCode, ItemCode, ItemSeq, Value, Description, SortNo, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                return IsSaved;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+                throw (ex);
+            }
+        }
+        public int SetPsDoctor(string UserId, string UserName, int Birthday, int Gender, string IDNo, int InvalidFlag, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            try
+            {
+                int IsSaved = 2;
+                IsSaved = usersMethod.PsDoctorInfoSetData(pclsCache, UserId, UserName, Birthday, Gender, IDNo, InvalidFlag, revUserId, TerminalName, TerminalIP, DeviceType);
+                return IsSaved;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+                throw (ex);
+            }
+        }
+        public List<Insurance> GetInsuranceType()
+        {
+            try
+            {
+                return dictMethod.GetInsurance(pclsCache);
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetInsuranceType", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+        }
+        public int SetPatBasicInfo(string UserId, string UserName, int Birthday, int Gender, int BloodType, string IDNo, string DoctorId, string InsuranceType, int InvalidFlag, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            try
+            {
+                return usersMethod.PsBasicInfoSetData(pclsCache, UserId, UserName, Birthday, Gender, BloodType, IDNo, DoctorId, InsuranceType, InvalidFlag, revUserId, TerminalName, TerminalIP, DeviceType);
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "SetPatBasicInfo", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return 0;
+                throw ex;
+            }
+        }
         
     }
 }

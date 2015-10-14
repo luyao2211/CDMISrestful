@@ -112,65 +112,93 @@ namespace CDMISrestful.Models
                 //整理成列表形式 2011/01/03 星期三 
                 //08:00 137 95 66
                 //09:00 134 78 66
-                if (dt_Sort.Rows.Count > 0)
+                if (dt_Sort != null)
                 {
-                    SignDetail SignDetail = new SignDetail();
-                    SignDetail.DetailTime = dt_Sort.Rows[0]["RecordTime"].ToString();
-                    if (dt_Sort.Rows[0]["SignType"].ToString() == "1")
+                    if (dt_Sort.Rows.Count > 0)
                     {
-                        SignDetail.SBPValue = dt_Sort.Rows[0]["Value"].ToString();
-                    }
-                    else if (dt_Sort.Rows[0]["SignType"].ToString() == "2")
-                    {
-                        SignDetail.DBPValue = dt_Sort.Rows[0]["Value"].ToString();
-                    }
-                    else
-                    {
-                        SignDetail.PulseValue = dt_Sort.Rows[0]["Value"].ToString();
-                    }
-
-                    SignDetailByD SignDetailByD = new SignDetailByD();
-                    SignDetailByD.Date = dt_Sort.Rows[0]["RecordDate"].ToString();
-                    SignDetailByD.WeekDay = new CommonFunction().CaculateWeekDay(dt_Sort.Rows[0]["RecordDate"].ToString());
-
-                    if (dt_Sort.Rows.Count == 1)
-                    {
-                        SignDetailByD.SignDetailList.Add(SignDetail);
-                        result.SignDetailByDs.Add(SignDetailByD);
-                    }
-                    else
-                    {
-                        string temp_date = dt_Sort.Rows[0]["RecordDate"].ToString();
-                        string temp_hour = dt_Sort.Rows[0]["RecordTime"].ToString();
-
-                        for (int rowsCount = 1; rowsCount < dt_Sort.Rows.Count; rowsCount++)
+                        SignDetail SignDetail = new SignDetail();
+                        SignDetail.DetailTime = dt_Sort.Rows[0]["RecordTime"].ToString();
+                        if (dt_Sort.Rows[0]["SignType"].ToString() == "1")
                         {
-                            if (rowsCount != dt_Sort.Rows.Count - 1)
-                            {
-                                #region 不是最后一条
+                            SignDetail.SBPValue = dt_Sort.Rows[0]["Value"].ToString();
+                        }
+                        else if (dt_Sort.Rows[0]["SignType"].ToString() == "2")
+                        {
+                            SignDetail.DBPValue = dt_Sort.Rows[0]["Value"].ToString();
+                        }
+                        else
+                        {
+                            SignDetail.PulseValue = dt_Sort.Rows[0]["Value"].ToString();
+                        }
 
-                                if (temp_date == dt_Sort.Rows[rowsCount]["RecordDate"].ToString())
+                        SignDetailByD SignDetailByD = new SignDetailByD();
+                        SignDetailByD.Date = dt_Sort.Rows[0]["RecordDate"].ToString();
+                        SignDetailByD.WeekDay = new CommonFunction().CaculateWeekDay(dt_Sort.Rows[0]["RecordDate"].ToString());
+
+                        if (dt_Sort.Rows.Count == 1)
+                        {
+                            SignDetailByD.SignDetailList.Add(SignDetail);
+                            result.SignDetailByDs.Add(SignDetailByD);
+                        }
+                        else
+                        {
+                            string temp_date = dt_Sort.Rows[0]["RecordDate"].ToString();
+                            string temp_hour = dt_Sort.Rows[0]["RecordTime"].ToString();
+
+                            for (int rowsCount = 1; rowsCount < dt_Sort.Rows.Count; rowsCount++)
+                            {
+                                if (rowsCount != dt_Sort.Rows.Count - 1)
                                 {
-                                    #region 同一天
-                                    if (temp_hour == dt_Sort.Rows[rowsCount]["RecordTime"].ToString())
+                                    #region 不是最后一条
+
+                                    if (temp_date == dt_Sort.Rows[rowsCount]["RecordDate"].ToString())
                                     {
-                                        if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "1")
+                                        #region 同一天
+                                        if (temp_hour == dt_Sort.Rows[rowsCount]["RecordTime"].ToString())
                                         {
-                                            SignDetail.SBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
-                                        }
-                                        else if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "2")
-                                        {
-                                            SignDetail.DBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "1")
+                                            {
+                                                SignDetail.SBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+                                            else if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "2")
+                                            {
+                                                SignDetail.DBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+                                            else
+                                            {
+                                                SignDetail.PulseValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
                                         }
                                         else
                                         {
-                                            SignDetail.PulseValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            SignDetailByD.SignDetailList.Add(SignDetail);
+
+                                            SignDetail = new SignDetail();
+                                            SignDetail.DetailTime = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
+                                            if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "1")
+                                            {
+                                                SignDetail.SBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+                                            else if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "2")
+                                            {
+                                                SignDetail.DBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+                                            else
+                                            {
+                                                SignDetail.PulseValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+
+                                            temp_hour = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
                                         }
+                                        #endregion
                                     }
                                     else
                                     {
+                                        #region 不同天
                                         SignDetailByD.SignDetailList.Add(SignDetail);
+                                        result.SignDetailByDs.Add(SignDetailByD);
 
+                                        SignDetailByD = new SignDetailByD();
                                         SignDetail = new SignDetail();
                                         SignDetail.DetailTime = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
                                         if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "1")
@@ -185,70 +213,72 @@ namespace CDMISrestful.Models
                                         {
                                             SignDetail.PulseValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
                                         }
+                                        SignDetailByD.Date = dt_Sort.Rows[rowsCount]["RecordDate"].ToString();
+                                        SignDetailByD.WeekDay = new CommonFunction().CaculateWeekDay(dt_Sort.Rows[rowsCount]["RecordDate"].ToString());
 
+                                        temp_date = dt_Sort.Rows[rowsCount]["RecordDate"].ToString();
                                         temp_hour = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
+
+                                        #endregion
                                     }
                                     #endregion
                                 }
                                 else
                                 {
-                                    #region 不同天
-                                    SignDetailByD.SignDetailList.Add(SignDetail);
-                                    result.SignDetailByDs.Add(SignDetailByD);
+                                    #region 最后一条
 
-                                    SignDetailByD = new SignDetailByD();
-                                    SignDetail = new SignDetail();
-                                    SignDetail.DetailTime = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
-                                    if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "1")
+                                    if (temp_date == dt_Sort.Rows[rowsCount]["RecordDate"].ToString())
                                     {
-                                        SignDetail.SBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
-                                    }
-                                    else if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "2")
-                                    {
-                                        SignDetail.DBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
-                                    }
-                                    else
-                                    {
-                                        SignDetail.PulseValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
-                                    }
-                                    SignDetailByD.Date = dt_Sort.Rows[rowsCount]["RecordDate"].ToString();
-                                    SignDetailByD.WeekDay = new CommonFunction().CaculateWeekDay(dt_Sort.Rows[rowsCount]["RecordDate"].ToString());
-
-                                    temp_date = dt_Sort.Rows[rowsCount]["RecordDate"].ToString();
-                                    temp_hour = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
-
-                                    #endregion
-                                }
-                                #endregion
-                            }
-                            else
-                            {
-                                #region 最后一条
-
-                                if (temp_date == dt_Sort.Rows[rowsCount]["RecordDate"].ToString())
-                                {
-                                    #region 同一天
-                                    if (temp_hour == dt_Sort.Rows[rowsCount]["RecordTime"].ToString())
-                                    {
-                                        if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "1")
+                                        #region 同一天
+                                        if (temp_hour == dt_Sort.Rows[rowsCount]["RecordTime"].ToString())
                                         {
-                                            SignDetail.SBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
-                                        }
-                                        else if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "2")
-                                        {
-                                            SignDetail.DBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "1")
+                                            {
+                                                SignDetail.SBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+                                            else if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "2")
+                                            {
+                                                SignDetail.DBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+                                            else
+                                            {
+                                                SignDetail.PulseValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+                                            SignDetailByD.SignDetailList.Add(SignDetail);
+                                            result.SignDetailByDs.Add(SignDetailByD);
                                         }
                                         else
                                         {
-                                            SignDetail.PulseValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            SignDetailByD.SignDetailList.Add(SignDetail);
+
+                                            SignDetail = new SignDetail();
+                                            SignDetail.DetailTime = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
+                                            if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "1")
+                                            {
+                                                SignDetail.SBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+                                            else if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "2")
+                                            {
+                                                SignDetail.DBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+                                            else
+                                            {
+                                                SignDetail.PulseValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                            }
+
+                                            temp_hour = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
+                                            SignDetailByD.SignDetailList.Add(SignDetail);
+                                            result.SignDetailByDs.Add(SignDetailByD);
                                         }
-                                        SignDetailByD.SignDetailList.Add(SignDetail);
-                                        result.SignDetailByDs.Add(SignDetailByD);
+                                        #endregion
                                     }
                                     else
                                     {
+                                        #region 不同天
                                         SignDetailByD.SignDetailList.Add(SignDetail);
+                                        result.SignDetailByDs.Add(SignDetailByD);
 
+                                        SignDetailByD = new SignDetailByD();
                                         SignDetail = new SignDetail();
                                         SignDetail.DetailTime = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
                                         if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "1")
@@ -263,51 +293,23 @@ namespace CDMISrestful.Models
                                         {
                                             SignDetail.PulseValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
                                         }
+                                        SignDetailByD.Date = dt_Sort.Rows[rowsCount]["RecordDate"].ToString();
+                                        SignDetailByD.WeekDay = new CommonFunction().CaculateWeekDay(dt_Sort.Rows[rowsCount]["RecordDate"].ToString());
 
-                                        temp_hour = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
+                                        temp_date = dt_Sort.Rows[rowsCount]["RecordDate"].ToString();
                                         SignDetailByD.SignDetailList.Add(SignDetail);
                                         result.SignDetailByDs.Add(SignDetailByD);
-                                    }
-                                    #endregion
-                                }
-                                else
-                                {
-                                    #region 不同天
-                                    SignDetailByD.SignDetailList.Add(SignDetail);
-                                    result.SignDetailByDs.Add(SignDetailByD);
 
-                                    SignDetailByD = new SignDetailByD();
-                                    SignDetail = new SignDetail();
-                                    SignDetail.DetailTime = dt_Sort.Rows[rowsCount]["RecordTime"].ToString();
-                                    if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "1")
-                                    {
-                                        SignDetail.SBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
+                                        #endregion
                                     }
-                                    else if (dt_Sort.Rows[rowsCount]["SignType"].ToString() == "2")
-                                    {
-                                        SignDetail.DBPValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
-                                    }
-                                    else
-                                    {
-                                        SignDetail.PulseValue = dt_Sort.Rows[rowsCount]["Value"].ToString();
-                                    }
-                                    SignDetailByD.Date = dt_Sort.Rows[rowsCount]["RecordDate"].ToString();
-                                    SignDetailByD.WeekDay = new CommonFunction().CaculateWeekDay(dt_Sort.Rows[rowsCount]["RecordDate"].ToString());
-
-                                    temp_date = dt_Sort.Rows[rowsCount]["RecordDate"].ToString();
-                                    SignDetailByD.SignDetailList.Add(SignDetail);
-                                    result.SignDetailByDs.Add(SignDetailByD);
 
                                     #endregion
                                 }
 
-                                #endregion
                             }
-
                         }
                     }
                 }
-
                 return result;
                 //string a = JSONHelper.ObjectToJson(result);
                 //Context.Response.BinaryWrite(new byte[] { 0xEF, 0xBB, 0xBF });

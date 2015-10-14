@@ -720,6 +720,73 @@
             <param name="CategoryCode"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetValueByPlanNoAndId(System.String,System.String)">
+            <summary>
+            获取某计划下某任务的目标值 LY 2015-10-13
+            </summary>
+            <param name="PlanNo"></param>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetBPGrades">
+            <summary>
+            获取血压等级字典表的所有信息 LY 2015-10-13
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
+            <summary>
+            根据收缩压获取血压等级说明 LY 2015-10-13
+            </summary>
+            <param name="SBP"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.PostRiskResult(System.String,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            插入风险评估结果 LY 2015-10-13
+            </summary>
+            <param name="UserId"></param>
+            <param name="AssessmentType"></param>
+            <param name="AssessmentName"></param>
+            <param name="AssessmentTime"></param>
+            <param name="Result"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.PutBasicInfoDetail(System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            修改用户详细信息 LY 2015-10-13
+            </summary>
+            <param name="Patient"></param>
+            <param name="CategoryCode"></param>
+            <param name="ItemCode"></param>
+            <param name="ItemSeq"></param>
+            <param name="Value"></param>
+            <param name="Description"></param>
+            <param name="SortNo"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetRiskResult(System.String)">
+            <summary>
+            根据UserId获取最新风险评估结果 LY 2015-10-13
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetRiskInput(System.String)">
+            <summary>
+            获取风险评估所需输入 LY 2015-10-13
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.VitalInfoController.GetLatestPatientVitalSigns(System.String,System.String,System.String)">
             <summary>
             GetLatestPatientVitalSigns 获取病人最新体征情况 GL 2015-10-12
@@ -2075,6 +2142,73 @@
             获取某医生未读消息总数 GL 2015-10-10
             </summary>
             <param name="DoctorId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetValueByPlanNoAndId(System.String,System.String)">
+            <summary>
+            获取某计划下某任务的目标值 LY 2015-10-13
+            </summary>
+            <param name="PlanNo"></param>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetBPGrades">
+            <summary>
+            获取血压等级字典表的所有信息 LY 2015-10-13
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetDescription(System.Int32)">
+            <summary>
+            根据收缩压获取血压等级说明 LY 2015-10-13
+            </summary>
+            <param name="SBP"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.SetRiskResult(System.String,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            插入风险评估结果 LY 2015-10-13
+            </summary>
+            <param name="UserId"></param>
+            <param name="AssessmentType"></param>
+            <param name="AssessmentName"></param>
+            <param name="AssessmentTime"></param>
+            <param name="Result"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.SetBasicInfoDetail(System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            修改用户详细信息 LY 2015-10-13
+            </summary>
+            <param name="Patient"></param>
+            <param name="CategoryCode"></param>
+            <param name="ItemCode"></param>
+            <param name="ItemSeq"></param>
+            <param name="Value"></param>
+            <param name="Description"></param>
+            <param name="SortNo"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetRiskResult(System.String)">
+            <summary>
+            根据UserId获取最新风险评估结果 LY 2015-10-13
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetRiskInput(System.String)">
+            <summary>
+            获取风险评估所需输入 LY 2015-10-13
+            </summary>
+            <param name="UserId"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Models.UsersRepository.Register(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">

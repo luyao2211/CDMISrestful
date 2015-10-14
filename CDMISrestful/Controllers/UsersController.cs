@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using CDMISrestful.CommonLibrary;
 using CDMISrestful.DataModels;
+using CDMISrestful.DataViewModels;
 using CDMISrestful.Models;
 
 namespace CDMISrestful.Controllers
@@ -84,6 +85,106 @@ namespace CDMISrestful.Controllers
         {
             int ret = repository.ChangePassword(ChangePassword.OldPassword, ChangePassword.NewPassword, ChangePassword.UserId, ChangePassword.revUserId, ChangePassword.TerminalName, ChangePassword.TerminalIP, ChangePassword.DeviceType);
             return new ExceptionHandler().ChangePassword(ret);
+        }
+
+        [Route("Api/v1/Users/GetPatientsList")]
+        [ModelValidationFilter]
+        [HttpGet]
+        public PatientsDataSet GetPatientsList(GetPatientsList GetPatientsList)
+        {
+            PatientsDataSet ret = repository.GetPatientsList(GetPatientsList.DoctorId, GetPatientsList.ModuleType, GetPatientsList.Plan, GetPatientsList.Compliance, GetPatientsList.Goal);
+            return ret;
+        }
+
+        [Route("Api/v1/Users/Verification")]
+        [ModelValidationFilter]
+        public HttpResponseMessage Verification(Verification Verification)
+        {
+            int ret = repository.Verification(Verification.userId, Verification.ValidateCode, Verification.PwType);
+            return new ExceptionHandler().Verification(ret);
+        }
+
+        [Route("Api/v1/Users/ResetPassword")]
+        [ModelValidationFilter]
+        public HttpResponseMessage ResetPassword(ResetPassword ResetPassword)
+        {
+            int ret = repository.ResetPassword(ResetPassword.NewPassword, ResetPassword.ConfirmPassword, ResetPassword.UserId, ResetPassword.Key, ResetPassword.Device, ResetPassword.revUserId, ResetPassword.TerminalName, ResetPassword.TerminalIP, ResetPassword.DeviceType);
+            return new ExceptionHandler().ResetPassword(ret);
+        }
+
+        [Route("Api/v1/Users/GetPatBasicInfo")]
+        [ModelValidationFilter]
+        public PatBasicInfo GetPatBasicInfo(string UserId)
+        {
+            PatBasicInfo ret = repository.GetPatBasicInfo(UserId);
+            return ret;
+        }
+
+        [Route("Api/v1/Users/GetPatientDetailInfo")]
+        [ModelValidationFilter]
+        public PatientDetailInfo GetPatientDetailInfo(string UserId)
+        {
+            PatientDetailInfo ret = repository.GetPatientDetailInfo(UserId);
+            return ret;
+        }
+
+        [Route("Api/v1/Users/GetUserBasicInfo")]
+        [ModelValidationFilter]
+        public PatientALLBasicInfo GetUserBasicInfo(string UserId)
+        {
+            PatientALLBasicInfo ret = repository.GetUserBasicInfo(UserId);
+            return ret;
+        }
+
+        [Route("Api/v1/Users/GetDoctorDetailInfo")]
+        [ModelValidationFilter]
+        public DocInfoDetail GetDoctorDetailInfo(string UserId)
+        {
+            DocInfoDetail ret = repository.GetDoctorDetailInfo(UserId);
+            return ret;
+        }
+
+        [Route("Api/v1/Users/GetTypeList")]
+        [ModelValidationFilter]
+        public List<TypeAndName> GetTypeList(string Category)
+        {
+            List<TypeAndName> ret = repository.GetTypeList(Category);
+            return ret;
+        }
+        [Route("Api/v1/Users/GetDoctorInfo")]
+        [ModelValidationFilter]
+        public DoctorInfo GetDoctorInfo(string Category)
+        {
+            DoctorInfo ret = repository.GetDoctorInfo(Category);
+            return ret;
+        }
+        [Route("Api/v1/Users/SetDoctorInfoDetail")]
+        [ModelValidationFilter]
+        public HttpResponseMessage SetDoctorInfoDetail(SetDoctorInfoDetail SetDoctorInfoDetail)
+        {
+            int ret = repository.SetDoctorInfoDetail(SetDoctorInfoDetail.Doctor, SetDoctorInfoDetail.CategoryCode, SetDoctorInfoDetail.ItemCode, SetDoctorInfoDetail.ItemSeq, SetDoctorInfoDetail.Value, SetDoctorInfoDetail.Description, SetDoctorInfoDetail.SortNo, SetDoctorInfoDetail.piUserId, SetDoctorInfoDetail.piTerminalName, SetDoctorInfoDetail.piTerminalIP, SetDoctorInfoDetail.piDeviceType);
+            return new ExceptionHandler().SetData(ret);
+        }
+        [Route("Api/v1/Users/SetPsDoctor")]
+        [ModelValidationFilter]
+        public HttpResponseMessage SetPsDoctor(SetPsDoctor SetPsDoctor)
+        {
+            int ret = repository.SetPsDoctor(SetPsDoctor.UserId, SetPsDoctor.UserName, SetPsDoctor.Birthday, SetPsDoctor.Gender, SetPsDoctor.IDNo, SetPsDoctor.InvalidFlag, SetPsDoctor.piUserId, SetPsDoctor.piTerminalName, SetPsDoctor.piTerminalIP, SetPsDoctor.piDeviceType);
+            return new ExceptionHandler().SetData(ret);
+        }
+        [Route("Api/v1/Users/GetInsuranceType")]
+        [ModelValidationFilter]
+        public List<Insurance> GetInsuranceType()
+        {
+            List<Insurance> ret = repository.GetInsuranceType();
+            return ret;
+        }
+        [Route("Api/v1/Users/SetPatBasicInfo")]
+        [ModelValidationFilter]
+        public HttpResponseMessage SetPatBasicInfo(SetPatBasicInfo SetPatBasicInfo)
+        {
+            int ret = repository.SetPatBasicInfo(SetPatBasicInfo.UserId, SetPatBasicInfo.UserName, SetPatBasicInfo.Birthday, SetPatBasicInfo.Gender, SetPatBasicInfo.BloodType, SetPatBasicInfo.IDNo, SetPatBasicInfo.DoctorId, SetPatBasicInfo.InsuranceType, SetPatBasicInfo.InvalidFlag, SetPatBasicInfo.piUserId, SetPatBasicInfo.piTerminalName, SetPatBasicInfo.piTerminalIP, SetPatBasicInfo.piDeviceType);
+            return new ExceptionHandler().SetData(ret);
         }
     }
 }

@@ -533,6 +533,7 @@
     <Compile Include="DataModels\Users.cs" />
     <Compile Include="DataModels\VitalInfo.cs" />
     <Compile Include="DataViewModels\ClinicInfoViewModel.cs" />
+    <Compile Include="DataViewModels\UsersViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
