@@ -7,8 +7,7 @@ namespace CDMISrestful.CommonLibrary
 {
     public class CommonFunction
     {
-      
-
+        DataConnection pclsCache = new DataConnection();
         /// <summary>
         /// 时间格式转换 GL 2015-10-10
         /// </summary>
@@ -88,6 +87,42 @@ namespace CDMISrestful.CommonLibrary
             }
         }
 
+        //获取服务器日期(解决频繁连接导致的连接未及时关闭) GL 2015-10-13
+        public int GetServerDate()
+        {
+            string serverDate = string.Empty;
+            int date = 99999999;
+            try
+            {
+                //ZAM 2015-5-7 频繁连接导致的连接未及时关闭
+                {
+                    if (!pclsCache.Connect())
+                    {
+                        return date;
+                    }
+                }
+                serverDate = Cm.CommonLibrary.GetServerDateTime(pclsCache.CacheConnectionObject);    //2014/08/22 15:33:35
+                string[] str = serverDate.Split(' ');
+                if (str.Length >= 1)
+                {
+                    serverDate = str[0];
+                    serverDate = serverDate.Replace("/", string.Empty);
+                    date = Convert.ToInt32(serverDate);
+                }
 
+                return date;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetServerDate", "CommonFunction error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return date;
+                throw (ex);
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+
+        }
     }
 }
