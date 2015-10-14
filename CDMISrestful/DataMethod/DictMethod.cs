@@ -99,13 +99,12 @@ namespace CDMISrestful.DataMethod
                     list.Add(new LifeStyleDetail
                     {
                         StyleId = cdr["StyleId"].ToString(),
-                        Module = cdr["Module"].ToString(),
+                        Name = cdr["Name"].ToString(),
                         CurativeEffect = cdr["CurativeEffect"].ToString(),
                         SideEffect = cdr["SideEffect"].ToString(),
                         Instruction = cdr["Instruction"].ToString(),
                         HealthEffect = cdr["HealthEffect"].ToString(),
                         Unit = cdr["Unit"].ToString(),
-                        Redundance = cdr["Redundance"].ToString()
                     });
                 }
                 return list;

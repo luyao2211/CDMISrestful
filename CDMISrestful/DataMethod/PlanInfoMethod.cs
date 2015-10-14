@@ -33,7 +33,7 @@ namespace CDMISrestful.DataMethod
         /// <returns></returns>
         public int PsPlanSetData(DataConnection pclsCache, string PlanNo, string PatientId, int StartDate, int EndDate, string Module, int Status, string DoctorId, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
-            int ret = 0;
+            int ret = 2;
             try
             {
                 if (!pclsCache.Connect())
@@ -307,6 +307,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.TotalDays = cdr["TotalDays"].ToString();
                     NewLine.RemainingDays = cdr["RemainingDays"].ToString();
                     NewLine.Status = cdr["Status"].ToString();
+                    list.Add(NewLine);
                 }
                 return list;
             }
@@ -519,6 +520,32 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+
+        //更新计划状态 GL 2015-10-13
+        public int PlanStart(DataConnection pclsCache, string PlanNo, int Status, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            int ret = 2;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+
+                ret = (int)Ps.Plan.PlanStart(pclsCache.CacheConnectionObject, PlanNo, Status, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.Plan.PlanStart", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
         #endregion
 
 
@@ -538,7 +565,7 @@ namespace CDMISrestful.DataMethod
         /// <returns></returns>
         public int PsComplianceDetailSetData(DataConnection pclsCache, string Parent, string Id, int Status, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
         {
-            int ret = 0;
+            int ret = 2;
             try
             {
                 if (!pclsCache.Connect())
@@ -763,6 +790,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.TaskID = cdr["TaskID"].ToString();
                     NewLine.TaskName = cdr["TaskName"].ToString();
                     NewLine.Status = cdr["Status"].ToString();
+                    list.Add(NewLine);
                 }
                 return list;
             }
@@ -824,6 +852,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.TaskName = cdr["TaskName"].ToString();
                     NewLine.TaskType = cdr["TaskType"].ToString();
                     NewLine.Instruction = cdr["Instruction"].ToString();
+                    list.Add(NewLine);
                 }
                 return list;
             }
@@ -954,6 +983,7 @@ namespace CDMISrestful.DataMethod
                     ComplianceListByPeriod NewLine = new ComplianceListByPeriod();
                     NewLine.Date = cdr["Date"].ToString();
                     NewLine.Compliance = cdr["Compliance"].ToString();
+                    list.Add(NewLine);
                 }
                 return list;
             }
