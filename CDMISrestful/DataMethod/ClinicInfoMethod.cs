@@ -1122,6 +1122,68 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+        /// <summary>
+        /// 获取患者某次化验的所有详细信息 LY 2015-10-14
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <param name="VisitId"></param>
+        /// <param name="SortNo"></param>
+        /// <returns></returns>
+        public List<LabTestDetails> GetLabTestDetails(DataConnection pclsCache, string UserId, string VisitId, string SortNo)
+        {
+            List<LabTestDetails> list = new List<LabTestDetails>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.LabTestDetails.GetLabTestDetails(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
+                cmd.Parameters.Add("VisitId", CacheDbType.NVarChar).Value = VisitId;
+                cmd.Parameters.Add("SortNo", CacheDbType.NVarChar).Value = SortNo;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    LabTestDetails NewLine = new LabTestDetails();
+                    NewLine.Code = cdr["Code"].ToString();
+                    NewLine.Name = cdr["Name"].ToString();
+                    NewLine.Value = cdr["Value"].ToString();
+                    NewLine.IsAbnormalCode = Convert.ToInt32(cdr["IsAbnormalCode"].ToString());
+                    NewLine.IsAbnormal = cdr["IsAbnormal"].ToString();
+                    NewLine.UnitCode = cdr["UnitCode"].ToString();
+                    NewLine.Unit = cdr["Unit"].ToString();
+                    NewLine.Creator = cdr["Creator"].ToString();
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PsLabTestDetails.GetLabTestDetails", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
 
     }
 }
