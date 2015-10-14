@@ -433,6 +433,8 @@ namespace CDMISrestful.Models
                     patientInfo.GenderText = patientList.GenderText;
                     patientInfo.BloodTypeText = patientList.BloodTypeText;
                     patientInfo.InsuranceTypeText = patientList.InsuranceTypeText;
+                    patientInfo.DoctorId = patientList.DoctorId;
+                    patientInfo.IDNo = patientList.IDNo;
                 }
 
                 List<TypeAndName> modules = moduleInfoMethod.PsBasicInfoDetailGetModulesByPID(pclsCache, UserId);
@@ -537,55 +539,13 @@ namespace CDMISrestful.Models
             }
 
         }
-        public PatientALLBasicInfo GetUserBasicInfo(string UserId)
-        {
-            try
-            {
-                string module = "";
-                PatientALLBasicInfo UserBasicInfo = new PatientALLBasicInfo();
-                UserBasicInfo GetUserBasicInfoList = usersMethod.GetUserBasicInfo(pclsCache, UserId);
-                UserBasicInfo.UserId = UserId;
-                if (GetUserBasicInfoList != null)
-                {
-                    UserBasicInfo.UserName = GetUserBasicInfoList.UserName;
-                    UserBasicInfo.Birthday = Convert.ToInt32(GetUserBasicInfoList.Birthday);
-                    UserBasicInfo.Gender = GetUserBasicInfoList.Gender;
-                    UserBasicInfo.BloodType = GetUserBasicInfoList.BloodType;
-                    UserBasicInfo.IDNo = GetUserBasicInfoList.IDNo;
-                    UserBasicInfo.DoctorId = GetUserBasicInfoList.DoctorId;
-                    UserBasicInfo.InsuranceType = GetUserBasicInfoList.InsuranceType;
-                    UserBasicInfo.InvalidFlag = Convert.ToInt32(GetUserBasicInfoList.InvalidFlag);
-                }
-
-                List<TypeAndName> modules = moduleInfoMethod.PsBasicInfoDetailGetModulesByPID(pclsCache, UserId);
-                for (int i = 0; i < modules.Count; i++)
-                {
-                    module = module + "|" + modules[i].Name;
-                }
-                if (module != "")
-                {
-                    module = module.Substring(1, module.Length - 1);
-                }
-                UserBasicInfo.Module = module;
-                return UserBasicInfo;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.BasicInfo.GetUserBasicInfo", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-                throw (ex);
-            }
-
-        }
+   
 
         public DocInfoDetail GetDoctorDetailInfo(string UserId)
         {
             return moduleInfoMethod.PsDoctorInfoDetailGetDoctorInfoDetail(pclsCache, UserId);
         }
-        public List<TypeAndName> GetTypeList(string Category)
-        {
-            return dictMethod.CmMstTypeGetTypeList(pclsCache, Category);
-        }
+     
         public DoctorInfo GetDoctorInfo(string DoctorId)
         {
             return usersMethod.GetDoctorInfo(pclsCache, DoctorId);

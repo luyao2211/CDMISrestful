@@ -18,9 +18,8 @@ namespace CDMISrestful.Models
         int Verification(string userId, string PwType);
         PatBasicInfo GetPatBasicInfo(string UserId);
         PatientDetailInfo GetPatientDetailInfo(string UserId);
-        PatientALLBasicInfo GetUserBasicInfo(string UserId);
         DocInfoDetail GetDoctorDetailInfo(string UserId);
-        List<TypeAndName> GetTypeList(string Category);
+    
         DoctorInfo GetDoctorInfo(string DoctorId);
         int SetDoctorInfoDetail(string Doctor, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
         int SetPsDoctor(string UserId, string UserName, int Birthday, int Gender, string IDNo, int InvalidFlag, string revUserId, string TerminalName, string TerminalIP, int DeviceType);

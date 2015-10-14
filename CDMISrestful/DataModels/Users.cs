@@ -266,6 +266,8 @@ namespace CDMISrestful.DataModels
         public string BloodTypeText { get; set; }
         public string InsuranceTypeText { get; set; }
         public string Module { get; set; }
+        public string DoctorId { get; set; }
+        public string IDNo { get; set; }
     }
 
     public class PatientDetailInfo
@@ -282,20 +284,6 @@ namespace CDMISrestful.DataModels
         public string IDNo { get; set; }
         public string Height { get; set; }
         public string Weight { get; set; }
-    }
-
-    public class PatientALLBasicInfo
-    {
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        public int Birthday { get; set; }
-        public string Gender { get; set; }
-        public string BloodType { get; set; }
-        public string IDNo { get; set; }
-        public string DoctorId { get; set; }
-        public string InsuranceType { get; set; }
-        public int InvalidFlag { get; set; }
-        public string Module { get; set; }
     }
 
 

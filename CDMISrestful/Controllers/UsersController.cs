@@ -19,8 +19,6 @@ namespace CDMISrestful.Controllers
 
         [Route("Api/v1/Users/LogOn")]
         [ModelValidationFilter]
-
-        //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public HttpResponseMessage LogOn(LogOn logOn)
         {
             //string token = "";
@@ -106,7 +104,6 @@ namespace CDMISrestful.Controllers
         }
 
 
-
         [Route("Api/v1/Users/{UserId}/BasicInfo")]
         [ModelValidationFilter]
         public PatBasicInfo GetPatBasicInfo(string UserId)
@@ -123,15 +120,7 @@ namespace CDMISrestful.Controllers
             return ret;
         }
 
-        [Route("Api/v1/Users/GetUserBasicInfo")]
-        [ModelValidationFilter]
-        public PatientALLBasicInfo GetUserBasicInfo(string UserId)
-        {
-            PatientALLBasicInfo ret = repository.GetUserBasicInfo(UserId);
-            return ret;
-        }
-
-        [Route("Api/v1/Users/GetDoctorDetailInfo")]
+        [Route("Api/v1/Users/{UserId}/DoctorDtlInfo")]
         [ModelValidationFilter]
         public DocInfoDetail GetDoctorDetailInfo(string UserId)
         {
@@ -139,20 +128,15 @@ namespace CDMISrestful.Controllers
             return ret;
         }
 
-        [Route("Api/v1/Users/GetTypeList")]
+
+        [Route("Api/v1/Users/{UserId}/DoctorInfo")]
         [ModelValidationFilter]
-        public List<TypeAndName> GetTypeList(string Category)
+        public DoctorInfo GetDoctorInfo(string UserId)
         {
-            List<TypeAndName> ret = repository.GetTypeList(Category);
+            DoctorInfo ret = repository.GetDoctorInfo(UserId);
             return ret;
         }
-        [Route("Api/v1/Users/GetDoctorInfo")]
-        [ModelValidationFilter]
-        public DoctorInfo GetDoctorInfo(string Category)
-        {
-            DoctorInfo ret = repository.GetDoctorInfo(Category);
-            return ret;
-        }
+
         [Route("Api/v1/Users/SetDoctorInfoDetail")]
         [ModelValidationFilter]
         public HttpResponseMessage SetDoctorInfoDetail(SetDoctorInfoDetail SetDoctorInfoDetail)
