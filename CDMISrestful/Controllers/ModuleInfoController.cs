@@ -25,58 +25,7 @@ namespace CDMISrestful.Controllers
             return repository.GetItemInfoByPIdAndModule(UserId, CategoryCode);
         }
 
-        /// <summary>
-        /// 获取高血压药物类型名称列表 LY 2015-10-13
-        /// </summary>
-        /// <returns></returns>
-        [Route("Api/v1/Users/ChronicSurveys/Items/GetHypertensionDrugTypeNameList")]
-        public List<TypeAndName> GetHypertensionDrugTypeNameList()
-        {
-            return repository.GetHypertensionDrugTypeNameList();
-        }
-
-        /// <summary>
-        /// 获取高血压药物名称列表 LY 2015-10-13
-        /// </summary>
-        /// <param name="Type"></param>
-        /// <returns></returns>
-        [Route("Api/v1/Users/ChronicSurveys/Items/GetHypertensionDrugNameList")]
-        public List<CmAbsType> GetHypertensionDrugNameList(string Type)
-        {
-            return repository.GetHypertensionDrugNameList(Type);
-        }
-
-        /// <summary>
-        /// 获取糖尿病药物类型名称列表 LY 2015-10-13
-        /// </summary>
-        /// <returns></returns>
-        [Route("Api/v1/Users/ChronicSurveys/Items/GetDiabetesDrugTypeNameList")]
-        public List<TypeAndName> GetDiabetesDrugTypeNameList()
-        {
-            return repository.GetDiabetesDrugTypeNameList();
-        }
-
-        /// <summary>
-        /// 获取糖尿病药物名称列表 LY 2015-10-13
-        /// </summary>
-        /// <param name="Type"></param>
-        /// <returns></returns>
-        [Route("Api/v1/Users/ChronicSurveys/Items/GetDiabetesDrugNameList")]
-        public List<CmAbsType> GetDiabetesDrugNameList(string Type)
-        {
-            return repository.GetDiabetesDrugNameList(Type);
-        }
-
-        /// <summary>
-        /// 获取某个分类的类别 LY 2015-10-13
-        /// </summary>
-        /// <param name="Category"></param>
-        /// <returns></returns>
-        [Route("Api/v1/Users/ChronicSurveys/{Category}/Items/GetTypeList")]
-        public List<TypeAndName> GetTypeList(string Category)
-        {
-            return repository.GetTypeList(Category);
-        }
+       
 
         /// <summary>
         /// 插入患者详细信息 LY 2015-10-14

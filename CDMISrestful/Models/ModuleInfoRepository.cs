@@ -11,6 +11,7 @@ namespace CDMISrestful.Models
     public class ModuleInfoRepository : IModuleInfoRepository
     {
         DataConnection pclsCache = new DataConnection();
+
         /// <summary>
         /// 输入PatientId和CategoryCode，获取患者已经购买的某个模块的详细信息 LY 2015-10-14
         /// </summary>
@@ -20,62 +21,6 @@ namespace CDMISrestful.Models
         public List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(string UserId, string CategoryCode)
         {
             return new ModuleInfoMethod().PsBasicInfoDetailGetPatientBasicInfoDetail(pclsCache, UserId, CategoryCode);
-        }
-
-        /// <summary>
-        /// 获取高血压药物类型名称列表 LY 2015-10-14
-        /// </summary>
-        /// <returns></returns>
-        public List<TypeAndName> GetHypertensionDrugTypeNameList()
-        {
-            return new DictMethod().CmMstHypertensionDrugGetTypeList(pclsCache);
-        }
-
-        /// <summary>
-        /// 获取高血压药物名称列表 LY 2015-10-14
-        /// </summary>
-        /// <param name="Type"></param>
-        /// <returns></returns>
-        public List<CmAbsType> GetHypertensionDrugNameList(string Type)
-        {
-            List<CmAbsType> list = new DictMethod().GetHypertensionDrug(pclsCache);
-            return list.FindAll(delegate(CmAbsType x)
-            {
-                return x.Type.Equals(Type);
-            });
-        }
-
-        /// <summary>
-        /// 获取糖尿病药物类型名称列表 LY 2015-10-14
-        /// </summary>
-        /// <returns></returns>
-        public List<TypeAndName> GetDiabetesDrugTypeNameList()
-        {
-            return new DictMethod().CmMstDiabetesDrugGetTypeList(pclsCache);
-        }
-
-        /// <summary>
-        /// 获取糖尿病药物名称列表 LY 2015-10-14
-        /// </summary>
-        /// <param name="Type"></param>
-        /// <returns></returns>
-        public List<CmAbsType> GetDiabetesDrugNameList(string Type)
-        {
-            List<CmAbsType> list = new DictMethod().GetDiabetesDrug(pclsCache);
-            return list.FindAll(delegate(CmAbsType x)
-            {
-                return x.Type.Equals(Type);
-            });
-        }
-
-        /// <summary>
-        /// 获取某个分类的类别 LY 2015-10-14
-        /// </summary>
-        /// <param name="Category"></param>
-        /// <returns></returns>
-        public List<TypeAndName> GetTypeList(string Category)
-        {
-            return new DictMethod().CmMstTypeGetTypeList(pclsCache, Category);
         }
 
         /// <summary>

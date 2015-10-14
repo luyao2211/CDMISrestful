@@ -194,12 +194,12 @@ namespace CDMISrestful.DataModels
         public string Code { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
-        public string IsAbnormalCode { get; set; }
+        public int IsAbnormalCode { get; set; }
         public string IsAbnormal { get; set; }
         public string UnitCode { get; set; }
-
         public string Unit { get; set; }
         public string Creator { get; set; }
 
     }
+
 }

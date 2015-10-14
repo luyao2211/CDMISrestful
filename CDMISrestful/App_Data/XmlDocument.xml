@@ -675,6 +675,39 @@
             <param name="StartDate"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.DictController.GetHypertensionDrugTypeNameList">
+            <summary>
+            获取高血压药物类型名称列表 LY 2015-10-13
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.DictController.GetHypertensionDrug">
+            <summary>
+            获取高血压药物名称列表 LY 2015-10-13
+            </summary>
+            <param name="Type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.DictController.GetDiabetesDrugTypeNameList">
+            <summary>
+            获取糖尿病药物类型名称列表 LY 2015-10-13
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.DictController.GetDiabetesDrug">
+            <summary>
+            获取糖尿病药物名称列表 LY 2015-10-13
+            </summary>
+            <param name="Type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.DictController.GetTypeList(System.String)">
+            <summary>
+            获取某个分类的类别 LY 2015-10-13
+            </summary>
+            <param name="Category"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.MessageController.GetSMSDialogue(System.String,System.String)">
             <summary>
             GetSMSDialogue 获取消息对话 GL 2015-10-10
@@ -718,6 +751,45 @@
             </summary>
             <param name="DoctorId"></param>
             <param name="CategoryCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ModuleInfoController.GetItemInfoByPIdAndModule(System.String,System.String)">
+            <summary>
+            输入PatientId和CategoryCode，获取患者已经购买的某个模块的详细信息 LY 2015-10-13
+            </summary>
+            <param name="UserId"></param>
+            <param name="CategoryCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ModuleInfoController.PostPatBasicInfoDetail(System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            插入患者详细信息 LY 2015-10-14
+            </summary>
+            <param name="Patient"></param>
+            <param name="CategoryCode"></param>
+            <param name="ItemCode"></param>
+            <param name="ItemSeq"></param>
+            <param name="Value"></param>
+            <param name="Description"></param>
+            <param name="SortNo"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ModuleInfoController.GetMstInfoItemByCategoryCode(System.String)">
+            <summary>
+            获取模块关注详细信息 LY 2015-10-14
+            </summary>
+            <param name="CategoryCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ModuleInfoController.GetSynBasicInfoDetail(System.String)">
+            <summary>
+            获取同步患者购买模块下的某些信息 LY 2015-10-14
+            </summary>
+            <param name="UserId"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.PostPlan(CDMISrestful.DataModels.GPlanInfo)">
@@ -1122,6 +1194,24 @@
             <param name="pclsCache"></param>
             <param name="piUserId"></param>
             <param name="piVisitId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.ClinicInfoMethod.GetNewLabTest(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            得到某些最新的化验结果 LY 2015-10-14
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.ClinicInfoMethod.GetLabTestDetails(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String)">
+            <summary>
+            获取患者某次化验的所有详细信息 LY 2015-10-14
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="UserId"></param>
+            <param name="VisitId"></param>
+            <param name="SortNo"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.ClinicInfoMethod.GetDrugRecord(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
@@ -2305,6 +2395,39 @@
             模块大分类，如M1，M2
             </summary>
         </member>
+        <member name="M:CDMISrestful.Models.DictRepository.GetHypertensionDrugTypeNameList">
+            <summary>
+            获取高血压药物类型名称列表 LY 2015-10-14
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.DictRepository.GetHypertensionDrug">
+            <summary>
+            获取高血压药物名称列表 LY 2015-10-14
+            </summary>
+            <param name="Type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.DictRepository.GetDiabetesDrugTypeNameList">
+            <summary>
+            获取糖尿病药物类型名称列表 LY 2015-10-14
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.DictRepository.GetDiabetesDrug">
+            <summary>
+            获取糖尿病药物名称列表 LY 2015-10-14
+            </summary>
+            <param name="Type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.DictRepository.GetTypeList(System.String)">
+            <summary>
+            获取某个分类的类别 LY 2015-10-14
+            </summary>
+            <param name="Category"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Models.IVitalInfoRepository.GetLatestPatientVitalSigns(System.String,System.String,System.String)">
             <summary>
             获取最新一条体征信息
@@ -2376,6 +2499,45 @@
             获取某医生未读消息总数 GL 2015-10-10
             </summary>
             <param name="DoctorId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.ModuleInfoRepository.GetItemInfoByPIdAndModule(System.String,System.String)">
+            <summary>
+            输入PatientId和CategoryCode，获取患者已经购买的某个模块的详细信息 LY 2015-10-14
+            </summary>
+            <param name="UserId"></param>
+            <param name="CategoryCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.ModuleInfoRepository.SetPatBasicInfoDetail(System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            插入患者详细信息 LY 2015-10-14
+            </summary>
+            <param name="Patient"></param>
+            <param name="CategoryCode"></param>
+            <param name="ItemCode"></param>
+            <param name="ItemSeq"></param>
+            <param name="Value"></param>
+            <param name="Description"></param>
+            <param name="SortNo"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.ModuleInfoRepository.GetMstInfoItemByCategoryCode(System.String)">
+            <summary>
+            获取模块关注详细信息 LY 2015-10-14
+            </summary>
+            <param name="CategoryCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.ModuleInfoRepository.SynBasicInfoDetail(System.String)">
+            <summary>
+            同步患者购买模块下的某些信息 LY 2015-10-14
+            </summary>
+            <param name="UserId"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Models.RiskInfoRepository.GetValueByPlanNoAndId(System.String,System.String)">
