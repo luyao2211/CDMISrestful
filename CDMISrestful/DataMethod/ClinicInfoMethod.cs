@@ -457,6 +457,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.Value2 = cdr["Value2"].ToString();
                     NewLine.Name3 = cdr["Name3"].ToString();
                     NewLine.Value3 = cdr["Value3"].ToString();
+                    list.Add(NewLine);
                 }
                 return list;
             }
@@ -543,6 +544,60 @@ namespace CDMISrestful.DataMethod
             catch (Exception ex)
             {
                 HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "ClinicInfoMethod.GetLabTestList", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// 得到某些最新的化验结果 LY 2015-10-14
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public List<NewLabTest> GetNewLabTest(DataConnection pclsCache, string UserId)
+        {
+            List<NewLabTest> list = new List<NewLabTest>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.LabTestDetails.GetNewLabTest(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    NewLabTest NewLine = new NewLabTest();
+                    NewLine.Code = cdr["Code"].ToString();
+                    NewLine.Name = cdr["Name"].ToString();
+                    NewLine.Value = cdr["Value"].ToString();
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PsLabTestDetails.GetNewLabTest", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
                 return null;
             }
             finally
