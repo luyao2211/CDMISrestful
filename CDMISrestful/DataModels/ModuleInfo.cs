@@ -47,4 +47,9 @@ namespace CDMISrestful.DataModels
         public string Level { get; set; }
         public string Dept { get; set; }
     }
+    public class SynBasicInfo
+    {
+        public List<NewExam> ExamInfo { get; set; }
+        public List<NewLabTest> LabTestInfo { get; set; }
+    }
 }
