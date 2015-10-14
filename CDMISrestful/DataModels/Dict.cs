@@ -12,7 +12,7 @@ namespace CDMISrestful.DataModels
     public class LifeStyleDetail
     {
         public string StyleId{get;set;}
-        public string Module{get;set;}
+        public string Name{get;set;}
         public string CurativeEffect{get;set;}
         public string SideEffect{get;set;}
         public string Instruction{get;set;}

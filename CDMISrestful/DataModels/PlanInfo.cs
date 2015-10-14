@@ -30,6 +30,41 @@ namespace CDMISrestful.DataModels
         public string Module { get; set; }
         public string Status { get; set; }
         public string DoctorId { get; set; }
+        public string piUserId { get; set; }
+        public string piTerminalName { get; set; }
+        public string piTerminalIP { get; set; }
+        public int piDeviceType { get; set; }
+    }
+    public class ComplianceDetail
+    {
+        public string Parent { get; set; }
+        public string Id { get; set; }
+        public int Status { get; set; }
+        public string piUserId { get; set; }
+        public string piTerminalName { get; set; }
+        public string piTerminalIP { get; set; }
+        public int piDeviceType { get; set; }
+    }
+    public class SetComplance
+    {
+        public string PatientId { get; set; }
+        public int Date { get; set; }
+        public string PlanNo { get; set; }
+        public double Compliance { get; set; }
+        public string piUserId { get; set; }
+        public string piTerminalName { get; set; }
+        public string piTerminalIP { get; set; }
+        public int piDeviceType { get; set; }
+    }
+
+    public class CreateTask
+    {
+        public string PlanNo { get; set; }
+        public string Task { get; set; }
+        public string piUserId { get; set; }
+        public string piTerminalName { get; set; }
+        public string piTerminalIP { get; set; }
+        public int piDeviceType { get; set; }
     }
 
     public class PatientPlan
@@ -145,7 +180,23 @@ namespace CDMISrestful.DataModels
         public string Origin { get; set; }
         public string Instruction { get; set; }
         public string Unit { get; set; }
+        public string Plan { get; set; }
+        public string piUserId { get; set; }
+        public string piTerminalName { get; set; }
+        public string piTerminalIP { get; set; }
+        public int piDeviceType { get; set; }
+    }
 
+    public class OverDuePlanDetail
+    {
+        public string PatientId { get; set; }
+        public string PatientName { get; set; }
+        public string PhotoAddress { get; set; }
+        public string PlanNo { get; set; }
+        public string StartDate { get; set; }
+        public double Process { get; set; }
+        public string RemainingDays { get; set; }
+        public List<string> VitalSign { get; set; }
     }
 
     public class MstBloodPressure
