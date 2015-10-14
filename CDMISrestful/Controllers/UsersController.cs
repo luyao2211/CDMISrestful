@@ -89,10 +89,11 @@ namespace CDMISrestful.Controllers
 
         [Route("Api/v1/Users/GetPatientsList")]
         [ModelValidationFilter]
-        [HttpGet]
-        public PatientsDataSet GetPatientsList(GetPatientsList GetPatientsList)
+        
+        //public PatientsDataSet GetPatientsList(GetPatientsList GetPatientsList)
+        public PatientsDataSet GetPatientsList(string DoctorId, string ModuleType, int Plan, int Compliance,int Goal)
         {
-            PatientsDataSet ret = repository.GetPatientsList(GetPatientsList.DoctorId, GetPatientsList.ModuleType, GetPatientsList.Plan, GetPatientsList.Compliance, GetPatientsList.Goal);
+            PatientsDataSet ret = repository.GetPatientsList(DoctorId, ModuleType, Plan, Compliance, Goal);
             return ret;
         }
 
@@ -100,19 +101,13 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage Verification(Verification Verification)
         {
-            int ret = repository.Verification(Verification.userId, Verification.ValidateCode, Verification.PwType);
+            int ret = repository.Verification(Verification.userId, Verification.PwType);
             return new ExceptionHandler().Verification(ret);
         }
 
-        [Route("Api/v1/Users/ResetPassword")]
-        [ModelValidationFilter]
-        public HttpResponseMessage ResetPassword(ResetPassword ResetPassword)
-        {
-            int ret = repository.ResetPassword(ResetPassword.NewPassword, ResetPassword.ConfirmPassword, ResetPassword.UserId, ResetPassword.Key, ResetPassword.Device, ResetPassword.revUserId, ResetPassword.TerminalName, ResetPassword.TerminalIP, ResetPassword.DeviceType);
-            return new ExceptionHandler().ResetPassword(ret);
-        }
 
-        [Route("Api/v1/Users/GetPatBasicInfo")]
+
+        [Route("Api/v1/Users/{UserId}/BasicInfo")]
         [ModelValidationFilter]
         public PatBasicInfo GetPatBasicInfo(string UserId)
         {
@@ -120,7 +115,7 @@ namespace CDMISrestful.Controllers
             return ret;
         }
 
-        [Route("Api/v1/Users/GetPatientDetailInfo")]
+        [Route("Api/v1/Users/{UserId}/BasicDtlInfo")]
         [ModelValidationFilter]
         public PatientDetailInfo GetPatientDetailInfo(string UserId)
         {

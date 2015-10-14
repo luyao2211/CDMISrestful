@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web;
 using CDMISrestful.DataModels;
+using System.Net.Http.Headers;
 
 namespace CDMISrestful.CommonLibrary
 {
@@ -85,6 +86,7 @@ namespace CDMISrestful.CommonLibrary
             //
             var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError);
             resp.Content = new StringContent(string.Format("登录失败"));
+            //resp.Headers = new HttpResponseMessage().Add("Access-Control-Allow-Origin","*");
             switch (operationResult)
             {
                 case 1:
@@ -201,31 +203,14 @@ namespace CDMISrestful.CommonLibrary
             resp.Content = new StringContent(string.Format("用户名验证失败"));
             switch (operationResult)
             {
-                case 1:
-                    //"已注册激活且有权限，登陆成功，跳转到主页";
+                case 1:              
                     resp = new HttpResponseMessage(HttpStatusCode.OK);
-                    resp.Content = new StringContent(string.Format("location.href = ResetPassword-Pad.html"));
+                    resp.Content = new StringContent(string.Format("用户存在"));
                     break;
                 case 2:
-                    //"已注册激活 但没有权限";
-                    resp = new HttpResponseMessage(HttpStatusCode.BadRequest);
-                    resp.Content = new StringContent(string.Format("验证码错误"));
-                    break;
-                case 3:
-                    //您的账号对应的角色未激活，需要先激活；界面跳转到游客页面（已注册但未激活）
-                    resp = new HttpResponseMessage(HttpStatusCode.BadRequest);
-                    resp.Content = new StringContent(string.Format("用户名不存在"));
-                    break;
-                case 4:
-                    //您的账号对应的角色未激活，需要先激活；界面跳转到游客页面（已注册但未激活）
-                    resp = new HttpResponseMessage(HttpStatusCode.BadRequest);
-                    resp.Content = new StringContent(string.Format("用户名不能为空"));
-                    break;
-                case 5:
-                    //您的账号对应的角色未激活，需要先激活；界面跳转到游客页面（已注册但未激活）
-                    resp = new HttpResponseMessage(HttpStatusCode.BadRequest);
-                    resp.Content = new StringContent(string.Format("验证码不能为空"));
-                    break;
+                    resp = new HttpResponseMessage(HttpStatusCode.OK);
+                    resp.Content = new StringContent(string.Format("用户不存在"));
+                    break;                   
                 default:
                     break;
             }

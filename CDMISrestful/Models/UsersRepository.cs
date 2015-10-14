@@ -212,13 +212,6 @@ namespace CDMISrestful.Models
             List<PatientListTable> DT_PatientList = new List<PatientListTable>();
 
             List<PatientPlan> DT_Patients = new List<PatientPlan>();
-            //DT_Patients.Columns.Add(new DataColumn("PatientId", typeof(string)));
-            //DT_Patients.Columns.Add(new DataColumn("PlanNo", typeof(string)));
-            //DT_Patients.Columns.Add(new DataColumn("StartDate", typeof(string)));
-            //DT_Patients.Columns.Add(new DataColumn("EndDate", typeof(string)));
-            //DT_Patients.Columns.Add(new DataColumn("TotalDays", typeof(string)));
-            //DT_Patients.Columns.Add(new DataColumn("RemainingDays", typeof(string)));
-            //DT_Patients.Columns.Add(new DataColumn("Status", typeof(string)));
 
             PatientsDataSet DS_Patients = new PatientsDataSet();
 
@@ -230,9 +223,7 @@ namespace CDMISrestful.Models
                     patientTotalCount = DT_Patients.Count;
                 else
                     return DS_Patients;
-
-                //foreach (DataRow item in DT_Patients)
-                //{
+           
                 for (int i = 0; i < patientTotalCount; i++)
                 {
                     string patientId = DT_Patients[i].PatientId; // item["PatientId"].ToString();
@@ -363,18 +354,21 @@ namespace CDMISrestful.Models
 
                     string patientName = "";
                     patientName = usersMethod.GetNameByUserId(pclsCache, patientId);
-                    DT_PatientList[i].PatientId = patientId;
-                    DT_PatientList[i].PatientName = patientName;
-                    DT_PatientList[i].photoAddress = photoAddress;
-                    DT_PatientList[i].PlanNo = planNo;
-                    DT_PatientList[i].StartDate = startDate;
-                    DT_PatientList[i].Process = process;
-                    DT_PatientList[i].RemainingDays = remainingDays;
-                    DT_PatientList[i].VitalSign = vitalsigns;
-                    DT_PatientList[i].ComplianceRate = complianceRate;
-                    DT_PatientList[i].TotalDays = totalDays;
-                    DT_PatientList[i].Status = status;
+                    PatientListTable NewLine = new PatientListTable();
+                    NewLine.PatientId = patientId;
+                    NewLine.PatientName = patientName;
+                    NewLine.photoAddress = photoAddress;
+                    NewLine.PlanNo = planNo;
+                    NewLine.StartDate = startDate;
+                    NewLine.Process = process;
+                    NewLine.RemainingDays = remainingDays;
+                    NewLine.VitalSign = vitalsigns;
+                    NewLine.ComplianceRate = complianceRate;
+                    NewLine.TotalDays = totalDays;
+                    NewLine.Status = status;
 
+                    DT_PatientList.Add(NewLine);
+                                
                 }
                 DS_Patients.DT_PatientList = DT_PatientList;
                 //The main rates for Plan, Compliance , Goal
@@ -396,92 +390,29 @@ namespace CDMISrestful.Models
             }
         }
 
-        public int Verification(string userId, string ValidateCode, string PwType)
+        /// <summary>
+        /// 验证用户是否存在
+        /// </summary>
+        /// <param name="userId">手机号/邮箱等</param>
+        /// <param name="PwType"></param>
+        /// <returns></returns>
+        public int Verification(string userId, string PwType)
         {
             int ret = 0;
-            var valiCode = "test";
-            if (userId != "" && ValidateCode != "")
+
+            string userID = usersMethod.GetIDByInput(pclsCache, PwType, userId);
+            if (userID != "" && userID != null)
             {
-                string userID = usersMethod.GetIDByInput(pclsCache, PwType, userId);
-                if (userID != "")
-                {
-                    if (ValidateCode == valiCode)
-                    {
-                        //window.localStorage.setItem("ID",userID);	
-                        //window.localStorage.setItem("Key","Verification");
-                        ret = 1; //location.href = "ResetPassword-Pad.html";
-                    }
-                    else
-                    {
-                        ret = 2; // "验证码错误！";
-                    }
-                }
-                else
-                {
-                    ret = 3;    // "用户名不存在！";
-                }
+                ret = 1; //用户存在
             }
-            else if (userId == "")
+            else
             {
-                ret = 4; // "用户名不能为空！";
+                ret = 2;    // "用户不存在！";
             }
-            else if (ValidateCode == "")
-            {
-                ret = 5;  // "验证码不能为空！";
-            }
+
             return ret;
         }
-
-        public int ResetPassword(string NewPassword, string ConfirmPassword, string UserId, string Key, string Device, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
-        {
-            int ret = 0;
-            string OldPassword = "#*bme319*#";
-            if (NewPassword != "" && ConfirmPassword != "" && NewPassword == ConfirmPassword)
-            {
-                int test = usersMethod.ChangePassword(pclsCache, UserId, OldPassword, NewPassword, revUserId, TerminalName, TerminalIP, DeviceType);
-                if (test == 1)
-                {
-                    if (Key == "LogOn")
-                    {
-
-                        if (Device == "Pad")
-                        {
-                            ret = 1; // "首次重置密码成功，即将进入系统 -- HomePage.html";
-                        }
-                        else if (Device == "Phone")
-                        {
-                            ret = 2; // "首次重置密码成功，即将进入系统 -- TaskMenu.html";
-                        }
-                    }
-                    else if (Key == "Verification")
-                    {
-                        if (Device == "Pad")
-                        {
-                            ret = 3; //  "LogOn-Pad.html";
-                        }
-                        else if (Device == "Phone")
-                        {
-                            ret = 4; //  "LogOn-Phone.html";
-                        }
-
-                    }
-                }
-            }
-            else if (NewPassword == "")
-            {
-                ret = 5; //"新密码不能为空！";
-            }
-            else if (ConfirmPassword == "")
-            {
-                ret = 6; // "请再次输入新密码！";
-            }
-            else if (NewPassword != ConfirmPassword)
-            {
-                ret = 7; // "两次输入的密码不同，请再次确认新密码！";
-
-            }
-            return ret;
-        }
+       
 
         public PatBasicInfo GetPatBasicInfo(string UserId)
         {

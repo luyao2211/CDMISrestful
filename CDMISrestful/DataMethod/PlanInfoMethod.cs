@@ -245,7 +245,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.TotalDays = cdr["TotalDays"].ToString();
                     NewLine.RemainingDays = cdr["RemainingDays"].ToString();
                     NewLine.Status = cdr["Status"].ToString();
-
+                    list.Add(NewLine);
                 }
                 return list;
             }

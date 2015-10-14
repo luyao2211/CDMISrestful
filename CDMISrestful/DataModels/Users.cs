@@ -95,36 +95,12 @@ namespace CDMISrestful.DataModels
     {
         [Required(ErrorMessage = "请传入用户Id")]
         public string userId { get; set; }
-        [Required(ErrorMessage = "请传入ValidateCode")]
-        public string ValidateCode { get; set; }
         [Required(ErrorMessage = "请传入PwType")]
         public string PwType { get; set; }
 
 
     }
-    public class ResetPassword
-    {
-        [Required(ErrorMessage = "请传入NewPassword")]
-        public string NewPassword { get; set; }
-        [Required(ErrorMessage = "请传入ConfirmPassword")]
-        public string ConfirmPassword { get; set; }
-        [Required(ErrorMessage = "请传入UserId")]
-        public string UserId { get; set; }
-        [Required(ErrorMessage = "请输入Key")]
-        public string Key { get; set; }
-        [Required(ErrorMessage = "请输入Device")]
-        public string Device { get; set; }
-        [Required(ErrorMessage = "revUserId")]
-        public string revUserId { get; set; }
-        [Required(ErrorMessage = "TerminalName")]
-        public string TerminalName { get; set; }
-        [Required(ErrorMessage = "TerminalIP")]
-        public string TerminalIP { get; set; }
-        [Required(ErrorMessage = "DeviceType")]
-        public int DeviceType { get; set; }
-
-
-    }
+    
     public class SetDoctorInfoDetail
     {
         [Required(ErrorMessage = "请传入Doctor")]

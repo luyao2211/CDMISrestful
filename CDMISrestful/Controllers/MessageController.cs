@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CDMISrestful.CommonLibrary;
+using System.Web.Http.OData;
 
 namespace CDMISrestful.Controllers
 {
@@ -19,7 +20,9 @@ namespace CDMISrestful.Controllers
         /// <param name="Reciever"></param>
         /// <param name="SendBy"></param>
         /// <returns></returns>
+        
         [Route("Api/v1/MessageInfo/messages")]
+        [EnableQuery]
         public List<Message> GetSMSDialogue(string Reciever, string SendBy)
         {
             return repository.GetSMSDialogue(Reciever, SendBy);

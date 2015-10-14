@@ -15,8 +15,7 @@ namespace CDMISrestful.Models
         int Activition(string UserId, string InviteCode,string role);
         int ChangePassword(string OldPassword, string NewPassword, string UserId, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
         PatientsDataSet GetPatientsList(string DoctorId, string ModuleType, int Plan, int Compliance, int Goal);
-        int Verification(string userId, string ValidateCode, string PwType);
-        int ResetPassword(string NewPassword, string ConfirmPassword, string UserId, string Key, string Device, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+        int Verification(string userId, string PwType);
         PatBasicInfo GetPatBasicInfo(string UserId);
         PatientDetailInfo GetPatientDetailInfo(string UserId);
         PatientALLBasicInfo GetUserBasicInfo(string UserId);
