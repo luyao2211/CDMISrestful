@@ -48,4 +48,16 @@ namespace CDMISrestful.DataModels
         public int piChd { get; set; }
         public int piValve { get; set; }
     }
+    public class RiskResult
+    {
+        public string UserId { get; set; }
+        public string AssessmentType { get; set; }
+        public string AssessmentName { get; set; }
+        public DateTime AssessmentTime { get; set; }
+        public string Result { get; set; }
+        public string revUserId { get; set; }
+        public string TerminalName { get; set; }
+        public string TerminalIP { get; set; }
+        public int DeviceType { get; set; }
+    }
 }
