@@ -40,6 +40,7 @@ namespace CDMISrestful.Controllers
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/MessageInfo/message")]
+        [ModelValidationFilter]
         public HttpResponseMessage PostSMS(Message item)
         {
             int ret = 0;

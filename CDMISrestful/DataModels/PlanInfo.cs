@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using CDMISrestful.CommonLibrary;
 using InterSystems.Data.CacheClient;
+using System.ComponentModel.DataAnnotations;
 
 namespace CDMISrestful.DataModels
 {
@@ -23,11 +24,13 @@ namespace CDMISrestful.DataModels
 
     public class GPlanInfo
     {
+        [Required]
         public string PlanNo { get; set; }
         public string PatientId { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string Module { get; set; }
+        [Required]
         public string Status { get; set; }
         public string DoctorId { get; set; }
         public string piUserId { get; set; }
@@ -37,7 +40,9 @@ namespace CDMISrestful.DataModels
     }
     public class ComplianceDetail
     {
+        [Required]
         public string Parent { get; set; }
+        [Required]
         public string Id { get; set; }
         public int Status { get; set; }
         public string piUserId { get; set; }
@@ -47,8 +52,11 @@ namespace CDMISrestful.DataModels
     }
     public class SetComplance
     {
+        [Required]
         public string PatientId { get; set; }
+        [Required]
         public int Date { get; set; }
+        [Required]
         public string PlanNo { get; set; }
         public double Compliance { get; set; }
         public string piUserId { get; set; }
@@ -59,7 +67,9 @@ namespace CDMISrestful.DataModels
 
     public class CreateTask
     {
+        [Required]
         public string PlanNo { get; set; }
+        [Required]
         public string Task { get; set; }
         public string piUserId { get; set; }
         public string piTerminalName { get; set; }
@@ -173,6 +183,7 @@ namespace CDMISrestful.DataModels
     }
     public class TargetByCode
     {
+        [Required]
         public string Id { get; set; }
         public string Type { get; set; }
         public string Code { get; set; }
@@ -180,6 +191,7 @@ namespace CDMISrestful.DataModels
         public string Origin { get; set; }
         public string Instruction { get; set; }
         public string Unit { get; set; }
+        [Required]
         public string Plan { get; set; }
         public string piUserId { get; set; }
         public string piTerminalName { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -26,6 +27,7 @@ namespace CDMISrestful.DataModels
         /// <summary>
         /// 发送者Id
         /// </summary>
+        [Required]
         public string SendBy { get; set; }
         /// <summary>
         /// 接收者Id
@@ -46,6 +48,7 @@ namespace CDMISrestful.DataModels
         /// <summary>
         /// 接收者Id
         /// </summary>
+        [Required]
         public string Receiver { get; set; }
         /// <summary>
         /// 接收者姓名

@@ -30,6 +30,7 @@ namespace CDMISrestful.Controllers
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/Plan")]
+        [ModelValidationFilter]
         public HttpResponseMessage PostPlan(GPlanInfo item)
         {
             int ret = repository.SetPlan(item.PlanNo, item.PatientId, Convert.ToInt32(item.StartDate), Convert.ToInt32(item.EndDate), item.Module, Convert.ToInt32(item.Status), item.DoctorId, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
@@ -48,6 +49,7 @@ namespace CDMISrestful.Controllers
         /// <param name="CoDeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostComplianceDetail")]
+        [ModelValidationFilter]
         public HttpResponseMessage PostComplianceDetail(ComplianceDetail item)
         {
             int ret = repository.SetComplianceDetail(item.Parent, item.Id, item.Status, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
@@ -103,6 +105,7 @@ namespace CDMISrestful.Controllers
         /// <param name="DeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostCreateTask")]
+        [ModelValidationFilter]
         public HttpResponseMessage PostCreateTask(CreateTask item)
         {
             int ret = repository.CreateTask(item.PlanNo, item.Task, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
@@ -122,6 +125,7 @@ namespace CDMISrestful.Controllers
         /// <param name="DeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostCompliance")]
+        [ModelValidationFilter]
         public HttpResponseMessage PostCompliance(SetComplance item)
         {
             int ret = repository.SetCompliance(item.PatientId, item.Date, item.PlanNo, item.Compliance, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
@@ -158,6 +162,7 @@ namespace CDMISrestful.Controllers
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostTarget")]
+        [ModelValidationFilter]
         public HttpResponseMessage PostTarget(TargetByCode item)
         {
             int ret = repository.SetTarget(item.Plan, item.Id, item.Type, item.Code, item.Value, item.Origin, item.Instruction, item.Unit, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
@@ -239,6 +244,7 @@ namespace CDMISrestful.Controllers
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostPlanStart")]
+        [ModelValidationFilter]
         public HttpResponseMessage PostPlanStart(GPlanInfo item)
         {
             int ret = repository.SetPlanStart(item.PlanNo, Convert.ToInt32(item.Status), item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
