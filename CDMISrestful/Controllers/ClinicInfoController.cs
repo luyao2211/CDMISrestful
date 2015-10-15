@@ -19,9 +19,9 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
 
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
-        public Clinic GetClinicalNewMobile(GetClinicalNewMobile GetClinicalNewMobile)
+        public Clinic GetClinicalNewMobile(string UserId, DateTime AdmissionDate, DateTime ClinicDate, int Num)
         {
-            Clinic ret = repository.GetClinicalNewMobile(GetClinicalNewMobile.UserId, GetClinicalNewMobile.AdmissionDate, GetClinicalNewMobile.ClinicDate, GetClinicalNewMobile.Num);
+            Clinic ret = repository.GetClinicalNewMobile(UserId, AdmissionDate, ClinicDate, Num);
             return ret;
         }
 
@@ -29,18 +29,18 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
 
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
-        public ClinicInfoViewModel GetClinicInfoDetail(GetClinicInfoDetail GetClinicInfoDetail)
+        public ClinicInfoViewModel GetClinicInfoDetail(string UserId, string Type, string VisitId, string Date)
         {
-            ClinicInfoViewModel ret = repository.GetClinicInfoDetail(GetClinicInfoDetail.UserId, GetClinicInfoDetail.Type, GetClinicInfoDetail.VisitId, GetClinicInfoDetail.Date);
+            ClinicInfoViewModel ret = repository.GetClinicInfoDetail(UserId,Type, VisitId, Date);
             return ret;
         }
         [Route("Api/v1/ClinicInfo/GetLabTestDtlList")]
         [ModelValidationFilter]
 
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
-        public List<LabTestDetails> GetLabTestDtlList(GetLabTestDtlList GetLabTestDtlList)
+        public List<LabTestDetails> GetLabTestDtlList(string UserId, string VisitId, string SortNo)
         {
-            List<LabTestDetails> ret = repository.GetLabTestDtlList(GetLabTestDtlList.UserId,  GetLabTestDtlList.VisitId, GetLabTestDtlList.SortNo);
+            List<LabTestDetails> ret = repository.GetLabTestDtlList(UserId,  VisitId, SortNo);
             return ret;
         }
     }

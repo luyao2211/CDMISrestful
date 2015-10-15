@@ -333,7 +333,8 @@ namespace CDMISrestful.Models
                 
                 //string date = Date.Substring(0, 10) + " " + Date.Substring(10, 8);
                 //string date_final = Convert.ToDateTime(date).ToString("yyyy/M/d H:mm:ss");
-                string date_final = Date.Substring(0, 10) + " " + Date.Substring(10, 8);
+                //string date_final = Date.Substring(0, 10) + " " + Date.Substring(10, 8);
+                string date_final = Date;
                 return DT_ClinicInfoDetail = clinicInfoMethod.GetClinicInfoDetail(pclsCache, UserId, Type, VisitId, date_final);
           
             }

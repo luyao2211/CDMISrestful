@@ -10,45 +10,45 @@ namespace CDMISrestful.DataModels
     {
 
     }
-    public class GetClinicalNewMobile
-    {
+    //public class GetClinicalNewMobile
+    //{
 
-        [Required(ErrorMessage = "请传入UserId")]
-        public string UserId { get; set; }
-        [Required(ErrorMessage = "请输入AdmissionDate")]
-        //[RegularExpression(@"/^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/" @"/^1[3|4|5|7|8][0-9]\d{4,8}$/)]
-        public DateTime AdmissionDate { get; set; }
-        [Required(ErrorMessage = "请输入ClinicDate")]
-        public DateTime ClinicDate { get; set; }
-        [Required(ErrorMessage = "请输入Num")]
-        public int Num { get; set; }
-    }
+    //    [Required(ErrorMessage = "请传入UserId")]
+    //    public string UserId { get; set; }
+    //    [Required(ErrorMessage = "请输入AdmissionDate")]
+    //    //[RegularExpression(@"/^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/" @"/^1[3|4|5|7|8][0-9]\d{4,8}$/)]
+    //    public DateTime AdmissionDate { get; set; }
+    //    [Required(ErrorMessage = "请输入ClinicDate")]
+    //    public DateTime ClinicDate { get; set; }
+    //    [Required(ErrorMessage = "请输入Num")]
+    //    public int Num { get; set; }
+    //}
 
-    public class GetClinicInfoDetail
-    {
+    //public class GetClinicInfoDetail
+    //{
 
-        [Required(ErrorMessage = "请传入UserId")]
-        public string UserId { get; set; }
-        [Required(ErrorMessage = "请输入Type")]
-        //[RegularExpression(@"/^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/" @"/^1[3|4|5|7|8][0-9]\d{4,8}$/)]
-        public string Type { get; set; }
-        [Required(ErrorMessage = "请输入VisitId")]
-        public string VisitId { get; set; }
-        [Required(ErrorMessage = "请输入Date")]
-        public string Date { get; set; }
-    }
-    public class GetLabTestDtlList
-    {
+    //    [Required(ErrorMessage = "请传入UserId")]
+    //    public string UserId { get; set; }
+    //    [Required(ErrorMessage = "请输入Type")]
+    //    //[RegularExpression(@"/^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/" @"/^1[3|4|5|7|8][0-9]\d{4,8}$/)]
+    //    public string Type { get; set; }
+    //    [Required(ErrorMessage = "请输入VisitId")]
+    //    public string VisitId { get; set; }
+    //    [Required(ErrorMessage = "请输入Date")]
+    //    public string Date { get; set; }
+    //}
+    //public class GetLabTestDtlList
+    //{
 
-        [Required(ErrorMessage = "请传入UserId")]
-        public string UserId { get; set; }
-        [Required(ErrorMessage = "请输入VisitId")]
-        //[RegularExpression(@"/^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/" @"/^1[3|4|5|7|8][0-9]\d{4,8}$/)]
-        public string VisitId { get; set; }
-        [Required(ErrorMessage = "请输入SortNo")]
-        public string SortNo { get; set; }
+    //    [Required(ErrorMessage = "请传入UserId")]
+    //    public string UserId { get; set; }
+    //    [Required(ErrorMessage = "请输入VisitId")]
+    //    //[RegularExpression(@"/^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/" @"/^1[3|4|5|7|8][0-9]\d{4,8}$/)]
+    //    public string VisitId { get; set; }
+    //    [Required(ErrorMessage = "请输入SortNo")]
+    //    public string SortNo { get; set; }
 
-    }
+    //}
     public class ClinicalTrans
     {
         public DateTime 精确时间 { get; set; }

@@ -1186,7 +1186,7 @@ namespace CDMISrestful.DataMethod
                 switch (Type)
                 {
                     case "DiagnosisInfo": DiagnosisInfo_DataViewModel = new ClinicInfoMethod().PsDiagnosisGetDiagnosisInfo(pclsCache, UserId, VisitId);//诊断表
-                        List<DiagnosisInfo> DiagnosisInfo_DataViewModel_copy = null;
+                        List<DiagnosisInfo> DiagnosisInfo_DataViewModel_copy = new List<DiagnosisInfo>();
                         foreach (DiagnosisInfo item in DiagnosisInfo_DataViewModel)
                         {
                             if (item.RecordDateCom == Date)
@@ -1198,7 +1198,7 @@ namespace CDMISrestful.DataMethod
                         break;
 
                     case "ExaminationInfo": ExamInfo_DataViewModel = new ClinicInfoMethod().PsExaminationGetExaminationList(pclsCache, UserId, VisitId); //检查表（有子表）
-                        List<ExamInfo> ExamInfo_DataViewModel_copy = null;
+                        List<ExamInfo> ExamInfo_DataViewModel_copy = new List<ExamInfo>();
                         foreach (ExamInfo item in ExamInfo_DataViewModel)
                         {
                             if (item.ExamDateCom == Date)
@@ -1210,7 +1210,7 @@ namespace CDMISrestful.DataMethod
                         break;
 
                     case "LabTestInfo": LabTestList_DataViewModel = new ClinicInfoMethod().GetLabTestList(pclsCache, UserId, VisitId); //化验表（有子表）
-                        List<LabTestList> LabTestList_DataViewModel_copy = null;
+                        List<LabTestList> LabTestList_DataViewModel_copy = new List<LabTestList>();
                         foreach (LabTestList item in LabTestList_DataViewModel)
                         {
                             if (item.LabTestDateCom == Date)
