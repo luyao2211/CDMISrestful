@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.OData;
 using CDMISrestful.DataModels;
 using CDMISrestful.Models;
 
@@ -64,6 +65,18 @@ namespace CDMISrestful.Controllers
         public List<TypeAndName> GetTypeList(string Category)
         {
             return repository.GetTypeList(Category);
+        }
+
+
+        /// <summary>
+        /// 获取血压等级字典表的所有信息 LY 2015-10-13
+        /// </summary>
+        /// <returns></returns>
+        [Route("Api/v1/Dict/BloodPressure")]
+        [EnableQuery]
+        public List<MstBloodPressure> GetBloodPressure()
+        {
+            return repository.GetBloodPressure();
         }
     }
 }

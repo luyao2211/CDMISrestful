@@ -13,5 +13,6 @@ namespace CDMISrestful.Models
         List<TypeAndName> GetDiabetesDrugTypeNameList();
         List<CmAbsType> GetDiabetesDrug();
         List<TypeAndName> GetTypeList(string Category);
+        List<MstBloodPressure> GetBloodPressure();
     }
 }

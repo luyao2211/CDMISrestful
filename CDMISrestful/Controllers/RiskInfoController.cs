@@ -25,15 +25,6 @@ namespace CDMISrestful.Controllers
             return repository.GetValueByPlanNoAndId(PlanNo, Id);
         }
 
-        /// <summary>
-        /// 获取血压等级字典表的所有信息 LY 2015-10-13
-        /// </summary>
-        /// <returns></returns>
-        [Route("Api/v1/RiskInfo/GetBPGrades")]
-        public List<MstBloodPressure> GetBPGrades()
-        {
-            return repository.GetBPGrades();
-        }
 
         /// <summary>
         /// 根据收缩压获取血压等级说明 LY 2015-10-13

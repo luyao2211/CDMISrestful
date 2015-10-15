@@ -495,3 +495,4 @@ F:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\bin\zh-Han
 F:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\bin\zh-Hans\System.Web.Optimization.resources.dll
 F:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\obj\Debug\CDMISrestful.dll
 F:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\obj\Debug\CDMISrestful.pdb
+F:\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\obj\Debug\CDMISrestful.csprojResolveAssemblyReference.cache

@@ -708,6 +708,12 @@
             <param name="Category"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.DictController.GetBloodPressure">
+            <summary>
+            获取血压等级字典表的所有信息 LY 2015-10-13
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.MessageController.GetSMSDialogue(System.String,System.String)">
             <summary>
             GetSMSDialogue 获取消息对话 GL 2015-10-10
@@ -1032,12 +1038,6 @@
             </summary>
             <param name="PlanNo"></param>
             <param name="Id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetBPGrades">
-            <summary>
-            获取血压等级字典表的所有信息 LY 2015-10-13
-            </summary>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
@@ -2428,6 +2428,12 @@
             <param name="Category"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Models.DictRepository.GetBloodPressure">
+            <summary>
+            获取血压等级字典表的所有信息 LY 2015-10-13
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Models.IVitalInfoRepository.GetLatestPatientVitalSigns(System.String,System.String,System.String)">
             <summary>
             获取最新一条体征信息
@@ -2546,12 +2552,6 @@
             </summary>
             <param name="PlanNo"></param>
             <param name="Id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetBPGrades">
-            <summary>
-            获取血压等级字典表的所有信息 LY 2015-10-13
-            </summary>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Models.RiskInfoRepository.GetDescription(System.Int32)">

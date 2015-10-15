@@ -22,14 +22,7 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().GetValueByPlanNoAndId(pclsCache, PlanNo, Id);
         }
 
-        /// <summary>
-        /// 获取血压等级字典表的所有信息 LY 2015-10-13
-        /// </summary>
-        /// <returns></returns>
-        public List<MstBloodPressure> GetBPGrades()
-        {
-            return new PlanInfoMethod().GetBPGrades(pclsCache);
-        }
+       
 
         /// <summary>
         /// 根据收缩压获取血压等级说明 LY 2015-10-13

@@ -62,5 +62,13 @@ namespace CDMISrestful.Models
             return new DictMethod().CmMstTypeGetTypeList(pclsCache, Category);
         }
 
+        /// <summary>
+        /// 获取血压等级字典表的所有信息 LY 2015-10-13
+        /// </summary>
+        /// <returns></returns>
+        public List<MstBloodPressure> GetBloodPressure()
+        {
+            return new PlanInfoMethod().GetBPGrades(pclsCache);
+        }
     }
 }
