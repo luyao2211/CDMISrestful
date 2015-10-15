@@ -51,7 +51,7 @@ namespace CDMISrestful.Controllers
             {
                 ret= repository.SetSMS(item.SendBy, item.Receiver, item.Content, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
             }
-            return new ExceptionHandler().SetData(ret);
+            return new ExceptionHandler().SetData(Request,ret);
         }
 
         /// <summary>

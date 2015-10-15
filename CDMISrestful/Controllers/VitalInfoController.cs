@@ -37,7 +37,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage PostPatientVitalSigns(SetVitalInfo item)
         {
             int ret = repository.SetPatientVitalSigns(item.UserId, Convert.ToInt32(item.RecordDate), Convert.ToInt32(item.RecordTime), item.ItemType, item.ItemCode, item.Value, item.Unit, item.revUserId, item.TerminalName, item.TerminalIP, item.DeviceType);
-            return new ExceptionHandler().SetData(ret);
+            return new ExceptionHandler().SetData(Request,ret);
         }
 
         /// <summary>

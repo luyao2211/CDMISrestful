@@ -46,7 +46,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage PostPatBasicInfoDetail(string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             int ret = repository.SetPatBasicInfoDetail(Patient, CategoryCode, ItemCode, ItemSeq, Value, Description, SortNo, revUserId, TerminalName, TerminalIP, DeviceType);
-            return new ExceptionHandler().SetData(ret);
+            return new ExceptionHandler().SetData(Request, ret);
         }
 
         /// <summary>

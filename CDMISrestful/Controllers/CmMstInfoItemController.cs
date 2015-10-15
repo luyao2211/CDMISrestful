@@ -58,7 +58,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage Delete(string CategoryCode, string Code, int StartDate)
         {
             int ret = repository.Remove(CategoryCode, Code, StartDate);
-            return new ExceptionHandler().DeleteData(ret);
+            return new ExceptionHandler().DeleteData(Request, ret);
         }
 
         /// <summary>

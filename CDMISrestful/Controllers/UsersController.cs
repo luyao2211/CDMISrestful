@@ -42,7 +42,8 @@ namespace CDMISrestful.Controllers
             //if (SecurityManager.IsTokenValid(token))
             //{
             int ret = repository.LogOn(logOn.PwType, logOn.username, logOn.password, logOn.role);
-            return new ExceptionHandler().LogOn(ret);
+            return new ExceptionHandler().LogOn(Request,ret);
+           
             //}
             //else
             //{
@@ -57,7 +58,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage IsUserValid(String userId, String password)
         {
             string ret = repository.IsUserValid(userId, password);
-            return new ExceptionHandler().IsUserValid(ret);
+            return new ExceptionHandler().IsUserValid(Request, ret);
         }
 
         [Route("Api/v1/Users/Register")]
@@ -65,7 +66,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage Register(Register Register)
         {
             int ret = repository.Register(Register.PwType, Register.userId, Register.UserName, Register.Password, Register.role, Register.revUserId, Register.TerminalName, Register.TerminalIP, Register.DeviceType);
-            return new ExceptionHandler().Register(ret);
+            return new ExceptionHandler().Register(Request, ret);
         }
 
         [Route("Api/v1/Users/Activition")]
@@ -74,7 +75,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage Activition(Activation activation)
         {
             int ret = repository.Activition(activation.UserId, activation.InviteCode, activation.role);
-            return new ExceptionHandler().Activation(ret);
+            return new ExceptionHandler().Activation(Request, ret);
         }
 
         [Route("Api/v1/Users/ChangePassword")]
@@ -82,7 +83,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage ChangePassword(ChangePassword ChangePassword)
         {
             int ret = repository.ChangePassword(ChangePassword.OldPassword, ChangePassword.NewPassword, ChangePassword.UserId, ChangePassword.revUserId, ChangePassword.TerminalName, ChangePassword.TerminalIP, ChangePassword.DeviceType);
-            return new ExceptionHandler().ChangePassword(ret);
+            return new ExceptionHandler().ChangePassword(Request, ret);
         }
 
         [Route("Api/v1/Users/GetPatientsList")]
@@ -100,7 +101,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage Verification(Verification Verification)
         {
             int ret = repository.Verification(Verification.userId, Verification.PwType);
-            return new ExceptionHandler().Verification(ret);
+            return new ExceptionHandler().Verification(Request, ret);
         }
 
 
@@ -142,14 +143,14 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage SetDoctorInfoDetail(SetDoctorInfoDetail SetDoctorInfoDetail)
         {
             int ret = repository.SetDoctorInfoDetail(SetDoctorInfoDetail.Doctor, SetDoctorInfoDetail.CategoryCode, SetDoctorInfoDetail.ItemCode, SetDoctorInfoDetail.ItemSeq, SetDoctorInfoDetail.Value, SetDoctorInfoDetail.Description, SetDoctorInfoDetail.SortNo, SetDoctorInfoDetail.piUserId, SetDoctorInfoDetail.piTerminalName, SetDoctorInfoDetail.piTerminalIP, SetDoctorInfoDetail.piDeviceType);
-            return new ExceptionHandler().SetData(ret);
+            return new ExceptionHandler().SetData(Request, ret);
         }
         [Route("Api/v1/Users/SetPsDoctor")]
         [ModelValidationFilter]
         public HttpResponseMessage SetPsDoctor(SetPsDoctor SetPsDoctor)
         {
             int ret = repository.SetPsDoctor(SetPsDoctor.UserId, SetPsDoctor.UserName, SetPsDoctor.Birthday, SetPsDoctor.Gender, SetPsDoctor.IDNo, SetPsDoctor.InvalidFlag, SetPsDoctor.piUserId, SetPsDoctor.piTerminalName, SetPsDoctor.piTerminalIP, SetPsDoctor.piDeviceType);
-            return new ExceptionHandler().SetData(ret);
+            return new ExceptionHandler().SetData(Request, ret);
         }
         [Route("Api/v1/Users/GetInsuranceType")]
         [ModelValidationFilter]
@@ -163,7 +164,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage SetPatBasicInfo(SetPatBasicInfo SetPatBasicInfo)
         {
             int ret = repository.SetPatBasicInfo(SetPatBasicInfo.UserId, SetPatBasicInfo.UserName, SetPatBasicInfo.Birthday, SetPatBasicInfo.Gender, SetPatBasicInfo.BloodType, SetPatBasicInfo.IDNo, SetPatBasicInfo.DoctorId, SetPatBasicInfo.InsuranceType, SetPatBasicInfo.InvalidFlag, SetPatBasicInfo.piUserId, SetPatBasicInfo.piTerminalName, SetPatBasicInfo.piTerminalIP, SetPatBasicInfo.piDeviceType);
-            return new ExceptionHandler().SetData(ret);
+            return new ExceptionHandler().SetData(Request, ret);
         }
     }
 }

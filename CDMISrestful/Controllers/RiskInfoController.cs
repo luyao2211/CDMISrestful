@@ -64,7 +64,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage PostRiskResult(string UserId, string AssessmentType, string AssessmentName, DateTime AssessmentTime, string Result, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             int ret = repository.SetRiskResult(UserId, AssessmentType, AssessmentName, AssessmentTime, Result, revUserId, TerminalName, TerminalIP, DeviceType);
-            return new ExceptionHandler().SetData(ret);
+            return new ExceptionHandler().SetData(Request, ret);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage PutBasicInfoDetail(string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             int ret = repository.SetBasicInfoDetail(Patient, CategoryCode, ItemCode, ItemSeq, Value, Description, SortNo, revUserId, TerminalName, TerminalIP, DeviceType);
-            return new ExceptionHandler().SetData(ret);
+            return new ExceptionHandler().SetData(Request, ret);
         }
 
         /// <summary>
