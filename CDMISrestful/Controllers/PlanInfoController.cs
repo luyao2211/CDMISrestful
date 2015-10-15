@@ -29,7 +29,7 @@ namespace CDMISrestful.Controllers
         /// <param name="piTerminalIP"></param>
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
-        [Route("Api/v1/PlanInfo/PostPlan")]
+        [Route("Api/v1/PlanInfo/Plan")]
         public HttpResponseMessage PostPlan(GPlanInfo item)
         {
             int ret = repository.SetPlan(item.PlanNo, item.PatientId, Convert.ToInt32(item.StartDate), Convert.ToInt32(item.EndDate), item.Module, Convert.ToInt32(item.Status), item.DoctorId, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
