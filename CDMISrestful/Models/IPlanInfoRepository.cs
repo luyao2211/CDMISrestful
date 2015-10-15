@@ -13,7 +13,7 @@ namespace CDMISrestful.Models
         List<LifeStyleDetail> GetLifeStyleDetail(string Module);
         List<PsTaskByType> GetPsTaskByType(string PlanNo, string Type);
         List<PsDrugRecord> GetPatientDrugRecord(string PatientId, string Module);
-        bool CreateTask(string PlanNo, string Task, string UserId, string TerminalName, string TerminalIP, int DeviceType);
+        int CreateTask(string PlanNo, string Task, string UserId, string TerminalName, string TerminalIP, int DeviceType);
         int SetCompliance(string PatientId, int Date, string PlanNo, Double Compliance, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
         string GetValueByPlanNoAndId(string PlanNo, string Id);
         int SetTarget(string Plan, string Id, string Type, string Code, string Value, string Origin, string Instruction, string Unit, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);

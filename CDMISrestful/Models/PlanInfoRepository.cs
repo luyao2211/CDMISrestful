@@ -58,11 +58,11 @@ namespace CDMISrestful.Models
         }
 
         //创建计划 GL 2015-10-13
-        public bool CreateTask(string PlanNo, string Task, string UserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int CreateTask(string PlanNo, string Task, string UserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             try
             {
-                bool ret = false;
+                int ret = 2;
                 List<PsTask> DT_PsTask = new PlanInfoMethod().GetPsTask(pclsCache, PlanNo);
                 if (DT_PsTask.Count != 0)
                 {
@@ -77,14 +77,14 @@ namespace CDMISrestful.Models
                     string Type = content[0];
                     string Code = content[1];
                     string Instruction = content[2];
-                    ret = new PlanInfoMethod().PsTaskSetData(pclsCache, PlanNo, Id, Type, Code, Instruction, UserId, TerminalName, TerminalIP, DeviceType) == 1 ? true : false;
+                    ret = new PlanInfoMethod().PsTaskSetData(pclsCache, PlanNo, Id, Type, Code, Instruction, UserId, TerminalName, TerminalIP, DeviceType);
                 }
                 return ret;
             }
             catch (Exception ex)
             {
                 HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "CreateTask ", "PlanInfoRepository！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return false;
+                return 2;
                 throw (ex);
             }
         }

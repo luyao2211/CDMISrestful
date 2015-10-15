@@ -254,13 +254,14 @@ namespace CDMISrestful.CommonLibrary
             }
             return resp;
         }
-      
-        //public HttpResponseMessage Common(SignDetailByP ret)
-        //{
-        //    var resp = new HttpResponseMessage(HttpStatusCode.OK);
-        //    resp.Content = new JsonContent(ret);
-        //    return resp;
-        //}
+
+        public HttpResponseMessage Common(HttpRequestMessage request, string ret)
+        {
+            Result res = new Result();
+            res.result = ret;
+            var resp = request.CreateResponse(HttpStatusCode.OK, res);
+            return resp;
+        }   
     }
 }
                        

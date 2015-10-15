@@ -1,4 +1,5 @@
-﻿using CDMISrestful.DataModels;
+﻿using CDMISrestful.CommonLibrary;
+using CDMISrestful.DataModels;
 using CDMISrestful.Models;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,10 @@ namespace CDMISrestful.Controllers
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostPlan")]
-        public int PostPlan(GPlanInfo item)
+        public HttpResponseMessage PostPlan(GPlanInfo item)
         {
-            return repository.SetPlan(item.PlanNo, item.PatientId, Convert.ToInt32(item.StartDate), Convert.ToInt32(item.EndDate), item.Module, Convert.ToInt32(item.Status), item.DoctorId, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetPlan(item.PlanNo, item.PatientId, Convert.ToInt32(item.StartDate), Convert.ToInt32(item.EndDate), item.Module, Convert.ToInt32(item.Status), item.DoctorId, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
         }
 
         /// <summary>
@@ -46,9 +48,10 @@ namespace CDMISrestful.Controllers
         /// <param name="CoDeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostComplianceDetail")]
-        public int PostComplianceDetail(ComplianceDetail item)
+        public HttpResponseMessage PostComplianceDetail(ComplianceDetail item)
         {
-            return repository.SetComplianceDetail(item.Parent, item.Id, item.Status, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetComplianceDetail(item.Parent, item.Id, item.Status, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
         }
 
         /// <summary>
@@ -70,6 +73,7 @@ namespace CDMISrestful.Controllers
         /// <param name="Type"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetPsTaskByType")]
+        [EnableQuery]
         public List<PsTaskByType> GetPsTaskByType(string PlanNo, string Type)
         {
             return repository.GetPsTaskByType(PlanNo, Type);
@@ -82,6 +86,7 @@ namespace CDMISrestful.Controllers
         /// <param name="Module"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetPatientDrugRecord")]
+        [EnableQuery]
         public List<PsDrugRecord> GetPatientDrugRecord(string PatientId, string Module)
         {
             return repository.GetPatientDrugRecord(PatientId, Module);
@@ -98,9 +103,10 @@ namespace CDMISrestful.Controllers
         /// <param name="DeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostCreateTask")]
-        public bool PostCreateTask(CreateTask item)
+        public HttpResponseMessage PostCreateTask(CreateTask item)
         {
-            return repository.CreateTask(item.PlanNo, item.Task, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.CreateTask(item.PlanNo, item.Task, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
         }
 
         /// <summary>
@@ -116,9 +122,10 @@ namespace CDMISrestful.Controllers
         /// <param name="DeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostCompliance")]
-        public int PostCompliance(SetComplance item)
+        public HttpResponseMessage PostCompliance(SetComplance item)
         {
-            return repository.SetCompliance(item.PatientId, item.Date, item.PlanNo, item.Compliance, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetCompliance(item.PatientId, item.Date, item.PlanNo, item.Compliance, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
         }
 
         /// <summary>
@@ -128,9 +135,10 @@ namespace CDMISrestful.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetValueByPlanNoAndId")]
-        public string GetValueByPlanNoAndId(string PlanNo, string Id)
+        public HttpResponseMessage GetValueByPlanNoAndId(string PlanNo, string Id)
         {
-            return repository.GetValueByPlanNoAndId(PlanNo, Id);
+            string ret = repository.GetValueByPlanNoAndId(PlanNo, Id);
+            return new ExceptionHandler().Common(Request,ret);
         }
 
         /// <summary>
@@ -150,9 +158,10 @@ namespace CDMISrestful.Controllers
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostTarget")]
-        public int PostTarget(TargetByCode item)
+        public HttpResponseMessage PostTarget(TargetByCode item)
         {
-            return repository.SetTarget(item.Plan, item.Id, item.Type, item.Code, item.Value, item.Origin, item.Instruction, item.Unit, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetTarget(item.Plan, item.Id, item.Type, item.Code, item.Value, item.Origin, item.Instruction, item.Unit, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
         }
 
         /// <summary>
@@ -200,9 +209,10 @@ namespace CDMISrestful.Controllers
         /// <param name="PlanNo"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetGoalValue")]
-        public int GetGoalValue(string PlanNo)
+        public HttpResponseMessage GetGoalValue(string PlanNo)
         {
-            return repository.GetGoalValue(PlanNo);
+            string ret = repository.GetGoalValue(PlanNo).ToString();
+            return new ExceptionHandler().Common(Request, ret);
         }
 
         /// <summary>
@@ -212,9 +222,10 @@ namespace CDMISrestful.Controllers
         /// <param name="Module"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetExecutingPlanByModule")]
-        public string GetExecutingPlanByModule(string PatientId, string Module)
+        public HttpResponseMessage GetExecutingPlanByModule(string PatientId, string Module)
         {
-            return repository.GetExecutingPlanByModule(PatientId, Module);
+            string ret =  repository.GetExecutingPlanByModule(PatientId, Module);
+            return new ExceptionHandler().Common(Request, ret);
         }
 
         /// <summary>
@@ -228,9 +239,10 @@ namespace CDMISrestful.Controllers
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/PostPlanStart")]
-        public int PostPlanStart(GPlanInfo item)
+        public HttpResponseMessage PostPlanStart(GPlanInfo item)
         {
-            return repository.SetPlanStart(item.PlanNo, Convert.ToInt32(item.Status), item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetPlanStart(item.PlanNo, Convert.ToInt32(item.Status), item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
         }
 
         /// <summary>
@@ -264,6 +276,7 @@ namespace CDMISrestful.Controllers
         /// <param name="ModuleType"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetOverDuePlanList")]
+        [EnableQuery]
         public List<OverDuePlanDetail> GetOverDuePlanList(string DoctorId, string ModuleType)
         {
             return repository.GetOverDuePlanList(DoctorId, ModuleType);
@@ -277,6 +290,7 @@ namespace CDMISrestful.Controllers
         /// <param name="PiStatus"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetTaskByStatus")]
+        [EnableQuery]
         public List<TasksByStatus> GetTaskByStatus(string PatientId, string PlanNo, int PiStatus)
         {
             return repository.GetTaskByStatus(PatientId, PlanNo, PiStatus);
@@ -288,9 +302,10 @@ namespace CDMISrestful.Controllers
         /// <param name="PatientId"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetPlanInfobyPID")]
-        public string GetPlanInfobyPID(string PatientId)
+        public HttpResponseMessage GetPlanInfobyPID(string PatientId)
         {
-            return repository.GetPlanInfobyPID(PatientId);
+            string ret =  repository.GetPlanInfobyPID(PatientId);
+            return new ExceptionHandler().Common(Request, ret);
         }
 
         /// <summary>
@@ -313,6 +328,7 @@ namespace CDMISrestful.Controllers
         /// <param name="PlanNo"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetTasksByIndate")]
+        [EnableQuery]
         public List<TasksByDate> GetTasksByIndate(string PatientId, int InDate, string PlanNo)
         {
             return repository.GetTasksByIndate(PatientId, InDate, PlanNo);
@@ -325,6 +341,7 @@ namespace CDMISrestful.Controllers
         /// <param name="Module"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetPlanList34ByM")]
+        [EnableQuery]
         public List<PlanDeatil> GetPlanList34ByM(string PatientId, string Module)
         {
             return repository.GetPlanList34ByM(PatientId, Module);
@@ -339,6 +356,7 @@ namespace CDMISrestful.Controllers
         /// <param name="EndDate"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetAllComplianceListByPeriod")]
+        [EnableQuery]
         public List<ComplianceListByPeriod> GetAllComplianceListByPeriod(string PatientId, string PlanNo, int StartDate, int EndDate)
         {
             return repository.GetAllComplianceListByPeriod(PatientId, PlanNo, StartDate, EndDate);
