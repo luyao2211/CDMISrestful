@@ -11,14 +11,14 @@ namespace CDMISrestful.Models
     public class DictRepository : IDictRepository
     {
         DataConnection pclsCache = new DataConnection();
-
+        DictMethod dictMethod = new DictMethod();
         /// <summary>
         /// 获取高血压药物类型名称列表 LY 2015-10-14
         /// </summary>
         /// <returns></returns>
         public List<TypeAndName> GetHypertensionDrugTypeNameList()
         {
-            return new DictMethod().CmMstHypertensionDrugGetTypeList(pclsCache);
+            return dictMethod.CmMstHypertensionDrugGetTypeList(pclsCache);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace CDMISrestful.Models
         /// <returns></returns>
         public List<CmAbsType> GetHypertensionDrug()
         {
-            return new DictMethod().GetHypertensionDrug(pclsCache);
+            return dictMethod.GetHypertensionDrug(pclsCache);
             
         }
 
@@ -38,7 +38,7 @@ namespace CDMISrestful.Models
         /// <returns></returns>
         public List<TypeAndName> GetDiabetesDrugTypeNameList()
         {
-            return new DictMethod().CmMstDiabetesDrugGetTypeList(pclsCache);
+            return dictMethod.CmMstDiabetesDrugGetTypeList(pclsCache);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace CDMISrestful.Models
         /// <returns></returns>
         public List<CmAbsType> GetDiabetesDrug()
         {
-            return new DictMethod().GetDiabetesDrug(pclsCache);
+            return dictMethod.GetDiabetesDrug(pclsCache);
             
         }
 
@@ -59,7 +59,7 @@ namespace CDMISrestful.Models
         /// <returns></returns>
         public List<TypeAndName> GetTypeList(string Category)
         {
-            return new DictMethod().CmMstTypeGetTypeList(pclsCache, Category);
+            return dictMethod.CmMstTypeGetTypeList(pclsCache, Category);
         }
 
         /// <summary>
@@ -69,6 +69,20 @@ namespace CDMISrestful.Models
         public List<MstBloodPressure> GetBloodPressure()
         {
             return new PlanInfoMethod().GetBPGrades(pclsCache);
+        }
+
+        public List<Insurance> GetInsuranceType()
+        {
+            try
+            {
+                return dictMethod.GetInsurance(pclsCache);
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetInsuranceType", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
         }
     }
 }

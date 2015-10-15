@@ -14,6 +14,7 @@ namespace CDMISrestful.Controllers
     public class PlanInfoController : ApiController
     {
         static readonly IPlanInfoRepository repository = new PlanInfoRepository();
+
         /// <summary>
         /// Ps.Plan.SetData GL 2015-10-13
         /// </summary>
@@ -48,7 +49,7 @@ namespace CDMISrestful.Controllers
         /// <param name="CoTerminalIP"></param>
         /// <param name="CoDeviceType"></param>
         /// <returns></returns>
-        [Route("Api/v1/PlanInfo/PostComplianceDetail")]
+        [Route("Api/v1/PlanInfo/ComplianceDetail")]
         [ModelValidationFilter]
         public HttpResponseMessage PostComplianceDetail(ComplianceDetail item)
         {
@@ -87,7 +88,7 @@ namespace CDMISrestful.Controllers
         /// <param name="PatientId"></param>
         /// <param name="Module"></param>
         /// <returns></returns>
-        [Route("Api/v1/PlanInfo/GetPatientDrugRecord")]
+        [Route("Api/v1/PlanInfo/DrugRecords")]
         [EnableQuery]
         public List<PsDrugRecord> GetPatientDrugRecord(string PatientId, string Module)
         {
@@ -104,7 +105,7 @@ namespace CDMISrestful.Controllers
         /// <param name="TerminalIP"></param>
         /// <param name="DeviceType"></param>
         /// <returns></returns>
-        [Route("Api/v1/PlanInfo/PostCreateTask")]
+        [Route("Api/v1/PlanInfo/Task")]
         [ModelValidationFilter]
         public HttpResponseMessage PostCreateTask(CreateTask item)
         {
@@ -124,7 +125,7 @@ namespace CDMISrestful.Controllers
         /// <param name="TerminalIP"></param>
         /// <param name="DeviceType"></param>
         /// <returns></returns>
-        [Route("Api/v1/PlanInfo/PostCompliance")]
+        [Route("Api/v1/PlanInfo/Compliance")]
         [ModelValidationFilter]
         public HttpResponseMessage PostCompliance(SetComplance item)
         {
@@ -161,7 +162,7 @@ namespace CDMISrestful.Controllers
         /// <param name="piTerminalIP"></param>
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
-        [Route("Api/v1/PlanInfo/PostTarget")]
+        [Route("Api/v1/PlanInfo/Target")]
         [ModelValidationFilter]
         public HttpResponseMessage PostTarget(TargetByCode item)
         {
@@ -174,7 +175,7 @@ namespace CDMISrestful.Controllers
         /// </summary>
         /// <param name="PlanNo"></param>
         /// <returns></returns>
-        [Route("Api/v1/PlanInfo/GetPlanInfo")]
+        [Route("Api/v1/PlanInfo/Plan")]
         public GPlanInfo GetPlanInfo(string PlanNo)
         {
             return repository.GetPlanInfo(PlanNo);

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.OData;
 using CDMISrestful.CommonLibrary;
 using CDMISrestful.DataModels;
 using CDMISrestful.DataViewModels;
@@ -112,8 +113,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/GetPatientsList")]
         [ModelValidationFilter]
-        
-        //public PatientsDataSet GetPatientsList(GetPatientsList GetPatientsList)
+        [EnableQuery]
         public PatientsDataSet GetPatientsList(string DoctorId, string ModuleType, int Plan, int Compliance,int Goal)
         {
             PatientsDataSet ret = repository.GetPatientsList(DoctorId, ModuleType, Plan, Compliance, Goal);
@@ -186,7 +186,7 @@ namespace CDMISrestful.Controllers
         /// </summary>
         /// <param name="SetDoctorInfoDetail"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/SetDoctorInfoDetail")]
+        [Route("Api/v1/Users/DoctorDtlInfo")]
         [ModelValidationFilter]
         public HttpResponseMessage SetDoctorInfoDetail(SetDoctorInfoDetail SetDoctorInfoDetail)
         {
@@ -198,34 +198,47 @@ namespace CDMISrestful.Controllers
         /// </summary>
         /// <param name="SetPsDoctor"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/SetPsDoctor")]
+        [Route("Api/v1/Users/DoctorInfo")]
         [ModelValidationFilter]
         public HttpResponseMessage SetPsDoctor(SetPsDoctor SetPsDoctor)
         {
             int ret = repository.SetPsDoctor(SetPsDoctor.UserId, SetPsDoctor.UserName, SetPsDoctor.Birthday, SetPsDoctor.Gender, SetPsDoctor.IDNo, SetPsDoctor.InvalidFlag, SetPsDoctor.piUserId, SetPsDoctor.piTerminalName, SetPsDoctor.piTerminalIP, SetPsDoctor.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
-        /// <summary>
-        /// GetInsuranceType
-        /// </summary>
-        /// <returns></returns>
-        [Route("Api/v1/Users/GetInsuranceType")]
-        [ModelValidationFilter]
-        public List<Insurance> GetInsuranceType()
-        {
-            List<Insurance> ret = repository.GetInsuranceType();
-            return ret;
-        }
+        
         /// <summary>
         /// 插入患者基本信息
         /// </summary>
         /// <param name="SetPatBasicInfo"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/SetPatBasicInfo")]
+        [Route("Api/v1/Users/BasicInfo")]
         [ModelValidationFilter]
         public HttpResponseMessage SetPatBasicInfo(SetPatBasicInfo SetPatBasicInfo)
         {
             int ret = repository.SetPatBasicInfo(SetPatBasicInfo.UserId, SetPatBasicInfo.UserName, SetPatBasicInfo.Birthday, SetPatBasicInfo.Gender, SetPatBasicInfo.BloodType, SetPatBasicInfo.IDNo, SetPatBasicInfo.DoctorId, SetPatBasicInfo.InsuranceType, SetPatBasicInfo.InvalidFlag, SetPatBasicInfo.piUserId, SetPatBasicInfo.piTerminalName, SetPatBasicInfo.piTerminalIP, SetPatBasicInfo.piDeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
+        }
+
+        /// <summary>
+        /// 插入患者详细信息 LY 2015-10-14
+        /// </summary>
+        /// <param name="Patient"></param>
+        /// <param name="CategoryCode"></param>
+        /// <param name="ItemCode"></param>
+        /// <param name="ItemSeq"></param>
+        /// <param name="Value"></param>
+        /// <param name="Description"></param>
+        /// <param name="SortNo"></param>
+        /// <param name="revUserId"></param>
+        /// <param name="TerminalName"></param>
+        /// <param name="TerminalIP"></param>
+        /// <param name="DeviceType"></param>
+        /// <returns></returns>
+        [Route("Api/v1/Users/BasicDtlInfo")]
+        [ModelValidationFilter]
+        public HttpResponseMessage PostPatBasicInfoDetail(BasinInfoDetail Item)
+        {
+            int ret = repository.SetPatBasicInfoDetail(Item.Patient, Item.CategoryCode, Item.ItemCode, Item.ItemSeq, Item.Value, Item.Description, Item.SortNo, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
     }

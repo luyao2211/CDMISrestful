@@ -413,7 +413,6 @@ namespace CDMISrestful.Models
             return ret;
         }
        
-
         public PatBasicInfo GetPatBasicInfo(string UserId)
         {
             try
@@ -578,19 +577,7 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public List<Insurance> GetInsuranceType()
-        {
-            try
-            {
-                return dictMethod.GetInsurance(pclsCache);
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetInsuranceType", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-                throw (ex);
-            }
-        }
+     
         public int SetPatBasicInfo(string UserId, string UserName, int Birthday, int Gender, int BloodType, string IDNo, string DoctorId, string InsuranceType, int InvalidFlag, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             try
@@ -604,6 +591,25 @@ namespace CDMISrestful.Models
                 throw ex;
             }
         }
-        
+
+        /// <summary>
+        /// 插入患者详细信息 LY 2015-10-14
+        /// </summary>
+        /// <param name="Patient"></param>
+        /// <param name="CategoryCode"></param>
+        /// <param name="ItemCode"></param>
+        /// <param name="ItemSeq"></param>
+        /// <param name="Value"></param>
+        /// <param name="Description"></param>
+        /// <param name="SortNo"></param>
+        /// <param name="revUserId"></param>
+        /// <param name="TerminalName"></param>
+        /// <param name="TerminalIP"></param>
+        /// <param name="DeviceType"></param>
+        /// <returns></returns>
+        public int SetPatBasicInfoDetail(string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            return new ModuleInfoMethod().PsBasicInfoDetailSetData(pclsCache, Patient, CategoryCode, ItemCode, ItemSeq, Value, Description, SortNo, revUserId, TerminalName, TerminalIP, DeviceType);
+        }
     }
 }

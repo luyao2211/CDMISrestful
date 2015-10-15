@@ -19,53 +19,29 @@ namespace CDMISrestful.Controllers
         /// <param name="UserId"></param>
         /// <param name="CategoryCode"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/{UserId}/ChronicSurveys/{CategoryCode}/Items/GetItemInfoByPIdAndModule")]
+        [Route("Api/v1/ModuleInfo/{UserId}/{CategoryCode}")]
         public List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(string UserId, string CategoryCode)
         {
             return repository.GetItemInfoByPIdAndModule(UserId, CategoryCode);
         }
 
-       
-
-        /// <summary>
-        /// 插入患者详细信息 LY 2015-10-14
-        /// </summary>
-        /// <param name="Patient"></param>
-        /// <param name="CategoryCode"></param>
-        /// <param name="ItemCode"></param>
-        /// <param name="ItemSeq"></param>
-        /// <param name="Value"></param>
-        /// <param name="Description"></param>
-        /// <param name="SortNo"></param>
-        /// <param name="revUserId"></param>
-        /// <param name="TerminalName"></param>
-        /// <param name="TerminalIP"></param>
-        /// <param name="DeviceType"></param>
-        /// <returns></returns>
-        [Route("Api/v1/Users/{Patient}/ChronicSurveys/{CategoryCode}/Items/{ItemCode}/PostPatBasicInfoDetail")]
-        public HttpResponseMessage PostPatBasicInfoDetail(BasinInfoDetail Item)
-        {
-            int ret = repository.SetPatBasicInfoDetail(Item.Patient, Item.CategoryCode, Item.ItemCode, Item.ItemSeq, Item.Value, Item.Description, Item.SortNo, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
-            return new ExceptionHandler().SetData(Request, ret);
-        }
-
-        /// <summary>
-        /// 获取模块关注详细信息 LY 2015-10-14
-        /// </summary>
-        /// <param name="CategoryCode"></param>
-        /// <returns></returns>
-        [Route("Api/v1/Users/ChronicSurveys/{CategoryCode}/Items/GetMstInfoItemByCategoryCode")]
-        public List<MstInfoItemByCategoryCode> GetMstInfoItemByCategoryCode(string CategoryCode)
-        {
-            return repository.GetMstInfoItemByCategoryCode(CategoryCode);
-        }
+        ///// <summary>
+        ///// 获取模块关注详细信息 LY 2015-10-14 CSQ 20151015注释，这个方法前端应该不会再用，可用GetItemInfoByPIdAndModule方法替代
+        ///// </summary>
+        ///// <param name="CategoryCode"></param>
+        ///// <returns></returns>
+        //[Route("Api/v1/ModuleInfo/{CategoryCode}/Items/GetMstInfoItemByCategoryCode")]
+        //public List<MstInfoItemByCategoryCode> GetMstInfoItemByCategoryCode(string CategoryCode)
+        //{
+        //    return repository.GetMstInfoItemByCategoryCode(CategoryCode);
+        //}
 
         /// <summary>
         /// 获取同步患者购买模块下的某些信息 LY 2015-10-14
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/{UserId}/ChronicSurveys/Items/GetSynBasicInfoDetail")]
+        [Route("Api/v1/ModuleInfo/{UserId}/SynInfo")]
         public SynBasicInfo GetSynBasicInfoDetail(string UserId)
         {
             return repository.SynBasicInfoDetail(UserId);

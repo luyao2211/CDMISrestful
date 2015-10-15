@@ -11,7 +11,7 @@ namespace CDMISrestful.Models
     {
         List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(string UserId, string CategoryCode);
        
-        int SetPatBasicInfoDetail(string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+      
         List<MstInfoItemByCategoryCode> GetMstInfoItemByCategoryCode(string CategoryCode);
         SynBasicInfo SynBasicInfoDetail(string UserId);
     }

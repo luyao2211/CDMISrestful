@@ -52,42 +52,23 @@ namespace CDMISrestful.Controllers
         /// <param name="TerminalIP"></param>
         /// <param name="DeviceType"></param>
         /// <returns></returns>
-        
-        [Route("Api/v1/Users/{UserId}/Evaluations/PostRiskResult")]
+
+        [Route("Api/v1/RiskInfo/RiskResult")]
+        [ModelValidationFilter]
         public HttpResponseMessage PostRiskResult(RiskResult Item)
         {
             int ret = repository.SetRiskResult(Item.UserId, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
-        /// <summary>
-        /// 修改用户详细信息 LY 2015-10-13
-        /// </summary>
-        /// <param name="Patient"></param>
-        /// <param name="CategoryCode"></param>
-        /// <param name="ItemCode"></param>
-        /// <param name="ItemSeq"></param>
-        /// <param name="Value"></param>
-        /// <param name="Description"></param>
-        /// <param name="SortNo"></param>
-        /// <param name="revUserId"></param>
-        /// <param name="TerminalName"></param>
-        /// <param name="TerminalIP"></param>
-        /// <param name="DeviceType"></param>
-        /// <returns></returns>
-        [Route("Api/v1/Users/{Patient}/Evaluations/PutBasicInfoDetail")]
-        public HttpResponseMessage PutBasicInfoDetail(BasinInfoDetail Item)
-        {
-            int ret = repository.SetBasicInfoDetail(Item.Patient, Item.CategoryCode, Item.ItemCode, Item.ItemSeq, Item.Value, Item.Description, Item.SortNo, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
-            return new ExceptionHandler().SetData(Request, ret);
-        }
+     
 
         /// <summary>
         /// 根据UserId获取最新风险评估结果 LY 2015-10-13
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/{UserId}/Evaluations/GetRiskResult")]
+        [Route("Api/v1/RiskInfo/RiskResult")]
         public HttpResponseMessage GetRiskResult(string UserId)
         {
             string ret = repository.GetRiskResult(UserId);
@@ -99,7 +80,7 @@ namespace CDMISrestful.Controllers
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/{UserId}/Evaluations/GetRiskInput")]
+        [Route("Api/v1/RiskInfo/RiskInput")]
         public RiskInput GetRiskInput(string UserId)
         {
             return repository.GetRiskInput(UserId);

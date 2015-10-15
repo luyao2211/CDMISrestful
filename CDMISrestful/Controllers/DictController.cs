@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.OData;
+using CDMISrestful.CommonLibrary;
 using CDMISrestful.DataModels;
 using CDMISrestful.Models;
 
@@ -77,6 +78,18 @@ namespace CDMISrestful.Controllers
         public List<MstBloodPressure> GetBloodPressure()
         {
             return repository.GetBloodPressure();
+        }
+
+        /// <summary>
+        /// GetInsuranceType
+        /// </summary>
+        /// <returns></returns>
+        [Route("Api/v1/Dict/GetInsuranceType")]
+        [ModelValidationFilter]
+        public List<Insurance> GetInsuranceType()
+        {
+            List<Insurance> ret = repository.GetInsuranceType();
+            return ret;
         }
     }
 }

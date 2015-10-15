@@ -53,25 +53,7 @@ namespace CDMISrestful.Models
             return new RiskInfoMethod().PsTreatmentIndicatorsSetData(pclsCache, UserId, SortNo, AssessmentType, AssessmentName, AssessmentTime, Result, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
-        /// <summary>
-        /// 修改用户详细信息 LY 2015-10-13
-        /// </summary>
-        /// <param name="Patient"></param>
-        /// <param name="CategoryCode"></param>
-        /// <param name="ItemCode"></param>
-        /// <param name="ItemSeq"></param>
-        /// <param name="Value"></param>
-        /// <param name="Description"></param>
-        /// <param name="SortNo"></param>
-        /// <param name="revUserId"></param>
-        /// <param name="TerminalName"></param>
-        /// <param name="TerminalIP"></param>
-        /// <param name="DeviceType"></param>
-        /// <returns></returns>
-        public int SetBasicInfoDetail(string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
-        {
-            return new ModuleInfoMethod().PsBasicInfoDetailSetData(pclsCache, Patient, CategoryCode, ItemCode, ItemSeq, Value, Description, SortNo, revUserId, TerminalName, TerminalIP, DeviceType);
-        }
+  
 
         /// <summary>
         /// 根据UserId获取最新风险评估结果 LY 2015-10-13
