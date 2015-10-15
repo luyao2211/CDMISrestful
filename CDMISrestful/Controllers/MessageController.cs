@@ -73,16 +73,18 @@ namespace CDMISrestful.Controllers
         /// <param name="SendBy"></param>
         /// <returns></returns>
         [Route("Api/v1/MessageInfo/messageNum")]
-        public int GetSMSCount(string Reciever, string SendBy)
+        public HttpResponseMessage GetSMSCount(string Reciever, string SendBy)
         {
+            string ret = "0";
             if (SendBy == "")
             {
-                return repository.GetSMSCountForAll(Reciever);
+                ret = repository.GetSMSCountForAll(Reciever).ToString();
             }
             else
             {
-                return repository.GetSMSCountForOne(Reciever, SendBy);
+                ret =  repository.GetSMSCountForOne(Reciever, SendBy).ToString();
             }
+            return new ExceptionHandler().Common(Request, ret);
         }
 
         /// <summary>
@@ -92,6 +94,7 @@ namespace CDMISrestful.Controllers
         /// <param name="CategoryCode"></param>
         /// <returns></returns>
         [Route("Api/v1/MessageInfo/messageContact")]
+        [EnableQuery]
         public List<Message> GetSMSList(string DoctorId, string CategoryCode)
         {
             return repository.GetSMSList(DoctorId, CategoryCode);
