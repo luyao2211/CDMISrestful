@@ -20,9 +20,10 @@ namespace CDMISrestful.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [Route("Api/v1/RiskInfo/Plan/{PlanNo}/Task/{Id}")]
-        public string GetValueByPlanNoAndId(string PlanNo, string Id)
+        public HttpResponseMessage GetValueByPlanNoAndId(string PlanNo, string Id)
         {
-            return repository.GetValueByPlanNoAndId(PlanNo, Id);
+            string ret = repository.GetValueByPlanNoAndId(PlanNo, Id);
+            return new ExceptionHandler().Common(Request, ret);
         }
 
 
@@ -32,9 +33,10 @@ namespace CDMISrestful.Controllers
         /// <param name="SBP"></param>
         /// <returns></returns>
         [Route("Api/v1/RiskInfo/GetDescription")]
-        public string GetDescription(int SBP)
+        public HttpResponseMessage GetDescription(int SBP)
         {
-            return repository.GetDescription(SBP);
+            string ret = repository.GetDescription(SBP);
+            return new ExceptionHandler().Common(Request, ret);
         }
 
         /// <summary>
@@ -52,9 +54,9 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         
         [Route("Api/v1/Users/{UserId}/Evaluations/PostRiskResult")]
-        public HttpResponseMessage PostRiskResult(string UserId, string AssessmentType, string AssessmentName, DateTime AssessmentTime, string Result, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public HttpResponseMessage PostRiskResult(RiskResult Item)
         {
-            int ret = repository.SetRiskResult(UserId, AssessmentType, AssessmentName, AssessmentTime, Result, revUserId, TerminalName, TerminalIP, DeviceType);
+            int ret = repository.SetRiskResult(Item.UserId, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -74,9 +76,9 @@ namespace CDMISrestful.Controllers
         /// <param name="DeviceType"></param>
         /// <returns></returns>
         [Route("Api/v1/Users/{Patient}/Evaluations/PutBasicInfoDetail")]
-        public HttpResponseMessage PutBasicInfoDetail(string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public HttpResponseMessage PutBasicInfoDetail(BasinInfoDetail Item)
         {
-            int ret = repository.SetBasicInfoDetail(Patient, CategoryCode, ItemCode, ItemSeq, Value, Description, SortNo, revUserId, TerminalName, TerminalIP, DeviceType);
+            int ret = repository.SetBasicInfoDetail(Item.Patient, Item.CategoryCode, Item.ItemCode, Item.ItemSeq, Item.Value, Item.Description, Item.SortNo, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -86,9 +88,10 @@ namespace CDMISrestful.Controllers
         /// <param name="UserId"></param>
         /// <returns></returns>
         [Route("Api/v1/Users/{UserId}/Evaluations/GetRiskResult")]
-        public string GetRiskResult(string UserId)
+        public HttpResponseMessage GetRiskResult(string UserId)
         {
-            return repository.GetRiskResult(UserId);
+            string ret = repository.GetRiskResult(UserId);
+            return new ExceptionHandler().Common(Request, ret);
         }
 
         /// <summary>

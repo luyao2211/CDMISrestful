@@ -27,9 +27,9 @@ namespace CDMISrestful.Controllers
         /// <summary>
         /// 获取高血压药物名称列表 LY 2015-10-13
         /// </summary>
-        /// <param name="Type"></param>
         /// <returns></returns>
         [Route("Api/v1/Dict/HypertensionDrug")]
+        [EnableQuery]
         public List<CmAbsType> GetHypertensionDrug()
         {
             return repository.GetHypertensionDrug();
@@ -48,9 +48,9 @@ namespace CDMISrestful.Controllers
         /// <summary>
         /// 获取糖尿病药物名称列表 LY 2015-10-13
         /// </summary>
-        /// <param name="Type"></param>
         /// <returns></returns>
         [Route("Api/v1/Dict/DiabetesDrug")]
+        [EnableQuery]
         public List<CmAbsType> GetDiabetesDrug()
         {
             return repository.GetDiabetesDrug();

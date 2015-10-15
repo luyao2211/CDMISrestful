@@ -52,4 +52,19 @@ namespace CDMISrestful.DataModels
         public List<NewExam> ExamInfo { get; set; }
         public List<NewLabTest> LabTestInfo { get; set; }
     }
+
+    public class BasinInfoDetail 
+    {
+        public string Patient { get; set; }
+        public string CategoryCode { get; set; }
+        public string ItemCode { get; set; }
+        public int ItemSeq { get; set; }
+        public string Value { get; set; }
+        public string Description { get; set; }
+        public int SortNo { get; set; }
+        public string revUserId { get; set; }
+        public string TerminalName { get; set; }
+        public string TerminalIP { get; set; }
+        public int DeviceType { get; set; }
+    }
 }
