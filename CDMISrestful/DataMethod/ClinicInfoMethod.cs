@@ -837,6 +837,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.StartDateTime = cdr["StartDateTime"].ToString();
                     NewLine.StopDateTime = cdr["StopDateTime"].ToString();
                     NewLine.Frequency = cdr["Frequency"].ToString();
+                    list.Add(NewLine);
                 }
                 return list;
             }
