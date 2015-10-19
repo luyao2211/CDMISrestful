@@ -13,18 +13,39 @@ namespace CDMISrestful.CommonLibrary
 {
     public class ExceptionHandler
     {
-        public HttpResponseMessage IsUserValid(HttpRequestMessage request, string ret)
+        public HttpResponseMessage IsTokenValid(string ret)
         {
-            Result res = new Result();
-            res.result = ret;
-            if (ret == "不合法用户")
-            {               
-                var resp = request.CreateResponse(HttpStatusCode.BadRequest, res);           
+            if (ret == "false")
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.NonAuthoritativeInformation);
+                resp.Content = new StringContent(string.Format(ret));
                 return resp;
             }
             else
             {
-                var resp = request.CreateResponse(HttpStatusCode.OK, res);      
+                var resp = new HttpResponseMessage(HttpStatusCode.OK);
+                resp.Content = new StringContent(string.Format(ret));
+                return resp;
+            }
+        }
+
+        public HttpResponseMessage IsUserValid(string ret)
+        {
+            if (ret == "不合法用户")
+            {
+                //var response = Request.CreateResponse<bool>(HttpStatusCode.Created, operationResult);
+                //string uri = Url.Link("DefaultApi", new { id = item });
+                //response.Headers.Location = new Uri(uri);
+                //return response;
+                //return new HttpResponseMessage(HttpStatusCode.Created);
+                var resp = new HttpResponseMessage(HttpStatusCode.NoContent);
+                resp.Content = new StringContent(string.Format(ret));
+                return resp;
+            }
+            else
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.OK);
+                resp.Content = new StringContent(string.Format(ret));
                 return resp;
             }
         }

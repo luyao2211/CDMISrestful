@@ -371,6 +371,30 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ServiceStack.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Messaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ServiceStack.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -504,7 +528,6 @@
     <Compile Include="CommonLibrary\TextLog.cs" />
     <Compile Include="Controllers\ClinicInfoController.cs" />
     <Compile Include="Controllers\CmMstInfoItemController.cs" />
-    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\DictController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
@@ -512,6 +535,7 @@
     <Compile Include="Controllers\PlanInfoController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RiskInfoController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VitalInfoController.cs" />
     <Compile Include="DataMethod\ClinicInfoMethod.cs" />
@@ -550,6 +574,7 @@
     <Compile Include="Models\IProductRepository.cs" />
     <Compile Include="DataModels\Product.cs" />
     <Compile Include="Models\IRiskInfoRepository.cs" />
+    <Compile Include="Models\IServiceRepository.cs" />
     <Compile Include="Models\IUsersRepository.cs" />
     <Compile Include="Models\IVitalInfoRepository.cs" />
     <Compile Include="Models\MessageRepository.cs" />
@@ -557,6 +582,7 @@
     <Compile Include="Models\PlanInfoRepository.cs" />
     <Compile Include="Models\ProductRepository.cs" />
     <Compile Include="Models\RiskInfoRepository.cs" />
+    <Compile Include="Models\ServiceRepository.cs" />
     <Compile Include="Models\UsersRepository.cs" />
     <Compile Include="Models\VitalInfoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

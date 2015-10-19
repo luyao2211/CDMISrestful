@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using CDMISrestful.DataMethod;
+using CDMISrestful.DataModels;
 
 namespace CDMISrestful.CommonLibrary
 {
@@ -17,7 +19,7 @@ namespace CDMISrestful.CommonLibrary
     {
         private const string _alg = "HmacSHA256";//token加密所采用的算法
         private const string _salt = "rz8LuOtFBXphj9WQfvFh";//盐加密，相当于放在服务端的一个很安全的key
-        private static int _expirationMinutes = 10; //token有效期10分钟？
+        private static int _expirationMinutes = 1000;
 
         /// <summary>
         /// Generates a token to be used in API calls.
@@ -35,9 +37,10 @@ namespace CDMISrestful.CommonLibrary
         /// </summary>
         /// 下面函数用来产生token，输入可以放你关心的，我们可以放username,role和password来计算token，这里的demo用的输入比较多，但是实现起来都一样
         /// 有一个不足：没有验证客户端传过来的参数是不是合法，即传过来一个用户名，我要检查它是不是已经在我服务端数据库注册过了
-        public static string GenerateToken(string userId, string password)
+        public static string GenerateToken(string userId, string password, string ticks)
         {
-            string hash = string.Join(":", new string[] { userId });
+            //DateTime ticks = DateTime.UtcNow;
+            string hash = string.Join(":", new string[] { userId, ticks });
             //先把几个公共部分耦合一下
             string hashLeft = "";
             string hashRight = "";
@@ -48,7 +51,7 @@ namespace CDMISrestful.CommonLibrary
                 hmac.ComputeHash(Encoding.UTF8.GetBytes(hash));
 
                 hashLeft = Convert.ToBase64String(hmac.Hash);//token的私密部分，decode后才能验证是不是合法的token，包括password和salt这些敏感信息
-                hashRight = string.Join(":", new string[] { userId });//token的公共部分，用于识别用户名是否合法以及token是否过期
+                hashRight = string.Join(":", new string[] { userId, ticks.ToString() });//token的公共部分，用于识别用户名是否合法以及token是否过期
             }
 
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Join(":", hashLeft, hashRight)));
@@ -76,10 +79,8 @@ namespace CDMISrestful.CommonLibrary
         /// <summary>
         /// Checks if a token is valid.
         /// </summary>
-        /// <param name="token">string - generated either by GenerateToken() or via client with cryptojs etc.</param>
-        /// <param name="ip">string - IP address of client, passed in by RESTAuthenticate attribute on controller.</param>
-        /// <param name="userAgent">string - user-agent of client, passed in by RESTAuthenticate attribute on controller.</param>
-        /// <returns>bool</returns>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public static bool IsTokenValid(string token)
         {
             bool result = false;
@@ -91,27 +92,33 @@ namespace CDMISrestful.CommonLibrary
 
                 // Split the parts.
                 string[] parts = key.Split(new char[] { ':' });
-                if (parts.Length == 3)
+                if (parts.Length == 5)
                 {
                     // Get the hash message, username, and timestamp.
                     string hash = parts[0];
-                    string username = parts[1];
-                    long ticks = long.Parse(parts[2]);
-                    DateTime timeStamp = new DateTime(ticks);
+                    string UserId = parts[1];
+                    string tokentime = parts[2] + ":" + parts[3] + ":" + parts[4];
+                    //long ticks = long.Parse(tokentime);
+                    //DateTime timeStamp = new DateTime(ticks);
+
+                    DateTime timeStamp = Convert.ToDateTime(tokentime);
 
                     // Ensure the timestamp is valid.
                     bool expired = Math.Abs((DateTime.UtcNow - timeStamp).TotalMinutes) > _expirationMinutes;
                     if (!expired)
                     {
-                        //
-                        // Lookup the user's account from the db.
-                        //
-                        if (username == "john")
+                        DataConnection pclsCache = new DataConnection();
+                        bool exist = false;
+                        string UserIdCheck = new UsersMethod().GetIDByInputPhone(pclsCache, "PhoneNo", UserId);//用手机号获取UserId  
+                        exist = new UsersMethod().CheckUserExist(pclsCache, UserIdCheck);
+                        if (exist)
                         {
-                            string password = "password";
-
+                            //string password = "password";
+                            UserInfoByUserId list = new UserInfoByUserId();
+                            list = new UsersMethod().GetUserInfoByUserId(pclsCache, UserIdCheck);
+                            string password = list.Password;
                             // Hash the message with the key to generate a token.
-                            string computedToken = GenerateToken(username, password);
+                            string computedToken = GenerateToken(UserId, password, tokentime);
 
                             // Compare the computed token with the one supplied and ensure they match.
                             result = (token == computedToken);
@@ -125,6 +132,6 @@ namespace CDMISrestful.CommonLibrary
 
             return result;
         }
-     
+
     }
 }

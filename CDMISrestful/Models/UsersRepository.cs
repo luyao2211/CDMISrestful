@@ -23,15 +23,35 @@ namespace CDMISrestful.Models
         ModuleInfoMethod moduleInfoMethod = new ModuleInfoMethod();
         DictMethod dictMethod = new DictMethod();
 
+        /// <summary>
+        /// 验证token是否正确 syf 2015-10-13
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public bool IsTokenValid(string token)
+        {
+            return SecurityManager.IsTokenValid(token);
+        }
+
+        /// <summary>
+        /// 判断是否为合法用户，若合法则产生token返回
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public string IsUserValid(string userId, string password)
         {
             if (userId != "" && password != "")
             {
                 string PwType = "PhoneNo";
+                //userId = usersMethod.GetIDByInputPhone(pclsCache, PwType, userId);//用手机号获取UserId               
                 int result = usersMethod.CheckPasswordByInput(pclsCache, PwType, userId, password);
+
+                //验证数据库中是否存在该用户以及密码是否正确
                 if (result == 1)
                 {
-                    return SecurityManager.GenerateToken(userId, password);
+                    string ticks = new CommonMethod().GetServerTime(pclsCache);
+                    return SecurityManager.GenerateToken(userId, password, ticks);
                 }
                 else
                 {

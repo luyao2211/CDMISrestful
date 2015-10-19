@@ -9,8 +9,108 @@ using CDMISrestful.DataModels;
 namespace CDMISrestful.DataMethod
 {
     public class UsersMethod
-    {
+    {   /// <summary>
+        ///  GetUserInfoByUserId ZAM 2014-12-02 //syf 20151014
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public UserInfoByUserId GetUserInfoByUserId(DataConnection pclsCache, string UserId)
+        {
+            UserInfoByUserId ret = new UserInfoByUserId();
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Cm.MstUser.GetUserInfoByUserId(pclsCache.CacheConnectionObject, UserId);
+                if (list != null)
+                {
+                    ret.UserId = list[0];
+                    ret.UserName = list[1];
+                    ret.Password = list[2];
+                    ret.Class = list[3];
+                    ret.ClassName = list[4];
+                    ret.StartDate = list[5];
+                    ret.EndDate = list[6];
+                }
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "获取名称失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "CmMstUser.GetUserInfoByUserId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
 
+        }
+        public bool CheckUserExist(DataConnection pclsCache, string UserId)
+        {
+            bool exist = false;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return exist;
+                }
+
+                int flag = (int)Cm.MstUser.CheckExist(pclsCache.CacheConnectionObject, UserId);
+                if (flag == 1)
+                {
+                    exist = true;
+                }
+                return exist;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "保存失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.CheckUserExist", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return exist;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+
+
+        }
+        /// <summary>
+        /// 根据手机号获取userId LS 2015-03-26  TDY 20150507修改 //syf 20151013
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="Type"></param>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public string GetIDByInputPhone(DataConnection pclsCache, string Type, string Name)
+        {
+            string ret = "";
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+
+                ret = Cm.MstUserDetail.GetIDByInput(pclsCache.CacheConnectionObject, Type, Name);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetIDByInputPhone", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
         /// <summary>
         /// 王丰 20151010
         /// </summary>

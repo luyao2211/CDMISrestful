@@ -9,7 +9,27 @@ namespace CDMISrestful.DataModels
     public class Users
     {
     }
+    public class IsTokenValid
+    {
+        public string token { get; set; }
+    }
+    public class UserInfoByUserId
+    {
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Class { get; set; }
 
+        public string ClassName { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+
+    }
+    public class IsUserValid
+    {
+        public string userId { get; set; }
+        public string password { get; set; }
+    }
     public class LogOn
     {
 

@@ -13,7 +13,7 @@ using CDMISrestful.Models;
 
 namespace CDMISrestful.Controllers
 {
-    [RESTAuthorize]
+    
     public class UsersController : ApiController
     {
         static readonly IUsersRepository repository = new UsersRepository();
@@ -24,6 +24,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/LogOn")]
         [ModelValidationFilter]
+        [RESTAuthorize]
         public HttpResponseMessage LogOn(LogOn logOn)
         {
             //string token = "";
@@ -60,11 +61,26 @@ namespace CDMISrestful.Controllers
             //}
         }
 
-        public HttpResponseMessage IsUserValid(String userId, String password)
+        /// <summary>
+        /// 用户在登录时判断是否为合法用户，若合法则产生token返回给客户端
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [Route("Api/v1/Users/IsUserValid")]
+        public HttpResponseMessage IsUserValid(IsUserValid IsUserValid)
         {
-            string ret = repository.IsUserValid(userId, password);
-            return new ExceptionHandler().IsUserValid(Request, ret);
+            string ret = "";
+            ret = repository.IsUserValid(IsUserValid.userId, IsUserValid.password);
+            return new ExceptionHandler().IsUserValid(ret);
         }
+
+        public HttpResponseMessage IsTokenValid(IsTokenValid IsTokenValid)
+        {
+            bool ret = repository.IsTokenValid(IsTokenValid.token);
+            return new ExceptionHandler().IsTokenValid(ret.ToString());
+        }
+     
         /// <summary>
         /// 注册
         /// </summary>

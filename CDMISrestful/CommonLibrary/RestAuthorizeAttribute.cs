@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
+using System.Web.Http.Controllers;
 
 namespace CDMISrestful.CommonLibrary
 { /// <summary>
@@ -15,27 +17,29 @@ namespace CDMISrestful.CommonLibrary
     {
         private const string _securityToken = "token";
 
-        public override void OnAuthorization(AuthorizationContext filterContext)
+        public override void OnAuthorization(HttpActionContext actionContext)
         {
-            if (Authorize(filterContext))
+            if (Authorize(actionContext))
             {
                 return;
             }
 
-            HandleUnauthorizedRequest(filterContext);
+            HandleUnauthorizedRequest(actionContext);
         }
 
-        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
         {
-            base.HandleUnauthorizedRequest(filterContext);
+            base.HandleUnauthorizedRequest(actionContext);
         }
 
-        private bool Authorize(AuthorizationContext actionContext)
+        private bool Authorize(HttpActionContext actionContext)
         {
             try
             {
-                HttpRequestBase request = actionContext.RequestContext.HttpContext.Request;
-                string token = request.Params[_securityToken];
+                HttpRequestMessage request = actionContext.Request;
+                string url = request.RequestUri.Query;
+                var header_token = request.Headers.GetValues("token");
+                string token = header_token.ElementAt(0);
 
                 return SecurityManager.IsTokenValid(token);
             }
