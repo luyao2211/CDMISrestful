@@ -43,7 +43,7 @@ namespace CDMISrestful.Models
             {
                 List<PsDrugRecord> list = new List<PsDrugRecord>();
                 list = new ClinicInfoMethod().GetPsDrugRecord(pclsCache, PatientId, Module);
-                if (list.Count > 0) //排序
+                if (list.Count > 0) //排序(降序)
                 {
                     list.Sort((x, y) => -(x.StartDateTime).CompareTo(y.StartDateTime));
                 }

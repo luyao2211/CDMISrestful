@@ -70,7 +70,7 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// GetPsTaskByType 根据Type获取某PlanNo的所有任务 GL 2015-10-13
+        /// GetPsTaskByType 根据Type(LifeStyle,VitalSign,Drug)获取某PlanNo的所有任务 GL 2015-10-13
         /// </summary>
         /// <param name="PlanNo"></param>
         /// <param name="Type"></param>
@@ -96,7 +96,7 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// PostCreateTask 创建计划 GL 2015-10-13
+        /// PostCreateTask 创建计划（Task格式：Type1#Code1#Instruction1@Type2#Code2#Instruction2,如："LifeStyle#S001#减轻体重@LifeStyle#S002#锻炼",） GL 2015-10-13
         /// </summary>
         /// <param name="PlanNo"></param>
         /// <param name="Task"></param>
@@ -171,7 +171,7 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// GetPlanInfo 获取某计划的进度和剩余天数（取PlanNo，StartDate，EndDate） GL 2015-10-13
+        /// GetPlanInfo 根据PlanNo获取某计划详情 GL 2015-10-13
         /// </summary>
         /// <param name="PlanNo"></param>
         /// <returns></returns>
@@ -222,7 +222,7 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// GetExecutingPlanByModule 根据模块获取正在执行的计划 GL 2015-10-13
+        /// GetExecutingPlanByModule 根据模块获取正在执行的计划PlanNo GL 2015-10-13
         /// </summary>
         /// <param name="PatientId"></param>
         /// <param name="Module"></param>
@@ -235,7 +235,7 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// PostPlanStart 更新计划状态 GL 2015-10-13
+        /// PostPlanStart 更新计划状态（开始计划） GL 2015-10-13
         /// </summary>
         /// <param name="PlanNo"></param>
         /// <param name="Status"></param>
@@ -342,7 +342,7 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// GetPlanList34ByM 根据计划编码和日期，获取计划详情 GL 2015-10-13
+        /// GetPlanList34ByM 获取某模块患者的正在执行的和结束的计划列表 GL 2015-10-13
         /// </summary>
         /// <param name="PatientId"></param>
         /// <param name="Module"></param>

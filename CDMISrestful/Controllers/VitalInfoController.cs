@@ -15,16 +15,17 @@ namespace CDMISrestful.Controllers
         static readonly IVitalInfoRepository repository = new VitalInfoRepository();
 
         /// <summary>
-        /// GetLatestPatientVitalSigns 获取病人最新体征情况 GL 2015-10-12
+        /// GetLatestPatientVitalSigns 获取病人某项生理参数最新值 GL 2015-10-12
         /// </summary>
         /// <param name="UserId"></param>
         /// <param name="ItemType"></param>
         /// <param name="ItemCode"></param>
         /// <returns></returns>
         [Route("Api/v1/VitalInfo/VitalSign")]
-        public string GetLatestPatientVitalSigns(string UserId, string ItemType, string ItemCode)
+        public HttpResponseMessage GetLatestPatientVitalSigns(string UserId, string ItemType, string ItemCode)
         {
-            return repository.GetLatestPatientVitalSigns(UserId, ItemType, ItemCode);
+            string ret =  repository.GetLatestPatientVitalSigns(UserId, ItemType, ItemCode);
+            return new ExceptionHandler().Common(Request, ret);
         }
 
         /// <summary>
