@@ -13,7 +13,6 @@ using CDMISrestful.Models;
 
 namespace CDMISrestful.Controllers
 {
-    
     public class UsersController : ApiController
     {
         static readonly IUsersRepository repository = new UsersRepository();
