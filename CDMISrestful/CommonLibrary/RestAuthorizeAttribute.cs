@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceStack.Text;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -36,15 +37,26 @@ namespace CDMISrestful.CommonLibrary
         {
             try
             {
+                //前端传入Token
                 HttpRequestMessage request = actionContext.Request;
-                string url = request.RequestUri.Query;
+
                 var header_token = request.Headers.GetValues("token");
                 string token = header_token.ElementAt(0);
-
-                return SecurityManager.IsTokenValid(token);
+             
+                if(SecurityManager.IsTokenValid(token))
+                {
+                    //Token未过期
+                    return true;
+                }
+                else
+                {
+                    //Token已过期               
+                    return false;                 
+                }
             }
             catch (Exception)
             {
+                //前端不传入Token
                 return false;
             }
         }

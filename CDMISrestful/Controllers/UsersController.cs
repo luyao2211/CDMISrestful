@@ -26,22 +26,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorize]
         public HttpResponseMessage LogOn(LogOn logOn)
         {
-            //string token = "";
-            //WebRequest  headers = Request.Headers;  
-            ////headers.get
-            //string token = string.Format(Request.Headers[token]);
-
-            //string token = WebRequest(Request.Headers["Range"]);
-
-            // Create a new 'HttpWebRequest' Object to the mentioned URL.
-
-            //string token = Request.Headers.GetValues[token];
-
-            //HttpRequestMessage request = new HttpRequestMessage(LogOn, Uri);
-
-            //HttpRequestMessage request = new HttpRequestMessage();
-            //request.contentType = HTTPRequestMessage.CONTENT_TYPE_FORM;
-            //msg.method = HTTPRequestMessage.POST_METHOD;
+          
             //msg.url = "http://my.company.com/login";
 
             //if (SecurityManager.IsTokenValid(token))
@@ -49,15 +34,7 @@ namespace CDMISrestful.Controllers
             int ret = repository.LogOn(logOn.PwType, logOn.username, logOn.password, logOn.role);
             return new ExceptionHandler().LogOn(Request,ret);
            
-            //}
-            //else
-            //{
-            //    //return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            //   // return resp;
-            //    var resp = new HttpResponseMessage(HttpStatusCode.NoContent);
-            //    resp.Content = new StringContent(string.Format(token));
-            //    return resp;
-            //}
+           
         }
 
         /// <summary>
