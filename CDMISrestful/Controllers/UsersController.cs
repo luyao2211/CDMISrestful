@@ -13,6 +13,7 @@ using CDMISrestful.Models;
 
 namespace CDMISrestful.Controllers
 {
+    //[AllowAnonymous]  
     public class UsersController : ApiController
     {
         static readonly IUsersRepository repository = new UsersRepository();
@@ -23,7 +24,6 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/LogOn")]
         [ModelValidationFilter]
-        [RESTAuthorize]
         public HttpResponseMessage LogOn(LogOn logOn)
         {
           
@@ -31,30 +31,9 @@ namespace CDMISrestful.Controllers
 
             //if (SecurityManager.IsTokenValid(token))
             //{
-            int ret = repository.LogOn(logOn.PwType, logOn.username, logOn.password, logOn.role);
-            return new ExceptionHandler().LogOn(Request,ret);
-           
-           
-        }
-
-        /// <summary>
-        /// 用户在登录时判断是否为合法用户，若合法则产生token返回给客户端
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        [Route("Api/v1/Users/IsUserValid")]
-        public HttpResponseMessage IsUserValid(IsUserValid IsUserValid)
-        {
-            string ret = "";
-            ret = repository.IsUserValid(IsUserValid.userId, IsUserValid.password);
-            return new ExceptionHandler().IsUserValid(ret);
-        }
-
-        public HttpResponseMessage IsTokenValid(IsTokenValid IsTokenValid)
-        {
-            bool ret = repository.IsTokenValid(IsTokenValid.token);
-            return new ExceptionHandler().IsTokenValid(ret.ToString());
+            ForToken ret = new ForToken();
+            ret = repository.LogOn(logOn.PwType, logOn.username, logOn.password, logOn.role);
+            return new ExceptionHandler().LogOn(Request,ret);          
         }
      
         /// <summary>
@@ -76,7 +55,6 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/Activition")]
         [ModelValidationFilter]
-        
         public HttpResponseMessage Activition(Activation activation)
         {
             int ret = repository.Activition(activation.UserId, activation.InviteCode, activation.role);
@@ -106,6 +84,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/GetPatientsList")]
         [ModelValidationFilter]
         [EnableQuery]
+        [RESTAuthorizeAttribute]
         public PatientsDataSet GetPatientsList(string DoctorId, string ModuleType, int Plan, int Compliance,int Goal)
         {
             PatientsDataSet ret = repository.GetPatientsList(DoctorId, ModuleType, Plan, Compliance, Goal);
@@ -131,6 +110,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/{UserId}/BasicInfo")]
         [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
         public PatBasicInfo GetPatBasicInfo(string UserId)
         {
             PatBasicInfo ret = repository.GetPatBasicInfo(UserId);
@@ -143,6 +123,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/{UserId}/BasicDtlInfo")]
         [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
         public PatientDetailInfo GetPatientDetailInfo(string UserId)
         {
             PatientDetailInfo ret = repository.GetPatientDetailInfo(UserId);
@@ -155,6 +136,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/{UserId}/DoctorDtlInfo")]
         [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
         public DocInfoDetail GetDoctorDetailInfo(string UserId)
         {
             DocInfoDetail ret = repository.GetDoctorDetailInfo(UserId);
@@ -168,6 +150,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/{UserId}/DoctorInfo")]
         [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
         public DoctorInfo GetDoctorInfo(string UserId)
         {
             DoctorInfo ret = repository.GetDoctorInfo(UserId);
@@ -180,6 +163,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/DoctorDtlInfo")]
         [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
         public HttpResponseMessage SetDoctorInfoDetail(SetDoctorInfoDetail SetDoctorInfoDetail)
         {
             int ret = repository.SetDoctorInfoDetail(SetDoctorInfoDetail.Doctor, SetDoctorInfoDetail.CategoryCode, SetDoctorInfoDetail.ItemCode, SetDoctorInfoDetail.ItemSeq, SetDoctorInfoDetail.Value, SetDoctorInfoDetail.Description, SetDoctorInfoDetail.SortNo, SetDoctorInfoDetail.piUserId, SetDoctorInfoDetail.piTerminalName, SetDoctorInfoDetail.piTerminalIP, SetDoctorInfoDetail.piDeviceType);
@@ -192,6 +176,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/DoctorInfo")]
         [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
         public HttpResponseMessage SetPsDoctor(SetPsDoctor SetPsDoctor)
         {
             int ret = repository.SetPsDoctor(SetPsDoctor.UserId, SetPsDoctor.UserName, SetPsDoctor.Birthday, SetPsDoctor.Gender, SetPsDoctor.IDNo, SetPsDoctor.InvalidFlag, SetPsDoctor.piUserId, SetPsDoctor.piTerminalName, SetPsDoctor.piTerminalIP, SetPsDoctor.piDeviceType);
@@ -205,6 +190,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/BasicInfo")]
         [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
         public HttpResponseMessage SetPatBasicInfo(SetPatBasicInfo SetPatBasicInfo)
         {
             int ret = repository.SetPatBasicInfo(SetPatBasicInfo.UserId, SetPatBasicInfo.UserName, SetPatBasicInfo.Birthday, SetPatBasicInfo.Gender, SetPatBasicInfo.BloodType, SetPatBasicInfo.IDNo, SetPatBasicInfo.DoctorId, SetPatBasicInfo.InsuranceType, SetPatBasicInfo.InvalidFlag, SetPatBasicInfo.piUserId, SetPatBasicInfo.piTerminalName, SetPatBasicInfo.piTerminalIP, SetPatBasicInfo.piDeviceType);
@@ -228,6 +214,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/Users/BasicDtlInfo")]
         [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
         public HttpResponseMessage PostPatBasicInfoDetail(BasinInfoDetail Item)
         {
             int ret = repository.SetPatBasicInfoDetail(Item.Patient, Item.CategoryCode, Item.ItemCode, Item.ItemSeq, Item.Value, Item.Description, Item.SortNo, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);

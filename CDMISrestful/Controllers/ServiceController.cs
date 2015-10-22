@@ -9,6 +9,7 @@ using CDMISrestful.CommonLibrary;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class ServiceController : ApiController
     {
         static readonly IServiceRepository repository = new ServiceRepository();

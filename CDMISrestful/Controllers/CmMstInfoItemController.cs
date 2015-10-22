@@ -11,6 +11,7 @@ using CDMISrestful.Models;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class CmMstInfoItemController : ApiController
     {
         static readonly ICmMstInfoItemRepository repository = new CmMstInfoItemRepository();

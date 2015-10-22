@@ -32,40 +32,12 @@ namespace CDMISrestful.Models
         {
             return SecurityManager.IsTokenValid(token);
         }
-
-        /// <summary>
-        /// 判断是否为合法用户，若合法则产生token返回
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public string IsUserValid(string userId, string password)
-        {
-            if (userId != "" && password != "")
-            {
-                string PwType = "PhoneNo";
-                //userId = usersMethod.GetIDByInputPhone(pclsCache, PwType, userId);//用手机号获取UserId               
-                int result = usersMethod.CheckPasswordByInput(pclsCache, PwType, userId, password);
-
-                //验证数据库中是否存在该用户以及密码是否正确
-                if (result == 1)
-                {
-                    string ticks = new CommonMethod().GetServerTime(pclsCache);
-                    return SecurityManager.GenerateToken(userId, password, ticks);
-                }
-                else
-                {
-                    return "不合法用户";
-                }
-            }
-            else
-            {
-                return "Invalid Input";
-            }
-        }
-        public int LogOn(string PwType, string userId, string password, string role)
+        public ForToken LogOn(string PwType, string userId, string password, string role)
         {
             int result = usersMethod.CheckPasswordByInput(pclsCache, PwType, userId, password);
+            ForToken response = new ForToken();
+            response.Status = "";
+            response.Token = "";
             if (result == 1)
             {
                 //密码验证成功
@@ -87,31 +59,35 @@ namespace CDMISrestful.Models
                         }
                         if (flag == 1)
                         {
-                            return 1; //"已注册激活且有权限，登陆成功，跳转到主页";
+                            string ticks = new CommonMethod().GetServerTime(pclsCache);
+                            response.Token = SecurityManager.GenerateToken(userId, password, role, ticks);
+                            response.Status = "已注册激活且有权限，登陆成功，跳转到主页";
+                            return response; //"已注册激活且有权限，登陆成功，跳转到主页"1;
                         }
                         else
                         {
-                            return 2; //"已注册激活 但没有权限";
+                            response.Status = "已注册激活,但没有权限"; //"已注册激活 但没有权限"2;
                         }
                     }
                     else      //Class == "1" or Class == ""
                     {
-                        return 3;            //您的账号对应的角色未激活，需要先激活；界面跳转到游客页面（已注册但未激活）
+                        response.Status = "您的账号对应的角色未激活，需要先激活；界面跳转到游客页面(已注册但未激活)";            //您的账号对应的角色未激活，需要先激活；界面跳转到游客页面（已注册但未激活）3
                     }
                 }
                 else
                 {
-                    return 4; //"用户不存在";
+                    response.Status = "用户不存在"; //"用户不存在"4;
                 }
             }
             else if (result == 0)
             {
-                return 5; //"密码错误";
+                response.Status = "密码错误"; //"密码错误"5;
             }
             else
             {
-                return 4;   //"用户不存在"
+                response.Status = "用户不存在";   //"用户不存在"4
             }
+            return response;
         }
 
         /// <summary>

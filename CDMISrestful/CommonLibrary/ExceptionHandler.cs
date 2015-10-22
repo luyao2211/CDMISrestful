@@ -99,67 +99,62 @@ namespace CDMISrestful.CommonLibrary
             return resp;
         }
 
-        public HttpResponseMessage LogOn(HttpRequestMessage request,int operationResult)
+        public HttpResponseMessage LogOn(HttpRequestMessage request, ForToken ret)
         {
-            //return request.CreateResponse(HttpStatusCode.OK, operationResult);
-          
-            //resultString = Newtonsoft.Json.JsonConvert.SerializeObject(resultData);
-            //HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            //response.Content = new StringContent(resultString);
             #region
             Result res = new Result();
             res.result = "登录失败";
-
+            
             var resp = request.CreateResponse(HttpStatusCode.InternalServerError, res);
-           
-          
+            string operationResult = ret.Status;
+
             //resp.Headers = new HttpResponseMessage().Add("Access-Control-Allow-Origin","*");
             switch (operationResult)
             {
-                case 1:
+                case "已注册激活且有权限，登陆成功，跳转到主页":
                     //"已注册激活且有权限，登陆成功，跳转到主页";
-                    res.result = "登陆成功";
-                    resp = request.CreateResponse(HttpStatusCode.OK,res);
-                   
+                    res.result = "登陆成功" + "Token = " + ret.Token;
+                    resp = request.CreateResponse(HttpStatusCode.OK, res);
+                    //resp = resp + ret.Token;
                     //resultString = Newtonsoft.Json.JsonConvert.SerializeObject("登陆成功");
                     //resp.Content = new StringContent(string.Format("登陆成功"));
                     break;
-                case 2:
+                case "已注册激活,但没有权限":
                     //"已注册激活 但没有权限";
                     res.result = "没有权限";
-                    resp = request.CreateResponse(HttpStatusCode.Forbidden,res);
-                  
+                    resp = request.CreateResponse(HttpStatusCode.Forbidden, res);
+
                     //resultString = Newtonsoft.Json.JsonConvert.SerializeObject("没有权限");
                     //resp.Content = new StringContent(string.Format("没有权限"));
                     break;
-                case 3:
+                case "您的账号对应的角色未激活，需要先激活；界面跳转到游客页面(已注册但未激活)":
                     //您的账号对应的角色未激活，需要先激活；界面跳转到游客页面（已注册但未激活）
                     res.result = "暂未激活";
-                    resp = request.CreateResponse(HttpStatusCode.Forbidden,res);
-      
+                    resp = request.CreateResponse(HttpStatusCode.Forbidden, res);
+
                     //resultString = Newtonsoft.Json.JsonConvert.SerializeObject("暂未激活");
                     //resp.Content = new StringContent(string.Format("暂未激活"));
                     break;
-                case 4:
+                case "用户不存在":
                     //"用户不存在";
                     res.result = "用户不存在";
-                    resp = request.CreateResponse(HttpStatusCode.BadRequest,res);
-                 
+                    resp = request.CreateResponse(HttpStatusCode.BadRequest, res);
+
                     //resultString = Newtonsoft.Json.JsonConvert.SerializeObject("用户不存在");
                     //resp.Content = new StringContent(string.Format("用户不存在"));
                     break;
-                case 5:
+                case "密码错误":
                     //"密码错误";
                     res.result = "密码错误";
-                    resp = request.CreateResponse(HttpStatusCode.BadRequest,res);
-                 
+                    resp = request.CreateResponse(HttpStatusCode.BadRequest, res);
+
                     //resultString = Newtonsoft.Json.JsonConvert.SerializeObject("密码错误");
                     //resp.Content = new StringContent(string.Format("密码错误"));
-                    break;                    
+                    break;
                 default:
                     break;
             }
-   
+
             return resp;
             #endregion
 

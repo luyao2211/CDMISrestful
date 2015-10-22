@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CDMISrestful.DataMethod;
 using CDMISrestful.DataModels;
+using System.Text.RegularExpressions;
 
 namespace CDMISrestful.CommonLibrary
 {
@@ -37,10 +38,10 @@ namespace CDMISrestful.CommonLibrary
         /// </summary>
         /// 下面函数用来产生token，输入可以放你关心的，我们可以放username,role和password来计算token，这里的demo用的输入比较多，但是实现起来都一样
         /// 有一个不足：没有验证客户端传过来的参数是不是合法，即传过来一个用户名，我要检查它是不是已经在我服务端数据库注册过了
-        public static string GenerateToken(string userId, string password, string ticks)
+        public static string GenerateToken(string userId, string password, string role, string ticks)
         {
             //DateTime ticks = DateTime.UtcNow;
-            string hash = string.Join(":", new string[] { userId, ticks });
+            string hash = string.Join(":", new string[] { userId, role, ticks });
             //先把几个公共部分耦合一下
             string hashLeft = "";
             string hashRight = "";
@@ -51,7 +52,7 @@ namespace CDMISrestful.CommonLibrary
                 hmac.ComputeHash(Encoding.UTF8.GetBytes(hash));
 
                 hashLeft = Convert.ToBase64String(hmac.Hash);//token的私密部分，decode后才能验证是不是合法的token，包括password和salt这些敏感信息
-                hashRight = string.Join(":", new string[] { userId, ticks.ToString() });//token的公共部分，用于识别用户名是否合法以及token是否过期
+                hashRight = string.Join(":", new string[] { userId, role, ticks.ToString() });//token的公共部分，用于识别用户名是否合法以及token是否过期
             }
 
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Join(":", hashLeft, hashRight)));
@@ -92,12 +93,13 @@ namespace CDMISrestful.CommonLibrary
 
                 // Split the parts.
                 string[] parts = key.Split(new char[] { ':' });
-                if (parts.Length == 5)
+                if (parts.Length == 6)
                 {
                     // Get the hash message, username, and timestamp.
                     string hash = parts[0];
                     string UserId = parts[1];
-                    string tokentime = parts[2] + ":" + parts[3] + ":" + parts[4];
+                    string role = parts[2];
+                    string tokentime = parts[3] + ":" + parts[4] + ":" + parts[5];
                     //long ticks = long.Parse(tokentime);
                     //DateTime timeStamp = new DateTime(ticks);
 
@@ -108,23 +110,37 @@ namespace CDMISrestful.CommonLibrary
                     if (!expired)
                     {
                         DataConnection pclsCache = new DataConnection();
-                        bool exist = false;
-                        string UserIdCheck = new UsersMethod().GetIDByInputPhone(pclsCache, "PhoneNo", UserId);//用手机号获取UserId  
-                        exist = new UsersMethod().CheckUserExist(pclsCache, UserIdCheck);
-                        if (exist)
+                        Regex dReg = new Regex(@"^1[3578][01379]\d{8}$");        
+                        Regex tReg = new Regex(@"^1[34578][01256]\d{8}$");        
+                        Regex yReg = new Regex(@"^(134[012345678]\d{7}|1[34578][012356789]\d{8})$");
+                        Regex mail = new Regex("^\\s*([A-Za-z0-9_-]+(\\.\\w+)*@(\\w+\\.)+\\w{2,5})\\s*$");
+                        string pwType = "";
+                        if( dReg.IsMatch(UserId) || tReg.IsMatch(UserId) || yReg.IsMatch(UserId))
                         {
-                            //string password = "password";
-                            UserInfoByUserId list = new UserInfoByUserId();
-                            list = new UsersMethod().GetUserInfoByUserId(pclsCache, UserIdCheck);
-                            string password = list.Password;
-                            // Hash the message with the key to generate a token.
-                            string computedToken = GenerateToken(UserId, password, tokentime);
-
-                            // Compare the computed token with the one supplied and ensure they match.
-                            result = (token == computedToken);
+                            pwType = "PhoneNo";
                         }
+                        else if(mail.IsMatch(UserId))
+                        {
+                            pwType = "Email";
+                        }
+                            string UserIdCheck = new UsersMethod().GetIDByInputPhone(pclsCache, pwType, UserId);//用手机号获取UserId  
+                             bool exist = new UsersMethod().CheckUserExist(pclsCache, UserIdCheck);
+                             if (exist)
+                            {
+                                   //string password = "password";
+                                   UserInfoByUserId list = new UserInfoByUserId();
+                                   list = new UsersMethod().GetUserInfoByUserId(pclsCache, UserIdCheck);
+                                   string password = list.Password;
+                                   // Hash the message with the key to generate a token.
+                                   string computedToken = GenerateToken(UserId, password, role, tokentime);
+
+                                   // Compare the computed token with the one supplied and ensure they match.
+                                   result = (token == computedToken);
+                             }
+                        }
+                       
                     }
-                }
+                
             }
             catch
             {

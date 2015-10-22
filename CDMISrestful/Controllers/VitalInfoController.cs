@@ -10,6 +10,7 @@ using CDMISrestful.CommonLibrary;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class VitalInfoController : ApiController
     {
         static readonly IVitalInfoRepository repository = new VitalInfoRepository();
