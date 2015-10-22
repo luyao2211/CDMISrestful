@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class RiskInfoController : ApiController
     {
         static readonly IRiskInfoRepository repository = new RiskInfoRepository();

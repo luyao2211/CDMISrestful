@@ -11,6 +11,7 @@ using System.Web.Http.OData;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class MessageController : ApiController
     {
         static readonly IMessageRepository repository = new MessageRepository();

@@ -9,6 +9,11 @@ namespace CDMISrestful.DataModels
     public class Users
     {
     }
+    public class ForToken
+    {
+        public string Status { get; set; }
+        public string Token { get; set; }
+    }
     public class IsTokenValid
     {
         public string token { get; set; }

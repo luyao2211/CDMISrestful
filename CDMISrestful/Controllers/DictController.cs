@@ -11,6 +11,7 @@ using CDMISrestful.Models;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class DictController : ApiController
     {
         static readonly IDictRepository repository = new DictRepository();

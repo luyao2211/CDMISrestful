@@ -6,9 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using CDMISrestful.DataModels;
 using CDMISrestful.Models;
+using CDMISrestful.CommonLibrary;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class ProductsController : ApiController
     {
         //在控制器中调用new ProductRepository()不是最好的设计

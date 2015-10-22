@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CDMISrestful.Models;
+using CDMISrestful.CommonLibrary;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class ServiceController : ApiController
     {
         static readonly IServiceRepository repository = new ServiceRepository();

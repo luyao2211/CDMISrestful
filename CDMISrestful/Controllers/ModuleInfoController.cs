@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class ModuleInfoController : ApiController
     {
         static readonly IModuleInfoRepository repository = new ModuleInfoRepository();

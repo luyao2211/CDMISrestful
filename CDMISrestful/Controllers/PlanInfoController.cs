@@ -11,6 +11,7 @@ using System.Web.Http.OData;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class PlanInfoController : ApiController
     {
         static readonly IPlanInfoRepository repository = new PlanInfoRepository();
