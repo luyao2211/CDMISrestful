@@ -14,6 +14,7 @@ namespace CDMISrestful.CommonLibrary
     /// http://primaryobjects.com/kory-becker
     /// License MIT
     /// </summary>
+    //[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class RESTAuthorizeAttribute : AuthorizeAttribute
     {
         private const string _securityToken = "token";

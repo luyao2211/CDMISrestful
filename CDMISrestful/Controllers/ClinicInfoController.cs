@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace CDMISrestful.Controllers
 {
+    [RESTAuthorizeAttribute]
     public class ClinicInfoController : ApiController
     {
         static readonly IClinicInfoRepository repository = new ClinicInfoRepository();
