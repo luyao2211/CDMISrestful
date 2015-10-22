@@ -1091,6 +1091,15 @@
             <param name="smsType"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.ServiceController.checkverification(System.String,System.String,System.String)">
+            <summary>
+            获取验证码 CSQ 20151021
+            </summary>
+            <param name="mobile"></param>
+            <param name="smsType"></param>
+            <param name="verification"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.UsersController.LogOn(CDMISrestful.DataModels.LogOn)">
             <summary>
             登录

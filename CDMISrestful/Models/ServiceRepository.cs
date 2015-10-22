@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using ServiceStack.Redis;
+using CDMISrestful.CommonLibrary;
 
 namespace CDMISrestful.Models
 {
@@ -102,5 +103,36 @@ namespace CDMISrestful.Models
                 return ex.Message;
             }
         }
+
+        public int checkverification(string mobile, string smsType, string verification)  //Verification是前端传进来的验证码
+        {
+            try
+            {
+                var Client = new RedisClient("127.0.0.1", 6379);
+                var verify = Client.Get<string>(mobile + smsType);
+                if (verify != null)
+                {
+                    if (verify == verification)
+                    {
+                        return 1;//验证码正确
+                    }
+                    else
+                    {
+                        return 2;//验证码错误
+                    }
+                }
+                else
+                {
+                    return 0;//没有验证码或验证码已过期
+                }
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "匹配验证码功能错误", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return 3;
+                throw (ex);
+            }
+        }
+
     }
 }

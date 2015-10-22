@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CDMISrestful.CommonLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -10,6 +11,8 @@ namespace CDMISrestful
     {
         public static void Register(HttpConfiguration config)
         {
+            //config.Filters.Add(new RESTAuthorizeAttribute());
+
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
 

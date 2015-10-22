@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CDMISrestful.Models;
+using CDMISrestful.CommonLibrary;
 
 namespace CDMISrestful.Controllers
 {
@@ -18,9 +19,23 @@ namespace CDMISrestful.Controllers
         /// <param name="phoneNo"></param>
         /// <param name="smsType"></param>
         /// <returns></returns>
-        public string sendSMS(string phoneNo, string smsType)
+        public HttpResponseMessage sendSMS(string phoneNo, string smsType)
         {
-            return repository.sendSMS(phoneNo, smsType);
+            string ret = repository.sendSMS(phoneNo, smsType);
+            return new ExceptionHandler().Common(Request, ret);
+        }
+
+        /// <summary>
+        /// 获取验证码 CSQ 20151021
+        /// </summary>
+        /// <param name="mobile"></param>
+        /// <param name="smsType"></param>
+        /// <param name="verification"></param>
+        /// <returns></returns>
+        public HttpResponseMessage checkverification(string mobile, string smsType, string verification)
+        {
+            string ret = repository.checkverification(mobile, smsType, verification).ToString();
+            return new ExceptionHandler().Common(Request, ret);
         } 
     }
 }
