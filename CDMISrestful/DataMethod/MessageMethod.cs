@@ -36,7 +36,7 @@ namespace CDMISrestful.DataMethod
                 while (cdr.Read())
                 {
                     Message item = new Message();
-                    item.SendDateTime = cdr["SendDateTime"].ToString();
+                    item.SendDateTime = cdr["Time"].ToString();
                     item.Content = cdr["Content"].ToString();
                     item.IDFlag = cdr["IDFlag"].ToString();
                     items.Add(item);
