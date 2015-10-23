@@ -9,5 +9,6 @@ namespace CDMISrestful.Models
     {
         string sendSMS(string mobile, string smsType);
         int checkverification(string mobile, string smsType, string verification);
+        string PushNotification(string platform, string Alias, string notification);
     }
 }

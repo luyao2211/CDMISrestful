@@ -134,5 +134,90 @@ namespace CDMISrestful.Models
             }
         }
 
+       /// <summary>
+       /// 推送 通知
+       /// </summary>
+       /// <param name="platform"></param>
+       /// <param name="Alias"></param>
+       /// <param name="notification"></param>
+       /// <returns></returns>
+        public string PushNotification(string platform, string Alias, string notification) // platform 是平台，不输入的时候默认为全部（安卓和ios）,可以单独输入android或者ios,不支持winphone
+        {                                                                                  // Alias 是别名，用于定位推送，输入为空时会推送给全部用户
+            try                                                                            // notification是要推送的消息内容
+            {
+                if (notification != "")
+                {
+                    string APPKEY = "d78aa00fb6d8b1f6d156696b";
+                    string MasterSecret = "3b3fd68d30b426d351d840b1";
+                    string J1 = "platform";
+                    string J2 = "audience";
+                    string J3 = "notification";
+                    string J4 = "alert";
+                    string J5 = "{";
+                    string J6 = "alias";
+                    string JSONData = "";
+
+                    if (platform == "")
+                    {
+                        platform = "all";
+                    }
+                    if (Alias == "")
+                    {
+                        Alias = "all";
+                        JSONData = J5 + '"' + J1 + '"' + ':' + '"' + platform + '"' + ',' + '"' + J2 + '"' + ':' + '"' + Alias + '"' + ',' + '"' + J3 + '"' + ':' + '{' + '"' + J4 + '"' + ':' + '"' + notification + '"' + '}' + '}';
+                    }
+                    else
+                    {
+                        JSONData = J5 + '"' + J1 + '"' + ':' + '"' + platform + '"' + ',' + '"' + J2 + '"' + ':' + '{' + '"' + J6 + '"' + ':' + '[' + '"' + Alias + '"' + ']' + '}' + ',' + '"' + J3 + '"' + ':' + '{' + '"' + J4 + '"' + ':' + '"' + notification + '"' + '}' + '}';
+                    }
+                    System.Text.Encoding encode = System.Text.Encoding.ASCII;
+                    byte[] bytedata = encode.GetBytes(APPKEY + ":" + MasterSecret);
+                    var Authorization = "Basic" + " " + Convert.ToBase64String(bytedata, 0, bytedata.Length);
+
+                    string Url = "https://api.jpush.cn/v3/push";
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+                    request.Method = "POST";
+                    request.Accept = "application/json";
+                    request.Headers.Set("Authorization", Authorization);
+                    //request.ContentLength = 256;
+                    //request.Headers.Set("content-type", "application/json;charset=utf-8");
+                    byte[] bytes = Encoding.UTF8.GetBytes(JSONData);
+                    request.ContentLength = bytes.Length;
+                    request.Timeout = 10000;
+                    Stream reqstream = request.GetRequestStream();
+                    reqstream.Write(bytes, 0, bytes.Length);
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    Stream streamReceive = response.GetResponseStream();
+                    Encoding encoding = Encoding.UTF8;
+                    StreamReader streamReader = new StreamReader(streamReceive, encoding);
+                    string strResult = streamReader.ReadToEnd();
+                    streamReceive.Dispose();
+                    streamReader.Dispose();
+
+                    return strResult;
+                }
+                else
+                {
+                    return "没有推送内容";
+                }
+            }
+            catch (WebException ex)
+            {
+                using (WebResponse response = ex.Response)
+                {
+                    HttpWebResponse httpResponse = (HttpWebResponse)response;
+                    Console.WriteLine("Error code: {0}", httpResponse.StatusCode);
+                    using (Stream data = response.GetResponseStream())
+                    using (var reader = new StreamReader(data))
+                    {
+                        string text = reader.ReadToEnd();
+                        Console.WriteLine(text);
+                    }
+                }
+                return ex.Message;
+            }
+        }
+
+
     }
 }

@@ -37,6 +37,19 @@ namespace CDMISrestful.Controllers
         {
             string ret = repository.checkverification(mobile, smsType, verification).ToString();
             return new ExceptionHandler().Common(Request, ret);
-        } 
+        }
+
+        /// <summary>
+        /// 推送 通知
+        /// </summary>
+        /// <param name="platform"></param>
+        /// <param name="Alias"></param>
+        /// <param name="notification"></param>
+        /// <returns></returns>
+        public HttpResponseMessage PushNotification(string platform, string Alias, string notification)
+        {
+            string ret = repository.PushNotification(platform, Alias, notification);
+            return new ExceptionHandler().Common(Request, ret);
+        }
     }
 }
