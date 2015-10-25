@@ -311,5 +311,46 @@ namespace CDMISrestful.DataModels
         public string Weight { get; set; }
     }
 
+    public class ActiveUser
+    {
+        public string UserName { get; set; }
+        public string UserId { get; set; }
+
+    }
+
+    public class CategoryByDoctorId
+    {
+        public string CategoryCode { get; set; }
+        public string CategoryName { get; set; }
+        public string ItemCode { get; set; }
+        public string ItemName { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class HealthCoachList
+    {
+        public string healthCoachID { get; set; }
+        public string imageURL { get; set; }
+        public string name { get; set; }
+        public string age { get; set; }
+        public string sex { get; set; }
+        public string module { get; set; }
+        public string score { get; set; }
+    }
+
+    public class HealthCoachInfo
+    {
+        public string imageURL { get; set; }
+        public string name { get; set; }
+        public string age { get; set; }
+        public string sex { get; set; }
+        public string module { get; set; }
+        public string generalComment { get; set; }
+        public string generalscore { get; set; }
+
+        public string patientNum { get; set; }
+        public string activityDegree { get; set; }
+        public string Description { get; set; }
+    }
 
 }
