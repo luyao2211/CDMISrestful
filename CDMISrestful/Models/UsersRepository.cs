@@ -32,6 +32,7 @@ namespace CDMISrestful.Models
         {
             return SecurityManager.IsTokenValid(token);
         }
+
         public ForToken LogOn(string PwType, string userId, string password, string role)
         {
             int result = usersMethod.CheckPasswordByInput(pclsCache, PwType, userId, password);
@@ -606,6 +607,11 @@ namespace CDMISrestful.Models
         public int SetPatBasicInfoDetail(string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             return new ModuleInfoMethod().PsBasicInfoDetailSetData(pclsCache, Patient, CategoryCode, ItemCode, ItemSeq, Value, Description, SortNo, revUserId, TerminalName, TerminalIP, DeviceType);
+        }
+   
+        public string GetIDByInputPhone(string Type, string Name)
+        {
+            return new UsersMethod().GetIDByInputPhone(pclsCache, Type, Name);
         }
     }
 }

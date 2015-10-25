@@ -1109,6 +1109,14 @@
             <param name="notification"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetIDByInputPhone(System.String,System.String)">
+            <summary>
+            根据输入的手机号和邮箱等获取系统唯一标识符 20151023 CSQ
+            </summary>
+            <param name="Type"></param>
+            <param name="Name"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.UsersController.LogOn(CDMISrestful.DataModels.LogOn)">
             <summary>
             登录

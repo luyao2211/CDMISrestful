@@ -17,6 +17,20 @@ namespace CDMISrestful.Controllers
     public class UsersController : ApiController
     {
         static readonly IUsersRepository repository = new UsersRepository();
+
+        /// <summary>
+        /// 根据输入的手机号和邮箱等获取系统唯一标识符 20151023 CSQ
+        /// </summary>
+        /// <param name="Type"></param>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        [Route("Api/v1/Users/UID")]
+        public HttpResponseMessage GetIDByInputPhone(string Type, string Name)
+        {
+            string ret = repository.GetIDByInputPhone(Type,Name);
+            return new ExceptionHandler().Common(Request, ret);   
+        }
+
         /// <summary>
         /// 登录
         /// </summary>

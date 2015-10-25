@@ -111,6 +111,7 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+
         /// <summary>
         /// 王丰 20151010
         /// </summary>
