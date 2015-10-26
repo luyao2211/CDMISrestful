@@ -614,5 +614,35 @@ namespace CDMISrestful.DataMethod
         #endregion
 
 
+        #region<Cm.MstTask>
+        public int CmMstTaskSetData(DataConnection pclsCache, string CategoryCode, string Code, string Name, string ParentCode, string Description, int StartDate, int EndDate, int GroupHeaderFlag, int ControlType, string OptionCategory, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int IsSaved = 2;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return IsSaved;
+
+                }
+                IsSaved = (int)Cm.MstTask.SetData(pclsCache.CacheConnectionObject, CategoryCode, Code, Name, ParentCode, Description, StartDate, EndDate, GroupHeaderFlag, ControlType, OptionCategory, revUserId, TerminalName, TerminalIP, DeviceType);
+
+                return IsSaved;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "保存失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "DictMethod.CmMstTaskSetData", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return IsSaved;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        #endregion
+
     }
 }
