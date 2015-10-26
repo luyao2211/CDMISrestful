@@ -68,7 +68,7 @@ namespace CDMISrestful.DataMethod
         }
 
         /// <summary>
-        /// 将消息写入数据库 GL 2015-10-10
+        /// 将消息写入数据库并获取发送时间与显示时间 GL 2015-10-10（修改2015-10-26）
         /// </summary>
         /// <param name="SendBy"></param>
         /// <param name="Reciever"></param>
@@ -78,28 +78,34 @@ namespace CDMISrestful.DataMethod
         /// <param name="piTerminalIP"></param>
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
-        public int SetSMS(DataConnection pclsCache, string SendBy, string Reciever, string Content, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public Message SetSMS(DataConnection pclsCache, string SendBy, string Reciever, string Content, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
-            int ret = 0;
             try
             {
+                Message Meg = new Message();
                 if (!pclsCache.Connect())
                 {
-                    return ret;
+                    return null;
                 }
-
-                ret = (int)Mb.MessageRecord.SetSMS(pclsCache.CacheConnectionObject, SendBy, Reciever, Content, piUserId, piTerminalName, piTerminalIP, piDeviceType);
-                return ret;
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Mb.MessageRecord.SetSMS(pclsCache.CacheConnectionObject, SendBy, Reciever, Content, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (list != null)
+                {
+                    Meg.Flag = list[0];
+                    Meg.SendDateTime = list[1];
+                    Meg.Time = list[2];
+                }
+                return Meg;
             }
             catch (Exception ex)
             {
                 HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "MessageMethod.SetSMS", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return ret;
+                return null;
             }
             finally
             {
                 pclsCache.DisConnect();
-            }
+            }           
         }
 
         /// <summary>
@@ -290,6 +296,7 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+        
         #endregion
        
     }

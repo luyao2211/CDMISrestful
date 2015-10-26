@@ -30,7 +30,7 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// SetSMS 将消息写入数据库或将多条消息设为已读 GL 2015-10-10
+        /// PutSMSRead 将多条消息设为已读 GL 2015-10-10（修改2015-10-26）
         /// </summary>
         /// <param name="SendBy"></param>
         /// <param name="Reciever"></param>
@@ -42,18 +42,20 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/MessageInfo/message")]
         [ModelValidationFilter]
-        public HttpResponseMessage PostSMS(Message item)
-        {
-            int ret = 0;
-            if (item.Content == "") //设为已读
-            {
-                ret= repository.SetSMSRead(item.Receiver, item.SendBy, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
-            }
-            else //写入数据库
-            {
-                ret= repository.SetSMS(item.SendBy, item.Receiver, item.Content, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
-            }
+        public HttpResponseMessage PutSMSRead(Message item)
+        {         
+            int ret= repository.SetSMSRead(item.Receiver, item.SendBy, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);                       
             return new ExceptionHandler().SetData(Request,ret);
+        }
+        /// <summary>
+        /// PostSMS 将消息写入数据库并获取发送时间与显示时间 GL 2015-10-26
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        [Route("Api/v1/MessageInfo/message")]
+        public Message PostSMS(Message item)
+        {
+            return repository.SetSMS(item.SendBy, item.Receiver, item.Content, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
         }
 
         /// <summary>
