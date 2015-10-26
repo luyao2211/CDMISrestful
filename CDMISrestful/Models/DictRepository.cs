@@ -84,20 +84,5 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-
-        public int CmMstTaskSetData(string CategoryCode, string Code, string Name, string ParentCode, string Description, int StartDate, int EndDate, int GroupHeaderFlag, int ControlType, string OptionCategory, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
-        {
-            try
-            {
-                int IsSaved = 2;
-                IsSaved = dictMethod.CmMstTaskSetData(pclsCache, CategoryCode, Code, Name, ParentCode, Description, StartDate, EndDate, GroupHeaderFlag, ControlType, OptionCategory, revUserId, TerminalName, TerminalIP, DeviceType);
-                return IsSaved;
-            }
-            catch (Exception ex)
-            {
-                return 0;
-                throw (ex);
-            }
-        }
     }
 }

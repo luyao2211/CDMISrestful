@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -53,38 +52,5 @@ namespace CDMISrestful.DataModels
         public int SortNo { get; set; }
         public string Redundance { get; set; }
         public int InvalidFlag { get; set; }
-    }
-
-    public class CmMstTaskSetData
-    {
-
-        [Required(ErrorMessage = "请传入CategoryCode")]
-        public string CategoryCode { get; set; }
-        [Required(ErrorMessage = "请输入Code")]
-        public string Code { get; set; }
-        [Required(ErrorMessage = "请输入Name")]
-        public string Name { get; set; }
-        [Required(ErrorMessage = "请输入ParentCode")]
-        public string ParentCode { get; set; }
-        [Required(ErrorMessage = "请输入Description")]
-        public string Description { get; set; }
-        [Required(ErrorMessage = "请输入StartDate")]
-        public int StartDate { get; set; }
-        [Required(ErrorMessage = "请输入EndDate")]
-        public int EndDate { get; set; }
-        [Required(ErrorMessage = "请输入GroupHeaderFlag")]
-        public int GroupHeaderFlag { get; set; }
-        [Required(ErrorMessage = "请输入ControlType")]
-        public int ControlType { get; set; }
-        [Required(ErrorMessage = "请输入OptionCategory")]
-        public string OptionCategory { get; set; }
-        [Required(ErrorMessage = "请输入revUserId")]
-        public string revUserId { get; set; }
-        [Required(ErrorMessage = "请输入TerminalName")]
-        public string TerminalName { get; set; }
-        [Required(ErrorMessage = "请输入TerminalIP")]
-        public string TerminalIP { get; set; }
-        [Required(ErrorMessage = "请输入DeviceType")]
-        public int DeviceType { get; set; }
     }
 }
