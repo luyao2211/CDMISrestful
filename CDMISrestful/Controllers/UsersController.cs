@@ -234,5 +234,13 @@ namespace CDMISrestful.Controllers
             int ret = repository.SetPatBasicInfoDetail(Item.Patient, Item.CategoryCode, Item.ItemCode, Item.ItemSeq, Item.Value, Item.Description, Item.SortNo, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
+        [Route("Api/v1/Users/GetCalendar")]
+        [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
+        public List<Calendar> GetCalendar(string DoctorId)
+        {
+            List<Calendar> ret = repository.GetCalendar(DoctorId);
+            return ret;
+        }
     }
 }

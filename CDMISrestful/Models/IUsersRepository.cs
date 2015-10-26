@@ -30,5 +30,6 @@ namespace CDMISrestful.Models
         int SetPatBasicInfoDetail(string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
 
         string GetIDByInputPhone(string Type, string Name);
+        List<Calendar> GetCalendar(string DoctorId);
     }
 }

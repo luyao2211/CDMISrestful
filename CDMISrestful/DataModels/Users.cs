@@ -310,6 +310,15 @@ namespace CDMISrestful.DataModels
         public string Height { get; set; }
         public string Weight { get; set; }
     }
-
+    public class Calendar
+    {
+        public string DateTime { get; set; }
+        public string Period { get; set; }
+        public int SortNo { get; set; }
+        public string Description { get; set; }
+        public int Status { get; set; }
+        public string Redundancy { get; set; }
+    
+    }
 
 }

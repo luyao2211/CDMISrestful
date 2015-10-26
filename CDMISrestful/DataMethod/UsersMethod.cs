@@ -766,7 +766,62 @@ namespace CDMISrestful.DataMethod
         }
 
         #endregion
+        #region<Ps.Calendar>
+        public List<Calendar> GetCalendar(DataConnection pclsCache, string DoctorId)
+        {
+            List<Calendar> list = new List<Calendar>();
 
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Calendar.GetCalendar(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new Calendar
+                    {
+                        DateTime = cdr["DateTime"].ToString(),
+                        Period = cdr["Period"].ToString(),
+                        SortNo = Convert.ToInt32(cdr["SortNo"]),
+                        Description = cdr["Description"].ToString(),
+                        Status = Convert.ToInt32(cdr["Status"]),
+                        Redundancy = cdr["Redundancy"].ToString(),
+                    });
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetCalendar", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+        #endregion
         #region 第二层
         public int RegisterRelated(DataConnection pclsCache, string PwType,string userId,string Password, string UserName,string role,string revUserId,string TerminalName,string  TerminalIP,int DeviceType)
         {
