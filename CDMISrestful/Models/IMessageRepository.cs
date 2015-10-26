@@ -9,7 +9,7 @@ namespace CDMISrestful.Models
     public interface IMessageRepository
     {
         List<Message> GetSMSDialogue(string Reciever, string SendBy);
-        int SetSMS(string SendBy, string Reciever, string Content, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
+        Message SetSMS(string SendBy, string Reciever, string Content, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
         Message GetLatestSMS(string DoctorId, string PatientId);
         int SetSMSRead(string Reciever, string SendBy, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
         int GetSMSCountForOne(string Reciever, string SendBy);

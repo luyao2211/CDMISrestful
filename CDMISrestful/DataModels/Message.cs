@@ -30,7 +30,7 @@ namespace CDMISrestful.DataModels
         [Required]
         public string SendBy { get; set; }
         /// <summary>
-        /// 接收者Id
+        /// 发送者姓名
         /// </summary>
         public string SendByName { get; set; }
         /// <summary>
@@ -65,7 +65,7 @@ namespace CDMISrestful.DataModels
         public string IDFlag { get; set; }
 
         /// <summary>
-        ///区分是否为当天第一条消息
+        ///标志位
         /// </summary>
         public string Flag { get; set; }
 
@@ -73,6 +73,10 @@ namespace CDMISrestful.DataModels
         /// 未读消息数
         /// </summary>
         public string Count { get; set; }
+        /// <summary>
+        /// 显示时间
+        /// </summary>
+        public string Time { get; set; }
 
         /// <summary>
        /// 以下4个字段为更新信息输入

@@ -24,7 +24,7 @@ namespace CDMISrestful.Models
         }
 
         /// <summary>
-        /// 将消息写入数据库 GL 2015-10-10
+        /// 将消息写入数据库并获取发送时间与显示时间 GL 2015-10-10(修改：2015-10-26)
         /// </summary>
         /// <param name="SendBy"></param>
         /// <param name="Reciever"></param>
@@ -34,7 +34,7 @@ namespace CDMISrestful.Models
         /// <param name="piTerminalIP"></param>
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
-        public int SetSMS(string SendBy, string Reciever, string Content, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public Message SetSMS(string SendBy, string Reciever, string Content, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             return new MessageMethod().SetSMS(pclsCache, SendBy, Reciever, Content, piUserId, piTerminalName, piTerminalIP, piDeviceType);         
         }
