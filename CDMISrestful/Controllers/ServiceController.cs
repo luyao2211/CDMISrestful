@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using CDMISrestful.Models;
 using CDMISrestful.CommonLibrary;
+using System.Web;
 
 namespace CDMISrestful.Controllers
 {
@@ -51,5 +52,17 @@ namespace CDMISrestful.Controllers
             string ret = repository.PushNotification(platform, Alias, notification);
             return new ExceptionHandler().Common(Request, ret);
         }
+
+        /// <summary>
+        /// 获取远程调用的IP CSQ 20151026
+        /// </summary>
+        /// <returns></returns>
+        public HttpResponseMessage getRemoteIPAddress()
+        {
+            string visitorIP = "";
+            visitorIP = HttpContext.Current.Request.UserHostAddress;
+            return new ExceptionHandler().Common(Request, visitorIP);
+        }
+
     }
 }

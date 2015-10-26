@@ -1167,6 +1167,12 @@
             <param name="notification"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.ServiceController.getRemoteIPAddress">
+            <summary>
+            获取远程调用的IP CSQ 20151026
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.UsersController.GetIDByInputPhone(System.String,System.String)">
             <summary>
             根据输入的手机号和邮箱等获取系统唯一标识符 20151023 CSQ
