@@ -145,6 +145,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Cache.Cm.MstSymptoms.dll</HintPath>
     </Reference>
+    <Reference Include="Cache.Cm.MstTask, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Cache.Cm.MstTask.dll</HintPath>
+    </Reference>
     <Reference Include="Cache.Cm.MstTreatment, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Cache.Cm.MstTreatment.dll</HintPath>
@@ -276,6 +280,10 @@
     <Reference Include="Cache.Ps.TaskList, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Cache.Ps.TaskList.dll</HintPath>
+    </Reference>
+    <Reference Include="Cache.Ps.Template, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Cache.Ps.Template.dll</HintPath>
     </Reference>
     <Reference Include="Cache.Ps.Treatment, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

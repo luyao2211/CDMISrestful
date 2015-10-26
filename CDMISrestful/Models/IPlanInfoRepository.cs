@@ -13,7 +13,8 @@ namespace CDMISrestful.Models
         List<LifeStyleDetail> GetLifeStyleDetail(string Module);
         List<PsTaskByType> GetPsTaskByType(string PlanNo, string Type);
         List<PsDrugRecord> GetPatientDrugRecord(string PatientId, string Module);
-        int CreateTask(string PlanNo, string Task, string UserId, string TerminalName, string TerminalIP, int DeviceType);
+        int CreateTask(string PlanNo, string Type, string Code, string SortNo, string Instruction, string UserId, string TerminalName, string TerminalIP, int DeviceType);
+
         int SetCompliance(string PatientId, int Date, string PlanNo, Double Compliance, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
         string GetValueByPlanNoAndId(string PlanNo, string Id);
         int SetTarget(string Plan, string Id, string Type, string Code, string Value, string Origin, string Instruction, string Unit, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
@@ -32,5 +33,12 @@ namespace CDMISrestful.Models
         List<TasksByDate> GetTasksByIndate(string PatientId, int InDate, string PlanNo);
         List<PlanDeatil> GetPlanList34ByM(string PatientId, string Module);
         List<ComplianceListByPeriod> GetAllComplianceListByPeriod(string PatientId, string PlanNo, int StartDate, int EndDate);
+        List<PsTask> GetTasks(string PlanNo, string ParentCode);
+        List<TaskDetail> GetTaskDetails(string CategoryCode, string Code);
+        int PsTemplateSetData(string DoctorId, int TemplateCode, string TemplateName, string Description, DateTime RecordDate, string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
+        int PsTemplateDetailSetData(string DoctorId, int TemplateCode, string CategoryCode, string ItemCode, string Value, string Description, string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
+        List<TemplateInfo> GetTemplateList(string DoctorId);
+        List<TemplateInfoDtl> GetTemplateDetails(string DoctorId, string TemplateCode, string ParentCode);
+
     }
 }

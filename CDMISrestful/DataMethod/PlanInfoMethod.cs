@@ -11,7 +11,169 @@ namespace CDMISrestful.DataMethod
 {
     public class PlanInfoMethod
     {
+        #region PsTemplate
+        //setdata CSQ 20151026
+        public int PsTemplateSetData(DataConnection pclsCache, string DoctorId, int TemplateCode, string TemplateName, string Description, DateTime RecordDate, string Redundance,string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            int ret = 3;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
 
+                ret = (int)Ps.Template.SetData(pclsCache.CacheConnectionObject, DoctorId, TemplateCode, TemplateName, Description, RecordDate, Redundance, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.Template.SetData", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        //setdata CSQ 20151026
+        public int PsTemplateDetailSetData(DataConnection pclsCache, string DoctorId, int TemplateCode, string CategoryCode, string ItemCode, string Value, string Description,string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            int ret = 3;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+                string Key = DoctorId + "||" + TemplateCode;
+                ret = (int)Ps.TemplateDetail.SetData(pclsCache.CacheConnectionObject, Key, CategoryCode, ItemCode, Value, Description, Redundance, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.TemplateDetail.SetData", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        public List<TemplateInfo> GetTemplateList(DataConnection pclsCache, string DoctorId)
+        {
+            List<TemplateInfo> list = new List<TemplateInfo>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Template.GetTemplateList(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;             
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    TemplateInfo NewLine = new TemplateInfo();             
+                    NewLine.TemplateCode = Convert.ToInt32(cdr["TemplateCode"]);
+                    NewLine.TemplateName = cdr["TemplateName"].ToString();
+                    NewLine.Description = cdr["Description"].ToString();
+                    NewLine.RecordDate = Convert.ToDateTime(cdr["RecordDate"]);
+                    NewLine.Redundance = cdr["Redundance"].ToString();         
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetPatientsPlanByDoctorId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+        public List<TemplateInfoDtl> GetTemplateDetails(DataConnection pclsCache, string DoctorId, string TemplateCode, string ParentCode)
+        {
+            List<TemplateInfoDtl> list = new List<TemplateInfoDtl>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.TemplateDetail.GetTemplateDetails(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
+                cmd.Parameters.Add("TemplateCode", CacheDbType.NVarChar).Value = TemplateCode;
+                cmd.Parameters.Add("ParentCode", CacheDbType.NVarChar).Value = ParentCode;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    TemplateInfoDtl NewLine = new TemplateInfoDtl();
+                    NewLine.CategoryCode = cdr["CategoryCode"].ToString();
+                    NewLine.Code = cdr["Code"].ToString();
+                    NewLine.Name = cdr["Name"].ToString();
+                    NewLine.InvalidFlag = cdr["InvalidFlag"].ToString();
+                    NewLine.Value = cdr["Value"].ToString();
+                    NewLine.TemplateDescription = cdr["TemplateDescription"].ToString();
+                    NewLine.Redundance = cdr["Redundance"].ToString();
+                    NewLine.ParentCode = cdr["ParentCode"].ToString();
+                    NewLine.TaskDescription = cdr["TaskDescription"].ToString();
+                    NewLine.GroupHeaderFlag = cdr["GroupHeaderFlag"].ToString();
+                    NewLine.ControlType = cdr["ControlType"].ToString();
+                    NewLine.OptionCategory = cdr["OptionCategory"].ToString();
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetTemplateDetails", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+        #endregion
 
         #region PsPlan
         //SYF 20151010
@@ -1616,8 +1778,8 @@ namespace CDMISrestful.DataMethod
         #endregion
 
         #region<PsTask>
-        //WF 20151010
-        public int PsTaskSetData(DataConnection pclsCache, string PlanNo, string Id, string Type, string Code, string Instruction, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        //CSQ 20151025
+        public int PsTaskSetData(DataConnection pclsCache, string PlanNo,  string Type, string Code,string SortNo, string Instruction, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             int ret = 2;
             try
@@ -1627,7 +1789,7 @@ namespace CDMISrestful.DataMethod
                     return ret;
                 }
 
-                ret = (int)Ps.Task.SetData(pclsCache.CacheConnectionObject, PlanNo, Id, Type, Code, Instruction, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                ret = (int)Ps.Task.SetData(pclsCache.CacheConnectionObject, PlanNo,  Type, Code,SortNo, Instruction, piUserId, piTerminalName, piTerminalIP, piDeviceType);
                 return ret;
             }
             catch (Exception ex)
@@ -1637,6 +1799,66 @@ namespace CDMISrestful.DataMethod
             }
             finally
             {
+                pclsCache.DisConnect();
+            }
+        }
+
+     
+        //CSQ 20151026 Cm.MstTaskDetail获取数据
+        public List<TaskDetail> GetTaskDetails(DataConnection pclsCache, string CategoryCode, string Code)
+        {
+            List<TaskDetail> list = new List<TaskDetail>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Cm.MstTaskDetail.GetTaskDetail(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("CategoryCode", CacheDbType.NVarChar).Value = CategoryCode;
+                cmd.Parameters.Add("Code", CacheDbType.NVarChar).Value = Code;
+
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new TaskDetail
+                    {
+                        Module = cdr["Module"].ToString(),
+                        CurativeEffect = cdr["CurativeEffect"].ToString(),
+                        SideEffect = cdr["SideEffect"].ToString(),
+                        Instruction = cdr["Instruction"].ToString(),
+                        HealthEffect = cdr["HealthEffect"].ToString(),
+                        Unit = cdr["Unit"].ToString(),
+                        Redundance = cdr["Redundance"].ToString(),                      
+                    });
+
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Cm.MstTask.GetTaskDetail", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
                 pclsCache.DisConnect();
             }
         }
@@ -1696,11 +1918,10 @@ namespace CDMISrestful.DataMethod
             }
         }
 
-        //WF 20151010
-        public List<PsTask> GetPsTask(DataConnection pclsCache, string PlanNo)
+        //CSQ 20151025
+        public List<PsTask> GetTasks(DataConnection pclsCache, string PlanNo,string ParentCode)
         {
             List<PsTask> list = new List<PsTask>();
-
 
             CacheCommand cmd = null;
             CacheDataReader cdr = null;
@@ -1711,19 +1932,28 @@ namespace CDMISrestful.DataMethod
                     return null;
                 }
                 cmd = new CacheCommand();
-                cmd = Ps.Task.GetPsTask(pclsCache.CacheConnectionObject);
+                cmd = Ps.Task.GetTask(pclsCache.CacheConnectionObject);
                 cmd.Parameters.Add("PlanNo", CacheDbType.NVarChar).Value = PlanNo;
+                cmd.Parameters.Add("ParentCode", CacheDbType.NVarChar).Value = ParentCode;
 
+                
                 cdr = cmd.ExecuteReader();
                 while (cdr.Read())
                 {
                     list.Add(new PsTask
-                    {
-                        Id = cdr["Id"].ToString(),
+                    {                   
                         Type = cdr["Type"].ToString(),
                         Code = cdr["Code"].ToString(),
-                        CodeName = cdr["CodeName"].ToString(),
+                        SortNo = cdr["SortNo"].ToString(),
+                        Name = cdr["Name"].ToString(),
+                        InvalidFlag = cdr["InvalidFlag"].ToString(),
                         Instruction = cdr["Instruction"].ToString(),
+                        ParentCode = cdr["ParentCode"].ToString(),
+                        Description = cdr["Description"].ToString(),
+                        GroupHeaderFlag = cdr["GroupHeaderFlag"].ToString(),
+                        ControlType = cdr["ControlType"].ToString(),
+                        OptionCategory = cdr["OptionCategory"].ToString(),
+                        
                     });
 
                 }
@@ -1731,7 +1961,7 @@ namespace CDMISrestful.DataMethod
             }
             catch (Exception ex)
             {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.Task.GetPsTask", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.Task.GetTask", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
                 return null;
             }
             finally
@@ -1797,10 +2027,10 @@ namespace CDMISrestful.DataMethod
                 while (cdr.Read())
                 {
                     PsTask item = new PsTask();
-                    item.Id = cdr["Id"].ToString();
+                    item.SortNo = cdr["SortNo"].ToString();
                     item.Type = cdr["Type"].ToString();
                     item.Code = cdr["Code"].ToString();
-                    item.CodeName = cdr["CodeName"].ToString();
+                    item.Name = cdr["Name"].ToString();
                     item.Instruction = cdr["Instruction"].ToString();
                     items.Add(item);
                 }

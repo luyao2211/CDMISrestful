@@ -12,6 +12,37 @@ namespace CDMISrestful.Models
     {
         DataConnection pclsCache = new DataConnection();
 
+        //CSQ 20151026 获取任务子表数据
+        public List<TaskDetail> GetTaskDetails(string CategoryCode, string Code)
+        {
+            return new PlanInfoMethod().GetTaskDetails(pclsCache, CategoryCode, Code);
+        }
+
+        //专员建立计划模板 父表写数 csq 20151026
+        public int PsTemplateSetData(string DoctorId, int TemplateCode, string TemplateName, string Description, DateTime RecordDate, string Redundance,string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            return new PlanInfoMethod().PsTemplateSetData(pclsCache, DoctorId, TemplateCode, TemplateName, Description, RecordDate, Redundance,  piUserId, piTerminalName, piTerminalIP, piDeviceType);
+        }
+
+         //专员建立计划模板 子表写数 csq 20151026
+        public int PsTemplateDetailSetData(string DoctorId, int TemplateCode, string CategoryCode, string ItemCode, string Value, string Description,string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            return new PlanInfoMethod().PsTemplateDetailSetData(pclsCache, DoctorId, TemplateCode, CategoryCode, ItemCode, Value,Description, Redundance, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+        }
+
+        
+        //获取专员计划模板列表 CSQ 20151026
+        public List<TemplateInfo> GetTemplateList(string DoctorId)
+        {
+            return new PlanInfoMethod().GetTemplateList(pclsCache, DoctorId);
+        }
+
+        //获取专员某个计划模板的详细信息 CSQ 20151026
+        public List<TemplateInfoDtl> GetTemplateDetails(string DoctorId, string TemplateCode, string ParentCode)
+        {
+            return new PlanInfoMethod().GetTemplateDetails(pclsCache, DoctorId, TemplateCode, ParentCode);
+        }
+
         //Ps.Plan.SetData GL 2015-10-13
         public int SetPlan(string PlanNo, string PatientId, int StartDate, int EndDate, string Module, int Status, string DoctorId, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
@@ -58,27 +89,13 @@ namespace CDMISrestful.Models
         }
 
         //创建计划 GL 2015-10-13
-        public int CreateTask(string PlanNo, string Task, string UserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int CreateTask(string PlanNo, string  Type,string Code,string SortNo,string Instruction, string UserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             try
             {
-                int ret = 2;
-                List<PsTask> DT_PsTask = new PlanInfoMethod().GetPsTask(pclsCache, PlanNo);
-                if (DT_PsTask.Count != 0)
-                {
-                    new PlanInfoMethod().DeleteAllByPlanNo(pclsCache, PlanNo);
-                }
-
-                string[] task = Task.Split('@');
-                for (int i = 0; i < task.Length; i++)
-                {
-                    string[] content = task[i].Split('#');
-                    string Id = " ";
-                    string Type = content[0];
-                    string Code = content[1];
-                    string Instruction = content[2];
-                    ret = new PlanInfoMethod().PsTaskSetData(pclsCache, PlanNo, Id, Type, Code, Instruction, UserId, TerminalName, TerminalIP, DeviceType);
-                }
+                int ret = 3;                      
+                ret = new PlanInfoMethod().PsTaskSetData(pclsCache, PlanNo,  Type, Code, SortNo,Instruction, UserId, TerminalName, TerminalIP, DeviceType);
+                
                 return ret;
             }
             catch (Exception ex)
@@ -365,7 +382,7 @@ namespace CDMISrestful.Models
                     foreach (PsTask item in VitalSignRows)
                     {
                         SignShow SignShow = new SignShow();
-                        SignShow.SignName = item.CodeName;
+                        SignShow.SignName = item.Name;
                         SignShow.SignCode = item.Code;
                         SignList.Add(SignShow);
                     }
@@ -526,7 +543,7 @@ namespace CDMISrestful.Models
                     foreach (PsTask item in VitalSignRows)
                     {
                         SignShow SignShow = new SignShow();
-                        SignShow.SignName = item.CodeName;
+                        SignShow.SignName = item.Name;
                         SignShow.SignCode = item.Code;
                         SignList.Add(SignShow);
                     }
@@ -820,7 +837,7 @@ namespace CDMISrestful.Models
                     foreach (PsTask item in VitalSignRows)
                     {
                         SignShow SignShow = new SignShow();
-                        SignShow.SignName = item.CodeName;
+                        SignShow.SignName = item.Name;
                         SignShow.SignCode = item.Code;
                         SignList.Add(SignShow);
                     }
@@ -927,6 +944,11 @@ namespace CDMISrestful.Models
         public List<ComplianceListByPeriod> GetAllComplianceListByPeriod(string PatientId, string PlanNo, int StartDate, int EndDate)
         {
             return new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PatientId, PlanNo, StartDate, EndDate);
+        }
+
+        public List<PsTask> GetTasks(string PlanNo, string ParentCode)
+        {
+            return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode);
         }
     }
 }

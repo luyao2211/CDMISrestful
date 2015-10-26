@@ -8,6 +8,72 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CDMISrestful.DataModels
 {
+    public class TaskDetail
+    {
+        public string Module { get; set; }
+        public string CurativeEffect { get; set; }
+        public string SideEffect { get; set; }
+        public string Instruction { get; set; }
+        public string HealthEffect { get; set; }
+        public string Unit { get; set; }
+        public string Redundance { get; set; }
+    }
+
+    public class Template
+    {
+        public string DoctorId { get; set; }
+        public int TemplateCode { get; set; }
+        public string TemplateName { get; set; }
+        public string Description { get; set; }
+        public DateTime RecordDate { get; set; }
+        public string Redundance { get; set; }
+        public string piUserId { get; set; }
+        public string piTerminalName { get; set; }
+        public string piTerminalIP { get; set; }
+        public int piDeviceType { get; set; }
+    }
+
+    public class TemplateInfo
+    {
+        public int TemplateCode { get; set; }
+        public string TemplateName { get; set; }
+        public string Description { get; set; }
+        public DateTime RecordDate { get; set; }
+        public string Redundance { get; set; }
+    }
+
+
+    public class TemplateInfoDtl
+    {
+        public string CategoryCode { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string InvalidFlag { get; set; }
+        public string Value { get; set; }
+        public string TemplateDescription { get; set; }
+        public string Redundance { get; set; }
+        public string ParentCode { get; set; }
+        public string TaskDescription { get; set; }
+        public string GroupHeaderFlag { get; set; }
+        public string ControlType { get; set; }
+        public string OptionCategory { get; set; }
+    }
+
+    public class TemplateDetail
+    {
+        public string DoctorId { get; set; }
+        public int TemplateCode { get; set; }
+        public string CategoryCode { get; set; }
+        public string ItemCode { get; set; }
+        public string Value { get; set; }
+        public string Description { get; set; }
+        public string Redundance { get; set; }
+
+        public string piUserId { get; set; }
+        public string piTerminalName { get; set; }
+        public string piTerminalIP { get; set; }
+        public int piDeviceType { get; set; }
+    }
 
     public class Period
     {
@@ -69,8 +135,10 @@ namespace CDMISrestful.DataModels
     {
         [Required]
         public string PlanNo { get; set; }
-        [Required]
-        public string Task { get; set; }
+        public string Type{ get; set; }
+        public string Code{ get; set; }
+        public string SortNo{ get; set; }
+        public string Instruction{ get; set; }
         public string piUserId { get; set; }
         public string piTerminalName { get; set; }
         public string piTerminalIP { get; set; }
@@ -174,11 +242,17 @@ namespace CDMISrestful.DataModels
     }
     public class PsTask
     {
-        public string Id { get; set; }
         public string Type { get; set; }
         public string Code { get; set; }
-        public string CodeName { get; set; }
+        public string SortNo { get; set; }
+        public string Name { get; set; }
+        public string InvalidFlag { get; set; }
         public string Instruction { get; set; }
+        public string ParentCode { get; set; }
+        public string Description { get; set; }
+        public string GroupHeaderFlag { get; set; }
+        public string ControlType { get; set; }
+        public string OptionCategory { get; set; }
 
     }
     public class TargetByCode

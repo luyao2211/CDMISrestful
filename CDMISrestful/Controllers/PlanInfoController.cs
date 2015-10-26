@@ -96,22 +96,101 @@ namespace CDMISrestful.Controllers
             return repository.GetPatientDrugRecord(PatientId, Module);
         }
 
-        /// <summary>
-        /// PostCreateTask 创建计划（Task格式：Type1#Code1#Instruction1@Type2#Code2#Instruction2,如："LifeStyle#S001#减轻体重@LifeStyle#S002#锻炼",） GL 2015-10-13
-        /// </summary>
-        /// <param name="PlanNo"></param>
-        /// <param name="Task"></param>
-        /// <param name="UserId"></param>
-        /// <param name="TerminalName"></param>
-        /// <param name="TerminalIP"></param>
-        /// <param name="DeviceType"></param>
-        /// <returns></returns>
+        
+       /// <summary>
+       /// PostCreateTask 创建计划时插入Task信息 CSQ 20151025
+       /// </summary>
+       /// <param name="item"></param>
+       /// <returns></returns>
         [Route("Api/v1/PlanInfo/Task")]
         [ModelValidationFilter]
         public HttpResponseMessage PostCreateTask(CreateTask item)
-        {
-            int ret = repository.CreateTask(item.PlanNo, item.Task, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+        {         
+            int ret = repository.CreateTask(item.PlanNo, item.Type, item.Code,item.SortNo,item.Instruction,item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
+        }
+
+        /// <summary>
+        /// 获取某个计划下的所有任务 CSQ 20151025
+        /// </summary>
+        /// <param name="PlanNo"></param>
+        /// <returns></returns>
+        [Route("Api/v1/PlanInfo/Tasks")]
+        [EnableQuery]
+        public List<PsTask> GetTasks(string PlanNo, string ParentCode)
+        {
+            return repository.GetTasks(PlanNo, ParentCode);
+        }
+
+        /// <summary>
+        /// CSQ 20151026 获取任务子表数据
+        /// </summary>
+        /// <param name="CategoryCode"></param>
+        /// <param name="Code"></param>
+        /// <returns></returns>
+        [Route("Api/v1/PlanInfo/TaskDetails")]
+        public List<TaskDetail> GetTaskDetails(string CategoryCode, string Code)
+        {
+            return repository.GetTaskDetails(CategoryCode, Code);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="DoctorId"></param>
+        /// <param name="TemplateCode"></param>
+        /// <param name="TemplateName"></param>
+        /// <param name="Description"></param>
+        /// <param name="RecordDate"></param>
+        /// <param name="Redundance"></param>
+        /// <param name="piUserId"></param>
+        /// <param name="piTerminalName"></param>
+        /// <param name="piTerminalIP"></param>
+        /// <param name="piDeviceType"></param>
+        /// <returns></returns>
+        [Route("Api/v1/PlanInfo/Template")]
+        public HttpResponseMessage PostPsTemplateSetData(Template template)
+        {
+            int ret = repository.PsTemplateSetData(template.DoctorId, template.TemplateCode, template.TemplateName, template.Description, template.RecordDate, template.Redundance, template.piUserId, template.piTerminalName, template.piTerminalIP, template.piDeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
+        }
+
+        /// <summary>
+        /// 专员建立计划模板 子表写数 csq 20151026
+        /// </summary>
+        /// <param name="templateDtl"></param>
+        /// <returns></returns>
+        [Route("Api/v1/PlanInfo/TemplateDetail")]
+        public HttpResponseMessage PostPsTemplateDetailSetData(TemplateDetail templateDtl)
+        {
+            int ret = repository.PsTemplateDetailSetData(templateDtl.DoctorId, templateDtl.TemplateCode, templateDtl.CategoryCode, templateDtl.ItemCode, templateDtl.Value, templateDtl.Description, templateDtl.Redundance, templateDtl.piUserId, templateDtl.piTerminalName, templateDtl.piTerminalIP, templateDtl.piDeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
+        }
+
+        /// <summary>
+        /// 获取专员计划模板列表 CSQ 20151026
+        /// </summary>
+        /// <param name="DoctorId"></param>
+        /// <param name="TemplateCode"></param>
+        /// <returns></returns>
+        [Route("Api/v1/PlanInfo/Templates")]
+        public List<TemplateInfo> GetTemplateList(string DoctorId)
+        {
+            return repository.GetTemplateList(DoctorId);
+        }
+
+        /// <summary>
+        /// 获取专员某个计划模板的详细信息 CSQ 20151026
+        /// </summary>
+        /// <param name="DoctorId"></param>
+        /// <param name="TemplateCode"></param>
+        /// <param name="ParentCode"></param>
+        /// <returns></returns>
+        [Route("Api/v1/PlanInfo/TemplateDetails")]
+        public List<TemplateInfoDtl> GetTemplateDetails(string DoctorId, string TemplateCode, string ParentCode)
+        {
+            return repository.GetTemplateDetails(DoctorId, TemplateCode, ParentCode);
         }
 
         /// <summary>
