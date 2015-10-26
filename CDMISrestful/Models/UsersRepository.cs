@@ -613,5 +613,10 @@ namespace CDMISrestful.Models
         {
             return new UsersMethod().GetIDByInputPhone(pclsCache, Type, Name);
         }
+        public List<Calendar> GetCalendar(string DoctorId)
+        {
+            return usersMethod.GetCalendar(pclsCache, DoctorId);
+
+        }
     }
 }
