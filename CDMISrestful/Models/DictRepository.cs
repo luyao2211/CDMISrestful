@@ -99,5 +99,10 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
+        public List<CmMstTask> GetMstTaskByParentCode(string ParentCode)
+        {
+            return dictMethod.GetMstTaskByParentCode(pclsCache, ParentCode);
+
+        }
     }
 }

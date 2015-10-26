@@ -87,4 +87,19 @@ namespace CDMISrestful.DataModels
         [Required(ErrorMessage = "请输入DeviceType")]
         public int DeviceType { get; set; }
     }
+    public class CmMstTask
+    {
+        public string CategoryCode { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string ParentCode { get; set; }
+        public string Description { get; set; }
+        public int StartDate { get; set; }
+        public int EndDate { get; set; }
+        public int GroupHeaderFlag { get; set; }
+        public int ControlType { get; set; }
+        public string OptionCategory { get; set; }
+      
+    }
+
 }
