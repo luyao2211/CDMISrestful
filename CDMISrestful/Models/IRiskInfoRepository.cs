@@ -16,5 +16,6 @@ namespace CDMISrestful.Models
         string GetRiskResult(string UserId, string AssessmentType);
         RiskInput GetRiskInput(string UserId);
         List<PsTreatmentIndicators> GetPsTreatmentIndicators(string UserId);
+        int PsTreatmentIndicatorsSetData(string UserId, string AssessmentType, string AssessmentName, DateTime AssessmentTime, string Result, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
     }
 }

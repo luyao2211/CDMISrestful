@@ -100,5 +100,13 @@ namespace CDMISrestful.Controllers
             List<PsTreatmentIndicators> ret = repository.GetPsTreatmentIndicators(UserId);
             return ret;
         }
+
+        [Route("Api/v1/RiskInfo/PsTreatmentIndicatorsSetData")]
+        [ModelValidationFilter]
+        public HttpResponseMessage POSTPsTreatmentIndicatorsSetData(RiskResult Item)
+        {
+            int ret = repository.PsTreatmentIndicatorsSetData(Item.UserId, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
+        }
     }
 }
