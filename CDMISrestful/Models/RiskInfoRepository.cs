@@ -60,10 +60,10 @@ namespace CDMISrestful.Models
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        public string GetRiskResult(string UserId)
+        public string GetRiskResult(string UserId, string AssessmentType)
         {
             int SortNo = new RiskInfoMethod().GetMaxSortNo(pclsCache, UserId);
-            return new RiskInfoMethod().GetResult(pclsCache, UserId, SortNo);
+            return new RiskInfoMethod().GetResult(pclsCache, UserId, SortNo, AssessmentType);
         }
 
         /// <summary>
@@ -1070,6 +1070,11 @@ namespace CDMISrestful.Models
             Input.piChd = piChd;
             Input.piValve = piValve;
             return Input;
+        }
+        public List<PsTreatmentIndicators> GetPsTreatmentIndicators(string UserId)
+        {
+            return new RiskInfoMethod().GetPsTreatmentIndicators(pclsCache, UserId);
+
         }
     }
 }

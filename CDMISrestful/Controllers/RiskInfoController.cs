@@ -70,9 +70,9 @@ namespace CDMISrestful.Controllers
         /// <param name="UserId"></param>
         /// <returns></returns>
         [Route("Api/v1/RiskInfo/RiskResult")]
-        public HttpResponseMessage GetRiskResult(string UserId)
+        public HttpResponseMessage GetRiskResult(string UserId, string AssessmentType)
         {
-            string ret = repository.GetRiskResult(UserId);
+            string ret = repository.GetRiskResult(UserId,  AssessmentType);
             return new ExceptionHandler().Common(Request, ret);
         }
 
@@ -85,6 +85,14 @@ namespace CDMISrestful.Controllers
         public RiskInput GetRiskInput(string UserId)
         {
             return repository.GetRiskInput(UserId);
+        }
+        [Route("Api/v1/RiskInfo/GetPsTreatmentIndicators")]
+        [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
+        public List<PsTreatmentIndicators> GetPsTreatmentIndicators(string UserId)
+        {
+            List<PsTreatmentIndicators> ret = repository.GetPsTreatmentIndicators(UserId);
+            return ret;
         }
     }
 }
