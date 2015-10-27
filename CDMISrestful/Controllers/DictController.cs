@@ -100,7 +100,7 @@ namespace CDMISrestful.Controllers
             int ret = repository.CmMstTaskSetData(CmMstTaskSetData.CategoryCode, CmMstTaskSetData.Code, CmMstTaskSetData.Name, CmMstTaskSetData.ParentCode, CmMstTaskSetData.Description, CmMstTaskSetData.StartDate, CmMstTaskSetData.EndDate, CmMstTaskSetData.GroupHeaderFlag, CmMstTaskSetData.ControlType, CmMstTaskSetData.OptionCategory, CmMstTaskSetData.revUserId, CmMstTaskSetData.TerminalName, CmMstTaskSetData.TerminalIP, CmMstTaskSetData.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
-        [Route("Api/v1/Dict/CmMstTaskSetData")]
+        [Route("Api/v1/Dict/MstTask")]
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
         public List<CmMstTask> GetMstTaskByParentCode(string ParentCode)
