@@ -284,7 +284,7 @@ namespace CDMISrestful.Models
                             vitalsigns.Add("");
                         }
 
-                        TargetByCode targetlist = planInfoMethod.GetTargetByCode(pclsCache, planNo, itemType, itemCode);
+                        TargetByCode targetlist = planInfoMethod.GetTarget(pclsCache, planNo, itemType, itemCode);
                         if (targetlist != null)
                         {
                             vitalsigns.Add(targetlist.Origin);  //index 4 for Origin value

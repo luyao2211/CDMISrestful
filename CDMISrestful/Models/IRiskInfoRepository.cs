@@ -8,8 +8,6 @@ namespace CDMISrestful.Models
 {
     public interface IRiskInfoRepository
     {
-        string GetValueByPlanNoAndId(string PlanNo, string Id);
-
         string GetDescription(int SBP);
         int SetRiskResult(string UserId, string AssessmentType, string AssessmentName, DateTime AssessmentTime, string Result, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
 

@@ -919,128 +919,7 @@ namespace CDMISrestful.DataMethod
             }
         }
 
-        /// <summary>
-        /// syf 2015-10-10根据计划编码和日期，获取依从率
-        /// </summary>
-        /// <param name="pclsCache"></param>
-        /// <param name="PatientId"></param>
-        /// <param name="Date"></param>
-        /// <param name="PlanNo"></param>
-        /// <returns></returns>
-        public List<TasksByDate> GetTasksByDate(DataConnection pclsCache, string PatientId, int Date, string PlanNo)
-        {
-            List<TasksByDate> list = new List<TasksByDate>();
-
-            CacheCommand cmd = null;
-            CacheDataReader cdr = null;
-            try
-            {
-                if (!pclsCache.Connect())
-                {
-                    return null;
-                }
-                cmd = new CacheCommand();
-                cmd = Ps.Compliance.GetTasksByDate(pclsCache.CacheConnectionObject);
-                cmd.Parameters.Add("PatientId", CacheDbType.NVarChar).Value = PatientId;
-                cmd.Parameters.Add("Date", CacheDbType.Int).Value = Date;
-                cmd.Parameters.Add("PlanNo", CacheDbType.NVarChar).Value = PlanNo;
-
-                cdr = cmd.ExecuteReader();
-                while (cdr.Read())
-                {
-                    TasksByDate NewLine = new TasksByDate();
-                    NewLine.TaskID = cdr["TaskID"].ToString();
-                    NewLine.TaskName = cdr["TaskName"].ToString();
-                    NewLine.Status = cdr["Status"].ToString();
-                    list.Add(NewLine);
-                }
-                return list;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetTasksByDate", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-            }
-            finally
-            {
-                if ((cdr != null))
-                {
-                    cdr.Close();
-                    cdr.Dispose(true);
-                    cdr = null;
-                }
-                if ((cmd != null))
-                {
-                    cmd.Parameters.Clear();
-                    cmd.Dispose();
-                    cmd = null;
-                }
-                pclsCache.DisConnect();
-            }
-        }
-
-        /// <summary>
-        /// syf 2015-10-10 在当天根据任务状态的完成情况输出相应的任务
-        /// </summary>
-        /// <param name="pclsCache"></param>
-        /// <param name="PatientId"></param>
-        /// <param name="PlanNo"></param>
-        /// <param name="PiStatus"></param>
-        /// <returns></returns>
-        public List<TasksByStatus> GetTaskByStatus(DataConnection pclsCache, string PatientId, string PlanNo, int PiStatus)
-        {
-            List<TasksByStatus> list = new List<TasksByStatus>();
-            CacheCommand cmd = null;
-            CacheDataReader cdr = null;
-            try
-            {
-                if (!pclsCache.Connect())
-                {
-                    return null;
-                }
-                cmd = new CacheCommand();
-                cmd = Ps.Compliance.GetTaskByStatus(pclsCache.CacheConnectionObject);
-                cmd.Parameters.Add("PatientId", CacheDbType.NVarChar).Value = PatientId;
-                cmd.Parameters.Add("PlanNo", CacheDbType.NVarChar).Value = PlanNo;
-                cmd.Parameters.Add("PiStatus", CacheDbType.Int).Value = PiStatus;
-
-                cdr = cmd.ExecuteReader();
-                while (cdr.Read())
-                {
-                    TasksByStatus NewLine = new TasksByStatus();
-                    NewLine.Id = cdr["Id"].ToString();
-                    NewLine.Status = cdr["Status"].ToString();
-                    NewLine.TaskCode = cdr["TaskCode"].ToString();
-                    NewLine.TaskName = cdr["TaskName"].ToString();
-                    NewLine.TaskType = cdr["TaskType"].ToString();
-                    NewLine.Instruction = cdr["Instruction"].ToString();
-                    list.Add(NewLine);
-                }
-                return list;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetTaskByStatus", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-            }
-            finally
-            {
-                if ((cdr != null))
-                {
-                    cdr.Close();
-                    cdr.Dispose(true);
-                    cdr = null;
-                }
-                if ((cmd != null))
-                {
-                    cmd.Parameters.Clear();
-                    cmd.Dispose();
-                    cmd = null;
-                }
-                pclsCache.DisConnect();
-            }
-        }
-
+       
         /// <summary>
         /// 通过Ps.Compliance中的date获取当天某项生理参数值，形成系列  DataTable 形式syf 2015-10-10
         /// </summary>
@@ -1863,63 +1742,8 @@ namespace CDMISrestful.DataMethod
             }
         }
 
-        //WF 20151010
-        public List<PsTaskByType> GetPsTaskByType(DataConnection pclsCache, string PlanNo, string Type)
-        {
-            List<PsTaskByType> list = new List<PsTaskByType>();
-
-
-            CacheCommand cmd = null;
-            CacheDataReader cdr = null;
-            try
-            {
-                if (!pclsCache.Connect())
-                {
-                    return null;
-                }
-                cmd = new CacheCommand();
-                cmd = Ps.Task.GetPsTaskByType(pclsCache.CacheConnectionObject);
-                cmd.Parameters.Add("PlanNo", CacheDbType.NVarChar).Value = PlanNo;
-                cmd.Parameters.Add("Type", CacheDbType.NVarChar).Value = Type;
-
-                cdr = cmd.ExecuteReader();
-                while (cdr.Read())
-                {
-                    list.Add(new PsTaskByType
-                    {
-                        Id = cdr["Id"].ToString(),
-                        Code = cdr["Code"].ToString(),
-                        CodeName = cdr["CodeName"].ToString(),
-                        Instruction = cdr["Instruction"].ToString(),
-                    });
-                }
-                return list;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.Task.GetPsTaskByType", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-            }
-            finally
-            {
-                if ((cdr != null))
-                {
-                    cdr.Close();
-                    cdr.Dispose(true);
-                    cdr = null;
-                }
-                if ((cmd != null))
-                {
-                    cmd.Parameters.Clear();
-                    cmd.Dispose();
-                    cmd = null;
-                }
-                pclsCache.DisConnect();
-            }
-        }
-
         //CSQ 20151025
-        public List<PsTask> GetTasks(DataConnection pclsCache, string PlanNo,string ParentCode)
+        public List<PsTask> GetTasks(DataConnection pclsCache, string PlanNo,string ParentCode,string Date)
         {
             List<PsTask> list = new List<PsTask>();
 
@@ -1935,6 +1759,7 @@ namespace CDMISrestful.DataMethod
                 cmd = Ps.Task.GetTask(pclsCache.CacheConnectionObject);
                 cmd.Parameters.Add("PlanNo", CacheDbType.NVarChar).Value = PlanNo;
                 cmd.Parameters.Add("ParentCode", CacheDbType.NVarChar).Value = ParentCode;
+                cmd.Parameters.Add("Date", CacheDbType.NVarChar).Value = Date;
 
                 
                 cdr = cmd.ExecuteReader();
@@ -1983,87 +1808,11 @@ namespace CDMISrestful.DataMethod
             }
         }
 
-        //WF 20151010
-        public int DeleteAllByPlanNo(DataConnection pclsCache, string PlanNo)
-        {
-            int ret = 3;
-            try
-            {
-                if (!pclsCache.Connect())
-                {
-                    return ret;
-                }
-
-                ret = (int)Ps.Task.DeleteAllByPlanNo(pclsCache.CacheConnectionObject, PlanNo);
-                return ret;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.Task.SetData", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return ret;
-            }
-            finally
-            {
-                pclsCache.DisConnect();
-            }
-        }
-
-        //GL 2015-10-13
-        public List<PsTask> GetTaskList(DataConnection pclsCache, string PlanNo)
-        {
-            List<PsTask> items = new List<PsTask>();
-            CacheCommand cmd = null;
-            CacheDataReader cdr = null;
-            try
-            {
-                if (!pclsCache.Connect())
-                {
-                    return null;
-                }
-
-                cmd = new CacheCommand();
-                cmd = Ps.Task.GetPsTask(pclsCache.CacheConnectionObject);
-                cmd.Parameters.Add("piUserId", CacheDbType.NVarChar).Value = PlanNo;
-                cdr = cmd.ExecuteReader();
-                while (cdr.Read())
-                {
-                    PsTask item = new PsTask();
-                    item.SortNo = cdr["SortNo"].ToString();
-                    item.Type = cdr["Type"].ToString();
-                    item.Code = cdr["Code"].ToString();
-                    item.Name = cdr["Name"].ToString();
-                    item.Instruction = cdr["Instruction"].ToString();
-                    items.Add(item);
-                }
-                return items;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetTaskList", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-            }
-            finally
-            {
-                if ((cdr != null))
-                {
-                    cdr.Close();
-                    cdr.Dispose(true);
-                    cdr = null;
-                }
-                if ((cmd != null))
-                {
-                    cmd.Parameters.Clear();
-                    cmd.Dispose();
-                    cmd = null;
-                }
-                pclsCache.DisConnect();
-            }
-        }
         #endregion
 
         #region<PsTarget>
         //WF 20151010
-        public int PsTargetSetData(DataConnection pclsCache, string Plan, string Id, string Type, string Code, string Value, string Origin, string Instruction, string Unit, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public int PsTargetSetData(DataConnection pclsCache, string Plan, string Type, string Code, string Value, string Origin, string Instruction, string Unit, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             int ret = 2;
             try
@@ -2073,7 +1822,7 @@ namespace CDMISrestful.DataMethod
                     return ret;
                 }
 
-                ret = (int)Ps.Target.SetData(pclsCache.CacheConnectionObject, Plan, Id, Type, Code, Value, Origin, Instruction, Unit, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                ret = (int)Ps.Target.SetData(pclsCache.CacheConnectionObject, Plan, Type, Code, Value, Origin, Instruction, Unit, piUserId, piTerminalName, piTerminalIP, piDeviceType);
                 return ret;
             }
             catch (Exception ex)
@@ -2087,53 +1836,30 @@ namespace CDMISrestful.DataMethod
             }
         }
         //WF 20151010  只针对一种参数   使用
-        public TargetByCode GetTargetByCode(DataConnection pclsCache, string PlanNo, string Type, string Code)
+        public TargetByCode GetTarget(DataConnection pclsCache, string PlanNo, string Type, string Code)
         {
-            TargetByCode CacheList = new TargetByCode();
+            TargetByCode targetByCode = new TargetByCode();
+          
             try
             {
                 if (!pclsCache.Connect())
                 {
                     return null;
                 }
-                CacheList.Id = Ps.Target.GetTargetByCode(pclsCache.CacheConnectionObject, PlanNo, Type, Code)[0].ToString();
-                CacheList.Type = Ps.Target.GetTargetByCode(pclsCache.CacheConnectionObject, PlanNo, Type, Code)[1].ToString();
-                CacheList.Code = Ps.Target.GetTargetByCode(pclsCache.CacheConnectionObject, PlanNo, Type, Code)[2].ToString();
-                CacheList.Value = Ps.Target.GetTargetByCode(pclsCache.CacheConnectionObject, PlanNo, Type, Code)[3].ToString();
-                CacheList.Origin = Ps.Target.GetTargetByCode(pclsCache.CacheConnectionObject, PlanNo, Type, Code)[4].ToString();
-                CacheList.Instruction = Ps.Target.GetTargetByCode(pclsCache.CacheConnectionObject, PlanNo, Type, Code)[5].ToString();
-                CacheList.Unit = Ps.Target.GetTargetByCode(pclsCache.CacheConnectionObject, PlanNo, Type, Code)[6].ToString();
-                return CacheList;
+                InterSystems.Data.CacheTypes.CacheSysList CacheList = Ps.Target.GetTarget(pclsCache.CacheConnectionObject, PlanNo, Type, Code);
+
+                targetByCode.Type = CacheList[1].ToString();
+                targetByCode.Code = CacheList[2].ToString();
+                targetByCode.Value = CacheList[3].ToString();
+                targetByCode.Origin = CacheList[4].ToString();
+                targetByCode.Instruction = CacheList[5].ToString();
+                targetByCode.Unit = CacheList[6].ToString();
+                return targetByCode;
             }
             catch (Exception ex)
             {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PsTarget.GetTargetByCode", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PsTarget.GetTarget", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
                 return null;
-            }
-            finally
-            {
-                pclsCache.DisConnect();
-            }
-        }
-
-        // WF 20151010 获取某计划下某任务的目标值
-        public string GetValueByPlanNoAndId(DataConnection pclsCache, string PlanNo, string Id)
-        {
-            string ret = "";
-            try
-            {
-                if (!pclsCache.Connect())
-                {
-                    return ret;
-                }
-
-                ret = (string)Ps.Target.GetValueByPlanNoAndId(pclsCache.CacheConnectionObject, PlanNo, Id);
-                return ret;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.Target.GetValueByPlanNoAndId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return ret;
             }
             finally
             {
@@ -2585,7 +2311,7 @@ namespace CDMISrestful.DataMethod
                     GraphGuide.minimum = Convert.ToDouble(Reference[0].SBP);
                     GraphGuide.maximum = Convert.ToDouble(Reference[Reference.Count - 1].SBP);
                     //InterSystems.Data.CacheTypes.CacheSysList SysTarget = null;
-                    TargetByCode SysTarget = GetTargetByCode(pclsCache, PlanNo, "Bloodpressure", "Bloodpressure_1");
+                    TargetByCode SysTarget = GetTarget(pclsCache, PlanNo, "Bloodpressure", "Bloodpressure_1");
                     if (SysTarget != null)
                     {
                         //初始值
@@ -2669,7 +2395,7 @@ namespace CDMISrestful.DataMethod
                     GraphGuide.minimum = Convert.ToDouble(Reference[0].DBP);
                     GraphGuide.maximum = Convert.ToDouble(Reference[Reference.Count - 1].DBP);
                     //InterSystems.Data.CacheTypes.CacheSysList DiaTarget = null;
-                    TargetByCode DiaTarget = GetTargetByCode(pclsCache, PlanNo, "Bloodpressure", "Bloodpressure_2");
+                    TargetByCode DiaTarget = GetTarget(pclsCache, PlanNo, "Bloodpressure", "Bloodpressure_2");
                     if (DiaTarget != null)
                     {
                         //初始值

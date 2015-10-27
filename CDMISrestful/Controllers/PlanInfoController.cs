@@ -87,9 +87,9 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/Tasks")]
         [EnableQuery]
-        public List<PsTask> GetTasks(string PlanNo, string ParentCode)
+        public List<PsTask> GetTasks(string PlanNo, string ParentCode,string Date)
         {
-            return repository.GetTasks(PlanNo, ParentCode);
+            return repository.GetTasks(PlanNo, ParentCode,Date);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// 
+        /// 插入专员计划模板信息 CSQ 20151027
         /// </summary>
         /// <param name="pclsCache"></param>
         /// <param name="DoctorId"></param>
@@ -176,41 +176,32 @@ namespace CDMISrestful.Controllers
             return new ExceptionHandler().SetData(Request, ret);
         }
 
-        /// <summary>
-        /// GetValueByPlanNoAndId 获取某计划下某任务的目标值 GL 2015-10-13
-        /// </summary>
-        /// <param name="PlanNo"></param>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        [Route("Api/v1/PlanInfo/GetValueByPlanNoAndId")]
-        public HttpResponseMessage GetValueByPlanNoAndId(string PlanNo, string Id)
-        {
-            string ret = repository.GetValueByPlanNoAndId(PlanNo, Id);
-            return new ExceptionHandler().Common(Request,ret);
-        }
+
 
         /// <summary>
-        /// Ps.Target.SetData GL 2015-10-13
+        /// Ps.Target.SetData CSQ 20151027 任务目标数据写入
         /// </summary>
-        /// <param name="Plan"></param>
-        /// <param name="Id"></param>
-        /// <param name="Type"></param>
-        /// <param name="Code"></param>
-        /// <param name="Value"></param>
-        /// <param name="Origin"></param>
-        /// <param name="Instruction"></param>
-        /// <param name="Unit"></param>
-        /// <param name="piUserId"></param>
-        /// <param name="piTerminalName"></param>
-        /// <param name="piTerminalIP"></param>
-        /// <param name="piDeviceType"></param>
+        /// <param name="item"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/Target")]
         [ModelValidationFilter]
         public HttpResponseMessage PostTarget(TargetByCode item)
         {
-            int ret = repository.SetTarget(item.Plan, item.Id, item.Type, item.Code, item.Value, item.Origin, item.Instruction, item.Unit, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetTarget(item.Plan, item.Type, item.Code, item.Value, item.Origin, item.Instruction, item.Unit, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
+        }
+
+        /// <summary>
+        /// CSQ 获取某条任务的Target信息 20151027
+        /// </summary>
+        /// <param name="PlanNo"></param>
+        /// <param name="Type"></param>
+        /// <param name="Code"></param>
+        /// <returns></returns>
+        [Route("Api/v1/PlanInfo/Target")]
+        public TargetByCode GetTarget(string PlanNo, string Type, string Code)
+        {
+            return repository.GetTarget(PlanNo, Type, Code);
         }
 
         /// <summary>
@@ -250,18 +241,6 @@ namespace CDMISrestful.Controllers
         public ChartData GetSignInfoByCode(string PatientId, string PlanNo, string ItemCode, int StartDate, int EndDate)
         {
             return repository.GetSignInfoByCode(PatientId, PlanNo, ItemCode, StartDate, EndDate);
-        }
-
-        /// <summary>
-        /// GetGoalValue 获取当前血压跟目标血压之间的差值 GL 2015-10-13
-        /// </summary>
-        /// <param name="PlanNo"></param>
-        /// <returns></returns>
-        [Route("Api/v1/PlanInfo/GetGoalValue")]
-        public HttpResponseMessage GetGoalValue(string PlanNo)
-        {
-            string ret = repository.GetGoalValue(PlanNo).ToString();
-            return new ExceptionHandler().Common(Request, ret);
         }
 
         /// <summary>
@@ -332,19 +311,6 @@ namespace CDMISrestful.Controllers
             return repository.GetOverDuePlanList(DoctorId, ModuleType);
         }
 
-        /// <summary>
-        /// GetTaskByStatus 在当天根据任务状态的完成情况输出相应的任务 GL 2015-10-13
-        /// </summary>
-        /// <param name="PatientId"></param>
-        /// <param name="PlanNo"></param>
-        /// <param name="PiStatus"></param>
-        /// <returns></returns>
-        [Route("Api/v1/PlanInfo/GetTaskByStatus")]
-        [EnableQuery]
-        public List<TasksByStatus> GetTaskByStatus(string PatientId, string PlanNo, int PiStatus)
-        {
-            return repository.GetTaskByStatus(PatientId, PlanNo, PiStatus);
-        }
 
         /// <summary>
         /// GetPlanInfobyPID 获取病人当前计划以及健康专员 "PlanNo|DoctorId" GL 2015-10-13
@@ -368,20 +334,6 @@ namespace CDMISrestful.Controllers
         public ImplementationPhone GetImplementationForPhone(string PatientId, string Module)
         {
             return repository.GetImplementationForPhone(PatientId, Module);
-        }
-
-        /// <summary>
-        /// GetTasksByIndate 根据计划编码和日期，获取任务 GL 2015-10-13
-        /// </summary>
-        /// <param name="PatientId"></param>
-        /// <param name="InDate"></param>
-        /// <param name="PlanNo"></param>
-        /// <returns></returns>
-        [Route("Api/v1/PlanInfo/GetTasksByIndate")]
-        [EnableQuery]
-        public List<TasksByDate> GetTasksByIndate(string PatientId, int InDate, string PlanNo)
-        {
-            return repository.GetTasksByIndate(PatientId, InDate, PlanNo);
         }
 
         /// <summary>

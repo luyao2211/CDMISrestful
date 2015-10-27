@@ -490,7 +490,7 @@ namespace CDMISrestful.DataMethod
         /// <summary>
         /// 根据piUserId和piVisitId获取化验结果
         /// </summary>
-        /// <param name="pclsCache"></param>
+        /// <param name="pclsCacheList"></param>
         /// <param name="piUserId"></param>
         /// <param name="piVisitId"></param>
         /// <returns></returns>

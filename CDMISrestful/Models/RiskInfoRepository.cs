@@ -11,17 +11,7 @@ namespace CDMISrestful.Models
     public class RiskInfoRepository : IRiskInfoRepository
     {
         DataConnection pclsCache = new DataConnection();
-        /// <summary>
-        /// 获取某计划下某任务的目标值 LY 2015-10-13
-        /// </summary>
-        /// <param name="PlanNo"></param>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        public string GetValueByPlanNoAndId(string PlanNo, string Id)
-        {
-            return new PlanInfoMethod().GetValueByPlanNoAndId(pclsCache, PlanNo, Id);
-        }
-
+       
        
 
         /// <summary>

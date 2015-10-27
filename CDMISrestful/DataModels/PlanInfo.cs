@@ -262,8 +262,6 @@ namespace CDMISrestful.DataModels
     }
     public class TargetByCode
     {
-        [Required]
-        public string Id { get; set; }
         public string Type { get; set; }
         public string Code { get; set; }
         public string Value { get; set; }

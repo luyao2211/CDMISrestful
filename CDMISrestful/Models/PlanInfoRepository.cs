@@ -55,16 +55,15 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().PsComplianceDetailSetData(pclsCache, PlanNo, Date, CategoryCode, Code, Status, Description, CoUserId, CoTerminalName, CoTerminalIP, CoDeviceType);
         }
 
+        public TargetByCode GetTarget(string PlanNo, string Type, string Code)
+        {
+            return new PlanInfoMethod().GetTarget(pclsCache, PlanNo, Type, Code);
+        }
+
         //GL 2015-10-13
         public List<LifeStyleDetail> GetLifeStyleDetail(string Module)
         {
             return new DictMethod().GetLifeStyleDetail(pclsCache, Module);
-        }
-
-        //根据Type获取某PlanNo的所有任务 GL 2015-10-13
-        public List<PsTaskByType> GetPsTaskByType(string PlanNo, string Type)
-        {
-            return new PlanInfoMethod().GetPsTaskByType(pclsCache, PlanNo, Type);
         }
 
         //根据患者Id，获取药物治疗列表 GL 2015-10-13
@@ -112,33 +111,11 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().PsComplianceSetData(pclsCache, PlanNo, Date, Compliance, Description, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
-        //获取某计划下某任务的目标值 GL 2015-10-13
-        public string GetValueByPlanNoAndId(string PlanNo, string Id)
-        {
-            try
-            {
-                string Value = new PlanInfoMethod().GetValueByPlanNoAndId(pclsCache, PlanNo, Id);
-                if (Value != "")
-                {
-                    return Value;
-                }
-                else
-                {
-                    return "";
-                }
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetValueByPlanNoAndId", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-                throw (ex);
-            }
-        }
 
-        //Ps.Target.SetData GL 2015-10-13
-        public int SetTarget(string Plan, string Id, string Type, string Code, string Value, string Origin, string Instruction, string Unit, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        //Ps.Target.SetData CSQ 20151027
+        public int SetTarget(string Plan, string Type, string Code, string Value, string Origin, string Instruction, string Unit, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
-            return new PlanInfoMethod().PsTargetSetData(pclsCache, Plan, Id, Type, Code, Value, Origin, Instruction, Unit, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+            return new PlanInfoMethod().PsTargetSetData(pclsCache, Plan, Type, Code, Value, Origin, Instruction, Unit, piUserId, piTerminalName, piTerminalIP, piDeviceType);
         }
 
         //获取某计划的进度和剩余天数（取PlanNo，StartDate，EndDate） GL 2015-10-13
@@ -209,8 +186,9 @@ namespace CDMISrestful.Models
                     }
                 }
 
-                //读取任务列表  必有测量任务，其他任务（例如吃药）可能没有
-                List<PsTask> TaskList = new PlanInfoMethod().GetTaskList(pclsCache, PlanNo);
+                //读取任务列表  必有测量任务，其他任务（例如吃药）可能没有  20151027 需要修改
+                //List<PsTask> TaskList = new PlanInfoMethod().GetTaskList(pclsCache, PlanNo);
+                List<PsTask> TaskList = new List<PsTask>();
                 List<PsTask> VitalSignRows = new List<PsTask>();
                 foreach (PsTask item in TaskList)
                 {
@@ -256,28 +234,6 @@ namespace CDMISrestful.Models
                 HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetSignInfoByCode", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
                 return null;
                 //throw (ex);
-            }
-        }
-
-        //获取当前血压跟目标血压之间的差值 GL 2015-10-13
-        public int GetGoalValue(string PlanNo)
-        {
-            int result = 0;
-            try
-            {
-                TargetByCode targetlist = new PlanInfoMethod().GetTargetByCode(pclsCache, PlanNo, "Bloodpressure", "Bloodpressure_1");
-                if (targetlist != null)
-                {
-                    result = Convert.ToInt16(targetlist.Origin) - Convert.ToInt16(targetlist.Value);
-                }
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetGoalValue ", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return result;
-                throw (ex);
             }
         }
 
@@ -365,8 +321,9 @@ namespace CDMISrestful.Models
                         ImplementationInfo.CompliacneValue = "最近一周依从率为：" + new PlanInfoMethod().GetCompliacneRate(pclsCache, PatientId, PlanNo, Convert.ToInt32(weekPeriod.StartDate), Convert.ToInt32(weekPeriod.EndDate)) + "%";
                     }
 
-                    //读取任务列表
-                    List<PsTask> TaskList = new PlanInfoMethod().GetTaskList(pclsCache, PlanNo);
+                    //读取任务列表  20151027 需要修改
+                    //List<PsTask> TaskList = new PlanInfoMethod().GetTaskList(pclsCache, PlanNo);
+                    List<PsTask> TaskList = new List<PsTask>();
                     //ImplementationInfo.TaskList = PsTask.GetSpTaskList(pclsCache, PlanNo);
 
                     //测量-体征切换下拉框  
@@ -525,8 +482,9 @@ namespace CDMISrestful.Models
 
                     #region  读取任务执行情况，体征、用药等
 
-                    //读取任务列表
-                    List<PsTask> TaskList = new PlanInfoMethod().GetTaskList(pclsCache, PlanNo);
+                    //读取任务列表 20151027 需要修改
+                    //List<PsTask> TaskList = new PlanInfoMethod().GetTaskList(pclsCache, PlanNo);
+                    List<PsTask> TaskList = new List<PsTask>();
                     //ImplementationInfo.TaskList = PsTask.GetSpTaskList(pclsCache, PlanNo);
 
                     //测量-体征切换下拉框  
@@ -674,7 +632,7 @@ namespace CDMISrestful.Models
                             vitalsigns.Add(list.Value);
                         }
 
-                        TargetByCode targetlist = new PlanInfoMethod().GetTargetByCode(pclsCache, planNo, itemType, itemCode);
+                        TargetByCode targetlist = new PlanInfoMethod().GetTarget(pclsCache, planNo, itemType, itemCode);
                         if (targetlist != null)
                         {
                             vitalsigns.Add(targetlist.Value);  //value
@@ -729,11 +687,6 @@ namespace CDMISrestful.Models
             }
         }
 
-        //在当天根据任务状态的完成情况输出相应的任务 GL 2015-10-13
-        public List<TasksByStatus> GetTaskByStatus(string PatientId, string PlanNo, int PiStatus)
-        {
-            return new PlanInfoMethod().GetTaskByStatus(pclsCache, PatientId, PlanNo, PiStatus);
-        }
 
         //获取病人当前计划以及健康专员 "PlanNo|DoctorId" GL 2015-10-13
         public string GetPlanInfobyPID(string PatientId)
@@ -821,8 +774,9 @@ namespace CDMISrestful.Models
 
                     #region  读取任务执行情况，血压、用药-最近一周的数据
 
-                    //读取任务  phone版 此函数其他任务也显示
-                    List<PsTask> TaskList = new PlanInfoMethod().GetTaskList(pclsCache, PlanNo);
+                    //读取任务  phone版 此函数其他任务也显示  20151027 需要修改
+                    //List<PsTask> TaskList = new PlanInfoMethod().GetTaskList(pclsCache, PlanNo);
+                    List<PsTask> TaskList = new List<PsTask>();
 
                     //测量-体征切换下拉框  
                     List<PsTask> VitalSignRows = new List<PsTask>();
@@ -929,12 +883,6 @@ namespace CDMISrestful.Models
         }
 
         //根据计划编码和日期，获取依从率 GL 2015-10-13
-        public List<TasksByDate> GetTasksByIndate(string PatientId, int InDate, string PlanNo)
-        {
-            return new PlanInfoMethod().GetTasksByDate(pclsCache, PatientId, InDate, PlanNo);
-        }
-
-        //根据计划编码和日期，获取依从率 GL 2015-10-13
         public List<PlanDeatil> GetPlanList34ByM(string PatientId, string Module)
         {
             return new PlanInfoMethod().GetPlanList34ByM(pclsCache, PatientId, Module);
@@ -946,9 +894,9 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PatientId, PlanNo, StartDate, EndDate);
         }
 
-        public List<PsTask> GetTasks(string PlanNo, string ParentCode)
+        public List<PsTask> GetTasks(string PlanNo, string ParentCode,string Date)
         {
-            return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode);
+            return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date);
         }
     }
 }

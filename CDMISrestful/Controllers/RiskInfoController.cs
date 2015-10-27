@@ -14,18 +14,6 @@ namespace CDMISrestful.Controllers
     public class RiskInfoController : ApiController
     {
         static readonly IRiskInfoRepository repository = new RiskInfoRepository();
-        /// <summary>
-        /// 获取某计划下某任务的目标值 LY 2015-10-13
-        /// </summary>
-        /// <param name="PlanNo"></param>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        [Route("Api/v1/RiskInfo/Plan/{PlanNo}/Task/{Id}")]
-        public HttpResponseMessage GetValueByPlanNoAndId(string PlanNo, string Id)
-        {
-            string ret = repository.GetValueByPlanNoAndId(PlanNo, Id);
-            return new ExceptionHandler().Common(Request, ret);
-        }
 
 
         /// <summary>
