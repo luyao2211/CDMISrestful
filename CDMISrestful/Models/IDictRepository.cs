@@ -16,5 +16,6 @@ namespace CDMISrestful.Models
         List<MstBloodPressure> GetBloodPressure();
         List<Insurance> GetInsuranceType();
         int CmMstTaskSetData(string CategoryCode, string Code, string Name, string ParentCode, string Description, int StartDate, int EndDate, int GroupHeaderFlag, int ControlType, string OptionCategory, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+        List<CmMstTask> GetMstTaskByParentCode(string ParentCode);
     }
 }

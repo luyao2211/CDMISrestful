@@ -641,7 +641,65 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+        public List<CmMstTask> GetMstTaskByParentCode(DataConnection pclsCache, string ParentCode)
+        {
+            List<CmMstTask> list = new List<CmMstTask>();
 
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Cm.MstTask.GetMstTaskByParentCode(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = ParentCode;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new CmMstTask
+                    {
+                        CategoryCode = cdr["CategoryCode"].ToString(),
+                        Code = cdr["Code"].ToString(),
+                        Name = cdr["Name"].ToString(),
+                        ParentCode = cdr["ParentCode"].ToString(),
+                        Description = cdr["Description"].ToString(),
+                        StartDate = Convert.ToInt32(cdr["StartDate"]),
+                        EndDate = Convert.ToInt32(cdr["EndDate"]),
+                        GroupHeaderFlag = Convert.ToInt32(cdr["GroupHeaderFlag"]),
+                        ControlType = Convert.ToInt32(cdr["ControlType"]),
+                        OptionCategory = cdr["OptionCategory"].ToString(),
+                 
+                    });
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetMstTaskByParentCode", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
         #endregion
 
     }
