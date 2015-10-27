@@ -48,7 +48,28 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
-
+        public int PsParametersSetData(DataConnection pclsCache, string Indicators, string Id, string Name, string Value, string Unit,  string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int ret = 2;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+                ret = (int)Ps.Parameters.SetData(pclsCache.CacheConnectionObject, Indicators, Id, Name, Value, Unit, revUserId, TerminalName, TerminalIP, DeviceType);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "RiskInfoMethod.PsParametersSetData", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return 2;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
         /// <summary>
         /// GL 2015-10-10
         /// </summary>
@@ -162,6 +183,60 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+        public List<Parameters> GetParameters(DataConnection pclsCache, string Indicators)
+        {
+            List<Parameters> list = new List<Parameters>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Parameters.GetParameters(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("Indicators", CacheDbType.NVarChar).Value = Indicators;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new Parameters
+                    {
+                        Id = cdr["Id"].ToString(),
+                        Name = cdr["Name"].ToString(),
+                        Value = cdr["Value"].ToString(),
+                        Unit = cdr["Unit"].ToString()
+                       
+                    });
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "RiskInfoMethod.GetParameters", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+        
         #endregion
     }
 }
