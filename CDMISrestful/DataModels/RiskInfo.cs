@@ -60,4 +60,14 @@ namespace CDMISrestful.DataModels
         public string TerminalIP { get; set; }
         public int DeviceType { get; set; }
     }
+    public class PsTreatmentIndicators
+    {
+        public int SortNo { get; set; }
+        public string AssessmentType { get; set; }
+        public string AssessmentName { get; set; }
+        public string AssessmentTime { get; set; }
+        public string Result { get; set; }
+        public string DocName { get; set; }
+       
+    }
 }
