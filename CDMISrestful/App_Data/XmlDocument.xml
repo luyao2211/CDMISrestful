@@ -831,30 +831,9 @@
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.PostComplianceDetail(CDMISrestful.DataModels.ComplianceDetail)">
             <summary>
-            Ps.ComplianceDetail.SetData GL 2015-10-13
+            Ps.ComplianceDetail.SetData CSQ 20151027
             </summary>
-            <param name="Parent"></param>
-            <param name="Id"></param>
-            <param name="Status"></param>
-            <param name="CoUserId"></param>
-            <param name="CoTerminalName"></param>
-            <param name="CoTerminalIP"></param>
-            <param name="CoDeviceType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetLifeStyleDetail(System.String)">
-            <summary>
-            GetLifeStyleDetail GL 2015-10-13
-            </summary>
-            <param name="Module"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPsTaskByType(System.String,System.String)">
-            <summary>
-            GetPsTaskByType 根据Type(LifeStyle,VitalSign,Drug)获取某PlanNo的所有任务 GL 2015-10-13
-            </summary>
-            <param name="PlanNo"></param>
-            <param name="Type"></param>
+            <param name="item"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPatientDrugRecord(System.String,System.String)">
@@ -930,16 +909,9 @@
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.PostCompliance(CDMISrestful.DataModels.SetComplance)">
             <summary>
-            Ps.Compliance.SetData GL 2015-10-13
+            Ps.Compliance.SetData CSQ 20151027
             </summary>
-            <param name="PatientId"></param>
-            <param name="Date"></param>
-            <param name="PlanNo"></param>
-            <param name="Compliance"></param>
-            <param name="revUserId"></param>
-            <param name="TerminalName"></param>
-            <param name="TerminalIP"></param>
-            <param name="DeviceType"></param>
+            <param name="item"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.GetValueByPlanNoAndId(System.String,System.String)">
@@ -1796,7 +1768,7 @@
             <param name="PatientId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.PsComplianceDetailSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.PsComplianceDetailSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             施宇帆 2015-10-10 插入子表PsComplianceDetail某条数据
             </summary>
@@ -1810,7 +1782,7 @@
             <param name="CoDeviceType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.PsComplianceSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String,System.Double,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.PsComplianceSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.Double,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
              syf 2015-10-10 插入PsCompliance某条数据
             </summary>

@@ -40,48 +40,18 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// Ps.ComplianceDetail.SetData GL 2015-10-13
+        /// Ps.ComplianceDetail.SetData CSQ 20151027
         /// </summary>
-        /// <param name="Parent"></param>
-        /// <param name="Id"></param>
-        /// <param name="Status"></param>
-        /// <param name="CoUserId"></param>
-        /// <param name="CoTerminalName"></param>
-        /// <param name="CoTerminalIP"></param>
-        /// <param name="CoDeviceType"></param>
+        /// <param name="item"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/ComplianceDetail")]
         [ModelValidationFilter]
         public HttpResponseMessage PostComplianceDetail(ComplianceDetail item)
         {
-            int ret = repository.SetComplianceDetail(item.Parent, item.Id, item.Status, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetComplianceDetail(item.PlanNo, item.Date, item.CategoryCode,  item.Code, item.Status, item.Description,item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
-        /// <summary>
-        /// GetLifeStyleDetail GL 2015-10-13
-        /// </summary>
-        /// <param name="Module"></param>
-        /// <returns></returns>
-        [Route("Api/v1/PlanInfo/GetLifeStyleDetail")]
-        [EnableQuery]
-        public List<LifeStyleDetail> GetLifeStyleDetail(string Module)
-        {
-            return repository.GetLifeStyleDetail(Module);
-        }
-
-        /// <summary>
-        /// GetPsTaskByType 根据Type(LifeStyle,VitalSign,Drug)获取某PlanNo的所有任务 GL 2015-10-13
-        /// </summary>
-        /// <param name="PlanNo"></param>
-        /// <param name="Type"></param>
-        /// <returns></returns>
-        [Route("Api/v1/PlanInfo/GetPsTaskByType")]
-        [EnableQuery]
-        public List<PsTaskByType> GetPsTaskByType(string PlanNo, string Type)
-        {
-            return repository.GetPsTaskByType(PlanNo, Type);
-        }
 
         /// <summary>
         /// GetPatientDrugRecord 根据患者Id，获取药物治疗列表 GL 2015-10-13
@@ -193,23 +163,16 @@ namespace CDMISrestful.Controllers
             return repository.GetTemplateDetails(DoctorId, TemplateCode, ParentCode);
         }
 
-        /// <summary>
-        /// Ps.Compliance.SetData GL 2015-10-13
-        /// </summary>
-        /// <param name="PatientId"></param>
-        /// <param name="Date"></param>
-        /// <param name="PlanNo"></param>
-        /// <param name="Compliance"></param>
-        /// <param name="revUserId"></param>
-        /// <param name="TerminalName"></param>
-        /// <param name="TerminalIP"></param>
-        /// <param name="DeviceType"></param>
-        /// <returns></returns>
+       /// <summary>
+        /// Ps.Compliance.SetData CSQ 20151027
+       /// </summary>
+       /// <param name="item"></param>
+       /// <returns></returns>
         [Route("Api/v1/PlanInfo/Compliance")]
         [ModelValidationFilter]
         public HttpResponseMessage PostCompliance(SetComplance item)
         {
-            int ret = repository.SetCompliance(item.PatientId, item.Date, item.PlanNo, item.Compliance, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetCompliance(item.PlanNo, item.Date, item.Compliance, item.Description, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 

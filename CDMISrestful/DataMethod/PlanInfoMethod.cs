@@ -725,7 +725,7 @@ namespace CDMISrestful.DataMethod
         /// <param name="CoTerminalIP"></param>
         /// <param name="CoDeviceType"></param>
         /// <returns></returns>
-        public int PsComplianceDetailSetData(DataConnection pclsCache, string Parent, string Id, int Status, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
+        public int PsComplianceDetailSetData(DataConnection pclsCache, string PlanNo, int Date, string CategoryCode,string Code,int Status,string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
         {
             int ret = 2;
             try
@@ -735,7 +735,7 @@ namespace CDMISrestful.DataMethod
                     return ret;
                 }
 
-                ret = (int)Ps.ComplianceDetail.SetData(pclsCache.CacheConnectionObject, Parent, Id, Status, CoUserId, CoTerminalName, CoTerminalIP, CoDeviceType);
+                ret = (int)Ps.ComplianceDetail.SetData(pclsCache.CacheConnectionObject, PlanNo, Date, CategoryCode, Code,Status,Description, CoUserId, CoTerminalName, CoTerminalIP, CoDeviceType);
                 return ret;
             }
             catch (Exception ex)
@@ -763,7 +763,7 @@ namespace CDMISrestful.DataMethod
         /// <param name="TerminalIP"></param>
         /// <param name="DeviceType"></param>
         /// <returns></returns>
-        public int PsComplianceSetData(DataConnection pclsCache, string PatientId, int Date, string PlanNo, Double Compliance, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int PsComplianceSetData(DataConnection pclsCache, string PlanNo, int Date, Double Compliance, string Description, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             int ret = 0;
             try
@@ -773,7 +773,7 @@ namespace CDMISrestful.DataMethod
                     return ret;
                 }
 
-                ret = (int)Ps.Compliance.SetData(pclsCache.CacheConnectionObject, PatientId, Date, PlanNo, Compliance, revUserId, TerminalName, TerminalIP, DeviceType);
+                ret = (int)Ps.Compliance.SetData(pclsCache.CacheConnectionObject, PlanNo, Date, Compliance, Description,revUserId, TerminalName, TerminalIP, DeviceType);
                 return ret;
             }
             catch (Exception ex)
@@ -1190,7 +1190,7 @@ namespace CDMISrestful.DataMethod
                     return ret;
                 }
 
-                ret = (double)Ps.Compliance.GetComplianceByDay(pclsCache.CacheConnectionObject, PatientId, Date, PlanNo);
+                //ret = (double)Ps.Compliance.GetComplianceByDay(pclsCache.CacheConnectionObject, PatientId, Date, PlanNo);
                 return ret;
             }
             catch (Exception ex)
@@ -1947,6 +1947,7 @@ namespace CDMISrestful.DataMethod
                         SortNo = cdr["SortNo"].ToString(),
                         Name = cdr["Name"].ToString(),
                         InvalidFlag = cdr["InvalidFlag"].ToString(),
+                        Status = cdr["Status"].ToString(),
                         Instruction = cdr["Instruction"].ToString(),
                         ParentCode = cdr["ParentCode"].ToString(),
                         Description = cdr["Description"].ToString(),

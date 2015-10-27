@@ -9,13 +9,15 @@ namespace CDMISrestful.Models
     public interface IPlanInfoRepository
     {
         int SetPlan(string PlanNo, string PatientId, int StartDate, int EndDate, string Module, int Status, string DoctorId, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
-        int SetComplianceDetail(string Parent, string Id, int Status, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType);
+        int SetComplianceDetail(string PlanNo, int Date, string CategoryCode, string Code, int Status, string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType);
+      
         List<LifeStyleDetail> GetLifeStyleDetail(string Module);
         List<PsTaskByType> GetPsTaskByType(string PlanNo, string Type);
         List<PsDrugRecord> GetPatientDrugRecord(string PatientId, string Module);
         int CreateTask(string PlanNo, string Type, string Code, string SortNo, string Instruction, string UserId, string TerminalName, string TerminalIP, int DeviceType);
 
-        int SetCompliance(string PatientId, int Date, string PlanNo, Double Compliance, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+        int SetCompliance(string PlanNo, int Date, Double Compliance, string Description, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+      
         string GetValueByPlanNoAndId(string PlanNo, string Id);
         int SetTarget(string Plan, string Id, string Type, string Code, string Value, string Origin, string Instruction, string Unit, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
         GPlanInfo GetPlanInfo(string PlanNo);

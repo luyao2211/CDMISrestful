@@ -49,10 +49,10 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().PsPlanSetData(pclsCache, PlanNo, PatientId, StartDate, EndDate, Module, Status, DoctorId, piUserId, piTerminalName, piTerminalIP, piDeviceType);
         }
 
-        //Ps.ComplianceDetail.SetData GL 2015-10-13
-        public int SetComplianceDetail(string Parent, string Id, int Status, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
+        //Ps.ComplianceDetail.SetData CSQ 20151027
+        public int SetComplianceDetail(string PlanNo, int Date, string CategoryCode,string Code,int Status, string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
         {
-            return new PlanInfoMethod().PsComplianceDetailSetData(pclsCache, Parent, Id, Status, CoUserId, CoTerminalName, CoTerminalIP, CoDeviceType);
+            return new PlanInfoMethod().PsComplianceDetailSetData(pclsCache, PlanNo, Date, CategoryCode, Code, Status, Description, CoUserId, CoTerminalName, CoTerminalIP, CoDeviceType);
         }
 
         //GL 2015-10-13
@@ -106,10 +106,10 @@ namespace CDMISrestful.Models
             }
         }
 
-        //Ps.Compliance.SetData GL 2015-10-13
-        public int SetCompliance(string PatientId, int Date, string PlanNo, Double Compliance, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        //Ps.Compliance.SetData CSQ 20151027
+        public int SetCompliance(string PlanNo, int Date, Double Compliance, string Description, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
-            return new PlanInfoMethod().PsComplianceSetData(pclsCache, PatientId, Date, PlanNo, Compliance, revUserId, TerminalName, TerminalIP, DeviceType);
+            return new PlanInfoMethod().PsComplianceSetData(pclsCache, PlanNo, Date, Compliance, Description, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
         //获取某计划下某任务的目标值 GL 2015-10-13

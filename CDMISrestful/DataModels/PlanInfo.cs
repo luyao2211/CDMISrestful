@@ -107,10 +107,14 @@ namespace CDMISrestful.DataModels
     public class ComplianceDetail
     {
         [Required]
-        public string Parent { get; set; }
+        public string PlanNo { get; set; }
         [Required]
-        public string Id { get; set; }
+        public int Date { get; set; }
+        public string CategoryCode { get; set; }
+        public string Code { get; set; }
         public int Status { get; set; }
+        public string Description { get; set; }
+  
         public string piUserId { get; set; }
         public string piTerminalName { get; set; }
         public string piTerminalIP { get; set; }
@@ -119,12 +123,12 @@ namespace CDMISrestful.DataModels
     public class SetComplance
     {
         [Required]
-        public string PatientId { get; set; }
+        public string PlanNo { get; set; }
         [Required]
         public int Date { get; set; }
         [Required]
-        public string PlanNo { get; set; }
         public double Compliance { get; set; }
+        public string Description { get; set; }
         public string piUserId { get; set; }
         public string piTerminalName { get; set; }
         public string piTerminalIP { get; set; }
@@ -247,6 +251,7 @@ namespace CDMISrestful.DataModels
         public string SortNo { get; set; }
         public string Name { get; set; }
         public string InvalidFlag { get; set; }
+        public string Status { get; set; }
         public string Instruction { get; set; }
         public string ParentCode { get; set; }
         public string Description { get; set; }
