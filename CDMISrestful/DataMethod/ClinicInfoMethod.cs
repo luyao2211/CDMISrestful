@@ -486,7 +486,7 @@ namespace CDMISrestful.DataMethod
         #endregion
 
         #region Ps.LabTest
-        //SYF 2015-10-10
+        //SYF 2015-10-10 WF 20151027
         /// <summary>
         /// 根据piUserId和piVisitId获取化验结果
         /// </summary>
@@ -533,11 +533,12 @@ namespace CDMISrestful.DataMethod
                     NewLine.LabTestDate = cdr["LabTestDate"].ToString();
                     NewLine.StatusCode = cdr["StatusCode"].ToString();
                     NewLine.Status = cdr["Status"].ToString();
-                    NewLine.ReportDate = cdr["ReportDate"].ToString();
+                    NewLine.ReportDate = ReportDateShow;
                     NewLine.DeptCode = cdr["DeptCode"].ToString();
                     NewLine.DeptName = cdr["DeptName"].ToString();
                     NewLine.Creator = cdr["Creator"].ToString();
-                    NewLine.LabTestDateCom = cdr["LabTestDateCom"].ToString(); 
+                    NewLine.LabTestDateCom = Convert.ToDateTime(cdr["LabTestDate"]).ToString("yyyy-MM-dd HH:mm:ss");
+                    list.Add(NewLine);
                 }
                 return list;
             }
@@ -864,7 +865,7 @@ namespace CDMISrestful.DataMethod
             }
         }
 
-        //syf 2015-10-10
+        //syf 2015-10-10  wf20151027
         /// <summary>
         /// 根据piUserId和piVisitId获取用药结果
         /// </summary>
@@ -916,8 +917,8 @@ namespace CDMISrestful.DataMethod
                     NewLine.DosageUnits = cdr["DosageUnits"].ToString();
                     NewLine.AdministrationCode = cdr["AdministrationCode"].ToString();
                     NewLine.Administration = cdr["Administration"].ToString();
-                    NewLine.StartDateTime = cdr["StartDateTime"].ToString();
-                    NewLine.StopDateTime = cdr["StopDateTime"].ToString();
+                    NewLine.StartDateTime = startTime;
+                    NewLine.StopDateTime = endTime;
                     NewLine.Frequency = cdr["Frequency"].ToString();
                     NewLine.FreqCounter = cdr["FreqCounter"].ToString();
                     NewLine.FreqInteval = cdr["FreqInteval"].ToString();
@@ -926,7 +927,8 @@ namespace CDMISrestful.DataMethod
                     NewLine.DeptCode = cdr["DeptCode"].ToString();
                     NewLine.DeptName = cdr["DeptName"].ToString();
                     NewLine.Creator = cdr["Creator"].ToString();
-                    NewLine.StartDateTimeCom = cdr["StartDateTimeCom"].ToString();
+                    NewLine.StartDateTimeCom = Convert.ToDateTime(cdr["StartDateTime"]).ToString("yyyy-MM-dd HH:mm:ss");
+                    list.Add(NewLine);
                 }
                 return list;
             }
