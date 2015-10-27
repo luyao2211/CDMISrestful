@@ -59,6 +59,10 @@ namespace CDMISrestful.Models
             return new RiskInfoMethod().PsTreatmentIndicatorsSetData(pclsCache, UserId, SortNo, AssessmentType, AssessmentName, AssessmentTime, Result, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
+        public int PsParametersSetData(string Indicators, string Id, string Name, string Value, string Unit, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            return new RiskInfoMethod().PsParametersSetData(pclsCache, Indicators, Id, Name, Value, Unit, revUserId, TerminalName, TerminalIP, DeviceType);
+        }
         /// <summary>
         /// 根据UserId获取最新风险评估结果 LY 2015-10-13
         /// </summary>
@@ -1078,6 +1082,11 @@ namespace CDMISrestful.Models
         public List<PsTreatmentIndicators> GetPsTreatmentIndicators(string UserId)
         {
             return new RiskInfoMethod().GetPsTreatmentIndicators(pclsCache, UserId);
+
+        }
+        public List<Parameters> GetParameters(string Indicators)
+        {
+            return new RiskInfoMethod().GetParameters(pclsCache, Indicators);
 
         }
     }
