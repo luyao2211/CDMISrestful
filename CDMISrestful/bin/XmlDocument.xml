@@ -1099,7 +1099,7 @@
             <param name="DeviceType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetRiskResult(System.String)">
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetRiskResult(System.String,System.String)">
             <summary>
             根据UserId获取最新风险评估结果 LY 2015-10-13
             </summary>
@@ -1109,6 +1109,13 @@
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetRiskInput(System.String)">
             <summary>
             获取风险评估所需输入 LY 2015-10-13
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetPsTreatmentIndicators(System.String)">
+            <summary>
+            根据UserId获取风险评估结果 WF 20151027
             </summary>
             <param name="UserId"></param>
             <returns></returns>
@@ -1961,7 +1968,7 @@
             <param name="UserId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.DataMethod.RiskInfoMethod.GetResult(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32)">
+        <member name="M:CDMISrestful.DataMethod.RiskInfoMethod.GetResult(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String)">
             <summary>
             GL 2015-10-10
             </summary>
@@ -2753,7 +2760,7 @@
             <param name="DeviceType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetRiskResult(System.String)">
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetRiskResult(System.String,System.String)">
             <summary>
             根据UserId获取最新风险评估结果 LY 2015-10-13
             </summary>

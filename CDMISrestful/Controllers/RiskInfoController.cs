@@ -86,7 +86,13 @@ namespace CDMISrestful.Controllers
         {
             return repository.GetRiskInput(UserId);
         }
-        [Route("Api/v1/RiskInfo/GetPsTreatmentIndicators")]
+
+        /// <summary>
+        /// 根据UserId获取风险评估结果 WF 20151027
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        [Route("Api/v1/RiskInfo/RiskResults")]
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
         public List<PsTreatmentIndicators> GetPsTreatmentIndicators(string UserId)
