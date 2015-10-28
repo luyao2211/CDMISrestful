@@ -714,7 +714,7 @@ namespace CDMISrestful.DataMethod
         #region Ps.Compliance
 
         /// <summary>
-        /// 施宇帆 2015-10-10 插入子表PsComplianceDetail某条数据
+        /// CSQ 20151027 写数据
         /// </summary>
         /// <param name="pclsCache"></param>
         /// <param name="Parent"></param>
@@ -751,7 +751,7 @@ namespace CDMISrestful.DataMethod
 
 
         /// <summary>
-        ///  syf 2015-10-10 插入PsCompliance某条数据
+        ///  CSQ 20151027 插入PsCompliance某条数据
         /// </summary>
         /// <param name="pclsCache"></param>
         /// <param name="PatientId"></param>

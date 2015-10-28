@@ -851,7 +851,7 @@
             <param name="item"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetTasks(System.String,System.String)">
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetTasks(System.String,System.String,System.String)">
             <summary>
             获取某个计划下的所有任务 CSQ 20151025
             </summary>
@@ -868,7 +868,7 @@
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.PostPsTemplateSetData(CDMISrestful.DataModels.Template)">
             <summary>
-            
+            插入专员计划模板信息 CSQ 20151027
             </summary>
             <param name="pclsCache"></param>
             <param name="DoctorId"></param>
@@ -914,30 +914,20 @@
             <param name="item"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetValueByPlanNoAndId(System.String,System.String)">
-            <summary>
-            GetValueByPlanNoAndId 获取某计划下某任务的目标值 GL 2015-10-13
-            </summary>
-            <param name="PlanNo"></param>
-            <param name="Id"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.PostTarget(CDMISrestful.DataModels.TargetByCode)">
             <summary>
-            Ps.Target.SetData GL 2015-10-13
+            Ps.Target.SetData CSQ 20151027 任务目标数据写入
             </summary>
-            <param name="Plan"></param>
-            <param name="Id"></param>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetTarget(System.String,System.String,System.String)">
+            <summary>
+            CSQ 获取某条任务的Target信息 20151027
+            </summary>
+            <param name="PlanNo"></param>
             <param name="Type"></param>
             <param name="Code"></param>
-            <param name="Value"></param>
-            <param name="Origin"></param>
-            <param name="Instruction"></param>
-            <param name="Unit"></param>
-            <param name="piUserId"></param>
-            <param name="piTerminalName"></param>
-            <param name="piTerminalIP"></param>
-            <param name="piDeviceType"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPlanInfo(System.String)">
@@ -965,13 +955,6 @@
             <param name="ItemCode"></param>
             <param name="StartDate"></param>
             <param name="EndDate"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetGoalValue(System.String)">
-            <summary>
-            GetGoalValue 获取当前血压跟目标血压之间的差值 GL 2015-10-13
-            </summary>
-            <param name="PlanNo"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.GetExecutingPlanByModule(System.String,System.String)">
@@ -1018,15 +1001,6 @@
             <param name="ModuleType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetTaskByStatus(System.String,System.String,System.Int32)">
-            <summary>
-            GetTaskByStatus 在当天根据任务状态的完成情况输出相应的任务 GL 2015-10-13
-            </summary>
-            <param name="PatientId"></param>
-            <param name="PlanNo"></param>
-            <param name="PiStatus"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPlanInfobyPID(System.String)">
             <summary>
             GetPlanInfobyPID 获取病人当前计划以及健康专员 "PlanNo|DoctorId" GL 2015-10-13
@@ -1041,15 +1015,6 @@
             <param name="PatientId"></param>
             <param name="Module"></param>
             <returns></returns>    
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetTasksByIndate(System.String,System.Int32,System.String)">
-            <summary>
-            GetTasksByIndate 根据计划编码和日期，获取任务 GL 2015-10-13
-            </summary>
-            <param name="PatientId"></param>
-            <param name="InDate"></param>
-            <param name="PlanNo"></param>
-            <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPlanList34ByM(System.String,System.String)">
             <summary>
@@ -1067,14 +1032,6 @@
             <param name="PlanNo"></param>
             <param name="StartDate"></param>
             <param name="EndDate"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetValueByPlanNoAndId(System.String,System.String)">
-            <summary>
-            获取某计划下某任务的目标值 LY 2015-10-13
-            </summary>
-            <param name="PlanNo"></param>
-            <param name="Id"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
@@ -1370,7 +1327,7 @@
             <summary>
             根据piUserId和piVisitId获取化验结果
             </summary>
-            <param name="pclsCache"></param>
+            <param name="pclsCacheList"></param>
             <param name="piUserId"></param>
             <param name="piVisitId"></param>
             <returns></returns>
@@ -1823,26 +1780,6 @@
             <param name="PlanNo"></param>
             <param name="StartDate"></param>
             <param name="EndDate"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetTasksByDate(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String)">
-            <summary>
-            syf 2015-10-10根据计划编码和日期，获取依从率
-            </summary>
-            <param name="pclsCache"></param>
-            <param name="PatientId"></param>
-            <param name="Date"></param>
-            <param name="PlanNo"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetTaskByStatus(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.Int32)">
-            <summary>
-            syf 2015-10-10 在当天根据任务状态的完成情况输出相应的任务
-            </summary>
-            <param name="pclsCache"></param>
-            <param name="PatientId"></param>
-            <param name="PlanNo"></param>
-            <param name="PiStatus"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetSignDetailByPeriod(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
@@ -2728,14 +2665,6 @@
             同步患者购买模块下的某些信息 LY 2015-10-14
             </summary>
             <param name="UserId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetValueByPlanNoAndId(System.String,System.String)">
-            <summary>
-            获取某计划下某任务的目标值 LY 2015-10-13
-            </summary>
-            <param name="PlanNo"></param>
-            <param name="Id"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Models.RiskInfoRepository.GetDescription(System.Int32)">

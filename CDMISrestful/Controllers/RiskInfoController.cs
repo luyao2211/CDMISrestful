@@ -89,21 +89,21 @@ namespace CDMISrestful.Controllers
             return ret;
         }
 
-        [Route("Api/v1/RiskInfo/PsTreatmentIndicatorsSetData")]
+        [Route("Api/v1/RiskInfo/TreatmentIndicators")]
         [ModelValidationFilter]
         public HttpResponseMessage POSTPsTreatmentIndicatorsSetData(RiskResult Item)
         {
             int ret = repository.PsTreatmentIndicatorsSetData(Item.UserId, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
-        [Route("Api/v1/RiskInfo/PsParametersSetData")]
+        [Route("Api/v1/RiskInfo/PsParameters")]
         [ModelValidationFilter]
         public HttpResponseMessage POSTPsParametersSetData(Parameters Item)
         {
             int ret = repository.PsParametersSetData(Item.Indicators, Item.Id, Item.Name, Item.Value, Item.Unit, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
-        [Route("Api/v1/RiskInfo/GetParameters")]
+        [Route("Api/v1/RiskInfo/Parameters")]
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
         public List<Parameters> GetParameters(string Indicators)
