@@ -360,5 +360,114 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
+
+        public ClinicalInfoListViewModel GetClinicalInfoList(string UserId)
+        {
+            try
+            {
+                ClinicInfoViewModel DT_ClinicInfoDetail = new ClinicInfoViewModel();
+                return clinicInfoMethod.GetClinicalInfoList(pclsCache, UserId);
+
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetClinicalInfoList", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+        }
+        public string getLatestHUserIdByHCode(string UserId, string HospitalCode)
+        {
+            try
+            {
+                string ret = clinicInfoMethod.getLatestHUserIdByHCode(pclsCache, UserId, HospitalCode);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "getLatestHUserIdByHCode", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return "";
+                throw ex;
+            }
+        }
+        public List<SymptomsList> GetSymptomsList(string UserId, string VisitId)
+        {
+            try
+            {
+                return clinicInfoMethod.GetSymptomsList(pclsCache, UserId, VisitId);
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetSymptomsList", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+        }
+        public List<DiagnosisInfo> GetDiagnosisInfoList(string UserId, string VisitId)
+        {
+            try
+            {
+                return clinicInfoMethod.PsDiagnosisGetDiagnosisInfo(pclsCache, UserId, VisitId);
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetDiagnosisInfoList", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+        }
+        public List<ExamInfo> GetExaminationList(string UserId, string VisitId)
+        {
+            try
+            {
+                return clinicInfoMethod.PsExaminationGetExaminationList(pclsCache, UserId, VisitId);
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetExaminationList", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+        }
+        public List<ExamDetails> GetExamDtlList(string UserId, string VisitId, string SortNo, string ItemCode)
+        {
+            try
+            {
+                return clinicInfoMethod.GetExamDetails(pclsCache, UserId, VisitId, SortNo, ItemCode);
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetExamDtlList", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+        }
+        public List<LabTestList> GetLabTestList(string UserId, string VisitId)
+        {
+            try
+            {
+                return clinicInfoMethod.GetLabTestList(pclsCache, UserId, VisitId);
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetLabTestList", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+        }
+        public List<DrugRecord> GetDrugRecordList(string UserId, string VisitId)
+        {
+            try
+            {
+                return clinicInfoMethod.GetDrugRecord(pclsCache, UserId, VisitId);
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetDrugRecordList", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+        }
+
     }
 }

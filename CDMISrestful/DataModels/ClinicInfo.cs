@@ -292,5 +292,56 @@ namespace CDMISrestful.DataModels
         public string Creator { get; set; }
 
     }
+    public class PsInPatInfo
+    {
+        public string VisitId { get; set; }
+        public string SortNo { get; set; }
+        public string AdmissionDate { get; set; }
+        public string DischargeDate { get; set; }
+        public string HospitalCode { get; set; }
+        public string HospitalName { get; set; }
+        public string Department { get; set; }
+        public string DepartmentName { get; set; }
+        public string Doctor { get; set; }
+        public string Creator { get; set; }
 
+    }
+    public class PsOutPatInfo
+    {
+        public string VisitId { get; set; }
+        public string ClinicDate { get; set; }
+        public string HospitalCode { get; set; }
+        public string HospitalName { get; set; }
+        public string Department { get; set; }
+        public string DepartmentName { get; set; }
+        public string Doctor { get; set; }
+        public string Creator { get; set; }
+
+    }
+    public class SymptomsList
+    {
+        public string VisitId { get; set; }
+        public string SynptomsNo { get; set; }
+        public string SymptomsType { get; set; }
+        public string SymptomsTypeName { get; set; }
+        public string SymptomsCode { get; set; }
+        public string SymptomsName { get; set; }
+        public string Description { get; set; }
+        public string RecordDate { get; set; }
+        public string RecordTime { get; set; }
+        public string Creator { get; set; }
+
+    }
+    public class ExamDetails
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
+        public int IsAbnormalCode { get; set; }
+        public string IsAbnormal { get; set; }
+        public string UnitCode { get; set; }
+        public string Unit { get; set; }
+        public string Creator { get; set; }
+
+    }
 }
