@@ -2056,6 +2056,14 @@
             <param name="ActivationCode"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetActiveUserByRole(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            根据角色获取激活用户 2015-06-03 ZC //SYF 20151022
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="RoleClass"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.DataMethod.UsersMethod.PsBasicInfoSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.Int32,System.Int32,System.Int32,System.String,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
             <summary>
             SetData WF 2014-12-2 //WF 20151010
@@ -2131,6 +2139,55 @@
             </summary>
             <param name="pclsCache"></param>
             <param name="DoctorId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetHealthCoachList(CDMISrestful.CommonLibrary.DataConnection)">
+            <summary>
+            获取健康专员列表 SYF 20151022
+            </summary>
+            <param name="pclsCache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetHealthCoachInfo(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            获取某专员相关信息 SYF 20151022
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="HealthCoachID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.ReserveHealthCoach(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.String,System.Int32,System.DateTime,System.DateTime,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            某患者预约某专员 //SYF 20151023 Ps.Appointment插入一条数据
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="DoctorId"></param>
+            <param name="PatientId"></param>
+            <param name="Module"></param>
+            <param name="Description"></param>
+            <param name="Status"></param>
+            <param name="ApplicationTime"></param>
+            <param name="AppointmentTime"></param>
+            <param name="AppointmentAdd"></param>
+            <param name="Redundancy"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.UpdateReservation(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            更新预约状态
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="DoctorId"></param>
+            <param name="PatientId"></param>
+            <param name="Status"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.VitalInfoMethod.SetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">

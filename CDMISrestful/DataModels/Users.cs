@@ -87,9 +87,9 @@ namespace CDMISrestful.DataModels
         [Required(ErrorMessage = "请传入OldPassword")]
         public string OldPassword { get; set; }
         [Required(ErrorMessage = "请传入NewPassword")]
-        public string NewPassword { get; set; } 
+        public string NewPassword { get; set; }
         [Required(ErrorMessage = "请输入用户Id")]
-        public string UserId { get; set; }    
+        public string UserId { get; set; }
         [Required(ErrorMessage = "revUserId")]
         public string revUserId { get; set; }
         [Required(ErrorMessage = "TerminalName")]
@@ -125,7 +125,7 @@ namespace CDMISrestful.DataModels
 
 
     }
-    
+
     public class SetDoctorInfoDetail
     {
         [Required(ErrorMessage = "请传入Doctor")]
@@ -310,6 +310,7 @@ namespace CDMISrestful.DataModels
         public string Height { get; set; }
         public string Weight { get; set; }
     }
+
     public class Calendar
     {
         public string DateTime { get; set; }
@@ -318,7 +319,49 @@ namespace CDMISrestful.DataModels
         public string Description { get; set; }
         public int Status { get; set; }
         public string Redundancy { get; set; }
-    
+
+
+    }
+    public class ActiveUser
+    {
+        public string UserName { get; set; }
+        public string UserId { get; set; }
+
     }
 
+    public class CategoryByDoctorId
+    {
+        public string CategoryCode { get; set; }
+        public string CategoryName { get; set; }
+        public string ItemCode { get; set; }
+        public string ItemName { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class HealthCoachList
+    {
+        public string healthCoachID { get; set; }
+        public string imageURL { get; set; }
+        public string name { get; set; }
+        public string age { get; set; }
+        public string sex { get; set; }
+        public string module { get; set; }
+        public string score { get; set; }
+    }
+
+    public class HealthCoachInfo
+    {
+        public string imageURL { get; set; }
+        public string name { get; set; }
+        public string age { get; set; }
+        public string sex { get; set; }
+        public string module { get; set; }
+        public string generalComment { get; set; }
+        public string generalscore { get; set; }
+
+        public string patientNum { get; set; }
+        public string activityDegree { get; set; }
+        public string Description { get; set; }
+
+    }
 }
