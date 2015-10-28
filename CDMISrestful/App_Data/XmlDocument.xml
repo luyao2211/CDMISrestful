@@ -851,7 +851,7 @@
             <param name="item"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetTasks(System.String,System.String,System.String)">
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetTasks(System.String,System.String,System.String,System.String)">
             <summary>
             获取某个计划下的所有任务 CSQ 20151025
             </summary>

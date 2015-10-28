@@ -1743,7 +1743,7 @@ namespace CDMISrestful.DataMethod
         }
 
         //CSQ 20151025
-        public List<PsTask> GetTasks(DataConnection pclsCache, string PlanNo,string ParentCode,string Date)
+        public List<PsTask> GetTasks(DataConnection pclsCache, string PlanNo,string ParentCode,string Date,string PatientId)
         {
             List<PsTask> list = new List<PsTask>();
 
@@ -1760,6 +1760,7 @@ namespace CDMISrestful.DataMethod
                 cmd.Parameters.Add("PlanNo", CacheDbType.NVarChar).Value = PlanNo;
                 cmd.Parameters.Add("ParentCode", CacheDbType.NVarChar).Value = ParentCode;
                 cmd.Parameters.Add("Date", CacheDbType.NVarChar).Value = Date;
+                cmd.Parameters.Add("PatientId", CacheDbType.NVarChar).Value = PatientId;
 
                 
                 cdr = cmd.ExecuteReader();
@@ -1779,7 +1780,7 @@ namespace CDMISrestful.DataMethod
                         GroupHeaderFlag = cdr["GroupHeaderFlag"].ToString(),
                         ControlType = cdr["ControlType"].ToString(),
                         OptionCategory = cdr["OptionCategory"].ToString(),
-                        
+                        VitalSignValue = cdr["VitalSignValue"].ToString()
                     });
 
                 }

@@ -234,6 +234,7 @@ namespace CDMISrestful.Controllers
             int ret = repository.SetPatBasicInfoDetail(Item.Patient, Item.CategoryCode, Item.ItemCode, Item.ItemSeq, Item.Value, Item.Description, Item.SortNo, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
+
         [Route("Api/v1/Users/GetCalendar")]
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
@@ -242,5 +243,58 @@ namespace CDMISrestful.Controllers
             List<Calendar> ret = repository.GetCalendar(DoctorId);
             return ret;
         }
+
+
+        [Route("Api/v1/Users/GetHealthCoachList")]
+        public List<HealthCoachList> GetHealthCoachList()
+        {
+            return repository.GetHealthCoachList();
+        }
+
+        [Route("Api/v1/Users/GetHealthCoachInfo")]
+        public HealthCoachInfo GetHealthCoachInfo(string HealthCoachID)
+        {
+            return repository.GetHealthCoachInfo(HealthCoachID);
+        }
+
+        [Route("Api/v1/Users/ReserveHealthCoach")]
+        public HttpResponseMessage ReserveHealthCoach(ReserveHealthCoach ReserveHealthCoach)
+        {
+            int ret = repository.ReserveHealthCoach(ReserveHealthCoach.DoctorId, ReserveHealthCoach.PatientId, ReserveHealthCoach.Module, ReserveHealthCoach.Description, ReserveHealthCoach.Status, ReserveHealthCoach.ApplicationTime, ReserveHealthCoach.AppointmentTime, ReserveHealthCoach.AppointmentAdd, ReserveHealthCoach.Redundancy, ReserveHealthCoach.revUserId, ReserveHealthCoach.TerminalName, ReserveHealthCoach.TerminalIP, ReserveHealthCoach.DeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
+        }
+
+        [Route("Api/v1/Users/UpdateReservation")]
+        public HttpResponseMessage UpdateReservation(UpdateReservation UpdateReservation)
+        {
+            int ret = repository.UpdateReservation(UpdateReservation.DoctorId, UpdateReservation.PatientId, UpdateReservation.Status, UpdateReservation.revUserId, UpdateReservation.TerminalName, UpdateReservation.TerminalIP, UpdateReservation.DeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
+        }
+
+        [Route("Api/v1/Users/GetCommentList")]
+        public List<CommentList> GetCommentList(string DoctorId, string CategoryCode)
+        {
+            return repository.GetCommentList(DoctorId, CategoryCode);
+        }
+
+        [Route("Api/v1/Users/GetHealthCoachListByPatient")]
+        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(string PatientId, string CategoryCode)
+        {
+            return repository.GetHealthCoachListByPatient(PatientId, CategoryCode);
+        }
+
+        [Route("Api/v1/Users/RemoveHealthCoach")]
+        public HttpResponseMessage RemoveHealthCoach(string PatientId, string DoctorId, string CategoryCode)
+        {
+            int ret = repository.RemoveHealthCoach(PatientId, DoctorId, CategoryCode);
+            return new ExceptionHandler().DeleteData(Request, ret);
+        }
+
+        [Route("Api/v1/Users/GetAppoitmentPatientList")]
+        public List<AppoitmentPatient> GetAppoitmentPatientList(string healthCoachID, string Status)
+        {
+            return repository.GetAppoitmentPatientList(healthCoachID, Status);
+        }
+
     }
 }
