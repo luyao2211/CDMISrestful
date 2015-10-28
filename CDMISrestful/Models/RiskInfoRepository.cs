@@ -43,12 +43,16 @@ namespace CDMISrestful.Models
             return new RiskInfoMethod().PsTreatmentIndicatorsSetData(pclsCache, UserId, SortNo, AssessmentType, AssessmentName, AssessmentTime, Result, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
-        public int PsTreatmentIndicatorsSetData(string UserId, string AssessmentType, string AssessmentName, DateTime AssessmentTime, string Result, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int PsTreatmentIndicatorsSetData(string UserId, int SortNo, string AssessmentType, string AssessmentName, DateTime AssessmentTime, string Result, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
-            int SortNo = new RiskInfoMethod().GetMaxSortNo(pclsCache, UserId) + 1;    //SortNo自增
+            //int SortNo = new RiskInfoMethod().GetMaxSortNo(pclsCache, UserId) + 1;    //SortNo自增
             return new RiskInfoMethod().PsTreatmentIndicatorsSetData(pclsCache, UserId, SortNo, AssessmentType, AssessmentName, AssessmentTime, Result, revUserId, TerminalName, TerminalIP, DeviceType);
         }
-
+        public int GetMaxSortNo(string UserId)
+        {
+            //int SortNo = new RiskInfoMethod().GetMaxSortNo(pclsCache, UserId) + 1;    //SortNo自增
+            return new RiskInfoMethod().GetMaxSortNo(pclsCache, UserId);
+        }
         public int PsParametersSetData(string Indicators, string Id, string Name, string Value, string Unit, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             return new RiskInfoMethod().PsParametersSetData(pclsCache, Indicators, Id, Name, Value, Unit, revUserId, TerminalName, TerminalIP, DeviceType);

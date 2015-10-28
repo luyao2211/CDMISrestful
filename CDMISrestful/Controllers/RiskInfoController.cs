@@ -99,7 +99,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage POSTPsTreatmentIndicatorsSetData(RiskResult Item)
         {
-            int ret = repository.PsTreatmentIndicatorsSetData(Item.UserId, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
+            int ret = repository.PsTreatmentIndicatorsSetData(Item.UserId, Item.SortNo, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -129,6 +129,20 @@ namespace CDMISrestful.Controllers
         public List<Parameters> GetParameters(string Indicators)
         {
             List<Parameters> ret = repository.GetParameters(Indicators);
+            return ret;
+        }
+        /// <summary>
+        /// Ps.TreatmentIndicators GetMaxSortNo
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        [Route("Api/v1/RiskInfo/GetMaxSortNo")]
+
+        [ModelValidationFilter]
+        [RESTAuthorizeAttribute]
+        public int GetMaxSortNo(string UserId)
+        {
+            int ret = repository.GetMaxSortNo(UserId);
             return ret;
         }
     }

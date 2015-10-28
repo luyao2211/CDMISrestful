@@ -51,6 +51,7 @@ namespace CDMISrestful.DataModels
     public class RiskResult
     {
         public string UserId { get; set; }
+        public int SortNo { get; set; }
         public string AssessmentType { get; set; }
         public string AssessmentName { get; set; }
         public DateTime AssessmentTime { get; set; }
