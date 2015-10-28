@@ -1077,6 +1077,27 @@
             <param name="UserId"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.POSTPsTreatmentIndicatorsSetData(CDMISrestful.DataModels.RiskResult)">
+            <summary>
+            Ps.TreatmentIndicators  SetData WF 20151027
+            </summary>
+            <param name="Item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.POSTPsParametersSetData(CDMISrestful.DataModels.Parameters)">
+            <summary>
+            Ps.Parameters  SetData WF20151027
+            </summary>
+            <param name="Item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetParameters(System.String)">
+            <summary>
+            Ps.Parameters  GetParameters WF20151027
+            </summary>
+            <param name="Indicators"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.ServiceController.sendSMS(System.String,System.String)">
             <summary>
             发送验证码短信 20151016 CSQ
@@ -1734,7 +1755,7 @@
         </member>
         <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.PsComplianceDetailSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
-            施宇帆 2015-10-10 插入子表PsComplianceDetail某条数据
+            CSQ 20151027 写数据
             </summary>
             <param name="pclsCache"></param>
             <param name="Parent"></param>
@@ -1748,7 +1769,7 @@
         </member>
         <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.PsComplianceSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.Double,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
-             syf 2015-10-10 插入PsCompliance某条数据
+             CSQ 20151027 插入PsCompliance某条数据
             </summary>
             <param name="pclsCache"></param>
             <param name="PatientId"></param>

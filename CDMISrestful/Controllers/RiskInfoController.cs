@@ -89,21 +89,41 @@ namespace CDMISrestful.Controllers
             return ret;
         }
 
+        /// <summary>
+        /// Ps.TreatmentIndicators  SetData WF 20151027
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <returns></returns>
         [Route("Api/v1/RiskInfo/TreatmentIndicators")]
+
         [ModelValidationFilter]
         public HttpResponseMessage POSTPsTreatmentIndicatorsSetData(RiskResult Item)
         {
             int ret = repository.PsTreatmentIndicatorsSetData(Item.UserId, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
-        [Route("Api/v1/RiskInfo/PsParameters")]
+
+        /// <summary>
+        /// Ps.Parameters  SetData WF20151027
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <returns></returns>
+         [Route("Api/v1/RiskInfo/PsParameters")]
+
         [ModelValidationFilter]
         public HttpResponseMessage POSTPsParametersSetData(Parameters Item)
         {
             int ret = repository.PsParametersSetData(Item.Indicators, Item.Id, Item.Name, Item.Value, Item.Unit, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
+
+        /// <summary>
+        /// Ps.Parameters  GetParameters WF20151027
+        /// </summary>
+        /// <param name="Indicators"></param>
+        /// <returns></returns>
         [Route("Api/v1/RiskInfo/Parameters")]
+
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
         public List<Parameters> GetParameters(string Indicators)
