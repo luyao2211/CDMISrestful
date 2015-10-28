@@ -29,7 +29,24 @@ namespace CDMISrestful.Models
         int SetPatBasicInfo(string UserId, string UserName, int Birthday, int Gender, int BloodType, string IDNo, string DoctorId, string InsuranceType, int InvalidFlag, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
         int SetPatBasicInfoDetail(string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
 
+<<<<<<< HEAD
         string GetIDByInputPhone(string Type, string Name);
         List<Calendar> GetCalendar(string DoctorId);
+=======
+        List<HealthCoachList> GetHealthCoachList();
+        HealthCoachInfo GetHealthCoachInfo(string HealthCoachID);
+
+        int ReserveHealthCoach(string DoctorId, string PatientId, string Module, string Description, int Status, DateTime ApplicationTime, DateTime AppointmentTime, string AppointmentAdd, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+
+        int UpdateReservation(string DoctorId, string PatientId, int Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+
+        List<CommentList> GetCommentList(string DoctorId, string CategoryCode);
+
+        List<HealthCoachListByPatient> GetHealthCoachListByPatient(string PatientId, string CategoryCode);
+
+        int RemoveHealthCoach(string PatientId, string DoctorId, string CategoryCode);
+
+        List<AppoitmentPatient> GetAppoitmentPatientList(string healthCoachID, string Status);
+>>>>>>> c987825adab0336222e75afc7f94781af9eaba95
     }
 }
