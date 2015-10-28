@@ -909,7 +909,7 @@ namespace CDMISrestful.DataMethod
         public List<HealthCoachList> GetHealthCoachList(DataConnection pclsCache)
         {
             List<HealthCoachList> list = new List<HealthCoachList>();
-            list = null;
+            //list = null;
             List<ActiveUser> list1 = new List<ActiveUser>();
             List<CategoryByDoctorId> list2 = new List<CategoryByDoctorId>();
             List<DoctorInfo> list3 = new List<DoctorInfo>();

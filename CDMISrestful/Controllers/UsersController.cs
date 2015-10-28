@@ -244,8 +244,11 @@ namespace CDMISrestful.Controllers
             return ret;
         }
 
-
-        [Route("Api/v1/Users/GetHealthCoachList")]
+        /// <summary>
+        /// 获取专员列表
+        /// </summary>
+        /// <returns></returns>
+        [Route("Api/v1/Users/HealthCoaches")]
         public List<HealthCoachList> GetHealthCoachList()
         {
             return repository.GetHealthCoachList();

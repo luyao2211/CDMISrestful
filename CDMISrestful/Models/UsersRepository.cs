@@ -624,6 +624,7 @@ namespace CDMISrestful.Models
         {
             return usersMethod.GetHealthCoachList(pclsCache);
         }
+
         public HealthCoachInfo GetHealthCoachInfo(string HealthCoachID)
         {
             return usersMethod.GetHealthCoachInfo(pclsCache, HealthCoachID);
