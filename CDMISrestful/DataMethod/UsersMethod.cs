@@ -1213,6 +1213,7 @@ namespace CDMISrestful.DataMethod
         
         
         #endregion
+
         #region<Ps.Calendar>
         public List<Calendar> GetCalendar(DataConnection pclsCache, string DoctorId)
         {
@@ -1269,6 +1270,517 @@ namespace CDMISrestful.DataMethod
             }
         }
         #endregion
+
+        /// <summary>
+        /// 获取某专员的评论列表 SYF 20151026
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="DoctorId"></param>
+        /// <param name="CategoryCode"></param>
+        /// <returns></returns>
+        public List<CommentList> GetCommentList(DataConnection pclsCache, string DoctorId, string CategoryCode)
+        {
+            List<CommentList> list = new List<CommentList>();
+            List<DetailsByDoctorId> list1 = new List<DetailsByDoctorId>();
+            try
+            {
+                list1 = GetDetailsByDoctorId(pclsCache, DoctorId, CategoryCode);//获取健康专员所负责的病人对他的评价及评分信息
+                if (list1 != null)
+                {
+                    for (int i = 0; i < list1.Count; i++)
+                    {
+                        CommentList clt = new CommentList();
+                        clt.PatientId = list1[i].PatientId;
+                        clt.Name = list1[i].Name;
+                        clt.Comment = list1[i].Comment;
+                        clt.Score = list1[i].Score;
+                        clt.CommentTime = list1[i].CommentTime;
+
+                        if (clt.PatientId != "")
+                        {
+                            //PatientDetailInfo1 ret = new PatientDetailInfo1();
+                            GetPatientDetailInfo lt = new GetPatientDetailInfo();
+                            lt = GetPatientDetailInfo(pclsCache, clt.PatientId);
+                            if (lt != null)
+                            {
+                                clt.imageURL = lt.PhotoAddress;
+                            }
+                        }
+                        list.Add(clt);
+                    }
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UserMethod.GetCommentList", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+
+        /// <summary>
+        /// GetCategoryName WF 2014-12-2 //syf 20151027
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="Code"></param>
+        /// <returns></returns>
+        public string GetCategoryName(DataConnection pclsCache, string Code)
+        {
+            string ret = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return ret;
+
+                }
+                ret = (Cm.MstInfoItemCategory.GetCategoryName(pclsCache.CacheConnectionObject, Code)).ToString();
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "保存失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetCategoryName", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+
+        /// <summary>
+        ///  获取需要知道的项目的值 ZC 20150603 //syf20151027
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <param name="CategoryCode"></param>
+        /// <param name="ItemCode"></param>
+        /// <param name="ItemSeq"></param>
+        /// <returns></returns>
+        public string GetValue(DataConnection pclsCache, string UserId, string CategoryCode, string ItemCode, int ItemSeq)
+        {
+            string ret = "";
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return ret;
+
+                }
+                ret = (string)Ps.DoctorInfoDetail.GetValue(pclsCache.CacheConnectionObject, UserId, CategoryCode, ItemCode, ItemSeq);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "保存失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetValue", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+
+        //GetDoctorsByPatientId 根据PatientId和CategoryCode取对应模块医生列表 SYF 2015-10-26
+        public List<DoctorsByPatientId> GetDoctorsByPatientId(DataConnection pclsCache, string PatientId, string CategoryCode)
+        {
+            List<DoctorsByPatientId> items = new List<DoctorsByPatientId>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.BasicInfoDetail.GetDoctorsByPatientId(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("PatientId", CacheDbType.NVarChar).Value = PatientId;
+                cmd.Parameters.Add("CategoryCode", CacheDbType.NVarChar).Value = CategoryCode;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    DoctorsByPatientId item = new DoctorsByPatientId();
+                    item.DoctorId = cdr["DoctorId"].ToString();
+                    item.DoctorName = cdr["DoctorName"].ToString();
+                    item.ItemSeq = cdr["ItemSeq"].ToString();
+                    items.Add(item);
+                }
+                return items;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetDoctorsByPatientId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+        //GetPatientDetailInfo TDY 2015-04-07
+        public GetPatientDetailInfo GetPatientDetailInfo(DataConnection pclsCache, string UserId)
+        {
+            GetPatientDetailInfo ret = new GetPatientDetailInfo();
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Ps.BasicInfoDetail.GetDetailInfo(pclsCache.CacheConnectionObject, UserId);
+                if (list != null)
+                {
+                    ret.PhoneNumber = list[0];
+                    ret.HomeAddress = list[1];
+                    ret.Occupation = list[2];
+                    ret.Nationality = list[3];
+                    ret.EmergencyContact = list[4];
+                    ret.EmergencyContactPhoneNumber = list[5];
+                    ret.PhotoAddress = list[6];
+                    ret.IDNo = list[7];
+                }
+                //DataCheck ZAM 2015-1-7
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetPatientDetailInfo", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        //GetDetailsByDoctorId 获取健康专员所负责的病人对他的评价及评分信息 SYF 2015-10-26
+        public List<DetailsByDoctorId> GetDetailsByDoctorId(DataConnection pclsCache, string DoctorId, string CategoryCode)
+        {
+            List<DetailsByDoctorId> items = new List<DetailsByDoctorId>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.DoctorInfoDetail.GetDetailsByDoctorId(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
+                cmd.Parameters.Add("CategoryCode", CacheDbType.NVarChar).Value = CategoryCode;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    DetailsByDoctorId item = new DetailsByDoctorId();
+                    item.PatientId = cdr["PatientId"].ToString();
+                    item.Name = cdr["Name"].ToString();
+                    item.Comment = cdr["Comment"].ToString();
+                    item.Score = cdr["Score"].ToString();
+                    item.CommentTime = cdr["CommentTime"].ToString();
+                    items.Add(item);
+                }
+                return items;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetDetailsByDoctorId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+
+
+        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(DataConnection pclsCache, string PatientId, string CategoryCode)
+        {
+            List<HealthCoachListByPatient> list = new List<HealthCoachListByPatient>();
+            List<DoctorsByPatientId> list1 = new List<DoctorsByPatientId>();
+            try
+            {
+                list1 = GetDoctorsByPatientId(pclsCache, PatientId, CategoryCode);//根据PatientId和CategoryCode取对应模块医生列表
+                if (list1 != null)
+                {
+                    for (int i = 0; i < list1.Count; i++)
+                    {
+                        HealthCoachListByPatient lt = new HealthCoachListByPatient();
+                        lt.HealthCoachID = list1[i].DoctorId;//专员Id
+                        lt.Name = list1[i].DoctorName;//专员名字
+                        lt.imageURL = new UsersMethod().GetValue(pclsCache, lt.HealthCoachID, "Contact", "Contact001_4", 1);//专员照片
+                        lt.module = new UsersMethod().GetCategoryName(pclsCache, CategoryCode);//负责模块，由输入决定
+                        if (lt.HealthCoachID != "")
+                        {
+                            lt.latestMessage = new MessageMethod().GetLatestSMS(pclsCache, lt.HealthCoachID, PatientId);//最新消息
+                        }
+                        list.Add(lt);
+                    }
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UserMethod.GetCommentList", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+
+
+
+
+        /// <summary>
+        /// 解除专员 syf 20151026
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="PatientId"></param>
+        /// <param name="DoctorId"></param>
+        /// <param name="Category"></param>
+        /// <returns></returns>
+        public int RemoveHealthCoach(DataConnection pclsCache, string PatientId, string DoctorId, string CategoryCode)
+        {
+            int ret = 0;
+            int Status = -1;
+            GPlanInfo ret1 = new GPlanInfo();
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Ps.Plan.GetExecutingPlan(pclsCache.CacheConnectionObject, PatientId);
+                if (list != null)//病人有正在执行的计划，但是没有对应该医生的正在执行的计划
+                {
+                    if ((ret1.Status != "3") && (ret1.DoctorId == DoctorId))//该病人对于当前医生来说，无正在执行的计划
+                    {
+                        Status = (int)Ps.Appointment.GetStatusById(pclsCache.CacheConnectionObject, DoctorId, PatientId);//当Ps.Appointment预约表的Status为0时才删除
+                        if (Status == 0)
+                        {
+                            ret = (int)Ps.Appointment.Delete(pclsCache.CacheConnectionObject, DoctorId, PatientId);
+                            ret = (int)Ps.BasicInfoDetail.DeleteDataByItemCode(pclsCache.CacheConnectionObject, PatientId, CategoryCode, "Doctor", DoctorId);
+                            ret = (int)Ps.DoctorInfoDetail.DeleteDataByItemCode(pclsCache.CacheConnectionObject, DoctorId, CategoryCode, "Patient", PatientId);
+                        }
+                    }
+                }
+                else
+                {
+                    //该病人无正在执行的计划
+                    Status = (int)Ps.Appointment.GetStatusById(pclsCache.CacheConnectionObject, DoctorId, PatientId);//当Ps.Appointment预约表的Status为0时才删除
+                    if (Status == 0)
+                    {
+                        ret = (int)Ps.Appointment.Delete(pclsCache.CacheConnectionObject, DoctorId, PatientId);
+                        string Doctor_Id = " " + DoctorId.ToUpper();//数据库的数据Value这一项加了个空格,而且小写变大写
+                        string Patient_Id = " " + PatientId.ToUpper();
+                        ret = (int)Ps.BasicInfoDetail.DeleteDataByItemCode(pclsCache.CacheConnectionObject, PatientId, CategoryCode, "Doctor", Doctor_Id);
+                        ret = (int)Ps.DoctorInfoDetail.DeleteDataByItemCode(pclsCache.CacheConnectionObject, DoctorId, CategoryCode, "Patient", Patient_Id);
+                    }
+                }
+
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UserMethod.RemoveHealthCoach", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        public List<PatientsByStatus> GetPatientsByStatus(DataConnection pclsCache, string DoctorId, string Status)
+        {
+            List<PatientsByStatus> items = new List<PatientsByStatus>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Appointment.GetPatientsByStatus(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
+                cmd.Parameters.Add("Status", CacheDbType.NVarChar).Value = Status;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    PatientsByStatus item = new PatientsByStatus();
+                    item.PatientId = cdr["PatientId"].ToString();
+                    item.Module = cdr["Module"].ToString();
+                    item.Status = cdr["Status"].ToString();
+                    item.Description = cdr["Description"].ToString();
+                    item.ApplicationTime = cdr["ApplicationTime"].ToString();
+                    item.AppointmentTime = cdr["AppointmentTime"].ToString();
+                    item.AppointmentAdd = cdr["AppointmentAdd"].ToString();
+                    items.Add(item);
+                }
+                return items;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetPatientsByStatus", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+
+        /// <summary>
+        /// 获取需要知道的项目的值 SYF 20150423 syf 20151027
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <param name="CategoryCode"></param>
+        /// <param name="ItemCode"></param>
+        /// <param name="ItemSeq"></param>
+        /// <returns></returns>
+        public string GetPatientValue(DataConnection pclsCache, string UserId, string CategoryCode, string ItemCode, int ItemSeq)
+        {
+            string ret = "";
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return ret;
+
+                }
+                ret = (string)Ps.BasicInfoDetail.GetValue(pclsCache.CacheConnectionObject, UserId, CategoryCode, ItemCode, ItemSeq);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "保存失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetPatientValue", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+
+
+        public List<AppoitmentPatient> GetAppoitmentPatientList(DataConnection pclsCache, string healthCoachID, string Status)
+        {
+            List<AppoitmentPatient> list = new List<AppoitmentPatient>();
+            List<PatientsByStatus> list1 = new List<PatientsByStatus>();
+            try
+            {
+                list1 = GetPatientsByStatus(pclsCache, healthCoachID, Status);
+                if (list1 != null)
+                {
+                    for (int i = 0; i < list1.Count; i++)
+                    {
+                        AppoitmentPatient app = new AppoitmentPatient();
+                        app.PatientID = list1[i].PatientId;
+                        app.module = list1[i].Module;
+                        app.AppointmentStatus = list1[i].Status;
+                        app.Description = list1[i].Description;
+                        app.ApplicationTime = list1[i].ApplicationTime;
+                        app.ApplicationTime = list1[i].ApplicationTime;
+                        app.AppointmentAdd = list1[i].AppointmentAdd;
+
+                        if (app.PatientID != "")
+                        {
+                            //list[i].imageURL = Ps.DoctorInfoDetail.GetValue(pclsCache.CacheConnectionObject, app.PatientID, "Contact", "Contact001_4", 1);
+                            app.imageURL = new UsersMethod().GetPatientValue(pclsCache, app.PatientID, "Contact", "Contact001_4", 1);//病人照片
+                            UserBasicInfo ret = new UserBasicInfo();
+                            ret = new UsersMethod().GetUserBasicInfo(pclsCache, app.PatientID);
+                            if (ret != null)
+                            {
+                                app.name = ret.UserName;
+
+                                app.age = ret.Age;
+                                //app.age = Convert.ToString(Ps.BasicInfo.GetAgeByBirthDay(pclsCache.CacheConnectionObject, Convert.ToInt32(ret.Birthday)));
+
+                                app.sex = ret.Gender;
+                            }
+                        }
+                        list.Add(app);
+                    }
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UserMethod.GetAppoitmentPatientList", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
         #region 第二层
         public int RegisterRelated(DataConnection pclsCache, string PwType,string userId,string Password, string UserName,string role,string revUserId,string TerminalName,string  TerminalIP,int DeviceType)
         {

@@ -238,6 +238,7 @@ namespace CDMISrestful.DataModels
     {
         public string UserName { get; set; }
         public string Birthday { get; set; }
+        public string Age { get; set; }
         public string Gender { get; set; }
         public string BloodType { get; set; }
         public string IDNo { get; set; }
@@ -363,5 +364,131 @@ namespace CDMISrestful.DataModels
         public string activityDegree { get; set; }
         public string Description { get; set; }
 
+    }
+
+    public class DetailsByDoctorId
+    {
+        public string PatientId { get; set; }
+        public string Name { get; set; }
+        public string Comment { get; set; }
+        public string Score { get; set; }
+        public string CommentTime { get; set; }
+    }
+
+    public class CommentList
+    {
+        public string PatientId { get; set; }
+        public string imageURL { get; set; }
+        public string Name { get; set; }
+        public string Comment { get; set; }
+        public string Score { get; set; }
+        public string CommentTime { get; set; }
+    }
+
+    public class PatientDetailInfo1 //注意与上面的PatientDetailInfo区分，差个1
+    {
+        public string PhoneNumber { get; set; }
+        public string HomeAddress { get; set; }
+        public string Occupation { get; set; }
+        public string Nationality { get; set; }
+        public string EmergencyContact { get; set; }
+        public string EmergencyContactPhoneNumber { get; set; }
+        public string PhotoAddress { get; set; }
+        public string IDNo { get; set; }
+        public string Height { get; set; }
+        public string Weight { get; set; }
+    }
+    public class HealthCoachListByPatient
+    {
+        public string HealthCoachID { get; set; }
+        public string imageURL { get; set; }
+        public string Name { get; set; }
+        public string module { get; set; }
+        public Message latestMessage { get; set; }
+    }
+
+
+    public class DoctorsByPatientId
+    {
+        public string DoctorId { get; set; }
+        public string DoctorName { get; set; }
+        public string ItemSeq { get; set; }
+    }
+
+    public class AppoitmentPatient
+    {
+        public string PatientID { get; set; }
+        public string imageURL { get; set; }
+        public string name { get; set; }
+        public string age { get; set; }
+        public string sex { get; set; }
+        public string module { get; set; }
+        public string AppointmentStatus { get; set; }
+        public string Description { get; set; }
+        public string ApplicationTime { get; set; }
+        public string AppointmentAdd { get; set; }
+    }
+
+    public class PatientsByStatus
+    {
+        public string PatientId { get; set; }
+        public string Module { get; set; }
+        public string Status { get; set; }
+        public string Description { get; set; }
+        public string ApplicationTime { get; set; }
+        public string AppointmentTime { get; set; }
+        public string AppointmentAdd { get; set; }
+    }
+
+    public class ReserveHealthCoach
+    {
+        [Required(ErrorMessage = "请传入DoctorId")]
+        public string DoctorId { get; set; }
+        [Required(ErrorMessage = "请传入PatientId")]
+        public string PatientId { get; set; }
+        [Required(ErrorMessage = "请传入Module")]
+        public string Module { get; set; }
+        [Required(ErrorMessage = "请输入Description")]
+        public string Description { get; set; }
+        [Required(ErrorMessage = "请输入Status")]
+        public int Status { get; set; }
+        [Required(ErrorMessage = "请输入ApplicationTime")]
+        public DateTime ApplicationTime { get; set; }
+        [Required(ErrorMessage = "请输入AppointmentTime")]
+        public DateTime AppointmentTime { get; set; }
+        [Required(ErrorMessage = "请输入AppointmentAdd")]
+        public string AppointmentAdd { get; set; }
+        public string Redundancy { get; set; }
+        [Required(ErrorMessage = "revUserId")]
+        public string revUserId { get; set; }
+        [Required(ErrorMessage = "TerminalName")]
+        public string TerminalName { get; set; }
+        [Required(ErrorMessage = "TerminalIP")]
+        public string TerminalIP { get; set; }
+        [Required(ErrorMessage = "DeviceType")]
+        public int DeviceType { get; set; }
+    }
+
+    public class UpdateReservation
+    {
+        public string DoctorId { get; set; }
+        public string PatientId { get; set; }
+        public int Status { get; set; }
+        public string revUserId { get; set; }
+        public string TerminalName { get; set; }
+        public string TerminalIP { get; set; }
+        public int DeviceType { get; set; }
+    }
+
+    public class GetPatientDetailInfo
+    {
+        public string PhoneNumber { get; set; }
+        public string HomeAddress { get; set; }
+        public string Occupation { get; set; }
+        public string Nationality { get; set; }
+        public string EmergencyContact { get; set; }
+        public string EmergencyContactPhoneNumber { get; set; }
+        public string PhotoAddress { get; set; }
+        public string IDNo { get; set; }
     }
 }

@@ -618,5 +618,47 @@ namespace CDMISrestful.Models
             return usersMethod.GetCalendar(pclsCache, DoctorId);
 
         }
+
+        #region<新增bySYF>
+        public List<HealthCoachList> GetHealthCoachList()
+        {
+            return usersMethod.GetHealthCoachList(pclsCache);
+        }
+        public HealthCoachInfo GetHealthCoachInfo(string HealthCoachID)
+        {
+            return usersMethod.GetHealthCoachInfo(pclsCache, HealthCoachID);
+        }
+
+        public int ReserveHealthCoach(string DoctorId, string PatientId, string Module, string Description, int Status, DateTime ApplicationTime, DateTime AppointmentTime, string AppointmentAdd, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            return usersMethod.ReserveHealthCoach(pclsCache, DoctorId, PatientId, Module, Description, Status, ApplicationTime, AppointmentTime, AppointmentAdd, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
+        }
+
+        public int UpdateReservation(string DoctorId, string PatientId, int Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            return usersMethod.UpdateReservation(pclsCache, DoctorId, PatientId, Status, revUserId, TerminalName, TerminalIP, DeviceType);
+        }
+
+        public List<CommentList> GetCommentList(string DoctorId, string CategoryCode)
+        {
+            return usersMethod.GetCommentList(pclsCache, DoctorId, CategoryCode);
+        }
+
+        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(string PatientId, string CategoryCode)
+        {
+            return usersMethod.GetHealthCoachListByPatient(pclsCache, PatientId, CategoryCode);
+        }
+
+        public int RemoveHealthCoach(string PatientId, string DoctorId, string CategoryCode)
+        {
+            return usersMethod.RemoveHealthCoach(pclsCache, PatientId, DoctorId, CategoryCode);
+        }
+
+        public List<AppoitmentPatient> GetAppoitmentPatientList(string healthCoachID, string Status)
+        {
+            return usersMethod.GetAppoitmentPatientList(pclsCache, healthCoachID, Status);
+        }
+
+        #endregion
     }
 }

@@ -1098,6 +1098,13 @@
             <param name="Indicators"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetMaxSortNo(System.String)">
+            <summary>
+            Ps.TreatmentIndicators GetMaxSortNo
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.ServiceController.sendSMS(System.String,System.String)">
             <summary>
             发送验证码短信 20151016 CSQ
@@ -2188,6 +2195,55 @@
             <param name="TerminalName"></param>
             <param name="TerminalIP"></param>
             <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetCommentList(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
+            <summary>
+            获取某专员的评论列表 SYF 20151026
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="DoctorId"></param>
+            <param name="CategoryCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetCategoryName(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            GetCategoryName WF 2014-12-2 //syf 20151027
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="Code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetValue(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.Int32)">
+            <summary>
+             获取需要知道的项目的值 ZC 20150603 //syf20151027
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="UserId"></param>
+            <param name="CategoryCode"></param>
+            <param name="ItemCode"></param>
+            <param name="ItemSeq"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.RemoveHealthCoach(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String)">
+            <summary>
+            解除专员 syf 20151026
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="PatientId"></param>
+            <param name="DoctorId"></param>
+            <param name="Category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetPatientValue(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            获取需要知道的项目的值 SYF 20150423 syf 20151027
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="UserId"></param>
+            <param name="CategoryCode"></param>
+            <param name="ItemCode"></param>
+            <param name="ItemSeq"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.VitalInfoMethod.SetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
