@@ -87,9 +87,9 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/Tasks")]
         [EnableQuery]
-        public List<PsTask> GetTasks(string PlanNo, string ParentCode,string Date)
+        public List<PsTask> GetTasks(string PlanNo, string ParentCode, string Date, string PatientId)
         {
-            return repository.GetTasks(PlanNo, ParentCode,Date);
+            return repository.GetTasks(PlanNo, ParentCode, Date, PatientId);
         }
 
         /// <summary>

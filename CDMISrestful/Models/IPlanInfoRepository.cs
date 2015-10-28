@@ -30,7 +30,7 @@ namespace CDMISrestful.Models
        
         List<PlanDeatil> GetPlanList34ByM(string PatientId, string Module);
         List<ComplianceListByPeriod> GetAllComplianceListByPeriod(string PatientId, string PlanNo, int StartDate, int EndDate);
-        List<PsTask> GetTasks(string PlanNo, string ParentCode,string Date);
+        List<PsTask> GetTasks(string PlanNo, string ParentCode,string Date,string PatientId);
         List<TaskDetail> GetTaskDetails(string CategoryCode, string Code);
         int PsTemplateSetData(string DoctorId, int TemplateCode, string TemplateName, string Description, DateTime RecordDate, string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
         int PsTemplateDetailSetData(string DoctorId, int TemplateCode, string CategoryCode, string ItemCode, string Value, string Description, string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);

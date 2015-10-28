@@ -258,6 +258,7 @@ namespace CDMISrestful.DataModels
         public string GroupHeaderFlag { get; set; }
         public string ControlType { get; set; }
         public string OptionCategory { get; set; }
+        public string VitalSignValue { get; set; }
 
     }
     public class TargetByCode

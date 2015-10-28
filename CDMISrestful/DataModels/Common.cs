@@ -17,5 +17,7 @@ namespace CDMISrestful.DataModels
     public class Result
     {
         public string result { get; set; }
+
     }
+
 }

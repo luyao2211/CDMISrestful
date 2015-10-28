@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+
 namespace CDMISrestful.Controllers
 {
     [RESTAuthorizeAttribute]
@@ -24,6 +25,12 @@ namespace CDMISrestful.Controllers
         public List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(string UserId, string CategoryCode)
         {
             return repository.GetItemInfoByPIdAndModule(UserId, CategoryCode);
+            //var list = repository.GetItemInfoByPIdAndModule(UserId, CategoryCode);
+            //var res = new System.Web.Mvc.JsonResult();
+            //res.Data = list;
+
+            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, res);
+            //return response;
         }
 
         ///// <summary>

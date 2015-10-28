@@ -894,9 +894,9 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PatientId, PlanNo, StartDate, EndDate);
         }
 
-        public List<PsTask> GetTasks(string PlanNo, string ParentCode,string Date)
+        public List<PsTask> GetTasks(string PlanNo, string ParentCode, string Date, string PatientId)
         {
-            return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date);
+            return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date,PatientId);
         }
     }
 }
