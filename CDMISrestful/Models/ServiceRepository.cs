@@ -8,11 +8,14 @@ using System.Text;
 using System.Web;
 using ServiceStack.Redis;
 using CDMISrestful.CommonLibrary;
+using CDMISrestful.DataModels;
+using CDMISrestful.DataMethod;
 
 namespace CDMISrestful.Models
 {
     public class ServiceRepository : IServiceRepository
     {
+        DataConnection pclsCache = new DataConnection();
         public string sendSMS(string mobile, string smsType)
         {
             try
@@ -218,6 +221,55 @@ namespace CDMISrestful.Models
             }
         }
 
-
+        /// <summary>
+        /// 浙大输出接口 LY 2015-10-29
+        /// </summary>
+        /// <param name="PatientId"></param>
+        /// <returns></returns>
+        public List<TypeAndName> GetPatientInfo(string PatientId)
+        {
+            List<TypeAndName> List = new List<TypeAndName>();
+            PatBasicInfo BasicInfo = new UsersRepository().GetPatBasicInfo(PatientId);
+            TypeAndName NewLine1 = new TypeAndName
+            {
+                Type = "name",
+                Name = BasicInfo.UserName
+            };
+            List.Add(NewLine1);
+            TypeAndName NewLine2 = new TypeAndName
+            {
+                Type = "age",
+                Name = BasicInfo.Age
+            };
+            List.Add(NewLine2);
+            TypeAndName NewLine3 = new TypeAndName
+            {
+                Type = "sex",
+                Name = BasicInfo.Gender
+            };
+            List.Add(NewLine3);
+            string Height = new VitalInfoRepository().GetLatestPatientVitalSigns(PatientId, "Height", "Height_1");
+            TypeAndName NewLine4 = new TypeAndName
+            {
+                Type = "height",
+                Name = Height
+            };
+            List.Add(NewLine4);
+            string Weight = new VitalInfoRepository().GetLatestPatientVitalSigns(PatientId, "Weight", "Weight_1");
+            TypeAndName NewLine5 = new TypeAndName
+            {
+                Type = "weight",
+                Name = Weight
+            };
+            List.Add(NewLine5);
+            string PhoneNumber = new UsersMethod().GetPhoneNoByUserId(pclsCache, PatientId);
+            TypeAndName NewLine6 = new TypeAndName
+            {
+                Type = "mobilephone",
+                Name = PhoneNumber
+            };
+            List.Add(NewLine6);
+            return List;
+        }
     }
 }

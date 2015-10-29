@@ -7,6 +7,7 @@ using System.Web.Http;
 using CDMISrestful.Models;
 using CDMISrestful.CommonLibrary;
 using System.Web;
+using CDMISrestful.DataModels;
 
 namespace CDMISrestful.Controllers
 {
@@ -64,5 +65,20 @@ namespace CDMISrestful.Controllers
             return new ExceptionHandler().Common(Request, visitorIP);
         }
 
+        /// <summary>
+        /// 浙大输出接口 LY 2015-10-29
+        /// </summary>
+        /// <param name="PatientId"></param>
+        /// <returns></returns>
+        public HttpResponseMessage GetPatientInfo(string PatientId)
+        {
+            List<TypeAndName> list = repository.GetPatientInfo(PatientId);
+            HttpResponseMessage ret = new ExceptionHandler().toJson(list);
+            ret.Headers.Add("type", "docapp");
+            ret.Headers.Add("action", "004");
+            ret.Headers.Add("content", "#base64");
+            ret.Headers.Add("contentkey", "#HQ*#base64");
+            return ret;
+        }
     }
 }
