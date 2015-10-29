@@ -23,10 +23,10 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/ModuleInfo/{UserId}/{CategoryCode}")]
         //public List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(string UserId, string CategoryCode)
-        public HttpResponseMessage GetItemInfoByPIdAndModule(string UserId, string CategoryCode)
+        public List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(string UserId, string CategoryCode)
         {
-            List<PatBasicInfoDetail> ret = repository.GetItemInfoByPIdAndModule(UserId, CategoryCode);
-            return ExceptionHandler.toJson(ret);
+            return repository.GetItemInfoByPIdAndModule(UserId, CategoryCode);
+            //return ExceptionHandler.toJson(ret);
             //var list = repository.GetItemInfoByPIdAndModule(UserId, CategoryCode);
             //var res = new System.Web.Mvc.JsonResult();
             //res.Data = list;

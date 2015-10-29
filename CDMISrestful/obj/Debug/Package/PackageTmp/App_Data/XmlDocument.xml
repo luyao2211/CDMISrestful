@@ -680,6 +680,63 @@
             <param name="SortNo"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.ClinicInfoController.GetClinicalInfoList(System.String)">
+            <summary>
+            获取患者的就诊信息 Table:Ps.InPatientInfo和Ps.OutPatientInfo Author:WF 2015-10-28"
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ClinicInfoController.GetLatestHUserIdByHCode(System.String,System.String)">
+            <summary>
+            获取患者在就诊医院的就诊号 Table：Ps.UserIdMatch Author:WF  2015-10-28
+            </summary>
+            <param name="UserId"></param>
+            <param name="HospitalCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ClinicInfoController.GetSymptomsList(System.String,System.String)">
+            <summary>
+            已有症状列表 Table:Ps.Symptoms  Author:WF 2015-10-28
+            </summary>
+            <param name="UserId"></param>
+            <param name="VisitId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ClinicInfoController.GetDiagnosisInfoList(System.String,System.String)">
+            <summary>
+            根据患者Id，获取诊断信息 Table:Ps.Diagnosis Author:WF 2015-10-28
+            </summary>
+            <param name="UserId"></param>
+            <param name="VisitId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ClinicInfoController.GetExaminationList(System.String,System.String)">
+            <summary>
+            根据患者Id,获取患者的检查信息  Table:Ps.Examination  Author:WF  2015-10-28
+            </summary>
+            <param name="UserId"></param>
+            <param name="VisitId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ClinicInfoController.GetExamDtlList(System.String,System.String,System.String,System.String)">
+            <summary>
+            获取检查参数列表 Table:Ps.ExamDetails  Author:WF 2015-10-28
+            </summary>
+            <param name="UserId"></param>
+            <param name="VisitId"></param>
+            <param name="SortNo"></param>
+            <param name="ItemCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ClinicInfoController.GetLabTestList(System.String,System.String)">
+            <summary>
+            根据患者Id, 获取患者的化验信息 Table:Ps.LabTest  Author:WF  2015-10-28
+            </summary>
+            <param name="UserId"></param>
+            <param name="VisitId"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.CmMstInfoItemController.GetAll">
             <summary>
             路径：有待确定
@@ -2124,6 +2181,14 @@
         <member name="M:CDMISrestful.DataMethod.UsersMethod.GetBasicInfo(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
             GetBasicInfo WF 2014-12-2  //WF 20151010
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetModuleByDoctorId(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            GetModuleByDoctorId WF 2015-06-04 //syf 20151027
             </summary>
             <param name="pclsCache"></param>
             <param name="UserId"></param>

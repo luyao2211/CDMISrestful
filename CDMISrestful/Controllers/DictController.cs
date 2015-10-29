@@ -52,11 +52,11 @@ namespace CDMISrestful.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("Api/v1/Dict/DiabetesDrug")]
-        //[EnableQuery]
-        public HttpResponseMessage GetDiabetesDrug()
+        [EnableQuery]
+        public List<CmAbsType> GetDiabetesDrug()
         {
-            List<CmAbsType> ret = repository.GetDiabetesDrug();
-            return ExceptionHandler.toJson(ret);
+            return repository.GetDiabetesDrug();
+            //return ExceptionHandler.toJson(ret);
 
         }
 
