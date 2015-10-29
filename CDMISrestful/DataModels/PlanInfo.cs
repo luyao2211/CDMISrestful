@@ -576,8 +576,10 @@ namespace CDMISrestful.DataModels
         public int Date { get; set; }
         public double Compliance { get; set; }
         public string Description { get; set; }
-        public VitalInfo[] AllSignsByPeriod { get; set; }
-
-
+        public string Value { get; set; }
+        public string Task { get; set; }
+        public string BulletValue { get; set; }
+        public string BulletColor { get; set; }
+        public string CustomBullet { get; set; }
     }
 }

@@ -873,17 +873,7 @@
             <summary>
             Ps.Plan.SetData GL 2015-10-13
             </summary>
-            <param name="PlanNo"></param>
-            <param name="PatientId"></param>
-            <param name="StartDate"></param>
-            <param name="EndDate"></param>
-            <param name="Module"></param>
-            <param name="Status"></param>
-            <param name="DoctorId"></param>
-            <param name="piUserId"></param>
-            <param name="piTerminalName"></param>
-            <param name="piTerminalIP"></param>
-            <param name="piDeviceType"></param>
+            <param name="item"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.PostComplianceDetail(CDMISrestful.DataModels.ComplianceDetail)">
@@ -1074,11 +1064,21 @@
             <param name="Module"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetAllComplianceListByPeriod(System.String,System.String,System.Int32,System.Int32)">
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetAllComplianceListByPeriod(System.String,System.Int32,System.Int32)">
             <summary>
             GetAllComplianceListByPeriod 获取某计划的某段时间(包括端点)的依从率列表 GL 2015-10-13
             </summary>
             <param name="PatientId"></param>
+            <param name="PlanNo"></param>
+            <param name="StartDate"></param>
+            <param name="EndDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetComplianceAllSignsListByPeriod(System.String,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            计划信息展示 WF20151029
+            </summary>
+            <param name="UserId"></param>
             <param name="PlanNo"></param>
             <param name="StartDate"></param>
             <param name="EndDate"></param>
@@ -1316,8 +1316,62 @@
         </member>
         <member name="M:CDMISrestful.Controllers.UsersController.GetHealthCoachList">
             <summary>
-            获取专员列表
+            GetHealthCoachList 获取所有健康专员列表 SYF
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetHealthCoachInfo(System.String)">
+            <summary>
+            GetHealthCoachInfo 获取某个健康专员的具体信息 SYF
+            </summary>
+            <param name="HealthCoachID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.ReserveHealthCoach(CDMISrestful.DataModels.ReserveHealthCoach)">
+            <summary>
+            ReserveHealthCoach 预约健康专员 SYF
+            </summary>
+            <param name="ReserveHealthCoach"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.UpdateReservation(CDMISrestful.DataModels.UpdateReservation)">
+            <summary>
+            UpdateReservation 更新预约状态 SYF
+            </summary>
+            <param name="UpdateReservation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetCommentList(System.String,System.String)">
+            <summary>
+            GetCommentList 获取某专员（医生）某个模块的评论列表 SYF
+            </summary>
+            <param name="DoctorId"></param>
+            <param name="CategoryCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetHealthCoachListByPatient(System.String,System.String)">
+            <summary>
+            GetHealthCoachListByPatient 获取某病人对应的专员列表 SYF
+            </summary>
+            <param name="PatientId"></param>
+            <param name="CategoryCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.RemoveHealthCoach(System.String,System.String,System.String)">
+            <summary>
+            RemoveHealthCoach 某病人解除某一模块的某个健康专员 SYF
+            </summary>
+            <param name="PatientId"></param>
+            <param name="DoctorId"></param>
+            <param name="CategoryCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetAppoitmentPatientList(System.String,System.String)">
+            <summary>
+            GetAppoitmentPatientList 获取某专员对应的病人列表 SYF
+            </summary>
+            <param name="healthCoachID"></param>
+            <param name="Status"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.VitalInfoController.GetLatestPatientVitalSigns(System.String,System.String,System.String)">
@@ -1895,7 +1949,7 @@
             <param name="EndDate"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetComplianceListByPeriod(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.Int32,System.Int32)">
+        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetComplianceListByPeriod(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.Int32)">
             <summary>
             syf 2015-10-10 获取某计划的某段时间(包括端点)的依从率列表
             </summary>

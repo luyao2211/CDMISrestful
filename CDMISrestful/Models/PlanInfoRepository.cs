@@ -905,8 +905,10 @@ namespace CDMISrestful.Models
         {
             return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date,PatientId);
         }
-        public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate)
+
+        public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate, string ItemType, string ItemCode)
         {
+            List<ComplianceAllSignsListByPeriod> items = new List<ComplianceAllSignsListByPeriod>();
             List<ComplianceListByPeriod> items1 = new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PlanNo, StartDate, EndDate);
             List<VitalInfo> items2 = new VitalInfoMethod().GetAllSignsByPeriod(pclsCache, UserId, StartDate, EndDate);
             List<ComplianceAllSignsListByPeriod> items3 = new List<ComplianceAllSignsListByPeriod>();
@@ -918,10 +920,7 @@ namespace CDMISrestful.Models
                     Description = items1[i].Description
                 });
             }
-            foreach (var p in items3)
-            {
-                p.AllSignsByPeriod = items2.Where(AllSignsByPeriod => AllSignsByPeriod.RecordDate == p.Date.ToString()).ToArray();
-            }
+            
             return items3;
         }
     }

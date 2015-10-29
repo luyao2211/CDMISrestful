@@ -37,7 +37,7 @@ namespace CDMISrestful.Models
         List<TemplateInfo> GetTemplateList(string DoctorId);
         List<TemplateInfoDtl> GetTemplateDetails(string DoctorId, string TemplateCode, string ParentCode);
         TargetByCode GetTarget(string PlanNo, string Type, string Code);
-        List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate);
+        List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate, string ItemType, string ItemCode);
 
     }
 }

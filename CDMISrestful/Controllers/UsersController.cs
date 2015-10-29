@@ -252,7 +252,7 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// 获取专员列表
+        /// GetHealthCoachList 获取所有健康专员列表 SYF
         /// </summary>
         /// <returns></returns>
         [Route("Api/v1/Users/HealthCoaches")]
@@ -261,12 +261,22 @@ namespace CDMISrestful.Controllers
             return repository.GetHealthCoachList();
         }
 
+        /// <summary>
+        /// GetHealthCoachInfo 获取某个健康专员的具体信息 SYF
+        /// </summary>
+        /// <param name="HealthCoachID"></param>
+        /// <returns></returns>
         [Route("Api/v1/Users/GetHealthCoachInfo")]
         public HealthCoachInfo GetHealthCoachInfo(string HealthCoachID)
         {
             return repository.GetHealthCoachInfo(HealthCoachID);
         }
 
+        /// <summary>
+        /// ReserveHealthCoach 预约健康专员 SYF
+        /// </summary>
+        /// <param name="ReserveHealthCoach"></param>
+        /// <returns></returns>
         [Route("Api/v1/Users/ReserveHealthCoach")]
         public HttpResponseMessage ReserveHealthCoach(ReserveHealthCoach ReserveHealthCoach)
         {
@@ -274,6 +284,11 @@ namespace CDMISrestful.Controllers
             return new ExceptionHandler().SetData(Request, ret);
         }
 
+        /// <summary>
+        /// UpdateReservation 更新预约状态 SYF
+        /// </summary>
+        /// <param name="UpdateReservation"></param>
+        /// <returns></returns>
         [Route("Api/v1/Users/UpdateReservation")]
         public HttpResponseMessage UpdateReservation(UpdateReservation UpdateReservation)
         {
@@ -281,18 +296,37 @@ namespace CDMISrestful.Controllers
             return new ExceptionHandler().SetData(Request, ret);
         }
 
+        /// <summary>
+        /// GetCommentList 获取某专员（医生）某个模块的评论列表 SYF
+        /// </summary>
+        /// <param name="DoctorId"></param>
+        /// <param name="CategoryCode"></param>
+        /// <returns></returns>
         [Route("Api/v1/Users/GetCommentList")]
         public List<CommentList> GetCommentList(string DoctorId, string CategoryCode)
         {
             return repository.GetCommentList(DoctorId, CategoryCode);
         }
 
+        /// <summary>
+        /// GetHealthCoachListByPatient 获取某病人对应的专员列表 SYF
+        /// </summary>
+        /// <param name="PatientId"></param>
+        /// <param name="CategoryCode"></param>
+        /// <returns></returns>
         [Route("Api/v1/Users/GetHealthCoachListByPatient")]
         public List<HealthCoachListByPatient> GetHealthCoachListByPatient(string PatientId, string CategoryCode)
         {
             return repository.GetHealthCoachListByPatient(PatientId, CategoryCode);
         }
 
+        /// <summary>
+        /// RemoveHealthCoach 某病人解除某一模块的某个健康专员 SYF
+        /// </summary>
+        /// <param name="PatientId"></param>
+        /// <param name="DoctorId"></param>
+        /// <param name="CategoryCode"></param>
+        /// <returns></returns>
         [Route("Api/v1/Users/RemoveHealthCoach")]
         public HttpResponseMessage RemoveHealthCoach(string PatientId, string DoctorId, string CategoryCode)
         {
@@ -300,6 +334,12 @@ namespace CDMISrestful.Controllers
             return new ExceptionHandler().DeleteData(Request, ret);
         }
 
+        /// <summary>
+        /// GetAppoitmentPatientList 获取某专员对应的病人列表 SYF
+        /// </summary>
+        /// <param name="healthCoachID"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
         [Route("Api/v1/Users/GetAppoitmentPatientList")]
         public List<AppoitmentPatient> GetAppoitmentPatientList(string healthCoachID, string Status)
         {

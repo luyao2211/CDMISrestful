@@ -19,17 +19,7 @@ namespace CDMISrestful.Controllers
         /// <summary>
         /// Ps.Plan.SetData GL 2015-10-13
         /// </summary>
-        /// <param name="PlanNo"></param>
-        /// <param name="PatientId"></param>
-        /// <param name="StartDate"></param>
-        /// <param name="EndDate"></param>
-        /// <param name="Module"></param>
-        /// <param name="Status"></param>
-        /// <param name="DoctorId"></param>
-        /// <param name="piUserId"></param>
-        /// <param name="piTerminalName"></param>
-        /// <param name="piTerminalIP"></param>
-        /// <param name="piDeviceType"></param>
+        /// <param name="item"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/Plan")]
         [ModelValidationFilter]
@@ -373,9 +363,9 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetComplianceAllSignsListByPeriod")]
         [EnableQuery]
-        public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate)
+        public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate,string ItemType,string ItemCode)
         {
-            return repository.GetComplianceAllSignsListByPeriod(UserId, PlanNo, StartDate, EndDate);
+            return repository.GetComplianceAllSignsListByPeriod(UserId, PlanNo, StartDate, EndDate, ItemType, ItemCode);
         }
     }
 }
