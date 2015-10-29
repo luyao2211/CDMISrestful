@@ -38,5 +38,7 @@ namespace CDMISrestful.Models
         List<TemplateInfoDtl> GetTemplateDetails(string DoctorId, string TemplateCode, string ParentCode);
         TargetByCode GetTarget(string PlanNo, string Type, string Code);
 
+
+        int DeteteTask(string Plan, string Type, string Code, string SortNo);
     }
 }

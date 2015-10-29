@@ -363,5 +363,20 @@ namespace CDMISrestful.Controllers
         {
             return repository.GetAllComplianceListByPeriod(PatientId, PlanNo, StartDate, EndDate);
         }
+
+        /// <summary>
+        /// 根据主键删除Ps.Task任务表的一条数据 SYF 20151029
+        /// </summary>
+        /// <param name="Plan"></param>
+        /// <param name="Type"></param>
+        /// <param name="Code"></param>
+        /// <param name="SortNo"></param>
+        /// <returns></returns>
+        [Route("Api/v1/PlanInfo/DeteteTask")]
+        public HttpResponseMessage DeteteTask(string Plan, string Type, string Code, string SortNo)
+        {
+            int ret = repository.DeteteTask(Plan, Type, Code, SortNo);
+            return new ExceptionHandler().DeleteData(Request, ret);
+        }
     }
 }

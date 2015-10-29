@@ -905,5 +905,11 @@ namespace CDMISrestful.Models
         {
             return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date,PatientId);
         }
+
+        //根据主键删除Ps.Task一条数据 SYF 2015-10-29
+        public int DeteteTask(string Plan, string Type, string Code, string SortNo)
+        {
+            return new PlanInfoMethod().DeteteTask(pclsCache, Plan, Type, Code, SortNo);
+        }
     }
 }
