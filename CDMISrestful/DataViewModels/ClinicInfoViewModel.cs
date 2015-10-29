@@ -22,4 +22,17 @@ namespace CDMISrestful.DataViewModels
         }
 
     }
+    public class ClinicalInfoListViewModel
+    {
+        public List<PsInPatInfo> DT_InPatientInfo { get; set; }
+        public List<PsOutPatInfo> DT_OutPatientInfo { get; set; }
+
+        public ClinicalInfoListViewModel()
+        {
+            DT_InPatientInfo = new List<PsInPatInfo>();
+            DT_OutPatientInfo = new List<PsOutPatInfo>();
+           
+        }
+
+    }
 }
