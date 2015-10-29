@@ -20,6 +20,7 @@ namespace CDMISrestful.Models
         List<ExamInfo> GetExaminationList(string UserId, string VisitId);
         List<ExamDetails> GetExamDtlList(string UserId, string VisitId, string SortNo, string ItemCode);
         List<LabTestList> GetLabTestList(string UserId, string VisitId);
-        List<DrugRecord> GetDrugRecordList(string UserId, string VisitId);
+        List<DrugRecordList> GetDrugRecordList(string UserId, string VisitId);
+
     }
 }

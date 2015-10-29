@@ -455,11 +455,11 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public List<DrugRecord> GetDrugRecordList(string UserId, string VisitId)
+        public List<DrugRecordList> GetDrugRecordList(string UserId, string VisitId)
         {
             try
             {
-                return clinicInfoMethod.GetDrugRecord(pclsCache, UserId, VisitId);
+                return clinicInfoMethod.GetDrugRecordList(pclsCache, UserId, VisitId);
             }
             catch (Exception ex)
             {
