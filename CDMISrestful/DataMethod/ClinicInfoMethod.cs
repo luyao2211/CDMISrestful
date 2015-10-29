@@ -796,12 +796,11 @@ namespace CDMISrestful.DataMethod
 
                         //用药开始时间处理（时间轴标准）
                         string StartDate = DateTime.Parse(cdr["StartDateTime"].ToString()).ToString("yyyyMMdd");
-
                         //用药结束时间处理
                         string EndDate = cdr["StopDateTime"].ToString();
-
                         string Content = "";
                         Content += cdr["OrderContent"].ToString();
+                        #region
                         DrugRecord NewLine = new DrugRecord();
                         NewLine.VisitId = cdr["VisitId"].ToString();
                         NewLine.OrderNo = cdr["OrderNo"].ToString();
@@ -824,10 +823,13 @@ namespace CDMISrestful.DataMethod
                         NewLine.FreqInteval = cdr["FreqInteval"].ToString();
                         NewLine.FreqIntevalUnitCode = cdr["FreqIntevalUnitCode"].ToString();
                         NewLine.FreqIntevalUnit = cdr["FreqIntevalUnit"].ToString();
-                        NewLine.HistoryContent = cdr["HistoryContent"].ToString();
-                        NewLine.StartDate = cdr["StartDate"].ToString();
-                        NewLine.StopDate = cdr["StopDate"].ToString();
-                    }
+                        NewLine.HistoryContent = Content;
+                        NewLine.StartDate = StartDate;
+                        NewLine.StopDate = EndDate;
+
+                        list.Add(NewLine);
+                        #endregion
+                    }                   
                 }
                 return list;
             }

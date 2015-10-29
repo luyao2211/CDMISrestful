@@ -175,9 +175,9 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
 
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
-        public List<DrugRecord> GetDrugRecordList(string UserId, string VisitId)
+        public List<DrugRecordList> GetDrugRecordList(string UserId, string VisitId)
         {
-            List<DrugRecord> ret = repository.GetDrugRecordList(UserId, VisitId);
+            List<DrugRecordList> ret = repository.GetDrugRecordList(UserId, VisitId);
             return ret;
         }
     }
