@@ -1808,6 +1808,36 @@ namespace CDMISrestful.DataMethod
             }
         }
 
+        /// <summary>
+        /// 根据ID获取手机号 LY 2015-10-29
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public string GetPhoneNoByUserId(DataConnection pclsCache, string UserId)
+        {
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return null;
+                }
+                string Name = Cm.MstUser.GetPhoneNoByUserId(pclsCache.CacheConnectionObject, UserId);
+                return Name;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "获取名称失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "CmMstUser.GetPhoneNoByUserId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
         #region 第二层
         public int RegisterRelated(DataConnection pclsCache, string PwType,string userId,string Password, string UserName,string role,string revUserId,string TerminalName,string  TerminalIP,int DeviceType)
         {
