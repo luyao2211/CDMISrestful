@@ -1579,6 +1579,15 @@
             <param name="pclsCache"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.DataMethod.DictMethod.GetNo(CDMISrestful.CommonLibrary.DataConnection,System.Int32,System.String)">
+            <summary>
+            syf 20151029
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="NumberingType"></param>
+            <param name="TargetDate"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.DataMethod.MessageMethod.GetSMSDialogue(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             获取消息对话 GL 2015-10-10
@@ -1823,7 +1832,7 @@
             <param name="PatientId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.PsComplianceDetailSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.PsComplianceDetailSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             CSQ 20151027 写数据
             </summary>

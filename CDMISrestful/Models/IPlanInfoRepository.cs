@@ -9,7 +9,7 @@ namespace CDMISrestful.Models
     public interface IPlanInfoRepository
     {
         int SetPlan(string PlanNo, string PatientId, int StartDate, int EndDate, string Module, int Status, string DoctorId, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
-        int SetComplianceDetail(string PlanNo, int Date, string CategoryCode, string Code, int Status, string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType);
+        int SetComplianceDetail(string PlanNo, int Date, string CategoryCode, string Code, string SortNo, int Status, string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType);
       
         List<LifeStyleDetail> GetLifeStyleDetail(string Module);
         List<PsDrugRecord> GetPatientDrugRecord(string PatientId, string Module);

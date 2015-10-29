@@ -89,10 +89,10 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
 
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
-        public string GetLatestHUserIdByHCode(string UserId, string HospitalCode)
+        public HttpResponseMessage GetLatestHUserIdByHCode(string UserId, string HospitalCode)
         {
             string ret = repository.getLatestHUserIdByHCode(UserId, HospitalCode);
-            return ret;
+            return new ExceptionHandler().Common(Request,ret);
         }
         /// <summary>
         /// 已有症状列表 Table:Ps.Symptoms  Author:WF 2015-10-28

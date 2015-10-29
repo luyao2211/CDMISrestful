@@ -50,9 +50,9 @@ namespace CDMISrestful.Models
         }
 
         //Ps.ComplianceDetail.SetData CSQ 20151027
-        public int SetComplianceDetail(string PlanNo, int Date, string CategoryCode,string Code,int Status, string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
+        public int SetComplianceDetail(string PlanNo, int Date, string CategoryCode,string Code,string SortNo,int Status, string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
         {
-            return new PlanInfoMethod().PsComplianceDetailSetData(pclsCache, PlanNo, Date, CategoryCode, Code, Status, Description, CoUserId, CoTerminalName, CoTerminalIP, CoDeviceType);
+            return new PlanInfoMethod().PsComplianceDetailSetData(pclsCache, PlanNo, Date, CategoryCode, Code,SortNo, Status, Description, CoUserId, CoTerminalName, CoTerminalIP, CoDeviceType);
         }
 
         public TargetByCode GetTarget(string PlanNo, string Type, string Code)

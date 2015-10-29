@@ -112,6 +112,7 @@ namespace CDMISrestful.DataModels
         public int Date { get; set; }
         public string CategoryCode { get; set; }
         public string Code { get; set; }
+        public string SortNo { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
   

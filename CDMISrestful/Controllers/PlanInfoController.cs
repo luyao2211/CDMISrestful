@@ -48,7 +48,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage PostComplianceDetail(ComplianceDetail item)
         {
-            int ret = repository.SetComplianceDetail(item.PlanNo, item.Date, item.CategoryCode,  item.Code, item.Status, item.Description,item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetComplianceDetail(item.PlanNo, item.Date, item.CategoryCode,  item.Code,item.SortNo, item.Status, item.Description,item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 

@@ -112,10 +112,10 @@ namespace CDMISrestful.Controllers
         }
         [Route("Api/v1/Dict/GetNo")]
         [ModelValidationFilter]
-        public string GetNo(int NumberingType, string TargetDate)
+        public HttpResponseMessage GetNo(int NumberingType, string TargetDate)
         {
             string ret = repository.GetNo(NumberingType, TargetDate);
-            return ret;
+            return new ExceptionHandler().Common(Request,ret);
         }
     }
 }

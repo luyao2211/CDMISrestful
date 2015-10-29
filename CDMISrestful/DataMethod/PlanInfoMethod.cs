@@ -725,7 +725,7 @@ namespace CDMISrestful.DataMethod
         /// <param name="CoTerminalIP"></param>
         /// <param name="CoDeviceType"></param>
         /// <returns></returns>
-        public int PsComplianceDetailSetData(DataConnection pclsCache, string PlanNo, int Date, string CategoryCode,string Code,int Status,string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
+        public int PsComplianceDetailSetData(DataConnection pclsCache, string PlanNo, int Date, string CategoryCode,string Code,string SortNo,int Status,string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
         {
             int ret = 2;
             try
@@ -735,7 +735,7 @@ namespace CDMISrestful.DataMethod
                     return ret;
                 }
 
-                ret = (int)Ps.ComplianceDetail.SetData(pclsCache.CacheConnectionObject, PlanNo, Date, CategoryCode, Code,Status,Description, CoUserId, CoTerminalName, CoTerminalIP, CoDeviceType);
+                ret = (int)Ps.ComplianceDetail.SetData(pclsCache.CacheConnectionObject, PlanNo, Date, CategoryCode, Code,SortNo,Status,Description, CoUserId, CoTerminalName, CoTerminalIP, CoDeviceType);
                 return ret;
             }
             catch (Exception ex)
