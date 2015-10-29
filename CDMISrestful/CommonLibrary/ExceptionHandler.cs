@@ -8,6 +8,8 @@ using System.Web;
 using CDMISrestful.DataModels;
 using System.Net.Http.Headers;
 using System.Web.Mvc;
+using System.Text;
+using System.Web.Script.Serialization;
 
 namespace CDMISrestful.CommonLibrary
 {
@@ -277,7 +279,23 @@ namespace CDMISrestful.CommonLibrary
             res.result = ret;
             var resp = request.CreateResponse(HttpStatusCode.OK, res);
             return resp;
-        }   
+        }
+
+        public static HttpResponseMessage toJson(Object obj)
+        {
+            String str;
+            if (obj is String || obj is Char)
+            {
+                str = obj.ToString();
+            }
+            else
+            {
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                str = serializer.Serialize(obj);
+            }
+            HttpResponseMessage result = new HttpResponseMessage { Content = new StringContent(str, Encoding.GetEncoding("UTF-8"), "application/json") };
+            return result;
+        } 
     }
 }
                        
