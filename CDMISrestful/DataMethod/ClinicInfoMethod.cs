@@ -483,6 +483,68 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+
+        public List<ExamDetails> GetExamDetails(DataConnection pclsCache, string UserId, string VisitId, string SortNo, string ItemCode)
+        {
+            List<ExamDetails> list = new List<ExamDetails>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.ExamDetails.GetExamDetails(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
+                cmd.Parameters.Add("VisitId", CacheDbType.NVarChar).Value = VisitId;
+                cmd.Parameters.Add("SortNo", CacheDbType.Int).Value = SortNo;
+                cmd.Parameters.Add("ItemCode", CacheDbType.NVarChar).Value = ItemCode;
+                cdr = cmd.ExecuteReader();
+
+                while (cdr.Read())
+                {
+                    list.Add(new ExamDetails() {
+                        Code            = cdr["Code"].ToString(),
+                        Name            = cdr["Name"].ToString(),
+                        Value           = cdr["Value"].ToString(),
+                        IsAbnormalCode  = Convert.ToInt32(cdr["IsAbnormalCode"].ToString()),
+                        IsAbnormal      = cdr["IsAbnormal"].ToString(),
+                        UnitCode        = cdr["UnitCode"].ToString(),
+                        Unit            = cdr["Unit"].ToString(),
+                        Creator         = cdr["Creator"].ToString()
+
+                    });
+                    //list.Rows.Add(cdr["Code"].ToString(), cdr["Name"].ToString(), cdr["Value"].ToString(),Convert.ToInt32(cdr["IsAbnormalCode"].ToString()), cdr["IsAbnormal"].ToString(),cdr["UnitCode"].ToString(), cdr["Unit"].ToString(), cdr["Creator"].ToString());
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PsExamDetails.GetExamDetails", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
         #endregion
 
         #region Ps.LabTest
@@ -1244,7 +1306,228 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
-     
+        public List<PsInPatInfo> PsInPatientInfoGetInfobyId(DataConnection pclsCache, string UserId)
+        {
+            List<PsInPatInfo> list = new List<PsInPatInfo>();
 
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+
+                cmd = new CacheCommand();
+                cmd = Ps.InPatientInfo.GetInfobyId(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
+                //cmd.Parameters.Add("InvalidFlag", CacheDbType.Int).Value = InvalidFlag;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new PsInPatInfo() {
+                        VisitId         = cdr["VisitId"].ToString(),
+                        SortNo          = cdr["SortNo"].ToString(),
+                        AdmissionDate   = cdr["AdmissionDate"].ToString(),
+                        DischargeDate   = cdr["DischargeDate"].ToString(),
+                        HospitalCode    = cdr["HospitalCode"].ToString(),
+                        HospitalName    = cdr["HospitalName"].ToString(),
+                        Department      = cdr["Department"].ToString(),
+                        DepartmentName  = cdr["DepartmentName"].ToString(),
+                        Doctor          = cdr["Doctor"].ToString(),
+                        Creator         = cdr["Creator"].ToString()
+
+                    });
+                    //list.Rows.Add(cdr["VisitId"].ToString(), cdr["SortNo"].ToString(), cdr["AdmissionDate"].ToString(), cdr["DischargeDate"].ToString(), cdr["HospitalCode"].ToString(), cdr["HospitalName"].ToString(), cdr["Department"].ToString(), cdr["DepartmentName"].ToString(), cdr["Doctor"].ToString(), cdr["Creator"].ToString());
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PsInPatientInfo.GetInfobyId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+        public List<PsOutPatInfo> PsOutPatientInfoGetInfobyId(DataConnection pclsCache, string UserId)
+        {
+            List<PsOutPatInfo> list = new List<PsOutPatInfo>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.OutPatientInfo.GetInfobyId(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new PsOutPatInfo() {
+                        VisitId         = cdr["VisitId"].ToString(),
+                        ClinicDate      = cdr["ClinicDate"].ToString(),
+                        HospitalCode    = cdr["HospitalCode"].ToString(),
+                        HospitalName    = cdr["HospitalName"].ToString(),
+                        Department      = cdr["Department"].ToString(),
+                        DepartmentName  = cdr["DepartmentName"].ToString(),
+                        Doctor          = cdr["Doctor"].ToString(),
+                        Creator         = cdr["Creator"].ToString()
+                     
+                    });
+                    //list.Rows.Add(cdr["VisitId"].ToString(), cdr["ClinicDate"].ToString(), cdr["HospitalCode"].ToString(), cdr["HospitalName"].ToString(), cdr["Department"].ToString(), cdr["DepartmentName"].ToString(), cdr["Doctor"].ToString(), cdr["Creator"].ToString());
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.OutPatientInfo.GetInfobyId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+        public ClinicalInfoListViewModel GetClinicalInfoList(DataConnection pclsCache, string UserId)
+        {
+            try
+            {
+                ClinicalInfoListViewModel DS_ClinicalInfo = new ClinicalInfoListViewModel();
+                List<PsInPatInfo> DT_InPatientInfo = new List<PsInPatInfo>();
+                List<PsOutPatInfo> DT_OutPatientInfo = new List<PsOutPatInfo>();
+
+                DT_InPatientInfo = PsInPatientInfoGetInfobyId(pclsCache, UserId);
+                DT_OutPatientInfo = PsOutPatientInfoGetInfobyId(pclsCache, UserId);
+
+                DS_ClinicalInfo.DT_InPatientInfo = DT_InPatientInfo;
+                DS_ClinicalInfo.DT_OutPatientInfo = DT_OutPatientInfo;
+
+                return DS_ClinicalInfo;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetClinicalInfoList", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+                throw (ex);
+            }
+        }
+        public string getLatestHUserIdByHCode(DataConnection pclsCache, string UserId, string HospitalCode)
+        {
+            string HUserId = "";
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return "";
+                }
+                HUserId = Ps.UserIdMatch.GetLatestHUserIdByHospitalCode(pclsCache.CacheConnectionObject, UserId, HospitalCode);
+
+                return HUserId;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PsUserIdMatch.getLatestHUserIdByHCode", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return "";
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+        public List<SymptomsList> GetSymptomsList(DataConnection pclsCache, string UserId, string VisitId)
+        {
+            List<SymptomsList> list = new List<SymptomsList>();
+
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Symptoms.GetSymptomsList(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
+                cmd.Parameters.Add("VisitId", CacheDbType.NVarChar).Value = VisitId;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new SymptomsList() {
+                        VisitId             = cdr["VisitId"].ToString(),
+                        SynptomsNo          = cdr["SynptomsNo"].ToString(),
+                        SymptomsType        = cdr["SymptomsType"].ToString(),
+                        SymptomsTypeName    = cdr["SymptomsTypeName"].ToString(),
+                        SymptomsCode        = cdr["SymptomsCode"].ToString(),
+                        SymptomsName        = cdr["SymptomsName"].ToString(),
+                        Description         = cdr["Description"].ToString(),
+                        RecordDate          = cdr["RecordDate"].ToString(),
+                        RecordTime          = cdr["RecordTime"].ToString(),
+                        Creator             = cdr["Creator"].ToString()
+                    }); 
+                    //list.Rows.Add(cdr["VisitId"].ToString(), cdr["SynptomsNo"].ToString(), cdr["SymptomsType"].ToString(), cdr["SymptomsTypeName"].ToString(), cdr["SymptomsCode"].ToString(), cdr["SymptomsName"].ToString(), cdr["Description"].ToString(), cdr["RecordDate"].ToString(), cdr["RecordTime"].ToString(), cdr["Creator"].ToString());
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "Ps.Symptoms.GetSymptomsList", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+     
     }
 }
