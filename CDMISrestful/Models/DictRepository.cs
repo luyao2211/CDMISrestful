@@ -104,5 +104,14 @@ namespace CDMISrestful.Models
             return dictMethod.GetMstTaskByParentCode(pclsCache, ParentCode);
 
         }
+
+        public string GetNo(int NumberingType, string TargetDate)
+        {
+            if(TargetDate == "{TargetDate}")
+            {
+                TargetDate = "";
+            }
+            return dictMethod.GetNo(pclsCache, NumberingType, TargetDate);
+        }
     }
 }

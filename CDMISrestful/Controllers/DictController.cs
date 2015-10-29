@@ -110,5 +110,12 @@ namespace CDMISrestful.Controllers
             List<CmMstTask> ret = repository.GetMstTaskByParentCode(ParentCode);
             return ret;
         }
+        [Route("Api/v1/Dict/GetNo")]
+        [ModelValidationFilter]
+        public string GetNo(int NumberingType, string TargetDate)
+        {
+            string ret = repository.GetNo(NumberingType, TargetDate);
+            return ret;
+        }
     }
 }
