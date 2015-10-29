@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/XmlDocument.xml">
-      <publishTime>10/28/2015 19:32:43</publishTime>
+      <publishTime>10/28/2015 23:11:14</publishTime>
     </File>
     <File Include="Areas/HelpPage/HelpPage.css">
       <publishTime>10/13/2015 19:27:06</publishTime>
@@ -334,10 +334,10 @@
       <publishTime>10/13/2015 19:27:06</publishTime>
     </File>
     <File Include="bin/CDMISrestful.dll">
-      <publishTime>10/28/2015 19:32:43</publishTime>
+      <publishTime>10/28/2015 23:11:14</publishTime>
     </File>
     <File Include="bin/CDMISrestful.pdb">
-      <publishTime>10/28/2015 19:32:43</publishTime>
+      <publishTime>10/28/2015 23:11:14</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>10/13/2015 19:27:07</publishTime>
@@ -565,7 +565,7 @@
       <publishTime>10/13/2015 19:27:08</publishTime>
     </File>
     <File Include="bin/XmlDocument.xml">
-      <publishTime>10/28/2015 19:32:43</publishTime>
+      <publishTime>10/28/2015 23:11:14</publishTime>
     </File>
     <File Include="bin/zh-Hans/Microsoft.Data.Edm.resources.dll">
       <publishTime>10/13/2015 19:27:07</publishTime>
@@ -907,7 +907,7 @@
       <publishTime>10/13/2015 19:27:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/28/2015 19:32:49</publishTime>
+      <publishTime>10/28/2015 23:11:35</publishTime>
     </File>
   </ItemGroup>
 </Project>
