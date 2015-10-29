@@ -768,6 +768,40 @@ namespace CDMISrestful.DataMethod
         #endregion
 
         #region<PsDoctorInfo>
+
+        /// <summary>
+        /// GetModuleByDoctorId WF 2015-06-04 //syf 20151027
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public string GetModuleByDoctorId(DataConnection pclsCache, string UserId)
+        {
+            string Module = "";
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return null;
+
+                }
+                Module = Ps.DoctorInfo.GetModuleByDoctorId(pclsCache.CacheConnectionObject, UserId);
+
+                return Module;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "保存失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetModuleByDoctorId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return Module;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
         /// <summary>
         /// 王丰 20151010
         /// </summary>
@@ -909,69 +943,66 @@ namespace CDMISrestful.DataMethod
         public List<HealthCoachList> GetHealthCoachList(DataConnection pclsCache)
         {
             List<HealthCoachList> list = new List<HealthCoachList>();
-            list = null;
             List<ActiveUser> list1 = new List<ActiveUser>();
             List<CategoryByDoctorId> list2 = new List<CategoryByDoctorId>();
-            List<DoctorInfo> list3 = new List<DoctorInfo>();
+            string moudlecodes = "";
+            string[] moudlecode = null;
             string DoctorId = "";
             try
             {
-                list1 = GetActiveUserByRole(pclsCache, "HealthCoach");
-                if(list1 != null)
+                list1 = GetActiveUserByRole(pclsCache, "HealthCoach");//根据角色获取已激活的用户
+                if (list1 != null)
                 {
-                    for(int i=0;i<list1.Count;i++)
+                    for (int i = 0; i < list1.Count; i++)
                     {
+                        DoctorInfo dcf = new DoctorInfo();
+                        HealthCoachList hcf = new HealthCoachList();
                         //一次循环取一个健康专员的信息
                         DoctorId = list1[i].UserId;
-                        list3[i] = GetDoctorInfo(pclsCache, DoctorId);//获取基本信息
 
-                        list[i].healthCoachID = DoctorId;
-                        list[i].name = list3[i].DoctorName;
-                        list[i].sex = list3[i].Gender;
-                        list[i].age = Convert.ToString(Ps.BasicInfo.GetAgeByBirthDay(pclsCache.CacheConnectionObject, Convert.ToInt32(list3[i].Birthday)));
+                        dcf = new UsersMethod().GetDoctorInfo(pclsCache, DoctorId);//获取基本信息
+                        hcf.healthCoachID = DoctorId;
+                        hcf.name = dcf.DoctorName;
+                        hcf.sex = dcf.Gender;
+                        hcf.age = Convert.ToString(new UsersMethod().GetAgeByBirthDay(pclsCache, Convert.ToInt32(dcf.Birthday)));
 
-                        list2 = GetCategoryByDoctorId(pclsCache, DoctorId);
+                        moudlecodes = new UsersMethod().GetModuleByDoctorId(pclsCache, DoctorId);
+                        if (moudlecodes != null)
+                        {
+                            moudlecode = moudlecodes.Split(new char[] { '_' });
+                            for (int k = 0; k < moudlecode.Length; k++)
+                            {
+                                if (k == 0)
+                                {
+                                    hcf.module = new UsersMethod().GetCategoryName(pclsCache, moudlecode[k]);
+                                }
+                                else
+                                {
+                                    hcf.module = hcf.module + "/" + new UsersMethod().GetCategoryName(pclsCache, moudlecode[k]);
+                                }
+                            }
+                        }
+                        list2 = new UsersMethod().GetCategoryByDoctorId(pclsCache, DoctorId);
                         //获取某个健康专员的所有CategoryCode信息
-                        if(list2 != null)
+                        if (list2 != null)
                         {
                             #region
-                            for (int j=0; j<list2.Count; j++)
+                            for (int j = 0; j < list2.Count; j++)
                             {
-                                if(list2[j].CategoryCode=="M1")
+                                if ((list2[j].CategoryCode == "Contact") && (list2[j].ItemCode == "Contact001_4"))
                                 {
-                                    list[i].module = list[i].module + "/" + "高血压模块";
-                                }
-                                else if(list2[j].CategoryCode=="M2")
-                                {
-                                    list[i].module = list[i].module + "/" + "糖尿病模块";
-                                }
-                                else if (list2[j].CategoryCode == "M3")
-                                {
-                                    list[i].module = list[i].module + "/" + "心力衰竭模块";
-                                }
-                                else if (list2[j].CategoryCode == "M4")
-                                {
-                                    list[i].module = list[i].module + "/" + "心律失常模块";
-                                }
-                                else if (list2[j].CategoryCode == "M5")
-                                {
-                                    list[i].module = list[i].module + "/" + "健康管理模块";
-                                }
-                                //获取某个健康专员的模块信息，多个模块信息用“/”拼接
-                                else if( (list2[j].CategoryCode=="Contact")&&(list2[j].ItemCode=="Contact001_4") )
-                                {
-                                    list[i].imageURL = list2[j].Value;
+                                    hcf.imageURL = list2[j].Value;
                                 }
                                 //获取头像
                                 else if ((list2[j].CategoryCode == "Score") && (list2[j].ItemCode == "Score_1"))
                                 {
-                                    list[i].imageURL = list2[j].Value;
+                                    hcf.score = list2[j].Value;
                                 }
                                 //获取该专员总体评分
                             }
                             #endregion
                         }
-
+                        list.Add(hcf);
                     }
                 }
                 return list;
@@ -1002,37 +1033,35 @@ namespace CDMISrestful.DataMethod
 
                 ret.name = ret1.DoctorName;
                 ret.sex = ret1.Gender;
-                ret.age = Convert.ToString(Ps.BasicInfo.GetAgeByBirthDay(pclsCache.CacheConnectionObject, Convert.ToInt32(ret1.Birthday)));
+                //ret.age = Convert.ToString(Ps.BasicInfo.GetAgeByBirthDay(pclsCache.CacheConnectionObject, Convert.ToInt32(ret1.Birthday)));
+                ret.age = Convert.ToString(new UsersMethod().GetAgeByBirthDay(pclsCache, Convert.ToInt32(ret1.Birthday)));
+                string moudlecodes = "";
+                string[] moudlecode = null;
+                moudlecodes = new UsersMethod().GetModuleByDoctorId(pclsCache, HealthCoachID);
+                if (moudlecodes != null)
+                {
+                    moudlecode = moudlecodes.Split(new char[] { '_' });
+                    for (int k = 0; k < moudlecode.Length; k++)
+                    {
+                        if (k == 0)
+                        {
+                            ret.module = new UsersMethod().GetCategoryName(pclsCache, moudlecode[k]);
+                        }
+                        else
+                        {
+                            ret.module = ret.module + "/" + new UsersMethod().GetCategoryName(pclsCache, moudlecode[k]);
+                        }
+                    }
+                }
 
                 List<CategoryByDoctorId> ret2 = new List<CategoryByDoctorId>();
-                ret2 = GetCategoryByDoctorId(pclsCache, HealthCoachID);
+                ret2 = new UsersMethod().GetCategoryByDoctorId(pclsCache, HealthCoachID);
                 if (ret2 != null)
                 {
                     #region
                     for (int j = 0; j < ret2.Count; j++)
                     {
-                        if (ret2[j].CategoryCode == "M1")
-                        {
-                            ret.module = ret.module + "/" + "高血压模块";
-                        }
-                        else if (ret2[j].CategoryCode == "M2")
-                        {
-                            ret.module = ret.module + "/" + "糖尿病模块";
-                        }
-                        else if (ret2[j].CategoryCode == "M3")
-                        {
-                            ret.module = ret.module + "/" + "心力衰竭模块";
-                        }
-                        else if (ret2[j].CategoryCode == "M4")
-                        {
-                            ret.module = ret.module + "/" + "心律失常模块";
-                        }
-                        else if (ret2[j].CategoryCode == "M5")
-                        {
-                            ret.module = ret.module + "/" + "健康管理模块";
-                        }
-                        //获取某个健康专员的模块信息，多个模块信息用“/”拼接
-                        else if ((ret2[j].CategoryCode == "Contact") && (ret2[j].ItemCode == "Contact001_4"))
+                        if ((ret2[j].CategoryCode == "Contact") && (ret2[j].ItemCode == "Contact001_4"))
                         {
                             ret.imageURL = ret2[j].Value;
                         }
@@ -1154,6 +1183,7 @@ namespace CDMISrestful.DataMethod
             }
         }
 
+
         /// <summary>
         /// 更新预约状态
         /// </summary>
@@ -1180,25 +1210,21 @@ namespace CDMISrestful.DataMethod
                 }
 
                 ret1 = (int)Ps.Appointment.ChangeStatus(pclsCache.CacheConnectionObject, DoctorId, PatientId, Status, revUserId, TerminalName, TerminalIP, DeviceType);
-                if( (ret1 == 1)&&(Status == 3) )
+                if ((ret1 == 1) && (Status == 3))
                 {
-                    ret++;
                     int ItemSeq1 = (int)Ps.BasicInfoDetail.GetMaxItemSeq(pclsCache.CacheConnectionObject, PatientId, "M1", "Doctor");
                     ItemSeq1++;
                     int ItemSeq2 = (int)Ps.DoctorInfoDetail.GetMaxItemSeq(pclsCache.CacheConnectionObject, DoctorId, "M1", "Patient");
                     ItemSeq2++;
+                    //可能以后还要判断有没有重复预约之类的
                     ret2 = (int)Ps.BasicInfoDetail.SetData(pclsCache.CacheConnectionObject, PatientId, "M1", "Doctor", ItemSeq1, DoctorId, "", 1, revUserId, TerminalName, TerminalIP, DeviceType);
-                    if(ret2==1)
-                    {
-                        ret++;
-                    }
                     ret3 = (int)Ps.DoctorInfoDetail.SetData(pclsCache.CacheConnectionObject, DoctorId, "M1", "Patient", ItemSeq2, PatientId, "", 1, revUserId, TerminalName, TerminalIP, DeviceType);
-                    if(ret3==1)
+                    if ((ret3 == 1) && (ret2 == 1))
                     {
-                        ret++;
+                        ret = 1;
                     }
                 }
-                return ret; //0数据库连接失败；1预约表更改状态成功；2病人新增医生成功；3医生新增病人成功
+                return ret;
             }
             catch (Exception ex)
             {
