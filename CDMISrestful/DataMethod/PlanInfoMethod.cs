@@ -1809,6 +1809,29 @@ namespace CDMISrestful.DataMethod
             }
         }
 
+        public int DeteteTask(DataConnection pclsCache, string Plan, string Type, string Code, string SortNo)
+        {
+            int ret = 0;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+                ret = (int)Ps.Task.Delete(pclsCache.CacheConnectionObject, Plan, Type, Code, SortNo);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.DeteteTask", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
         #endregion
 
         #region<PsTarget>

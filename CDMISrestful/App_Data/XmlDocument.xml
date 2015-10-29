@@ -1084,6 +1084,16 @@
             <param name="EndDate"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.DeteteTask(System.String,System.String,System.String,System.String)">
+            <summary>
+            根据主键删除Ps.Task任务表的一条数据 SYF 20151029
+            </summary>
+            <param name="Plan"></param>
+            <param name="Type"></param>
+            <param name="Code"></param>
+            <param name="SortNo"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
             <summary>
             根据收缩压获取血压等级说明 LY 2015-10-13

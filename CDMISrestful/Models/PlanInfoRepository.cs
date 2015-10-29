@@ -906,22 +906,31 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date,PatientId);
         }
 
+
         public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate, string ItemType, string ItemCode)
         {
             List<ComplianceAllSignsListByPeriod> items = new List<ComplianceAllSignsListByPeriod>();
             List<ComplianceListByPeriod> items1 = new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PlanNo, StartDate, EndDate);
             List<VitalInfo> items2 = new VitalInfoMethod().GetAllSignsByPeriod(pclsCache, UserId, StartDate, EndDate);
             List<ComplianceAllSignsListByPeriod> items3 = new List<ComplianceAllSignsListByPeriod>();
-            for (int i = 0; i < items1.Count();i++ )
+            for (int i = 0; i < items1.Count(); i++)
             {
-                items3.Add(new ComplianceAllSignsListByPeriod(){
+                items3.Add(new ComplianceAllSignsListByPeriod()
+                {
                     Date = items1[i].Date,
                     Compliance = items1[i].Compliance,
                     Description = items1[i].Description
                 });
             }
-            
+
             return items3;
+        }
+
+        //根据主键删除Ps.Task一条数据 SYF 2015-10-29
+        public int DeteteTask(string Plan, string Type, string Code, string SortNo)
+        {
+            return new PlanInfoMethod().DeteteTask(pclsCache, Plan, Type, Code, SortNo);
+
         }
     }
 }

@@ -39,5 +39,7 @@ namespace CDMISrestful.Models
         TargetByCode GetTarget(string PlanNo, string Type, string Code);
         List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate, string ItemType, string ItemCode);
 
+
+        int DeteteTask(string Plan, string Type, string Code, string SortNo);
     }
 }
