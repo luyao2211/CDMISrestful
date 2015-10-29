@@ -20,7 +20,7 @@ namespace CDMISrestful.Models
         GPlanInfo GetPlanInfo(string PlanNo);
         TaskComDetailByD GetImplementationByDate(string PatientId, string PlanNo, string DateSelected);
         ChartData GetSignInfoByCode(string PatientId, string PlanNo, string ItemCode, int StartDate, int EndDate);
-        string GetExecutingPlanByModule(string PatientId, string Module);
+        GPlanInfo GetExecutingPlanByModule(string PatientId, string Module);
         int SetPlanStart(string PlanNo, int Status, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
         ImplementationInfo GetImplementationForPadFirst(string PatientId, string Module);
         ImplementationInfo GetImplementationForPadSecond(string PatientId, string PlanNo);

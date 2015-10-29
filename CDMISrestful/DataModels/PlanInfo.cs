@@ -99,6 +99,7 @@ namespace CDMISrestful.DataModels
         [Required]
         public string Status { get; set; }
         public string DoctorId { get; set; }
+        public string DoctorName { get; set; }
         public string piUserId { get; set; }
         public string piTerminalName { get; set; }
         public string piTerminalIP { get; set; }

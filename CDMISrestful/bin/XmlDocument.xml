@@ -987,13 +987,6 @@
             <param name="Code"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPlanInfo(System.String)">
-            <summary>
-            GetPlanInfo 根据PlanNo获取某计划详情 GL 2015-10-13
-            </summary>
-            <param name="PlanNo"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.GetImplementationByDate(System.String,System.String,System.String)">
             <summary>
             GetImplementationByDate 通过某计划的日期，获取该天的任务完成详情 用于图上点点击时弹框内容 GL 2015-10-13
@@ -1016,7 +1009,7 @@
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.GetExecutingPlanByModule(System.String,System.String)">
             <summary>
-            GetExecutingPlanByModule 根据模块获取正在执行的计划PlanNo GL 2015-10-13
+            GetExecutingPlanByModule 根据模块获取正在执行的计划PlanNo CSQ 20151029
             </summary>
             <param name="PatientId"></param>
             <param name="Module"></param>
@@ -1194,6 +1187,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.ServiceController.GetPatientInfo(System.String)">
+            <summary>
+            浙大输出接口 LY 2015-10-29
+            </summary>
+            <param name="PatientId"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.UsersController.GetIDByInputPhone(System.String,System.String)">
             <summary>
             根据输入的手机号和邮箱等获取系统唯一标识符 20151023 CSQ
@@ -1297,7 +1297,7 @@
             <param name="SetPatBasicInfo"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.UsersController.PostPatBasicInfoDetail(CDMISrestful.DataModels.BasinInfoDetail)">
+        <member name="M:CDMISrestful.Controllers.UsersController.PostPatBasicInfoDetail(System.Collections.Generic.List{CDMISrestful.DataModels.BasinInfoDetail})">
             <summary>
             插入患者详细信息 LY 2015-10-14
             </summary>
@@ -2326,6 +2326,14 @@
             <param name="ItemSeq"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetPhoneNoByUserId(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            根据ID获取手机号 LY 2015-10-29
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.DataMethod.VitalInfoMethod.SetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             Ps.VitalSigns.SetData GL 2015-10-10
@@ -2924,6 +2932,13 @@
             <param name="platform"></param>
             <param name="Alias"></param>
             <param name="notification"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.ServiceRepository.GetPatientInfo(System.String)">
+            <summary>
+            浙大输出接口 LY 2015-10-29
+            </summary>
+            <param name="PatientId"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Models.UsersRepository.IsTokenValid(System.String)">

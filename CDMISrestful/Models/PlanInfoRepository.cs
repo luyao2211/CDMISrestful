@@ -238,22 +238,29 @@ namespace CDMISrestful.Models
         }
 
         //根据模块获取正在执行的计划 GL 2015-10-13
-        public string GetExecutingPlanByModule(string PatientId, string Module)
+        public GPlanInfo GetExecutingPlanByModule(string PatientId, string Module)
         {
             try
             {
-                string ret = "";
+                //string ret = "";
                 GPlanInfo planInfo = new PlanInfoMethod().GetExecutingPlanByM(pclsCache, PatientId, Module);
                 if (planInfo != null)
                 {
-                    ret = planInfo.PlanNo;
+                    //ret = planInfo.PlanNo;
+                    TypeAndName Doctor = new ModuleInfoMethod().PsBasicInfoDetailGetSDoctor(pclsCache, PatientId);
+                    if (Doctor != null && Doctor.Type != null) //Doctor.Count > 1
+                    {
+                        planInfo.DoctorId = Doctor.Type;
+                        planInfo.DoctorName = Doctor.Name;
+                    }
                 }
-                return ret;
+                
+                return planInfo;
             }
             catch (Exception ex)
             {
                 HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetExecutingPlanByModule", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return "";
+                return null;
                 throw ex;
             }
         }

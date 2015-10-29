@@ -229,9 +229,16 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/BasicDtlInfo")]
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
-        public HttpResponseMessage PostPatBasicInfoDetail(BasinInfoDetail Item)
+        public HttpResponseMessage PostPatBasicInfoDetail(List<BasinInfoDetail> items)
         {
-            int ret = repository.SetPatBasicInfoDetail(Item.Patient, Item.CategoryCode, Item.ItemCode, Item.ItemSeq, Item.Value, Item.Description, Item.SortNo, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
+            int length = items.Count();
+            int ret = 0;
+            for (int i = 0; i < length;i++ )
+            {
+                ret = repository.SetPatBasicInfoDetail(items[i].Patient, items[i].CategoryCode, items[i].ItemCode, items[i].ItemSeq, items[i].Value, items[i].Description, items[i].SortNo, items[i].revUserId, items[i].TerminalName, items[i].TerminalIP, items[i].DeviceType);
+                if (ret !=1)
+                    break;
+            } 
             return new ExceptionHandler().SetData(Request, ret);
         }
 

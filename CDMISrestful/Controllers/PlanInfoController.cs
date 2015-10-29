@@ -204,16 +204,16 @@ namespace CDMISrestful.Controllers
             return repository.GetTarget(PlanNo, Type, Code);
         }
 
-        /// <summary>
-        /// GetPlanInfo 根据PlanNo获取某计划详情 GL 2015-10-13
-        /// </summary>
-        /// <param name="PlanNo"></param>
-        /// <returns></returns>
-        [Route("Api/v1/PlanInfo/Plan")]
-        public GPlanInfo GetPlanInfo(string PlanNo)
-        {
-            return repository.GetPlanInfo(PlanNo);
-        }
+        ///// <summary>
+        ///// GetPlanInfo 根据PlanNo获取某计划详情 GL 2015-10-13
+        ///// </summary>
+        ///// <param name="PlanNo"></param>
+        ///// <returns></returns>
+        //[Route("Api/v1/PlanInfo/Plan")]
+        //public GPlanInfo GetPlanInfo(string PlanNo)
+        //{
+        //    return repository.GetPlanInfo(PlanNo);
+        //}
 
         /// <summary>
         /// GetImplementationByDate 通过某计划的日期，获取该天的任务完成详情 用于图上点点击时弹框内容 GL 2015-10-13
@@ -244,16 +244,16 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// GetExecutingPlanByModule 根据模块获取正在执行的计划PlanNo GL 2015-10-13
+        /// GetExecutingPlanByModule 根据模块获取正在执行的计划PlanNo CSQ 20151029
         /// </summary>
         /// <param name="PatientId"></param>
         /// <param name="Module"></param>
         /// <returns></returns>
-        [Route("Api/v1/PlanInfo/GetExecutingPlanByModule")]
+        [Route("Api/v1/PlanInfo/ExecutingPlanByModule")]
         public HttpResponseMessage GetExecutingPlanByModule(string PatientId, string Module)
         {
-            string ret =  repository.GetExecutingPlanByModule(PatientId, Module);
-            return new ExceptionHandler().Common(Request, ret);
+            GPlanInfo ret = repository.GetExecutingPlanByModule(PatientId, Module);
+            return new ExceptionHandler().toJson(ret);
         }
 
         /// <summary>
