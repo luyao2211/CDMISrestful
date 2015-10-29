@@ -999,7 +999,7 @@ namespace CDMISrestful.DataMethod
         /// <param name="StartDate"></param>
         /// <param name="EndDate"></param>
         /// <returns></returns>
-        public List<ComplianceListByPeriod> GetComplianceListByPeriod(DataConnection pclsCache, string PatientId, string PlanNo, int StartDate, int EndDate)
+        public List<ComplianceListByPeriod> GetComplianceListByPeriod(DataConnection pclsCache, string PlanNo, int StartDate, int EndDate)
         {
             List<ComplianceListByPeriod> list = new List<ComplianceListByPeriod>();
 
@@ -1013,7 +1013,6 @@ namespace CDMISrestful.DataMethod
                 }
                 cmd = new CacheCommand();
                 cmd = Ps.Compliance.GetComplianceListByPeriod(pclsCache.CacheConnectionObject);
-                cmd.Parameters.Add("PatientId", CacheDbType.NVarChar).Value = PatientId;
                 cmd.Parameters.Add("PlanNo", CacheDbType.NVarChar).Value = PlanNo;
                 cmd.Parameters.Add("StartDate", CacheDbType.Int).Value = StartDate;
                 cmd.Parameters.Add("EndDate", CacheDbType.Int).Value = EndDate;
@@ -1022,8 +1021,9 @@ namespace CDMISrestful.DataMethod
                 while (cdr.Read())
                 {
                     ComplianceListByPeriod NewLine = new ComplianceListByPeriod();
-                    NewLine.Date = cdr["Date"].ToString();
-                    NewLine.Compliance = cdr["Compliance"].ToString();
+                    NewLine.Date = Convert.ToInt32(cdr["Date"]);
+                    NewLine.Compliance = Convert.ToDouble(cdr["Compliance"]);
+                    NewLine.Description = cdr["Description"].ToString();
                     list.Add(NewLine);
                 }
                 return list;
@@ -2588,6 +2588,59 @@ namespace CDMISrestful.DataMethod
         }
 
         #endregion
+        public List<Parameters> GetParameters(DataConnection pclsCache, string Indicators)
+        {
+            List<Parameters> list = new List<Parameters>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Parameters.GetParameters(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("Indicators", CacheDbType.NVarChar).Value = Indicators;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new Parameters
+                    {
+                        Id = cdr["Id"].ToString(),
+                        Name = cdr["Name"].ToString(),
+                        Value = cdr["Value"].ToString(),
+                        Unit = cdr["Unit"].ToString()
+
+                    });
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "RiskInfoMethod.GetParameters", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
     }
 
 }

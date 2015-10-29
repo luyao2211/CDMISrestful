@@ -359,9 +359,23 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/GetAllComplianceListByPeriod")]
         [EnableQuery]
-        public List<ComplianceListByPeriod> GetAllComplianceListByPeriod(string PatientId, string PlanNo, int StartDate, int EndDate)
+        public List<ComplianceListByPeriod> GetAllComplianceListByPeriod(string PlanNo, int StartDate, int EndDate)
         {
-            return repository.GetAllComplianceListByPeriod(PatientId, PlanNo, StartDate, EndDate);
+            return repository.GetAllComplianceListByPeriod( PlanNo, StartDate, EndDate);
+        }
+        /// <summary>
+        /// 计划信息展示 WF20151029
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="PlanNo"></param>
+        /// <param name="StartDate"></param>
+        /// <param name="EndDate"></param>
+        /// <returns></returns>
+        [Route("Api/v1/PlanInfo/GetComplianceAllSignsListByPeriod")]
+        [EnableQuery]
+        public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate)
+        {
+            return repository.GetComplianceAllSignsListByPeriod(UserId, PlanNo, StartDate, EndDate);
         }
     }
 }

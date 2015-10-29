@@ -29,7 +29,7 @@ namespace CDMISrestful.Models
         ImplementationPhone GetImplementationForPhone(string PatientId, string Module);
        
         List<PlanDeatil> GetPlanList34ByM(string PatientId, string Module);
-        List<ComplianceListByPeriod> GetAllComplianceListByPeriod(string PatientId, string PlanNo, int StartDate, int EndDate);
+        List<ComplianceListByPeriod> GetAllComplianceListByPeriod( string PlanNo, int StartDate, int EndDate);
         List<PsTask> GetTasks(string PlanNo, string ParentCode,string Date,string PatientId);
         List<TaskDetail> GetTaskDetails(string CategoryCode, string Code);
         int PsTemplateSetData(string DoctorId, int TemplateCode, string TemplateName, string Description, DateTime RecordDate, string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
@@ -37,6 +37,7 @@ namespace CDMISrestful.Models
         List<TemplateInfo> GetTemplateList(string DoctorId);
         List<TemplateInfoDtl> GetTemplateDetails(string DoctorId, string TemplateCode, string ParentCode);
         TargetByCode GetTarget(string PlanNo, string Type, string Code);
+        List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate);
 
     }
 }

@@ -212,8 +212,9 @@ namespace CDMISrestful.DataModels
 
     public class ComplianceListByPeriod
     {
-         public string Date { get; set; }
-        public string Compliance { get; set; }
+        public int Date { get; set; }
+        public double Compliance { get; set; }
+        public string Description { get; set; }
     }
     public class PlanDeatil
     {
@@ -569,5 +570,14 @@ namespace CDMISrestful.DataModels
     {
         public string SignName { get; set; }
         public string SignCode { get; set; }
+    }
+    public class ComplianceAllSignsListByPeriod
+    {
+        public int Date { get; set; }
+        public double Compliance { get; set; }
+        public string Description { get; set; }
+        public VitalInfo[] AllSignsByPeriod { get; set; }
+
+
     }
 }

@@ -896,14 +896,33 @@ namespace CDMISrestful.Models
         }
 
         //获取某计划的某段时间(包括端点)的依从率列表 GL 2015-10-13
-        public List<ComplianceListByPeriod> GetAllComplianceListByPeriod(string PatientId, string PlanNo, int StartDate, int EndDate)
+        public List<ComplianceListByPeriod> GetAllComplianceListByPeriod(string PlanNo, int StartDate, int EndDate)
         {
-            return new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PatientId, PlanNo, StartDate, EndDate);
+            return new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PlanNo, StartDate, EndDate);
         }
 
         public List<PsTask> GetTasks(string PlanNo, string ParentCode, string Date, string PatientId)
         {
             return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date,PatientId);
+        }
+        public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate)
+        {
+            List<ComplianceListByPeriod> items1 = new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PlanNo, StartDate, EndDate);
+            List<VitalInfo> items2 = new VitalInfoMethod().GetAllSignsByPeriod(pclsCache, UserId, StartDate, EndDate);
+            List<ComplianceAllSignsListByPeriod> items3 = new List<ComplianceAllSignsListByPeriod>();
+            for (int i = 0; i < items1.Count();i++ )
+            {
+                items3.Add(new ComplianceAllSignsListByPeriod(){
+                    Date = items1[i].Date,
+                    Compliance = items1[i].Compliance,
+                    Description = items1[i].Description
+                });
+            }
+            foreach (var p in items3)
+            {
+                p.AllSignsByPeriod = items2.Where(AllSignsByPeriod => AllSignsByPeriod.RecordDate == p.Date.ToString()).ToArray();
+            }
+            return items3;
         }
     }
 }

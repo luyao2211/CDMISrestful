@@ -269,7 +269,61 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+        public List<VitalInfo> GetAllSignsByPeriod(DataConnection pclsCache, string UserId, int StartDate, int EndDate)
+        {
+            {
+                List<VitalInfo> items = new List<VitalInfo>();
+                CacheCommand cmd = null;
+                CacheDataReader cdr = null;
+                try
+                {
+                    if (!pclsCache.Connect())
+                    {
+                        return null;
+                    }
+                    cmd = new CacheCommand();
+                    cmd = Ps.VitalSigns.GetAllSignsByPeriod(pclsCache.CacheConnectionObject);
+                    cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
+                    cmd.Parameters.Add("StartDate", CacheDbType.NVarChar).Value = StartDate;
+                    cmd.Parameters.Add("EndDate", CacheDbType.NVarChar).Value = EndDate;
 
+                    cdr = cmd.ExecuteReader();
+                    while (cdr.Read())
+                    {
+                        VitalInfo item = new VitalInfo();
+                        item.RecordDate = cdr["RecordDate"].ToString();
+                        item.RecordTime = cdr["RecordTime"].ToString();
+                        item.ItemType   = cdr["ItemType"].ToString();
+                        item.ItemCode   = cdr["ItemCode"].ToString();
+                        item.Value      = cdr["Value"].ToString();
+                        item.Unit       = cdr["Unit"].ToString();
+                        items.Add(item);
+                    }
+                    return items;
+                }
+                catch (Exception ex)
+                {
+                    HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "VitalInfoMethod.GetAllSignsByPeriod", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                    return null;
+                }
+                finally
+                {
+                    if ((cdr != null))
+                    {
+                        cdr.Close();
+                        cdr.Dispose(true);
+                        cdr = null;
+                    }
+                    if ((cmd != null))
+                    {
+                        cmd.Parameters.Clear();
+                        cmd.Dispose();
+                        cmd = null;
+                    }
+                    pclsCache.DisConnect();
+                }
+            }
+        }
         #endregion
     }
 }
