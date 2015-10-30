@@ -1654,6 +1654,26 @@ namespace CDMISrestful.DataMethod
                 return null;
             }
         }
+
+        public double GetComplianceByPlanNo(DataConnection pclsCache, string PlanNo)
+        {
+            double ret=0;
+            try
+            {
+
+                ret = Convert.ToDouble(Ps.Compliance.GetComplianceByPlanNo(pclsCache.CacheConnectionObject, PlanNo));
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetComplianceByPlanNo", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
         #endregion
 
         #region<PsTask>
