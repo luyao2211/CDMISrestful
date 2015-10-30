@@ -1084,7 +1084,7 @@
             <param name="EndDate"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.DeteteTask(System.String,System.String,System.String,System.String)">
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.DeleteTask(System.String,System.String,System.String,System.String)">
             <summary>
             根据主键删除Ps.Task任务表的一条数据 SYF 20151029
             </summary>
@@ -2046,6 +2046,18 @@
             <param name="Reference"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetSignByPeriod(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            GetSignByPeriod LS 2015-03-30  只针对一种参数   syf 20151029
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="UserId"></param>
+            <param name="ItemType"></param>
+            <param name="ItemCode"></param>
+            <param name="StartDate"></param>
+            <param name="EndDate"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.DataMethod.RiskInfoMethod.PsTreatmentIndicatorsSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             Ps.TreatmentIndicators.SetData GL 2015-10-10
@@ -2951,6 +2963,18 @@
             同步患者购买模块下的某些信息 LY 2015-10-14
             </summary>
             <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.PlanInfoRepository.GetComplianceAllSignsListByPeriod(System.String,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            需要修改 20151029
+            </summary>
+            <param name="UserId"></param>
+            <param name="PlanNo"></param>
+            <param name="StartDate"></param>
+            <param name="EndDate"></param>
+            <param name="ItemType"></param>
+            <param name="ItemCode"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Models.RiskInfoRepository.GetDescription(System.Int32)">

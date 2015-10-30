@@ -582,4 +582,13 @@ namespace CDMISrestful.DataModels
         public string BulletColor { get; set; }
         public string CustomBullet { get; set; }
     }
+
+    public class SignByPeriod
+    {
+        public string RecordDate { get; set; }
+        public string RecordTime { get; set; }
+
+        public string Value { get; set; }
+        public string Unit { get; set; }
+    }
 }

@@ -725,4 +725,3 @@ F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\obj\Debug\CD
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.Cors.dll
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.Http.Cors.dll
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.Http.Cors.xml
-F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\obj\Debug\CDMISrestful.csprojResolveAssemblyReference.cache

@@ -377,7 +377,7 @@ namespace CDMISrestful.Controllers
         /// <param name="SortNo"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/DeteteTask")]
-        public HttpResponseMessage DeteteTask(string Plan, string Type, string Code, string SortNo)
+        public HttpResponseMessage DeleteTask(string Plan, string Type, string Code, string SortNo)
         {
             int ret = repository.DeteteTask(Plan, Type, Code, SortNo);
             return new ExceptionHandler().DeleteData(Request, ret);

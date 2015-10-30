@@ -2664,6 +2664,75 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+
+        /// <summary>
+        /// GetSignByPeriod LS 2015-03-30  只针对一种参数   syf 20151029
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <param name="ItemType"></param>
+        /// <param name="ItemCode"></param>
+        /// <param name="StartDate"></param>
+        /// <param name="EndDate"></param>
+        /// <returns></returns>
+        public List<SignByPeriod> GetSignByPeriod(DataConnection pclsCache, string UserId, string ItemType, string ItemCode, int StartDate, int EndDate)
+        {
+
+            List<SignByPeriod> list = new List<SignByPeriod>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+
+                cmd = new CacheCommand();
+                cmd = Ps.VitalSigns.GetSignByPeriod(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
+                cmd.Parameters.Add("ItemType", CacheDbType.NVarChar).Value = ItemType;
+                cmd.Parameters.Add("ItemCode", CacheDbType.NVarChar).Value = ItemCode;
+                cmd.Parameters.Add("StartDate", CacheDbType.NVarChar).Value = StartDate;
+                cmd.Parameters.Add("EndDate", CacheDbType.NVarChar).Value = EndDate;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    SignByPeriod NewLine = new SignByPeriod();
+                    NewLine.RecordDate = cdr["RecordDate"].ToString();
+                    NewLine.RecordTime = cdr["RecordTime"].ToString();
+                    NewLine.Value = cdr["Value"].ToString();
+                    NewLine.Unit = cdr["Unit"].ToString();
+                    list.Add(NewLine);
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetSignByPeriod", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
     }
 
 }

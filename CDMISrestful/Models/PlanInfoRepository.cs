@@ -906,24 +906,48 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date,PatientId);
         }
 
-
+        /// <summary>
+        /// 需要修改 20151029
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="PlanNo"></param>
+        /// <param name="StartDate"></param>
+        /// <param name="EndDate"></param>
+        /// <param name="ItemType"></param>
+        /// <param name="ItemCode"></param>
+        /// <returns></returns>
         public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate, string ItemType, string ItemCode)
         {
             List<ComplianceAllSignsListByPeriod> items = new List<ComplianceAllSignsListByPeriod>();
+            //依从率
             List<ComplianceListByPeriod> items1 = new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PlanNo, StartDate, EndDate);
-            List<VitalInfo> items2 = new VitalInfoMethod().GetAllSignsByPeriod(pclsCache, UserId, StartDate, EndDate);
-            List<ComplianceAllSignsListByPeriod> items3 = new List<ComplianceAllSignsListByPeriod>();
-            for (int i = 0; i < items1.Count(); i++)
+            //体征
+            List<SignByPeriod> items2 = new PlanInfoMethod().GetSignByPeriod(pclsCache,UserId,ItemType,ItemCode,StartDate,EndDate);
+
+            
+
+            for (int i = 0; i < items.Count;i++ )
             {
-                items3.Add(new ComplianceAllSignsListByPeriod()
+                ComplianceAllSignsListByPeriod item = new ComplianceAllSignsListByPeriod();
+                item.Date = items1[i].Date;
+                item.Compliance = items1[i].Compliance;
+                item.Description = items1[i].Description;
+                if(items1[i].Compliance==1)
                 {
-                    Date = items1[i].Date,
-                    Compliance = items1[i].Compliance,
-                    Description = items1[i].Description
-                });
+                    item.BulletColor = "#77777";
+                }
+                else
+                {
+                    item.BulletColor = "#DADADA";
+                }
+                item.CustomBullet = "img/amcharts/customBullet.png";
+                item.BulletValue = "1";
+                item.Task = ""; //需要修改
+                item.Value = "120"; //需要修改
+                items.Add(item);
             }
 
-            return items3;
+            return items;
         }
 
         //根据主键删除Ps.Task一条数据 SYF 2015-10-29
