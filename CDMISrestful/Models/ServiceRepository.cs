@@ -271,5 +271,65 @@ namespace CDMISrestful.Models
             List.Add(NewLine6);
             return List;
         }
+
+        /// <summary>
+        /// 浙大接收接口处理 LY 2015-10-31
+        /// </summary>
+        /// <param name="VitalSigns"></param>
+        /// <param name="revUserId"></param>
+        /// <param name="TerminalName"></param>
+        /// <param name="TerminalIP"></param>
+        /// <param name="DeviceType"></param>
+        /// <returns></returns>
+        public int VitalSignFromZKY(VitalSignFromDevice VitalSigns, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            string UserId = new UsersMethod().GetIDByInput(pclsCache, "PhoneNo", VitalSigns.mobilephone);
+            int RecordDate = Convert.ToInt32(VitalSigns.DateTime.Split('|')[0]);
+            int RecordTime = Convert.ToInt32(VitalSigns.DateTime.Split('|')[1]);
+            int ret = 0;
+            if (VitalSigns.Bloodpressure_1.Type != "" && VitalSigns.Bloodpressure_1.Name != "")
+            {
+                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_1", VitalSigns.Bloodpressure_1.Type, VitalSigns.Bloodpressure_1.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                if (ret == 0)
+                    return ret;
+            }
+            if (VitalSigns.Bloodpressure_2.Type != "" && VitalSigns.Bloodpressure_2.Name != "")
+            {
+                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_2", VitalSigns.Bloodpressure_2.Type, VitalSigns.Bloodpressure_2.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                if (ret == 0)
+                    return ret;
+            }
+            if (VitalSigns.Pulserate_1.Type != "" && VitalSigns.Pulserate_1.Name != "")
+            {
+                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "Pulserate", "Pulserate_1", VitalSigns.Pulserate_1.Type, VitalSigns.Pulserate_1.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                if (ret == 0)
+                    return ret;
+            }
+            if (VitalSigns.Bloodglucose.Type != "" && VitalSigns.Bloodglucose.Name != "")
+            {
+                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "BloodSugar", "BloodSugar_1", VitalSigns.Bloodglucose.Type, VitalSigns.Bloodglucose.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                if (ret == 0)
+                    return ret;
+            }
+            if (VitalSigns.Respiratoryrate.Type != "" && VitalSigns.Respiratoryrate.Name != "")
+            {
+                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "BreathStatus", "Respiratoryrate", VitalSigns.Respiratoryrate.Type, VitalSigns.Respiratoryrate.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                if (ret == 0)
+                    return ret;
+            }
+            if (VitalSigns.ECG != "")
+            {
+                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "ECG", "ECG_1", VitalSigns.ECG, "", revUserId, TerminalName, TerminalIP, DeviceType);
+                if (ret == 0)
+                    return ret;
+            }
+            if (VitalSigns.Activity != "")
+            {
+                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "Activity", "Activity_1", VitalSigns.Activity, "", revUserId, TerminalName, TerminalIP, DeviceType);
+                if (ret == 0)
+                    return ret;
+            }
+            return ret;
+        }
     }
 }
