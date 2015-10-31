@@ -27,6 +27,11 @@ namespace CDMISrestful.Models
             return new VitalInfoMethod().SetData(pclsCache, UserId, RecordDate, RecordTime, ItemType, ItemCode, Value, Unit, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
+        //public List<VitalInfo> GetAllSignsByPeriod( string UserId, int StartDate, int EndDate)
+        //{
+        //    return new VitalInfoMethod().GetAllSignsByPeriod(pclsCache, UserId, StartDate, EndDate);
+        //}
+
         // 获取某日期之前，一定条数血压（收缩压/舒张压）和脉率的数据详细时刻列表,用于phone，支持继续加载  GL 2015-10-12  
         public SignDetailByP GetSignsDetailByPeriod(string PatientId, string Module, int StartDate, int Num)
         {

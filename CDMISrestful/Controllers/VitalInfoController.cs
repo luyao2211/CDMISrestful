@@ -42,18 +42,32 @@ namespace CDMISrestful.Controllers
             return new ExceptionHandler().SetData(Request,ret);
         }
 
-        /// <summary>
-        /// GetSignsDetailByPeriod 获取某日期之前，一定条数血压（收缩压/舒张压）和脉率的数据详细时刻列表,用于phone，支持继续加载  GL 2015-10-12  
-        /// </summary>
-        /// <param name="PatientId"></param>
-        /// <param name="Module"></param>
-        /// <param name="StartDate"></param>
-        /// <param name="Num"></param>
-        [Route("Api/v1/VitalInfo/VitalSigns")]
-        [HttpGet]
-        public SignDetailByP GetSignsDetailByPeriod(string PatientId, string Module, int StartDate, int Num)
-        {
-            return repository.GetSignsDetailByPeriod(PatientId, Module, StartDate, Num);
-        }
+        ///// <summary>
+        ///// 根据患者Id，输入的起始日期和截止日期获取该段时间内记录的所有体征数据 CSQ 20151031
+        ///// </summary>
+        ///// <param name="UserId"></param>
+        ///// <param name="StartDate"></param>
+        ///// <param name="EndDate"></param>
+        ///// <returns></returns>
+        //[Route("Api/v1/VitalInfo/VitalSigns")]        
+        //public List<VitalInfo> GetAllSignsByPeriod(string UserId, int StartDate, int EndDate)
+        //{
+        //    return repository.GetAllSignsByPeriod(UserId, StartDate, EndDate);
+        //}
+
+        ///// <summary>
+        ///// GetSignsDetailByPeriod 获取某日期之前，一定条数血压（收缩压/舒张压）和脉率的数据详细时刻列表,用于phone，支持继续加载  GL 2015-10-12  
+        ///// </summary>
+        ///// <param name="PatientId"></param>
+        ///// <param name="Module"></param>
+        ///// <param name="StartDate"></param>
+        ///// <param name="Num"></param>
+        //[Route("Api/v1/VitalInfo/VitalSigns")]
+        //[HttpGet]
+        //public SignDetailByP GetSignsDetailByPeriod(string PatientId, string Module, int StartDate, int Num)
+        //{
+        //    return repository.GetSignsDetailByPeriod(PatientId, Module, StartDate, Num);
+        //}
+
     }
 }

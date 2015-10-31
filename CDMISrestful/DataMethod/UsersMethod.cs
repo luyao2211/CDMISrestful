@@ -948,7 +948,7 @@ namespace CDMISrestful.DataMethod
             List<CategoryByDoctorId> list2 = new List<CategoryByDoctorId>();
             string moudlecodes = "";
             string[] moudlecode = null;
-            string DoctorId = "";
+            //string DoctorId = "";
             try
             {
                 list1 = GetActiveUserByRole(pclsCache, "HealthCoach");//根据角色获取已激活的用户
@@ -959,15 +959,15 @@ namespace CDMISrestful.DataMethod
                         DoctorInfo dcf = new DoctorInfo();
                         HealthCoachList hcf = new HealthCoachList();
                         //一次循环取一个健康专员的信息
-                        DoctorId = list1[i].UserId;
+                       // DoctorId = list1[i].UserId;
 
-                        dcf = new UsersMethod().GetDoctorInfo(pclsCache, DoctorId);//获取基本信息
-                        hcf.healthCoachID = DoctorId;
+                        dcf = new UsersMethod().GetDoctorInfo(pclsCache, list1[i].UserId);//获取基本信息
+                        hcf.healthCoachID = list1[i].UserId;
                         hcf.name = dcf.DoctorName;
                         hcf.sex = dcf.Gender;
                         hcf.age = Convert.ToString(new UsersMethod().GetAgeByBirthDay(pclsCache, Convert.ToInt32(dcf.Birthday)));
 
-                        moudlecodes = new UsersMethod().GetModuleByDoctorId(pclsCache, DoctorId);
+                        moudlecodes = new UsersMethod().GetModuleByDoctorId(pclsCache, list1[i].UserId);
                         if (moudlecodes != null)
                         {
                             moudlecode = moudlecodes.Split(new char[] { '_' });
@@ -983,7 +983,7 @@ namespace CDMISrestful.DataMethod
                                 }
                             }
                         }
-                        list2 = new UsersMethod().GetCategoryByDoctorId(pclsCache, DoctorId);
+                        list2 = new UsersMethod().GetCategoryByDoctorId(pclsCache, list1[i].UserId);
                         //获取某个健康专员的所有CategoryCode信息
                         if (list2 != null)
                         {

@@ -869,6 +869,26 @@
             <param name="UserId"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetComplianceAllSignsListByPeriod(System.String,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            计划信息展示 WF20151029 测试用例：U201510260001 PLN201510260001 20151028 20151039 Bloodpressure Bloodpressure_1
+            </summary>
+            <param name="UserId"></param>
+            <param name="PlanNo"></param>
+            <param name="StartDate"></param>
+            <param name="EndDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.DeleteTask(System.String,System.String,System.String,System.String)">
+            <summary>
+            根据主键删除Ps.Task任务表的一条数据 SYF 20151029
+            </summary>
+            <param name="Plan"></param>
+            <param name="Type"></param>
+            <param name="Code"></param>
+            <param name="SortNo"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.PostPlan(CDMISrestful.DataModels.GPlanInfo)">
             <summary>
             Ps.Plan.SetData GL 2015-10-13
@@ -881,14 +901,6 @@
             Ps.ComplianceDetail.SetData CSQ 20151027
             </summary>
             <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPatientDrugRecord(System.String,System.String)">
-            <summary>
-            GetPatientDrugRecord 根据患者Id，获取药物治疗列表 GL 2015-10-13
-            </summary>
-            <param name="PatientId"></param>
-            <param name="Module"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.PostCreateTask(CDMISrestful.DataModels.CreateTask)">
@@ -977,34 +989,6 @@
             <param name="Code"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetImplementationByDate(System.String,System.String,System.String)">
-            <summary>
-            GetImplementationByDate 通过某计划的日期，获取该天的任务完成详情 用于图上点点击时弹框内容 GL 2015-10-13
-            </summary>
-            <param name="PatientId"></param>
-            <param name="PlanNo"></param>
-            <param name="DateSelected"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetSignInfoByCode(System.String,System.String,System.String,System.Int32,System.Int32)">
-            <summary>
-            GetSignInfoByCode 获取某体征的数据和画图信息（收缩压、舒张压、脉率) Pad和Phone都要用 GL 2015-10-13
-            </summary>
-            <param name="PatientId"></param>
-            <param name="PlanNo"></param>
-            <param name="ItemCode"></param>
-            <param name="StartDate"></param>
-            <param name="EndDate"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetExecutingPlanByModule(System.String,System.String)">
-            <summary>
-            GetExecutingPlanByModule 根据模块获取正在执行的计划PlanNo CSQ 20151029
-            </summary>
-            <param name="PatientId"></param>
-            <param name="Module"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.PostPlanStart(CDMISrestful.DataModels.GPlanInfo)">
             <summary>
             PostPlanStart 更新计划状态（开始计划） GL 2015-10-13
@@ -1017,22 +1001,6 @@
             <param name="piDeviceType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetImplementationForPadFirst(System.String,System.String)">
-            <summary>
-            GetImplementationForPadFirst 获取计划完成情况（Pad)-首次进入页面 PlanNo为空 GL 2015-10-13
-            </summary>
-            <param name="PatientId"></param>
-            <param name="Module"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetImplementationForPadSecond(System.String,System.String)">
-            <summary>
-            GetImplementationForPadSecond 获取计划完成情况（Pad)-查看往期计划 GL 2015-10-13
-            </summary>
-            <param name="PatientId"></param>
-            <param name="PlanNo"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.GetOverDuePlanList(System.String,System.String)">
             <summary>
             GetOverDuePlanList 获取健康专员负责的所有患者（最新结束但未达标的）计划列表 GL 2015-10-13
@@ -1041,57 +1009,11 @@
             <param name="ModuleType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPlanInfobyPID(System.String)">
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPlanInfo(System.String,System.String,System.String,System.String)">
             <summary>
-            GetPlanInfobyPID 获取病人当前计划以及健康专员 "PlanNo|DoctorId" GL 2015-10-13
+            GetPlanInfo 根据PlanNo获取某计划详情 GL 2015-10-13
             </summary>
-            <param name="PatientId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetImplementationForPhone(System.String,System.String)">
-            <summary>
-            GetImplementationForPhone 获取计划完成情况（Phone)-查看当前计划近一周的情况 GL 2015-10-13 
-            </summary>
-            <param name="PatientId"></param>
-            <param name="Module"></param>
-            <returns></returns>    
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPlanList34ByM(System.String,System.String)">
-            <summary>
-            GetPlanList34ByM 获取某模块患者的正在执行的和结束的计划列表 GL 2015-10-13
-            </summary>
-            <param name="PatientId"></param>
-            <param name="Module"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetAllComplianceListByPeriod(System.String,System.Int32,System.Int32)">
-            <summary>
-            GetAllComplianceListByPeriod 获取某计划的某段时间(包括端点)的依从率列表 GL 2015-10-13
-            </summary>
-            <param name="PatientId"></param>
             <param name="PlanNo"></param>
-            <param name="StartDate"></param>
-            <param name="EndDate"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetComplianceAllSignsListByPeriod(System.String,System.String,System.Int32,System.Int32,System.String,System.String)">
-            <summary>
-            计划信息展示 WF20151029
-            </summary>
-            <param name="UserId"></param>
-            <param name="PlanNo"></param>
-            <param name="StartDate"></param>
-            <param name="EndDate"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.DeleteTask(System.String,System.String,System.String,System.String)">
-            <summary>
-            根据主键删除Ps.Task任务表的一条数据 SYF 20151029
-            </summary>
-            <param name="Plan"></param>
-            <param name="Type"></param>
-            <param name="Code"></param>
-            <param name="SortNo"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
@@ -1399,15 +1321,6 @@
             </summary>
             <param name="item"></param>
             <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.VitalInfoController.GetSignsDetailByPeriod(System.String,System.String,System.Int32,System.Int32)">
-            <summary>
-            GetSignsDetailByPeriod 获取某日期之前，一定条数血压（收缩压/舒张压）和脉率的数据详细时刻列表,用于phone，支持继续加载  GL 2015-10-12  
-            </summary>
-            <param name="PatientId"></param>
-            <param name="Module"></param>
-            <param name="StartDate"></param>
-            <param name="Num"></param>
         </member>
         <member name="M:CDMISrestful.DataMethod.ClinicInfoMethod.PsClinicalInfoGetTransClinicalInfo(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
@@ -1961,7 +1874,7 @@
         </member>
         <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetComplianceListByPeriod(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.Int32)">
             <summary>
-            syf 2015-10-10 获取某计划的某段时间(包括端点)的依从率列表
+            WF 20151030 获取某计划的某段时间(包括端点)的依从率列表
             </summary>
             <param name="pclsCache"></param>
             <param name="PatientId"></param>

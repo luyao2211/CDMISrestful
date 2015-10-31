@@ -269,6 +269,8 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+
+        //输出一段时间中记录的所有体征信息
         public List<VitalInfo> GetAllSignsByPeriod(DataConnection pclsCache, string UserId, int StartDate, int EndDate)
         {
             {
@@ -297,6 +299,7 @@ namespace CDMISrestful.DataMethod
                         item.ItemCode   = cdr["ItemCode"].ToString();
                         item.Value      = cdr["Value"].ToString();
                         item.Unit       = cdr["Unit"].ToString();
+                        item.Name = cdr["VitalName"].ToString();
                         items.Add(item);
                     }
                     return items;

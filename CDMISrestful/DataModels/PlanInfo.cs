@@ -88,16 +88,43 @@ namespace CDMISrestful.DataModels
         public string ProgressRate { get; set; }
     }
 
+    public class PlanDeatil
+    {
+        /// <summary>
+        /// 计划名称  “计划”+序号+起止时间  用于计划列表的显示
+        /// </summary>
+        public string PlanName { get; set; }
+
+        /// <summary>
+        /// 计划编码
+        /// </summary>
+        public string PlanNo { get; set; }
+
+        /// <summary>
+        /// 起始日期
+        /// </summary>
+        public int StartDate { get; set; }
+
+        /// <summary>
+        /// 截止日期
+        /// </summary>
+        public int EndDate { get; set; }
+    }
+
     public class GPlanInfo
     {
         [Required]
         public string PlanNo { get; set; }
+        public string PlanName { get; set; }
         public string PatientId { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string Module { get; set; }
         [Required]
         public string Status { get; set; }
+        public double PlanCompliance { get; set; }
+        public string RemainingDays { get; set; }
+        public string ProgressRate { get; set; }
         public string DoctorId { get; set; }
         public string DoctorName { get; set; }
         public string piUserId { get; set; }
@@ -105,6 +132,7 @@ namespace CDMISrestful.DataModels
         public string piTerminalIP { get; set; }
         public int piDeviceType { get; set; }
     }
+
     public class ComplianceDetail
     {
         [Required]
@@ -216,28 +244,7 @@ namespace CDMISrestful.DataModels
         public double Compliance { get; set; }
         public string Description { get; set; }
     }
-    public class PlanDeatil
-    {
-        /// <summary>
-        /// 计划名称  “计划”+序号+起止时间  用于计划列表的显示
-        /// </summary>
-        public string PlanName { get; set; }
-
-        /// <summary>
-        /// 计划编码
-        /// </summary>
-        public string PlanNo { get; set; }
-
-        /// <summary>
-        /// 起始日期
-        /// </summary>
-        public int StartDate { get; set; }
-
-        /// <summary>
-        /// 截止日期
-        /// </summary>
-        public int EndDate { get; set; }
-    }
+   
 
     public class PsTaskByType
     { 
@@ -573,14 +580,21 @@ namespace CDMISrestful.DataModels
     }
     public class ComplianceAllSignsListByPeriod
     {
-        public int Date { get; set; }
-        public double Compliance { get; set; }
+        public string Date { get; set; }
+        public string Compliance { get; set; }
         public string Description { get; set; }
         public string Value { get; set; }
         public string Task { get; set; }
         public string BulletValue { get; set; }
         public string BulletColor { get; set; }
         public string CustomBullet { get; set; }
+        public string VitalCode { get; set; }
+
+        //public string BloodPressure_1 { get; set; }
+        //public string BloodPressure_2 { get; set; }
+        //public string Pulserate_1 { get; set; }
+
+
     }
 
     public class SignByPeriod

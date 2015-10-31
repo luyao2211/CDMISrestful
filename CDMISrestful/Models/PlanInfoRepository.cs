@@ -244,6 +244,8 @@ namespace CDMISrestful.Models
             {
                 //string ret = "";
                 GPlanInfo planInfo = new PlanInfoMethod().GetExecutingPlanByM(pclsCache, PatientId, Module);
+                planInfo.RemainingDays = new PlanInfoMethod().GetProgressRate(pclsCache, planInfo.PlanNo).RemainingDays;
+
                 if (planInfo != null)
                 {
                     //ret = planInfo.PlanNo;
@@ -271,175 +273,279 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().PlanStart(pclsCache, PlanNo, Status, piUserId, piTerminalName, piTerminalIP, piDeviceType);
         }
 
-        //获取计划完成情况（Pad)-首次进入页面 PlanNo为空 GL 2015-10-13
-        public ImplementationInfo GetImplementationForPadFirst(string PatientId, string Module)
-        {
-            ImplementationInfo ImplementationInfo = new ImplementationInfo();
-            string str_result = "";  //最终的输出-ImplementationInfo转化成json格式
-            try
-            {
-                //与模块特性无关的公共项 ——病人基本信息、计划列表、计划进度、体征切换  不同模块可共用
-                string PlanNo = "";
-                //病人基本信息-姓名、头像..
-                PatDetailInfo patientList = new ModuleInfoMethod().PsBasicInfoDetailGetPatientDetailInfo(pclsCache, PatientId);
-                if (patientList != null)
-                {
-                    ImplementationInfo.PatientInfo.PatientName = patientList.PhoneNumber;
+        #region 暂时不用
+        ////获取计划完成情况（Pad)-首次进入页面 PlanNo为空 GL 2015-10-13
+        //public ImplementationInfo GetImplementationForPadFirst(string PatientId, string Module)
+        //{
+        //    ImplementationInfo ImplementationInfo = new ImplementationInfo();
+        //    string str_result = "";  //最终的输出-ImplementationInfo转化成json格式
+        //    try
+        //    {
+        //        //与模块特性无关的公共项 ——病人基本信息、计划列表、计划进度、体征切换  不同模块可共用
+        //        string PlanNo = "";
+        //        //病人基本信息-姓名、头像..
+        //        PatDetailInfo patientList = new ModuleInfoMethod().PsBasicInfoDetailGetPatientDetailInfo(pclsCache, PatientId);
+        //        if (patientList != null)
+        //        {
+        //            ImplementationInfo.PatientInfo.PatientName = patientList.PhoneNumber;
 
-                    PatDetailInfo BasicInfoDetail = new ModuleInfoMethod().PsBasicInfoDetailGetPatientDetailInfo(pclsCache, PatientId);
-                    if (BasicInfoDetail != null)
-                    {
-                        if (BasicInfoDetail.PhotoAddress != null)
-                        {
-                            ImplementationInfo.PatientInfo.ImageUrl = BasicInfoDetail.PhotoAddress;
-                        }
-                        else
-                        {
-                            ImplementationInfo.PatientInfo.ImageUrl = "";  //js端意外不能识别null
-                        }
+        //            PatDetailInfo BasicInfoDetail = new ModuleInfoMethod().PsBasicInfoDetailGetPatientDetailInfo(pclsCache, PatientId);
+        //            if (BasicInfoDetail != null)
+        //            {
+        //                if (BasicInfoDetail.PhotoAddress != null)
+        //                {
+        //                    ImplementationInfo.PatientInfo.ImageUrl = BasicInfoDetail.PhotoAddress;
+        //                }
+        //                else
+        //                {
+        //                    ImplementationInfo.PatientInfo.ImageUrl = "";  //js端意外不能识别null
+        //                }
 
-                    }
-                }
+        //            }
+        //        }
 
-                //刚进入页面加载计划列表 (始终存在第一条-当前计划）
-                ImplementationInfo.PlanList = new PlanInfoMethod().GetPlanList34ByM(pclsCache, PatientId, Module);
+        //        //刚进入页面加载计划列表 (始终存在第一条-当前计划）
+        //        ImplementationInfo.PlanList = new PlanInfoMethod().GetPlanList34ByM(pclsCache, PatientId, Module);
 
-                PlanNo = ImplementationInfo.PlanList[0].PlanNo; //肯定会存在 
+        //        PlanNo = ImplementationInfo.PlanList[0].PlanNo; //肯定会存在 
 
-                #region  存在正在执行的计划
+        //        #region  存在正在执行的计划
 
-                if ((PlanNo != "") && (PlanNo != null))  //存在正在执行的计划
-                {
-                    //剩余天数和进度
-                    Progressrate PRlist = new PlanInfoMethod().GetProgressRate(pclsCache, PlanNo);
-                    if (PRlist != null)
-                    {
-                        ImplementationInfo.RemainingDays = PRlist.RemainingDays;
-                        ImplementationInfo.ProgressRate = (Convert.ToDouble(PRlist.ProgressRate) * 100).ToString();
+        //        if ((PlanNo != "") && (PlanNo != null))  //存在正在执行的计划
+        //        {
+        //            //剩余天数和进度
+        //            Progressrate PRlist = new PlanInfoMethod().GetProgressRate(pclsCache, PlanNo);
+        //            if (PRlist != null)
+        //            {
+        //                ImplementationInfo.RemainingDays = PRlist.RemainingDays;
+        //                ImplementationInfo.ProgressRate = (Convert.ToDouble(PRlist.ProgressRate) * 100).ToString();
 
-                        ImplementationInfo.StartDate = ImplementationInfo.PlanList[0].StartDate;
-                        ImplementationInfo.EndDate = ImplementationInfo.PlanList[0].EndDate;
-                    }
+        //                ImplementationInfo.StartDate = ImplementationInfo.PlanList[0].StartDate;
+        //                ImplementationInfo.EndDate = ImplementationInfo.PlanList[0].EndDate;
+        //            }
 
-                    //正在执行计划的最近一周的依从率
-                    Period weekPeriod = new PlanInfoMethod().GetWeekPeriod(pclsCache, ImplementationInfo.PlanList[0].StartDate);
-                    if (weekPeriod != null)
-                    {
-                        ImplementationInfo.CompliacneValue = "最近一周依从率为：" + new PlanInfoMethod().GetCompliacneRate(pclsCache, PatientId, PlanNo, Convert.ToInt32(weekPeriod.StartDate), Convert.ToInt32(weekPeriod.EndDate)) + "%";
-                    }
+        //            //正在执行计划的最近一周的依从率
+        //            Period weekPeriod = new PlanInfoMethod().GetWeekPeriod(pclsCache, ImplementationInfo.PlanList[0].StartDate);
+        //            if (weekPeriod != null)
+        //            {
+        //                ImplementationInfo.CompliacneValue = "最近一周依从率为：" + new PlanInfoMethod().GetCompliacneRate(pclsCache, PatientId, PlanNo, Convert.ToInt32(weekPeriod.StartDate), Convert.ToInt32(weekPeriod.EndDate)) + "%";
+        //            }
 
-                    //读取任务列表  20151027 需要修改
-                    //List<PsTask> TaskList = new PlanInfoMethod().GetTaskList(pclsCache, PlanNo);
-                    List<PsTask> TaskList = new List<PsTask>();
-                    //ImplementationInfo.TaskList = PsTask.GetSpTaskList(pclsCache, PlanNo);
+        //            //读取任务列表  20151027 需要修改
+        //            //List<PsTask> TaskList = new PlanInfoMethod().GetTaskList(pclsCache, PlanNo);
+        //            List<PsTask> TaskList = new List<PsTask>();
+        //            //ImplementationInfo.TaskList = PsTask.GetSpTaskList(pclsCache, PlanNo);
 
-                    //测量-体征切换下拉框  
-                    List<PsTask> VitalSignRows = new List<PsTask>();
-                    foreach (PsTask item in TaskList)
-                    {
-                        if (item.Type == "VitalSign")
-                        {
-                            VitalSignRows.Add(item);
-                        }
-                    }
-                    List<SignShow> SignList = new List<SignShow>();
-                    foreach (PsTask item in VitalSignRows)
-                    {
-                        SignShow SignShow = new SignShow();
-                        SignShow.SignName = item.Name;
-                        SignShow.SignCode = item.Code;
-                        SignList.Add(SignShow);
-                    }
-                    ImplementationInfo.SignList = SignList;
-
-
-                    List<MstBloodPressure> reference = new List<MstBloodPressure>();
-                    ChartData ChartData = new ChartData();
-                    List<Graph> GraphList = new List<Graph>();
-                    GraphGuide GraphGuide = new GraphGuide();
-
-                    if (Module == "M1")  //后期维护的话，在这里添加不同的模块判断
-                    {
-
-                        //高血压模块  体征测量-血压（收缩压、舒张压）、脉率   【默认显示-收缩压，血压必有，脉率可能有】  
-                        List<PsTask> HyperTensionRows = new List<PsTask>();
-                        foreach (PsTask item in TaskList)
-                        {
-                            if ((item.Code == "Bloodpressure|Bloodpressure_1") || (item.Code == "Bloodpressure|Bloodpressure_2") || (item.Code == "Pulserate|Pulserate_1"))
-                            {
-                                HyperTensionRows.Add(item);
-                            }
-                        }
-                        //注意：需要兼容之前没有脉率的情况
-                        if ((HyperTensionRows != null) && (HyperTensionRows.Count >= 2))  //M1 收缩压（默认显示）、舒张压、脉率  前两者肯定有，脉率不一定有
-                        {
-                            //从数据库获取血压的分级规则，脉率的分级原则写死在webservice
-                            reference = new PlanInfoMethod().GetBPGrades(pclsCache);
-
-                            //首次进入，默认加载收缩压
-                            GraphList = new PlanInfoMethod().GetSignInfoByM1(pclsCache, PatientId, PlanNo, "Bloodpressure|Bloodpressure_1", ImplementationInfo.PlanList[0].StartDate, ImplementationInfo.PlanList[0].EndDate, reference);
-
-                            //初始值、目标值、分级规则加工
-                            if (GraphList.Count > 0)
-                            {
-                                GraphGuide = new PlanInfoMethod().GetGuidesByCode(pclsCache, PlanNo, "Bloodpressure|Bloodpressure_1", reference);
-                                ChartData.GraphGuide = GraphGuide;
-                            }
-                        }
-
-                    }
-                    else
-                    {
-
-                    }
+        //            //测量-体征切换下拉框  
+        //            List<PsTask> VitalSignRows = new List<PsTask>();
+        //            foreach (PsTask item in TaskList)
+        //            {
+        //                if (item.Type == "VitalSign")
+        //                {
+        //                    VitalSignRows.Add(item);
+        //                }
+        //            }
+        //            List<SignShow> SignList = new List<SignShow>();
+        //            foreach (PsTask item in VitalSignRows)
+        //            {
+        //                SignShow SignShow = new SignShow();
+        //                SignShow.SignName = item.Name;
+        //                SignShow.SignCode = item.Code;
+        //                SignList.Add(SignShow);
+        //            }
+        //            ImplementationInfo.SignList = SignList;
 
 
-                    //必有测量任务，其他任务（例如吃药）可能没有
+        //            List<MstBloodPressure> reference = new List<MstBloodPressure>();
+        //            ChartData ChartData = new ChartData();
+        //            List<Graph> GraphList = new List<Graph>();
+        //            GraphGuide GraphGuide = new GraphGuide();
 
-                    //其他任务依从情况  所有模块共有的
-                    List<CompliacneDetailByD> TasksComByPeriod = new List<CompliacneDetailByD>();
-                    //是否有其他任务
-                    //string condition1 = " Type not in ('VitalSign,')";
-                    if (TaskList.Count == VitalSignRows.Count)
-                    {
-                        ChartData.OtherTasks = "0";
-                    }
-                    else
-                    {
-                        ChartData.OtherTasks = "1";
-                        TasksComByPeriod = new PlanInfoMethod().GetTasksComCountByPeriod(pclsCache, PatientId, PlanNo, ImplementationInfo.PlanList[0].StartDate, ImplementationInfo.PlanList[0].EndDate);
-                        if ((TasksComByPeriod != null) && (TasksComByPeriod.Count == GraphList.Count)) //体征的数据条数一定等于其他任务的条数（天数） ，都是按照compliance的date统计的
-                        {
-                            for (int rowsCount = 0; rowsCount < TasksComByPeriod.Count; rowsCount++)
-                            {
-                                GraphList[rowsCount].DrugValue = "1";   //已经初始化过
-                                GraphList[rowsCount].DrugBullet = TasksComByPeriod[rowsCount].drugBullet;
-                                GraphList[rowsCount].DrugColor = TasksComByPeriod[rowsCount].drugColor;
-                                GraphList[rowsCount].DrugDescription = TasksComByPeriod[rowsCount].Events;//+ "<br><a onclick= shuang shuang zz(); shuang shuang;>详细</a>"
-                            }
-                        }
-                    }
+        //            if (Module == "M1")  //后期维护的话，在这里添加不同的模块判断
+        //            {
 
-                    ChartData.GraphList = GraphList;
-                    ImplementationInfo.ChartData = ChartData;
-                }
+        //                //高血压模块  体征测量-血压（收缩压、舒张压）、脉率   【默认显示-收缩压，血压必有，脉率可能有】  
+        //                List<PsTask> HyperTensionRows = new List<PsTask>();
+        //                foreach (PsTask item in TaskList)
+        //                {
+        //                    if ((item.Code == "Bloodpressure|Bloodpressure_1") || (item.Code == "Bloodpressure|Bloodpressure_2") || (item.Code == "Pulserate|Pulserate_1"))
+        //                    {
+        //                        HyperTensionRows.Add(item);
+        //                    }
+        //                }
+        //                //注意：需要兼容之前没有脉率的情况
+        //                if ((HyperTensionRows != null) && (HyperTensionRows.Count >= 2))  //M1 收缩压（默认显示）、舒张压、脉率  前两者肯定有，脉率不一定有
+        //                {
+        //                    //从数据库获取血压的分级规则，脉率的分级原则写死在webservice
+        //                    reference = new PlanInfoMethod().GetBPGrades(pclsCache);
 
-                #endregion
+        //                    //首次进入，默认加载收缩压
+        //                    GraphList = new PlanInfoMethod().GetSignInfoByM1(pclsCache, PatientId, PlanNo, "Bloodpressure|Bloodpressure_1", ImplementationInfo.PlanList[0].StartDate, ImplementationInfo.PlanList[0].EndDate, reference);
 
-                //str_result = JSONHelper.ObjectToJson(ImplementationInfo);
-                //Context.Response.BinaryWrite(new byte[] { 0xEF, 0xBB, 0xBF });
-                //Context.Response.Write(str_result);
-                //HttpContext.Current.ApplicationInstance.CompleteRequest();
-                ////Context.Response.End();
-                return ImplementationInfo;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetImplementationForPadFirst", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                //return null;
-                throw (ex);
-            }
-        }
+        //                    //初始值、目标值、分级规则加工
+        //                    if (GraphList.Count > 0)
+        //                    {
+        //                        GraphGuide = new PlanInfoMethod().GetGuidesByCode(pclsCache, PlanNo, "Bloodpressure|Bloodpressure_1", reference);
+        //                        ChartData.GraphGuide = GraphGuide;
+        //                    }
+        //                }
+
+        //            }
+        //            else
+        //            {
+
+        //            }
+
+
+        //            //必有测量任务，其他任务（例如吃药）可能没有
+
+        //            //其他任务依从情况  所有模块共有的
+        //            List<CompliacneDetailByD> TasksComByPeriod = new List<CompliacneDetailByD>();
+        //            //是否有其他任务
+        //            //string condition1 = " Type not in ('VitalSign,')";
+        //            if (TaskList.Count == VitalSignRows.Count)
+        //            {
+        //                ChartData.OtherTasks = "0";
+        //            }
+        //            else
+        //            {
+        //                ChartData.OtherTasks = "1";
+        //                TasksComByPeriod = new PlanInfoMethod().GetTasksComCountByPeriod(pclsCache, PatientId, PlanNo, ImplementationInfo.PlanList[0].StartDate, ImplementationInfo.PlanList[0].EndDate);
+        //                if ((TasksComByPeriod != null) && (TasksComByPeriod.Count == GraphList.Count)) //体征的数据条数一定等于其他任务的条数（天数） ，都是按照compliance的date统计的
+        //                {
+        //                    for (int rowsCount = 0; rowsCount < TasksComByPeriod.Count; rowsCount++)
+        //                    {
+        //                        GraphList[rowsCount].DrugValue = "1";   //已经初始化过
+        //                        GraphList[rowsCount].DrugBullet = TasksComByPeriod[rowsCount].drugBullet;
+        //                        GraphList[rowsCount].DrugColor = TasksComByPeriod[rowsCount].drugColor;
+        //                        GraphList[rowsCount].DrugDescription = TasksComByPeriod[rowsCount].Events;//+ "<br><a onclick= shuang shuang zz(); shuang shuang;>详细</a>"
+        //                    }
+        //                }
+        //            }
+
+        //            ChartData.GraphList = GraphList;
+        //            ImplementationInfo.ChartData = ChartData;
+        //        }
+
+        //        #endregion
+
+        //        //str_result = JSONHelper.ObjectToJson(ImplementationInfo);
+        //        //Context.Response.BinaryWrite(new byte[] { 0xEF, 0xBB, 0xBF });
+        //        //Context.Response.Write(str_result);
+        //        //HttpContext.Current.ApplicationInstance.CompleteRequest();
+        //        ////Context.Response.End();
+        //        return ImplementationInfo;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetImplementationForPadFirst", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+        //        //return null;
+        //        throw (ex);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// 需要修改 20151029
+        ///// </summary>
+        ///// <param name="UserId"></param>
+        ///// <param name="PlanNo"></param>
+        ///// <param name="StartDate"></param>
+        ///// <param name="EndDate"></param>
+        ///// <param name="ItemType"></param>
+        ///// <param name="ItemCode"></param>
+        ///// <returns></returns>
+        //public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate)
+        //{
+        //    List<ComplianceAllSignsListByPeriod> items = new List<ComplianceAllSignsListByPeriod>();
+        //    //依从率
+        //    List<ComplianceListByPeriod> items1 = new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PlanNo, StartDate, EndDate);
+        //    //体征
+        //    //List<SignByPeriod> items2 = new PlanInfoMethod().GetSignByPeriod(pclsCache,UserId,ItemType,ItemCode,StartDate,EndDate);
+        //    List<VitalInfo> items2 = new VitalInfoMethod().GetAllSignsByPeriod(pclsCache, UserId, StartDate, EndDate);                   
+
+        //    for (int i = 0; i < items1.Count;i++ )
+        //    {
+        //        ComplianceAllSignsListByPeriod item = new ComplianceAllSignsListByPeriod();
+        //        item.Date = items1[i].Date.ToString();
+        //        item.Compliance = Math.Round(items1[i].Compliance*100,0)+"%";
+        //        item.Description = items1[i].Description;
+        //        if(items1[i].Compliance==1)
+        //        {
+        //            item.BulletColor = "#77777";
+        //        }
+        //        else if (items1[i].Compliance == 0)
+        //        {
+        //            item.BulletColor = "#DADADA";
+        //        }
+        //        else
+        //        {
+        //            item.CustomBullet = "img/amcharts/customBullet.png";
+        //        }
+        //        item.BulletValue = "1";
+
+        //        List<PsTask> tasks = new PlanInfoMethod().GetTasks(pclsCache,PlanNo, "T", item.Date, "");
+        //        string str = "";
+        //        for (int j = 0; j < tasks.Count;j++ )
+        //        {
+        //            if (j % 2 == 0)
+        //            {
+        //                str = str + tasks[j].Name +"："+ tasks[j].Status+"   ";
+
+        //            }
+        //            else
+        //            {
+        //                str = str + tasks[j].Name +"：" + tasks[j].Status + "<br>";
+        //            }
+        //        }
+        //        item.Task = str; //需要修改
+        //        if (items2 != null)
+        //        {
+        //            List<VitalInfo> vitalSigns = items2.FindAll(s => s.RecordDate == item.Date);
+        //            if (vitalSigns != null)
+        //            {
+        //                string strValue = "";
+        //                for (int k = 0; k < vitalSigns.Count; k++)
+        //                {
+        //                    if (vitalSigns[k].ItemCode == "Bloodpressure_1")
+        //                    {
+        //                        item.BloodPressure_1 = vitalSigns[k].Value;
+        //                        item.BloodPressure_2 = "#";
+        //                        item.Pulserate_1 = "#";
+
+        //                    }
+        //                    else if (vitalSigns[k].ItemCode == "Bloodpressure_2")
+        //                    {
+        //                        item.BloodPressure_1 = "#";
+        //                        item.BloodPressure_2 = vitalSigns[k].Value;
+        //                        item.Pulserate_1 = "#";
+        //                    }
+        //                    else if (vitalSigns[k].ItemCode == "Pulserate_1")
+        //                    {
+        //                        item.BloodPressure_1 = "#";
+        //                        item.BloodPressure_2 = "#";
+        //                        item.Pulserate_1 = vitalSigns[k].Value;
+        //                    }
+        //                    else
+        //                    {
+        //                        item.BloodPressure_1 = "#";
+        //                        item.BloodPressure_2 = "#";
+        //                        item.Pulserate_1 = "#";
+        //                    }
+        //                    strValue = strValue + vitalSigns[k].Name + "：" + vitalSigns[k].Value + "<br>";
+        //                }
+        //                item.Value = strValue; //需要修改
+        //            }
+        //            else
+        //            {
+        //                item.Value = "#";
+        //            }
+        //        }
+        //        items.Add(item);
+        //    }
+
+        //    return items;
+        //}
+        #endregion
 
         //获取计划完成情况（Pad)-查看往期计划 GL 2015-10-13
         public ImplementationInfo GetImplementationForPadSecond(string PatientId, string PlanNo)
@@ -695,42 +801,42 @@ namespace CDMISrestful.Models
         }
 
 
-        //获取病人当前计划以及健康专员 "PlanNo|DoctorId" GL 2015-10-13
-        public string GetPlanInfobyPID(string PatientId)
-        {
-            string Info = string.Empty;
-            try
-            {
-                //ZAM Bug Fix 2015-6-2
-                GPlanInfo Plan = new PlanInfoMethod().GetExecutingPlan(pclsCache, PatientId);
-                string PlanNo = string.Empty;
-                string DoctorId = string.Empty;
-                string DoctorName = string.Empty;
+        ////获取病人当前计划以及健康专员 "PlanNo|DoctorId" GL 2015-10-13
+        //public string GetPlanInfobyPID(string PatientId)
+        //{
+        //    string Info = string.Empty;
+        //    try
+        //    {
+        //        //ZAM Bug Fix 2015-6-2
+        //        GPlanInfo Plan = new PlanInfoMethod().GetExecutingPlan(pclsCache, PatientId);
+        //        string PlanNo = string.Empty;
+        //        string DoctorId = string.Empty;
+        //        string DoctorName = string.Empty;
 
-                if (Plan != null && Plan.PlanNo != null) //Plan.Count > 0
-                {
-                    PlanNo = Plan.PlanNo;
-                }
-                TypeAndName Doctor = new ModuleInfoMethod().PsBasicInfoDetailGetSDoctor(pclsCache, PatientId);
-                if (Doctor != null && Doctor.Type != null) //Doctor.Count > 1
-                {
-                    DoctorId = Doctor.Type;
-                    DoctorName = Doctor.Name;
-                }
-                Info = PlanNo + "|" + DoctorId + "|" + DoctorName;
-                return Info;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetPlanInfobyPID", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return Info;
-                throw (ex);
-            }
-            finally
-            {
-                pclsCache.DisConnect();
-            }
-        }
+        //        if (Plan != null && Plan.PlanNo != null) //Plan.Count > 0
+        //        {
+        //            PlanNo = Plan.PlanNo;
+        //        }
+        //        TypeAndName Doctor = new ModuleInfoMethod().PsBasicInfoDetailGetSDoctor(pclsCache, PatientId);
+        //        if (Doctor != null && Doctor.Type != null) //Doctor.Count > 1
+        //        {
+        //            DoctorId = Doctor.Type;
+        //            DoctorName = Doctor.Name;
+        //        }
+        //        Info = PlanNo + "|" + DoctorId + "|" + DoctorName;
+        //        return Info;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetPlanInfobyPID", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+        //        return Info;
+        //        throw (ex);
+        //    }
+        //    finally
+        //    {
+        //        pclsCache.DisConnect();
+        //    }
+        //}
 
         //获取计划完成情况（Phone)-查看当前计划近一周的情况 GL 2015-10-13     
         public ImplementationPhone GetImplementationForPhone(string PatientId, string Module)
@@ -890,7 +996,7 @@ namespace CDMISrestful.Models
         }
 
         //根据计划编码和日期，获取依从率 GL 2015-10-13
-        public List<PlanDeatil> GetPlanList34ByM(string PatientId, string Module)
+        public List<GPlanInfo> GetPlanList34ByM(string PatientId, string Module)
         {
             return new PlanInfoMethod().GetPlanList34ByM(pclsCache, PatientId, Module);
         }
@@ -905,6 +1011,8 @@ namespace CDMISrestful.Models
         {
             return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date,PatientId);
         }
+
+
 
         /// <summary>
         /// 需要修改 20151029
@@ -923,38 +1031,75 @@ namespace CDMISrestful.Models
             List<ComplianceListByPeriod> items1 = new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PlanNo, StartDate, EndDate);
             //体征
             List<SignByPeriod> items2 = new PlanInfoMethod().GetSignByPeriod(pclsCache,UserId,ItemType,ItemCode,StartDate,EndDate);
+            //List<VitalInfo> items2 = new VitalInfoMethod().GetAllSignsByPeriod(pclsCache, UserId, StartDate, EndDate);
 
-            
-
-            for (int i = 0; i < items.Count;i++ )
+            for (int i = 0; i < items1.Count; i++)
             {
                 ComplianceAllSignsListByPeriod item = new ComplianceAllSignsListByPeriod();
-                item.Date = items1[i].Date;
-                item.Compliance = items1[i].Compliance;
+                item.Date = items1[i].Date.ToString();
+                item.Compliance = Math.Round(items1[i].Compliance * 100, 0) + "%";
                 item.Description = items1[i].Description;
-                if(items1[i].Compliance==1)
+                if (items1[i].Compliance == 1)
                 {
                     item.BulletColor = "#77777";
                 }
-                else
+                else if (items1[i].Compliance == 0)
                 {
                     item.BulletColor = "#DADADA";
                 }
-                item.CustomBullet = "img/amcharts/customBullet.png";
+                else
+                {
+                    item.CustomBullet = "img/amcharts/customBullet.png";
+                }
                 item.BulletValue = "1";
-                item.Task = ""; //需要修改
-                item.Value = "120"; //需要修改
+
+                List<PsTask> tasks = new PlanInfoMethod().GetTasks(pclsCache, PlanNo, "T", item.Date, "");
+                string str = "";
+                for (int j = 0; j < tasks.Count; j++)
+                {
+                    if (j % 2 == 0)
+                    {
+                        //str = str + tasks[j].Name + "：" + tasks[j].Status + "   ";
+                        str = str + tasks[j].Name + "   ";
+
+                    }
+                    else
+                    {
+                        //str = str + tasks[j].Name + "：" + tasks[j].Status + "<br>";
+                        str = str + tasks[j].Name +  "<br>";
+
+                    }
+                }
+                item.Task = str; //需要修改
+                if (items2 != null)
+                {
+                    SignByPeriod vitalSign = items2.Find(s => s.RecordDate == item.Date);
+                    if (vitalSign != null)
+                    {
+                        item.VitalCode = ItemCode;
+                        item.Value = vitalSign.Value; //需要修改
+                    }
+                    else
+                    {
+                        item.VitalCode = ItemCode;
+                        item.Value = "#"; //需要修改
+                    }
+                }
                 items.Add(item);
             }
 
             return items;
         }
-
         //根据主键删除Ps.Task一条数据 SYF 2015-10-29
         public int DeteteTask(string Plan, string Type, string Code, string SortNo)
         {
             return new PlanInfoMethod().DeteteTask(pclsCache, Plan, Type, Code, SortNo);
 
+        }
+
+        public double GetComplianceByPlanNo(string PlanNo)
+        {
+            return new PlanInfoMethod().GetComplianceByPlanNo(pclsCache, PlanNo);
         }
     }
 }

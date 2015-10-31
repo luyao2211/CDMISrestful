@@ -84,6 +84,8 @@ namespace CDMISrestful.DataModels
         /// 项目单位
         /// </summary>
         public string  Unit{ get; set; }
+        public string Name { get; set; }
+
         /// <summary>
         /// 开始时间
         /// </summary>
