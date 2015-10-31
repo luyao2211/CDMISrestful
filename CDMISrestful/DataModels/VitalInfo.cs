@@ -166,4 +166,18 @@ namespace CDMISrestful.DataModels
         }
     }
 
+    public class VitalSignFromDevice
+    {
+        public string name { get; set; }
+        public string mobilephone { get; set; }
+        public TypeAndName Bloodpressure_1 { get; set; }
+        public TypeAndName Bloodpressure_2 { get; set; }
+        public TypeAndName Pulserate_1 { get; set; }
+        public TypeAndName Bloodglucose { get; set; }
+        public TypeAndName Respiratoryrate { get; set; }
+        public string ECG { get; set; }
+        public string Activity { get; set; }
+        public string DateTime { get; set; }
+    }
+
 }

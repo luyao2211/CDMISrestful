@@ -80,5 +80,31 @@ namespace CDMISrestful.Controllers
             ret.Headers.Add("contentkey", "#HQ*#base64");
             return ret;
         }
+
+        /// <summary>
+        /// 浙大接收接口处理 LY 2015-10-31
+        /// </summary>
+        /// <param name="VitalSigns"></param>
+        /// <param name="revUserId"></param>
+        /// <param name="TerminalName"></param>
+        /// <param name="TerminalIP"></param>
+        /// <param name="DeviceType"></param>
+        /// <returns></returns>
+        public HttpResponseMessage VitalSignFromZKY(VitalSignFromDevice VitalSigns, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int ret = 0;
+            var HeaderList = Request.Headers.ToList();
+            string HeaderContent = "";
+            KeyValuePair<string, IEnumerable<string>> Header = HeaderList.Find(delegate(KeyValuePair<string, IEnumerable<string>> x)
+            {
+                return x.Key == "Token";
+            });
+            if (Header.Key != null)
+                HeaderContent = Header.Value.First();
+            if (HeaderContent != "#zjuBME319*application/json; charset=utf-8")
+                return new ExceptionHandler().SetData(Request, ret);
+            ret = repository.VitalSignFromZKY(VitalSigns, revUserId, TerminalName, TerminalIP, DeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
+        }
     }
 }
