@@ -616,4 +616,26 @@ namespace CDMISrestful.DataModels
         public string Value { get; set; }
         public string Unit { get; set; }
     }
+
+    public class TasksForClickDtl
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string Status { get; set; }
+    }
+
+    public class TasksForClick
+    {
+        public string Type { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string Status { get; set; }
+
+        public List<TasksForClickDtl> SubTasks { get; set; }
+
+        public TasksForClick()
+        {
+            SubTasks = new List<TasksForClickDtl>();
+        }
+    }
 }

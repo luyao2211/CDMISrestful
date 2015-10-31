@@ -1116,7 +1116,7 @@ namespace CDMISrestful.DataMethod
         }
 
         /// <summary>
-        /// syf 2015-10-10 获取患者某计划内某天的依从率
+        /// CSQ 20151031 获取患者某计划内某天的依从率
         /// </summary>
         /// <param name="pclsCache"></param>
         /// <param name="PatientId"></param>
@@ -1955,13 +1955,15 @@ namespace CDMISrestful.DataMethod
                     return null;
                 }
                 InterSystems.Data.CacheTypes.CacheSysList CacheList = Ps.Target.GetTarget(pclsCache.CacheConnectionObject, PlanNo, Type, Code);
-
-                targetByCode.Type = CacheList[1].ToString();
-                targetByCode.Code = CacheList[2].ToString();
-                targetByCode.Value = CacheList[3].ToString();
-                targetByCode.Origin = CacheList[4].ToString();
-                targetByCode.Instruction = CacheList[5].ToString();
-                targetByCode.Unit = CacheList[6].ToString();
+                if (CacheList != null)
+                {
+                    targetByCode.Type = CacheList[1].ToString();
+                    targetByCode.Code = CacheList[2].ToString();
+                    targetByCode.Value = CacheList[3].ToString();
+                    targetByCode.Origin = CacheList[4].ToString();
+                    targetByCode.Instruction = CacheList[5].ToString();
+                    targetByCode.Unit = CacheList[6].ToString();
+                }
                 return targetByCode;
             }
             catch (Exception ex)

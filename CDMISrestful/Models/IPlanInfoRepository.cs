@@ -46,6 +46,7 @@ namespace CDMISrestful.Models
 
       
         List<GPlanInfo> GetPlanListByMS(string PatientId, string Module, int Status);
+        List<TasksForClick> GetTasksForClick(string PlanNo, string ParentCode, string Date);
 
     }
 }

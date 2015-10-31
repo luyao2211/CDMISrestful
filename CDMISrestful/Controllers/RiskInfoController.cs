@@ -140,10 +140,10 @@ namespace CDMISrestful.Controllers
 
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
-        public int GetMaxSortNo(string UserId)
+        public HttpResponseMessage GetMaxSortNo(string UserId)
         {
             int ret = repository.GetMaxSortNo(UserId);
-            return ret;
+            return new ExceptionHandler().Common(Request,ret.ToString());
         }
     }
 }

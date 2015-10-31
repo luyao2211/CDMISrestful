@@ -1018,6 +1018,15 @@
             <param name="PlanNo"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetTasksForClick(System.String,System.String,System.String)">
+            <summary>
+            CSQ 20151031 计划信息展示时 图的点击事件响应
+            </summary>
+            <param name="PlanNo"></param>
+            <param name="ParentCode"></param>
+            <param name="Date"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
             <summary>
             根据收缩压获取血压等级说明 LY 2015-10-13
@@ -1126,6 +1135,17 @@
             浙大输出接口 LY 2015-10-29
             </summary>
             <param name="PatientId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.ServiceController.VitalSignFromZKY(CDMISrestful.DataModels.VitalSignFromDevice,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            浙大接收接口处理 LY 2015-10-31
+            </summary>
+            <param name="VitalSigns"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.UsersController.GetIDByInputPhone(System.String,System.String)">
@@ -1896,7 +1916,7 @@
         </member>
         <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetComplianceByDate(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32)">
             <summary>
-            syf 2015-10-10 获取患者某计划内某天的依从率
+            CSQ 20151031 获取患者某计划内某天的依从率
             </summary>
             <param name="pclsCache"></param>
             <param name="PatientId"></param>
@@ -2951,6 +2971,17 @@
             浙大输出接口 LY 2015-10-29
             </summary>
             <param name="PatientId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.ServiceRepository.VitalSignFromZKY(CDMISrestful.DataModels.VitalSignFromDevice,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            浙大接收接口处理 LY 2015-10-31
+            </summary>
+            <param name="VitalSigns"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Models.UsersRepository.IsTokenValid(System.String)">

@@ -1012,7 +1012,36 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date,PatientId);
         }
 
-
+        public List<TasksForClick> GetTasksForClick(string PlanNo, string ParentCode, string Date)
+        {
+            List<TasksForClick> tasks = new List<TasksForClick>();
+            List<PsTask> tasksOne = new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode, Date, "");
+            if (tasksOne != null)
+            {
+                for (int i = 0; i < tasksOne.Count; i++)
+                {
+                    if (tasksOne[i].InvalidFlag == "1")
+                    {
+                        TasksForClick task = new TasksForClick();
+                        task.Type = tasksOne[i].Type;
+                        task.Code = tasksOne[i].Code;
+                        task.Name = tasksOne[i].Name;
+                        task.Status = tasksOne[i].Status;
+                        List<PsTask> tasksTwo = new PlanInfoMethod().GetTasks(pclsCache, PlanNo, tasksOne[i].Code, Date, "");
+                        for (int j = 0; j < tasksTwo.Count; j++)
+                        {
+                            TasksForClickDtl dtl = new TasksForClickDtl();
+                            dtl.Code = tasksTwo[j].Code;
+                            dtl.Name = tasksTwo[j].Name;
+                            dtl.Status = tasksTwo[j].Status;
+                            task.SubTasks.Add(dtl);
+                        }
+                        tasks.Add(task);
+                    }
+                }
+            }
+            return tasks;
+        }
 
         /// <summary>
         /// 需要修改 20151029
@@ -1107,5 +1136,7 @@ namespace CDMISrestful.Models
         {
             return new PlanInfoMethod().GetPlanListByMS(pclsCache, PatientId, Module, Status);
         }
+
+      
     }
 }

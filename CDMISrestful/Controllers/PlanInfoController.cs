@@ -272,7 +272,9 @@ namespace CDMISrestful.Controllers
             {
                 GPlanInfo ret = repository.GetPlanInfo(PlanNo);
                 ret.PlanCompliance = repository.GetComplianceByPlanNo(PlanNo).ToString();
-                return new ExceptionHandler().toJson(ret);
+                List<GPlanInfo> list = new List<GPlanInfo>();
+                list.Add(ret);
+                return new ExceptionHandler().toJson(list);
             }
             else
             {
@@ -285,6 +287,18 @@ namespace CDMISrestful.Controllers
             }
         }
 
+        /// <summary>
+        /// CSQ 20151031 计划信息展示时 图的点击事件响应
+        /// </summary>
+        /// <param name="PlanNo"></param>
+        /// <param name="ParentCode"></param>
+        /// <param name="Date"></param>
+        /// <returns></returns>
+         [Route("Api/v1/PlanInfo/PlanInfoChartDtl")]
+        public List<TasksForClick> GetTasksForClick(string PlanNo, string ParentCode, string Date)
+        {
+            return repository.GetTasksForClick(PlanNo, ParentCode, Date);
+        }
 
         #region 暂时不用
         ///// <summary>
