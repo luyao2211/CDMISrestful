@@ -23,10 +23,10 @@ namespace CDMISrestful.Models
         GPlanInfo GetExecutingPlanByModule(string PatientId, string Module);
         int SetPlanStart(string PlanNo, int Status, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
         //ImplementationInfo GetImplementationForPadFirst(string PatientId, string Module);
-        ImplementationInfo GetImplementationForPadSecond(string PatientId, string PlanNo);
+        //ImplementationInfo GetImplementationForPadSecond(string PatientId, string PlanNo);
         List<OverDuePlanDetail> GetOverDuePlanList(string DoctorId, string ModuleType);
         //string GetPlanInfobyPID(string PatientId);
-        ImplementationPhone GetImplementationForPhone(string PatientId, string Module);
+        //ImplementationPhone GetImplementationForPhone(string PatientId, string Module);
 
         List<GPlanInfo> GetPlanList34ByM(string PatientId, string Module);
         List<ComplianceListByPeriod> GetAllComplianceListByPeriod( string PlanNo, int StartDate, int EndDate);
@@ -37,11 +37,15 @@ namespace CDMISrestful.Models
         List<TemplateInfo> GetTemplateList(string DoctorId);
         List<TemplateInfoDtl> GetTemplateDetails(string DoctorId, string TemplateCode, string ParentCode);
         TargetByCode GetTarget(string PlanNo, string Type, string Code);
+
         //List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate);
         List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate, string ItemType, string ItemCode);
 
         int DeteteTask(string Plan, string Type, string Code, string SortNo);
         double GetComplianceByPlanNo(string PlanNo);
+
+      
+        List<GPlanInfo> GetPlanListByMS(string PatientId, string Module, int Status);
 
     }
 }

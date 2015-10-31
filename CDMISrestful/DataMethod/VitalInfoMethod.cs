@@ -327,6 +327,84 @@ namespace CDMISrestful.DataMethod
                 }
             }
         }
+
+        //WF 20151031
+        public List<VitalInfo> GetVitalSignsByPeriod(DataConnection pclsCache, string UserId, int StartDate, int EndDate)
+        {
+            {
+                List<VitalInfo> items = new List<VitalInfo>();
+                CacheCommand cmd = null;
+                CacheDataReader cdr = null;
+                try
+                {
+                    if (!pclsCache.Connect())
+                    {
+                        return null;
+                    }
+                    cmd = new CacheCommand();
+                    cmd = Ps.VitalSigns.GetVitalSignsByPeriod(pclsCache.CacheConnectionObject);
+                    cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
+                    cmd.Parameters.Add("StartDate", CacheDbType.NVarChar).Value = StartDate;
+                    cmd.Parameters.Add("EndDate", CacheDbType.NVarChar).Value = EndDate;
+
+                    cdr = cmd.ExecuteReader();
+                    while (cdr.Read())
+                    {
+                        VitalInfo item = new VitalInfo();
+                        item.RecordDate = cdr["RecordDate"].ToString();
+                        string time = cdr["RecordTime"].ToString();
+                        switch (time.Length)
+                        {
+                            case 1:
+                                item.RecordTime = "00:0" + time;
+                                break;
+                            case 2:
+                                item.RecordTime = "00:" + time;
+                                break;
+                            case 3:
+                                item.RecordTime = "0" + time.Substring(0,1)+":"+time.Substring(1,2);
+                                break;
+                            case 4:
+                                item.RecordTime = time.Substring(0, 2) + ":" + time.Substring(2, 2);
+                                break;
+                        }
+
+                        //item.RecordTime = cdr["RecordTime"].ToString();
+                        item.ItemType = cdr["ItemType"].ToString();
+                        item.ItemCode = cdr["ItemCode"].ToString();
+                        item.Value = cdr["Value"].ToString();
+                        item.Unit = cdr["Unit"].ToString();
+                        item.Name = cdr["VitalName"].ToString();
+
+                        items.Add(item);
+                    }
+                    return items;
+                }
+                catch (Exception ex)
+                {
+                    HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "VitalInfoMethod.GetVitalSignsByPeriod", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                    return null;
+                }
+                finally
+                {
+                    if ((cdr != null))
+                    {
+                        cdr.Close();
+                        cdr.Dispose(true);
+                        cdr = null;
+                    }
+                    if ((cmd != null))
+                    {
+                        cmd.Parameters.Clear();
+                        cmd.Dispose();
+                        cmd = null;
+                    }
+                    pclsCache.DisConnect();
+                }
+            }
+        }
+
+
         #endregion
     }
 }

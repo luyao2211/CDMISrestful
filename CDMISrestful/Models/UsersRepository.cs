@@ -247,7 +247,7 @@ namespace CDMISrestful.Models
 
                     if (planNo != "")
                     {
-                        complianceRate = planInfoMethod.GetComplianceByDay(pclsCache, patientId, nowDate, planNo);
+                        complianceRate = planInfoMethod.GetComplianceByDate(pclsCache, planNo, nowDate);
                         if (complianceRate > 0)
                         {
                             complianceCount++;

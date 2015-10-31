@@ -9,7 +9,8 @@ using CDMISrestful.DataModels;
 namespace CDMISrestful.DataMethod
 {
     public class UsersMethod
-    {   /// <summary>
+    { 
+        /// <summary>
         ///  GetUserInfoByUserId ZAM 2014-12-02 //syf 20151014
         /// </summary>
         /// <param name="pclsCache"></param>
@@ -50,6 +51,7 @@ namespace CDMISrestful.DataMethod
             }
 
         }
+
         public bool CheckUserExist(DataConnection pclsCache, string UserId)
         {
             bool exist = false;
@@ -81,6 +83,7 @@ namespace CDMISrestful.DataMethod
 
 
         }
+
         /// <summary>
         /// 根据手机号获取userId LS 2015-03-26  TDY 20150507修改 //syf 20151013
         /// </summary>

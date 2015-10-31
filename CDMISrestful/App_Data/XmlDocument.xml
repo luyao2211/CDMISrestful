@@ -879,7 +879,7 @@
             <param name="EndDate"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.DeleteTask(System.String,System.String,System.String,System.String)">
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.DeleteTask(System.Collections.Generic.List{CDMISrestful.DataModels.DeleteTask})">
             <summary>
             根据主键删除Ps.Task任务表的一条数据 SYF 20151029
             </summary>
@@ -903,7 +903,7 @@
             <param name="item"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.PostCreateTask(CDMISrestful.DataModels.CreateTask)">
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.PostCreateTask(System.Collections.Generic.List{CDMISrestful.DataModels.CreateTask})">
             <summary>
             PostCreateTask 创建计划时插入Task信息 CSQ 20151025
             </summary>
@@ -1009,9 +1009,11 @@
             <param name="ModuleType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPlanInfo(System.String,System.String,System.String,System.String)">
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPlanInfo(System.String,System.String,System.String,System.Int32)">
             <summary>
-            GetPlanInfo 根据PlanNo获取某计划详情 GL 2015-10-13
+            GetPlanInfo 根据PlanNo或PatientId/Module/Status,获取某计划详情 CSQ 20151031 
+            用法1：输入PlanNo，PatientId和Module为空，Status输入5 
+            用法2：PlanNo输入NULL，PatientId按界面输入，Module根据需要的模块输入，若为空则取全部模块数据；status根据需要输入2（未开始计划）/3（当前计划）/4（往前计划/已结束计划），若为0，则取全部状态的数据
             </summary>
             <param name="PlanNo"></param>
             <returns></returns>
@@ -1320,6 +1322,15 @@
             SetPatientVitalSigns  GL 2015-10-12  
             </summary>
             <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.VitalInfoController.GetVitalSignsByPeriod(System.String,System.Int32,System.Int32)">
+            <summary>
+            WF 20151031 获取体征信息 一段时间内的所有体征信息 同一天同一种体征可以有多条输出
+            </summary>
+            <param name="UserId"></param>
+            <param name="StartDate"></param>
+            <param name="EndDate"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.ClinicInfoMethod.PsClinicalInfoGetTransClinicalInfo(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
@@ -1883,7 +1894,7 @@
             <param name="EndDate"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetComplianceByDay(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String)">
+        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetComplianceByDate(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32)">
             <summary>
             syf 2015-10-10 获取患者某计划内某天的依从率
             </summary>

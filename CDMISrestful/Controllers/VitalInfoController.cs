@@ -42,6 +42,20 @@ namespace CDMISrestful.Controllers
             return new ExceptionHandler().SetData(Request,ret);
         }
 
+        /// <summary>
+        /// WF 20151031 获取体征信息 一段时间内的所有体征信息 同一天同一种体征可以有多条输出
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="StartDate"></param>
+        /// <param name="EndDate"></param>
+        /// <returns></returns>
+        [Route("Api/v1/VitalInfo/VitalSigns")]
+        [HttpGet]
+        public List<VitalInfo> GetVitalSignsByPeriod(string UserId, int StartDate, int EndDate)
+        {
+            return repository.GetVitalSignsByPeriod(UserId, StartDate, EndDate);
+        }
+
         ///// <summary>
         ///// 根据患者Id，输入的起始日期和截止日期获取该段时间内记录的所有体征数据 CSQ 20151031
         ///// </summary>

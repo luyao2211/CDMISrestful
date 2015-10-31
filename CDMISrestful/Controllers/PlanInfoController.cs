@@ -41,9 +41,17 @@ namespace CDMISrestful.Controllers
         /// <param name="SortNo"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/Task")]
-        public HttpResponseMessage DeleteTask(string Plan, string Type, string Code, string SortNo)
+        public HttpResponseMessage DeleteTask(List<DeleteTask> items)
         {
-            int ret = repository.DeteteTask(Plan, Type, Code, SortNo);
+            int ret = 2;
+            for (int i = 0; i < items.Count; i++)
+            {
+                ret = repository.DeteteTask(items[i].Plan, items[i].Type, items[i].Code, items[i].SortNo);
+                if(ret!=1)
+                {
+                    break;
+                }
+            }
             return new ExceptionHandler().DeleteData(Request, ret);
         }
 
@@ -80,9 +88,17 @@ namespace CDMISrestful.Controllers
        /// <returns></returns>
         [Route("Api/v1/PlanInfo/Task")]
         [ModelValidationFilter]
-        public HttpResponseMessage PostCreateTask(CreateTask item)
-        {         
-            int ret = repository.CreateTask(item.PlanNo, item.Type, item.Code,item.SortNo,item.Instruction,item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+        public HttpResponseMessage PostCreateTask(List<CreateTask> items)
+        {
+            int ret = 2;
+            for (int i = 0; i < items.Count; i++)
+            {
+                ret = repository.CreateTask(items[i].PlanNo, items[i].Type, items[i].Code, items[i].SortNo, items[i].Instruction, items[i].piUserId, items[i].piTerminalName, items[i].piTerminalIP, items[i].piDeviceType);
+                if(ret!=1)
+                {
+                    break;
+                }
+            }
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -203,9 +219,10 @@ namespace CDMISrestful.Controllers
         /// <param name="Code"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/Target")]
-        public TargetByCode GetTarget(string PlanNo, string Type, string Code)
+        public HttpResponseMessage GetTarget(string PlanNo, string Type, string Code)
         {
-            return repository.GetTarget(PlanNo, Type, Code);
+            TargetByCode ret = repository.GetTarget(PlanNo, Type, Code);
+            return new ExceptionHandler().toJson(ret);
         }
 
         /// <summary>
@@ -242,38 +259,32 @@ namespace CDMISrestful.Controllers
 
 
         /// <summary>
-        /// GetPlanInfo 根据PlanNo获取某计划详情 GL 2015-10-13
+        /// GetPlanInfo 根据PlanNo或PatientId/Module/Status,获取某计划详情 CSQ 20151031 
+        /// 用法1：输入PlanNo，PatientId和Module为空，Status输入5 
+        /// 用法2：PlanNo输入NULL，PatientId按界面输入，Module根据需要的模块输入，若为空则取全部模块数据；status根据需要输入2（未开始计划）/3（当前计划）/4（往前计划/已结束计划），若为0，则取全部状态的数据
         /// </summary>
         /// <param name="PlanNo"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/Plan")]
-        public HttpResponseMessage GetPlanInfo(string PatientId, string PlanNo, string Module,string Status)
+        public HttpResponseMessage GetPlanInfo(string PatientId, string PlanNo, string Module,int Status)
         {
             if (PlanNo!="NULL")
             {
                 GPlanInfo ret = repository.GetPlanInfo(PlanNo);
-                ret.PlanCompliance = repository.GetComplianceByPlanNo(PlanNo);
+                ret.PlanCompliance = repository.GetComplianceByPlanNo(PlanNo).ToString();
                 return new ExceptionHandler().toJson(ret);
             }
             else
             {
-                if (Status == "3")
+                if(Module=="{Module}")
                 {
-                    GPlanInfo plan = repository.GetExecutingPlanByModule(PatientId, Module);
-                    plan.PlanCompliance = repository.GetComplianceByPlanNo(PlanNo);
-
-                    List<GPlanInfo> ret = new List<GPlanInfo>();
-                    ret.Add(plan);
-                    return new ExceptionHandler().toJson(ret);
+                    Module = null;
                 }
-                else
-                {
-                    List<GPlanInfo> ret = repository.GetPlanList34ByM(PatientId, Module);
-                    return new ExceptionHandler().toJson(ret);
-
-                }              
+                List<GPlanInfo> ret = repository.GetPlanListByMS(PatientId, Module, Status);
+                return new ExceptionHandler().toJson(ret);
             }
         }
+
 
         #region 暂时不用
         ///// <summary>
@@ -407,5 +418,9 @@ namespace CDMISrestful.Controllers
         //    return repository.GetPlanList34ByM(PatientId, Module);
         //}
         #endregion
+
+      
+
+
     }
 }

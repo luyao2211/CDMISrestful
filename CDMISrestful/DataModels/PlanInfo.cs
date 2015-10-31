@@ -8,6 +8,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CDMISrestful.DataModels
 {
+    public class DeleteTask
+    {
+        public string Plan { get; set; }
+        public string Type { get; set; }
+        public string Code { get; set; }
+        public string SortNo { get; set; }
+
+    }
+
     public class TaskDetail
     {
         public string Module { get; set; }
@@ -122,7 +131,9 @@ namespace CDMISrestful.DataModels
         public string Module { get; set; }
         [Required]
         public string Status { get; set; }
-        public double PlanCompliance { get; set; }
+
+        public string PlanCompliance { get; set; }
+
         public string RemainingDays { get; set; }
         public string ProgressRate { get; set; }
         public string DoctorId { get; set; }

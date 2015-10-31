@@ -330,5 +330,12 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
+
+        public List<VitalInfo> GetVitalSignsByPeriod(string UserId, int StartDate, int EndDate)
+        {
+            return new VitalInfoMethod().GetVitalSignsByPeriod(pclsCache, UserId, StartDate, EndDate);
+        }
+
+
     }
 }

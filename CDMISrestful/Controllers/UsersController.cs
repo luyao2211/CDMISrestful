@@ -62,6 +62,7 @@ namespace CDMISrestful.Controllers
             int ret = repository.Register(Register.PwType, Register.userId, Register.UserName, Register.Password, Register.role, Register.revUserId, Register.TerminalName, Register.TerminalIP, Register.DeviceType);
             return new ExceptionHandler().Register(Request, ret);
         }
+
         /// <summary>
         /// 激活
         /// </summary>
@@ -74,6 +75,7 @@ namespace CDMISrestful.Controllers
             int ret = repository.Activition(activation.UserId, activation.InviteCode, activation.role);
             return new ExceptionHandler().Activation(Request, ret);
         }
+
         /// <summary>
         /// 修改密码
         /// </summary>
@@ -86,6 +88,7 @@ namespace CDMISrestful.Controllers
             int ret = repository.ChangePassword(ChangePassword.OldPassword, ChangePassword.NewPassword, ChangePassword.UserId, ChangePassword.revUserId, ChangePassword.TerminalName, ChangePassword.TerminalIP, ChangePassword.DeviceType);
             return new ExceptionHandler().ChangePassword(Request, ret);
         }
+
         /// <summary>
         /// 获取健康专员负责的患者列表
         /// </summary>
@@ -104,6 +107,7 @@ namespace CDMISrestful.Controllers
             PatientsDataSet ret = repository.GetPatientsList(DoctorId, ModuleType, Plan, Compliance, Goal);
             return ret;
         }
+
         /// <summary>
         /// 验证用户名
         /// </summary>
