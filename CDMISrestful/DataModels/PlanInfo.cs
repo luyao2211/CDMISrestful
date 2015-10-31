@@ -92,13 +92,18 @@ namespace CDMISrestful.DataModels
     {
         [Required]
         public string PlanNo { get; set; }
+        public string PlanName { get; set; }
         public string PatientId { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string Module { get; set; }
         [Required]
         public string Status { get; set; }
+        public string PlanCompliance { get; set; }
+        public string RemainingDays { get; set; }
+        public string ProgressRate { get; set; }
         public string DoctorId { get; set; }
+        public string DoctorName { get; set; }
         public string piUserId { get; set; }
         public string piTerminalName { get; set; }
         public string piTerminalIP { get; set; }

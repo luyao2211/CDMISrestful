@@ -917,5 +917,9 @@ namespace CDMISrestful.Models
             }
             return items3;
         }
+        public List<GPlanInfo> GetPlanListByMS(string PatientId, string Module, int Status)
+        {
+            return new PlanInfoMethod().GetPlanListByMS(pclsCache, PatientId, Module, Status);
+        }
     }
 }

@@ -708,6 +708,67 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+
+        public List<GPlanInfo> GetPlanListByMS(DataConnection pclsCache, string PatientId, string Module, int Status)
+        {
+            List<GPlanInfo> list = new List<GPlanInfo>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Plan.GetPlanListByMS(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("PatientId", CacheDbType.NVarChar).Value = PatientId;
+                cmd.Parameters.Add("Module", CacheDbType.NVarChar).Value = Module;
+                cmd.Parameters.Add("Status", CacheDbType.Int).Value = Status;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    GPlanInfo NewLine = new GPlanInfo();
+                    NewLine.PlanNo = cdr["PlanNo"].ToString();
+                    NewLine.PlanName = cdr["PlanName"].ToString();
+                    NewLine.PatientId = cdr["PatientId"].ToString();
+                    NewLine.StartDate = cdr["StartDate"].ToString(); 
+                    NewLine.EndDate = cdr["EndDate"].ToString();
+                    NewLine.Module = cdr["Module"].ToString();
+                    NewLine.Status = cdr["Status"].ToString();
+                    NewLine.PlanCompliance = cdr["PlanCompliance"].ToString();
+                    NewLine.RemainingDays = cdr["RemainingDays"].ToString();
+                    NewLine.ProgressRate = cdr["ProgressRate"].ToString();
+                    NewLine.DoctorId = cdr["DoctorId"].ToString();
+                    NewLine.DoctorName = cdr["DoctorName"].ToString();
+                  
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetPlanListByMS", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
         #endregion
 
 

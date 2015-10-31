@@ -377,5 +377,11 @@ namespace CDMISrestful.Controllers
         {
             return repository.GetComplianceAllSignsListByPeriod(UserId, PlanNo, StartDate, EndDate);
         }
+        [Route("Api/v1/PlanInfo/GetPlanListByMS")]
+        [EnableQuery]
+        public List<GPlanInfo> GetPlanListByMS(string PatientId, string Module, int Status)
+        {
+            return repository.GetPlanListByMS(PatientId, Module, Status);
+        }
     }
 }
