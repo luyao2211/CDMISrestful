@@ -798,7 +798,11 @@ namespace CDMISrestful.Models
             return usersMethod.GetCalendar(pclsCache, DoctorId);
 
         }
+        public List<PatientListTable> GetPatientsPlan(string DoctorId, string Module, string VitalType, string VitalCode)
+        {
+            return planInfoMethod.GetPatientsPlan(pclsCache, DoctorId, Module, VitalType, VitalCode);
 
+        }
         #region<新增bySYF>
         public List<HealthCoachList> GetHealthCoachList()
         {

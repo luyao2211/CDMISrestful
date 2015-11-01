@@ -2820,7 +2820,72 @@ namespace CDMISrestful.DataMethod
             }
         }
 
-      
+        public List<PatientListTable> GetPatientsPlan(DataConnection pclsCache, string DoctorId, string Module, string VitalType, string VitalCode)
+        {
+            List<PatientListTable> list = new List<PatientListTable>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Plan.GetPatientsPlan(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
+                cmd.Parameters.Add("Module", CacheDbType.NVarChar).Value = Module;
+                cmd.Parameters.Add("VitalType", CacheDbType.NVarChar).Value = VitalType;
+                cmd.Parameters.Add("VitalCode", CacheDbType.NVarChar).Value = VitalCode;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    if (cdr["PatientId"].ToString() == string.Empty)
+                    {
+                        continue;
+                    }
+                    PatientListTable NewLine = new PatientListTable();
+                    NewLine.PatientId = cdr["PatientId"].ToString();
+                    NewLine.PatientName = cdr["PatientName"].ToString();
+                    NewLine.photoAddress = cdr["PhotoAddress"].ToString(); 
+                    NewLine.PlanNo = cdr["PlanNo"].ToString();
+                    NewLine.StartDate = cdr["StartDate"].ToString();
+                    NewLine.EndDate = cdr["EndDate"].ToString();
+                    NewLine.Process = Convert.ToDouble(cdr["Process"]);
+                    NewLine.TotalDays = cdr["TotalDays"].ToString();
+                    NewLine.RemainingDays = cdr["RemainingDays"].ToString();
+                    NewLine.Status = cdr["Status"].ToString();
+                    NewLine.ComplianceRate = Convert.ToDouble(cdr["ComplianceRate"]);
+                    NewLine.VitalValue = cdr["VitalValue"].ToString();
+                    NewLine.VitalUnit = cdr["VitalUnit"].ToString();
+                    NewLine.TargetOrigin = cdr["TargetOrigin"].ToString();
+                    NewLine.TargetValue = cdr["TargetValue"].ToString();
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetPatientsPlan", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
 
     }
 

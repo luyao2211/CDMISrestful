@@ -47,6 +47,6 @@ namespace CDMISrestful.Models
         int RemoveHealthCoach(string PatientId, string DoctorId, string CategoryCode);
 
         List<AppoitmentPatient> GetAppoitmentPatientList(string healthCoachID, string Status);
-
+        List<PatientListTable> GetPatientsPlan(string DoctorId, string Module, string VitalType, string VitalCode);
     }
 }

@@ -349,6 +349,16 @@ namespace CDMISrestful.Controllers
         {
             return repository.GetAppoitmentPatientList(healthCoachID, Status);
         }
-
+        /// <summary>
+        /// 替代GetPatientsList 用于pad登录后获得专员的病人列表
+        /// </summary>
+        /// <param name="healthCoachID"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
+        [Route("Api/v1/Users/GetPatientsPlan")]
+        public List<PatientListTable> GetPatientsPlan(string DoctorId, string Module, string VitalType, string VitalCode)
+        {
+            return repository.GetPatientsPlan(DoctorId, Module, VitalType, VitalCode);
+        }
     }
 }
