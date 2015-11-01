@@ -270,12 +270,17 @@ namespace CDMISrestful.DataModels
         public string photoAddress { get; set; }
         public string PlanNo { get; set; }
         public string StartDate { get; set; }
+        public string EndDate { get; set; }
         public double Process { get; set; }
         public string RemainingDays { get; set; }
         public List<string> VitalSign { get; set; }
         public double ComplianceRate { get; set; }
         public string TotalDays { get; set; }
         public string Status { get; set; }
+        public string VitalValue { get; set; }
+        public string VitalUnit { get; set; }
+        public string TargetOrigin { get; set; }
+        public string TargetValue { get; set; }
 
     }
 
