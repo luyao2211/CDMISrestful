@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CDMISrestful.CommonLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,10 @@ namespace CDMISrestful
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //在应用程序启动时运行的代码        
+            //初始日志的配置
+            Log.SetConfig();       
         }
     }
 }

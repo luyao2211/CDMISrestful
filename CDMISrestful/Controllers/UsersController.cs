@@ -13,6 +13,7 @@ using CDMISrestful.Models;
 
 namespace CDMISrestful.Controllers
 {
+     [WebApiTracker]
     //[AllowAnonymous]  
     public class UsersController : ApiController
     {

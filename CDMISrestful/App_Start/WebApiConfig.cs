@@ -30,6 +30,7 @@ namespace CDMISrestful
             );
 
             //config.EnableQuerySupport();
+            log4net.Config.XmlConfigurator.Configure();
         }
     }
 }

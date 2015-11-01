@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace CDMISrestful.Controllers
 {
+     [WebApiTracker]
     [RESTAuthorizeAttribute]
     public class HomeController : Controller
     {

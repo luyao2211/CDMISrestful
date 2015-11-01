@@ -11,6 +11,7 @@ using CDMISrestful.DataModels;
 
 namespace CDMISrestful.Controllers
 {
+     [WebApiTracker]
     [RESTAuthorizeAttribute]
     public class ServiceController : ApiController
     {

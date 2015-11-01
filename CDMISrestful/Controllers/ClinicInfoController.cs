@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace CDMISrestful.Controllers
 {
+     [WebApiTracker]
     [RESTAuthorizeAttribute]
     public class ClinicInfoController : ApiController
     {

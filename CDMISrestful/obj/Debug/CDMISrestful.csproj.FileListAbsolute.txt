@@ -614,6 +614,7 @@ F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\CDMISres
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\CDMISrestful.pdb
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\XmlDocument.xml
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\Antlr3.Runtime.dll
+F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\log4net.dll
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\Microsoft.Data.Edm.dll
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\Microsoft.Data.OData.dll
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\Microsoft.OData.Core.dll
@@ -638,6 +639,7 @@ F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.W
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.WebPages.Razor.dll
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\WebApiTestClient.dll
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\WebGrease.dll
+F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\log4net.xml
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\Microsoft.Data.Edm.xml
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\Microsoft.Data.OData.xml
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\Microsoft.OData.Core.xml

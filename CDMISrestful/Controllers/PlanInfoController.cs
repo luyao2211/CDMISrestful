@@ -11,6 +11,7 @@ using System.Web.Http.OData;
 
 namespace CDMISrestful.Controllers
 {
+     [WebApiTracker]
     [RESTAuthorizeAttribute]
     public class PlanInfoController : ApiController
     {

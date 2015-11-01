@@ -10,6 +10,7 @@ using CDMISrestful.CommonLibrary;
 
 namespace CDMISrestful.Controllers
 {
+     [WebApiTracker]
     [RESTAuthorizeAttribute]
     public class ProductsController : ApiController
     {

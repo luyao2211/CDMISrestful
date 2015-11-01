@@ -651,6 +651,51 @@
             </summary>
             <param name="allLogs">全てのログの削除判定 true:全て / false:BaseNameが一致するもののみ</param>
         </member>
+        <member name="T:CDMISrestful.CommonLibrary.WebApiMonitorLog">
+            <summary>
+            监控日志对象
+            </summary>
+        </member>
+        <member name="M:CDMISrestful.CommonLibrary.WebApiMonitorLog.GetLoginfo">
+            <summary>
+            获取监控指标日志
+            </summary>
+            <param name="mtype"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.CommonLibrary.WebApiMonitorLog.GetCollections(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            获取Action 参数
+            </summary>
+            <param name="Collections"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.CommonLibrary.WebApiMonitorLog.GetIP">
+            <summary>
+            获取IP
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:CDMISrestful.CommonLibrary.WebApiMonitorLog.ActionParams">
+            <summary>
+            请求的Action 参数
+            </summary>
+        </member>
+        <member name="P:CDMISrestful.CommonLibrary.WebApiMonitorLog.HttpRequestHeaders">
+            <summary>
+            Http请求头
+            </summary>
+        </member>
+        <member name="P:CDMISrestful.CommonLibrary.WebApiMonitorLog.HttpMethod">
+            <summary>
+            请求方式
+            </summary>
+        </member>
+        <member name="P:CDMISrestful.CommonLibrary.WebApiMonitorLog.IP">
+            <summary>
+            请求的IP地址
+            </summary>
+        </member>
         <member name="M:CDMISrestful.Controllers.ClinicInfoController.GetClinicalNewMobile(System.String,System.DateTime,System.DateTime,System.Int32)">
             <summary>
             获取目前最新Num条临床数据
