@@ -15,7 +15,7 @@ namespace CDMISrestful.Controllers
     public class VitalInfoController : ApiController
     {
         static readonly IVitalInfoRepository repository = new VitalInfoRepository();
-
+        DataConnection pclsCache = new DataConnection();
         /// <summary>
         /// GetLatestPatientVitalSigns 获取病人某项生理参数最新值 GL 2015-10-12
         /// </summary>
@@ -26,7 +26,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/VitalInfo/VitalSign")]
         public HttpResponseMessage GetLatestPatientVitalSigns(string UserId, string ItemType, string ItemCode)
         {
-            string ret =  repository.GetLatestPatientVitalSigns(UserId, ItemType, ItemCode);
+            string ret = repository.GetLatestPatientVitalSigns(pclsCache, UserId, ItemType, ItemCode);
             return new ExceptionHandler().Common(Request, ret);
         }
 
@@ -39,7 +39,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage PostPatientVitalSigns(SetVitalInfo item)
         {
-            int ret = repository.SetPatientVitalSigns(item.UserId, Convert.ToInt32(item.RecordDate), Convert.ToInt32(item.RecordTime), item.ItemType, item.ItemCode, item.Value, item.Unit, item.revUserId, item.TerminalName, item.TerminalIP, item.DeviceType);
+            int ret = repository.SetPatientVitalSigns(pclsCache, item.UserId, Convert.ToInt32(item.RecordDate), Convert.ToInt32(item.RecordTime), item.ItemType, item.ItemCode, item.Value, item.Unit, item.revUserId, item.TerminalName, new CommonFunction().getRemoteIPAddress(), item.DeviceType);
             return new ExceptionHandler().SetData(Request,ret);
         }
 
@@ -54,7 +54,7 @@ namespace CDMISrestful.Controllers
         [HttpGet]
         public List<VitalInfo> GetVitalSignsByPeriod(string UserId, int StartDate, int EndDate)
         {
-            return repository.GetVitalSignsByPeriod(UserId, StartDate, EndDate);
+            return repository.GetVitalSignsByPeriod(pclsCache, UserId, StartDate, EndDate);
         }
 
         ///// <summary>

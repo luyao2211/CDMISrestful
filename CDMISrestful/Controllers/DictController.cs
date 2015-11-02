@@ -16,7 +16,7 @@ namespace CDMISrestful.Controllers
     public class DictController : ApiController
     {
         static readonly IDictRepository repository = new DictRepository();
-
+        DataConnection pclsCache = new DataConnection();
         /// <summary>
         /// 获取高血压药物类型名称列表 LY 2015-10-13
         /// </summary>
@@ -24,7 +24,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Dict/HypertensionDrug/TypeNames")]
         public List<TypeAndName> GetHypertensionDrugTypeNameList()
         {
-            return repository.GetHypertensionDrugTypeNameList();
+            return repository.GetHypertensionDrugTypeNameList(pclsCache);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace CDMISrestful.Controllers
         [EnableQuery]
         public List<CmAbsType> GetHypertensionDrug()
         {
-            return repository.GetHypertensionDrug();
+            return repository.GetHypertensionDrug(pclsCache);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Dict/DiabetesDrug/TypeNames")]
         public List<TypeAndName> GetDiabetesDrugTypeNameList()
         {
-            return repository.GetDiabetesDrugTypeNameList();
+            return repository.GetDiabetesDrugTypeNameList(pclsCache);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace CDMISrestful.Controllers
         [EnableQuery]
         public List<CmAbsType> GetDiabetesDrug()
         {
-            return repository.GetDiabetesDrug();
+            return repository.GetDiabetesDrug(pclsCache);
             //return ExceptionHandler.toJson(ret);
 
         }
@@ -69,7 +69,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Dict/Type/{Category}")]
         public List<TypeAndName> GetTypeList(string Category)
         {
-            return repository.GetTypeList(Category);
+            return repository.GetTypeList(pclsCache,Category);
         }
 
 
@@ -81,7 +81,7 @@ namespace CDMISrestful.Controllers
         [EnableQuery]
         public List<MstBloodPressure> GetBloodPressure()
         {
-            return repository.GetBloodPressure();
+            return repository.GetBloodPressure(pclsCache);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public List<Insurance> GetInsuranceType()
         {
-            List<Insurance> ret = repository.GetInsuranceType();
+            List<Insurance> ret = repository.GetInsuranceType(pclsCache);
             return ret;
         }
         [Route("Api/v1/Dict/CmMstTaskSetData")]
@@ -100,7 +100,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public HttpResponseMessage CmMstTaskSetData(CmMstTaskSetData CmMstTaskSetData)
         {
-            int ret = repository.CmMstTaskSetData(CmMstTaskSetData.CategoryCode, CmMstTaskSetData.Code, CmMstTaskSetData.Name, CmMstTaskSetData.ParentCode, CmMstTaskSetData.Description, CmMstTaskSetData.StartDate, CmMstTaskSetData.EndDate, CmMstTaskSetData.GroupHeaderFlag, CmMstTaskSetData.ControlType, CmMstTaskSetData.OptionCategory, CmMstTaskSetData.revUserId, CmMstTaskSetData.TerminalName, CmMstTaskSetData.TerminalIP, CmMstTaskSetData.DeviceType);
+            int ret = repository.CmMstTaskSetData(pclsCache, CmMstTaskSetData.CategoryCode, CmMstTaskSetData.Code, CmMstTaskSetData.Name, CmMstTaskSetData.ParentCode, CmMstTaskSetData.Description, CmMstTaskSetData.StartDate, CmMstTaskSetData.EndDate, CmMstTaskSetData.GroupHeaderFlag, CmMstTaskSetData.ControlType, CmMstTaskSetData.OptionCategory, CmMstTaskSetData.revUserId, CmMstTaskSetData.TerminalName, new CommonFunction().getRemoteIPAddress(), CmMstTaskSetData.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
         [Route("Api/v1/Dict/MstTask")]
@@ -108,14 +108,14 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public List<CmMstTask> GetMstTaskByParentCode(string ParentCode)
         {
-            List<CmMstTask> ret = repository.GetMstTaskByParentCode(ParentCode);
+            List<CmMstTask> ret = repository.GetMstTaskByParentCode(pclsCache, ParentCode);
             return ret;
         }
         [Route("Api/v1/Dict/GetNo")]
         [ModelValidationFilter]
         public HttpResponseMessage GetNo(int NumberingType, string TargetDate)
         {
-            string ret = repository.GetNo(NumberingType, TargetDate);
+            string ret = repository.GetNo(pclsCache, NumberingType, TargetDate);
             return new ExceptionHandler().Common(Request,ret);
         }
     }

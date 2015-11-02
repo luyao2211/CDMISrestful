@@ -163,7 +163,6 @@ namespace CDMISrestful.DataModels
         public int Birthday { get; set; }
         [Required(ErrorMessage = "请输入Gender")]
         public int Gender { get; set; }
-        [Required(ErrorMessage = "请输入IDNo")]
         public string IDNo { get; set; }
         [Required(ErrorMessage = "请输入InvalidFlag")]
         public int InvalidFlag { get; set; }
@@ -171,7 +170,7 @@ namespace CDMISrestful.DataModels
         public string piUserId { get; set; }
         [Required(ErrorMessage = "piTerminalName")]
         public string piTerminalName { get; set; }
-        [Required(ErrorMessage = "piTerminalIP")]
+ 
         public string piTerminalIP { get; set; }
         [Required(ErrorMessage = "piDeviceType")]
         public int piDeviceType { get; set; }
@@ -188,22 +187,22 @@ namespace CDMISrestful.DataModels
         public int Birthday { get; set; }
         [Required(ErrorMessage = "请输入Gender")]
         public int Gender { get; set; }
-        [Required(ErrorMessage = "请输入BloodType")]
+        //[Required(ErrorMessage = "请输入BloodType")]
         public int BloodType { get; set; }
-        [Required(ErrorMessage = "请输入IDNo")]
+        //[Required(ErrorMessage = "请输入IDNo")]
         public string IDNo { get; set; }
-        [Required(ErrorMessage = "请输入DoctorId")]
+    
         public string DoctorId { get; set; }
-        [Required(ErrorMessage = "请输入InsuranceType")]
+        //[Required(ErrorMessage = "请输入InsuranceType")]
         public string InsuranceType { get; set; }
 
-        [Required(ErrorMessage = "请输入InvalidFlag")]
+        //[Required(ErrorMessage = "请输入InvalidFlag")]
         public int InvalidFlag { get; set; }
         [Required(ErrorMessage = "piUserId")]
         public string piUserId { get; set; }
         [Required(ErrorMessage = "piTerminalName")]
         public string piTerminalName { get; set; }
-        [Required(ErrorMessage = "piTerminalIP")]
+        //[Required(ErrorMessage = "piTerminalIP")]
         public string piTerminalIP { get; set; }
         [Required(ErrorMessage = "piDeviceType")]
         public int piDeviceType { get; set; }

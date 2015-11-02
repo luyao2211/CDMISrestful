@@ -12,17 +12,15 @@ using System.Web;
 namespace CDMISrestful.Models
 {
     public class VitalInfoRepository : IVitalInfoRepository
-    {
-        DataConnection pclsCache = new DataConnection();
-
+    {    
         // 获取病人最新体征情况 GL 2015-10-10       
-        public string GetLatestPatientVitalSigns(string UserId, string ItemType, string ItemCode)
+        public string GetLatestPatientVitalSigns(DataConnection pclsCache, string UserId, string ItemType, string ItemCode)
         {
             return new VitalInfoMethod().GetLatestPatientVitalSigns(pclsCache, UserId, ItemType, ItemCode);
         }
 
         // Ps.VitalSigns.SetData GL 2015-10-10      
-        public int SetPatientVitalSigns(string UserId, int RecordDate, int RecordTime, string ItemType, string ItemCode, string Value, string Unit, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int SetPatientVitalSigns(DataConnection pclsCache, string UserId, int RecordDate, int RecordTime, string ItemType, string ItemCode, string Value, string Unit, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             return new VitalInfoMethod().SetData(pclsCache, UserId, RecordDate, RecordTime, ItemType, ItemCode, Value, Unit, revUserId, TerminalName, TerminalIP, DeviceType);
         }
@@ -33,7 +31,7 @@ namespace CDMISrestful.Models
         //}
 
         // 获取某日期之前，一定条数血压（收缩压/舒张压）和脉率的数据详细时刻列表,用于phone，支持继续加载  GL 2015-10-12  
-        public SignDetailByP GetSignsDetailByPeriod(string PatientId, string Module, int StartDate, int Num)
+        public SignDetailByP GetSignsDetailByPeriod(DataConnection pclsCache, string PatientId, string Module, int StartDate, int Num)
         {
             SignDetailByP result = new SignDetailByP();
 
@@ -331,7 +329,7 @@ namespace CDMISrestful.Models
             }
         }
 
-        public List<VitalInfo> GetVitalSignsByPeriod(string UserId, int StartDate, int EndDate)
+        public List<VitalInfo> GetVitalSignsByPeriod(DataConnection pclsCache, string UserId, int StartDate, int EndDate)
         {
             return new VitalInfoMethod().GetVitalSignsByPeriod(pclsCache, UserId, StartDate, EndDate);
         }

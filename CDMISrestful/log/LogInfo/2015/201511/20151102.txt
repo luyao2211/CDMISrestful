@@ -1,0 +1,414 @@
+
+ 
+记录时间：2015-11-02 10:48:09,652 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：ModuleInfoController
+            ActionName:GetItemInfoByPIdAndModule
+            开始时间：2015/11/2 10:46:40
+            结束时间：2015/11/2 10:48:09
+            总 时 间：89.3089656秒
+            Action参数：UserId=12312&CategoryCode=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-ModuleInfo-UserId-CategoryCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 10:50:44,979 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：ModuleInfoController
+            ActionName:GetItemInfoByPIdAndModule
+            开始时间：2015/11/2 10:48:16
+            结束时间：2015/11/2 10:50:44
+            总 时 间：148.9209372秒
+            Action参数：UserId=12312&CategoryCode=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-ModuleInfo-UserId-CategoryCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 18:41:51,084 
+线程ID:[12] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 18:41:44
+            结束时间：2015/11/2 18:41:51
+            总 时 间：7.0618971秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 18:43:01,227 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 18:41:56
+            结束时间：2015/11/2 18:43:01
+            总 时 间：65.1654395秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 18:49:35,595 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 18:48:41
+            结束时间：2015/11/2 18:49:35
+            总 时 间：54.3797108秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 18:50:48,590 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 18:50:16
+            结束时间：2015/11/2 18:50:48
+            总 时 间：31.6486873秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 18:53:07,740 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 18:50:50
+            结束时间：2015/11/2 18:53:07
+            总 时 间：137.0391194秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 18:55:17,665 
+线程ID:[125] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 18:54:24
+            结束时间：2015/11/2 18:55:17
+            总 时 间：53.4839209秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 18:59:36,666 
+线程ID:[9] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 18:58:30
+            结束时间：2015/11/2 18:59:36
+            总 时 间：65.6960601秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 19:04:54,655 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 19:04:05
+            结束时间：2015/11/2 19:04:54
+            总 时 间：49.2821473秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 19:05:57,773 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 19:05:28
+            结束时间：2015/11/2 19:05:57
+            总 时 间：29.3840399秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 19:09:36,043 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 19:07:57
+            结束时间：2015/11/2 19:09:36
+            总 时 间：98.4794054秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 19:15:06,962 
+线程ID:[9] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 19:14:53
+            结束时间：2015/11/2 19:15:06
+            总 时 间：13.8176859秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 19:16:01,587 
+线程ID:[18] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/2 19:16:01
+            结束时间：2015/11/2 19:16:01
+            总 时 间：0.2922339秒
+            Action参数：DoctorId=D003&Module=M1&VitalType=Bloodpressure&VitalCode=Bloodpressure_1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 20:38:12,837 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetPlanInfo
+            开始时间：2015/11/2 20:37:52
+            结束时间：2015/11/2 20:38:12
+            总 时 间：19.9127797秒
+            Action参数：PatientId=PID201506180013&PlanNo=NULL&Module=M1&Status=3
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-Plan_PatientId_PlanNo_Module_Status
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-02 20:38:37,647 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetPlanInfo
+            开始时间：2015/11/2 20:38:26
+            结束时间：2015/11/2 20:38:37
+            总 时 间：10.7151159秒
+            Action参数：PatientId=PID201506180013&PlanNo=NULL&Module=M1&Status=3
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=3ywb9W0rI$GmrXtMKic0vA--; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=4df6fcf0b0036c676d9ab03890538e415e9c26d4
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-Plan_PatientId_PlanNo_Module_Status
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 

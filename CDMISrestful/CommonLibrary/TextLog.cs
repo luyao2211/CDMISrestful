@@ -120,6 +120,7 @@ namespace CDMISrestful.CommonLibrary
 
             try
             {
+                //string testPath = GetLogFileFullPath();
                 // Logファイル作成
                 using (StreamWriter sw = new StreamWriter(GetLogFileFullPath(), true, System.Text.Encoding.Default))
                 {

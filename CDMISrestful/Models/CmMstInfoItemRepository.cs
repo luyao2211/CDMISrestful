@@ -11,14 +11,14 @@ namespace CDMISrestful.Models
     public class CmMstInfoItemRepository : ICmMstInfoItemRepository
     {
         //private List<CmMstInfoItem> CmMstInfoItemList = new List<CmMstInfoItem>();
-        DataConnection pclsCache = new DataConnection();
+     
 
-        public IEnumerable<CmMstInfoItem> GetAll()
-        {
-            List<CmMstInfoItem> CmMstInfoItemList = new List<CmMstInfoItem>();
-            GetCmMstInfoItem(CmMstInfoItemList);
-            return CmMstInfoItemList;
-        }
+        //public IEnumerable<CmMstInfoItem> GetAll()
+        //{
+        //    List<CmMstInfoItem> CmMstInfoItemList = new List<CmMstInfoItem>();
+        //    GetCmMstInfoItem(CmMstInfoItemList);
+        //    return CmMstInfoItemList;
+        //}
 
         //public CmMstInfoItem Get(string CategoryCode, string Code, int StartDate)
         //{
@@ -27,7 +27,7 @@ namespace CDMISrestful.Models
         //    return CmMstInfoItemList.Find(p => p.CategoryCode == CategoryCode && p.Code == Code && p.StartDate == StartDate);
         //}
 
-        public int Remove(string CategoryCode, string Code, int StartDate)
+        public int Remove(DataConnection pclsCache, string CategoryCode, string Code, int StartDate)
         {
              int ret = 3;
              try
@@ -53,28 +53,28 @@ namespace CDMISrestful.Models
              }
         }
 
-        public bool Update(CmMstInfoItem item)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException("item");
-            }
-            bool ret = SetData(item);
-            return ret;
-        }
+        //public bool Update(CmMstInfoItem item)
+        //{
+        //    if (item == null)
+        //    {
+        //        throw new ArgumentNullException("item");
+        //    }
+        //    bool ret = SetData(item);
+        //    return ret;
+        //}
 
-        public bool AddItem(CmMstInfoItem item)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException("item");
-            }
-            bool ret = SetData(item);
-            return ret;
-        }
+        //public bool AddItem(CmMstInfoItem item)
+        //{
+        //    if (item == null)
+        //    {
+        //        throw new ArgumentNullException("item");
+        //    }
+        //    bool ret = SetData(item);
+        //    return ret;
+        //}
 
         #region functions
-        private void GetCmMstInfoItem(List<CmMstInfoItem> CmMstInfoItemList)
+        private void GetCmMstInfoItem(DataConnection pclsCache, List<CmMstInfoItem> CmMstInfoItemList)
         {
             CacheCommand cmd = null;
             CacheDataReader cdr = null;
@@ -133,7 +133,7 @@ namespace CDMISrestful.Models
             }
         }
 
-        private bool SetData(CmMstInfoItem item)
+        private bool SetData(DataConnection pclsCache, CmMstInfoItem item)
         {
             bool IsSaved = false;
             try

@@ -11,9 +11,9 @@ namespace CDMISrestful.Models
 {
     public class ClinicInfoRepository : IClinicInfoRepository
     {
-        DataConnection pclsCache = new DataConnection();
+       
         ClinicInfoMethod clinicInfoMethod = new ClinicInfoMethod();
-        public Clinic GetClinicalNewMobile(string UserId, DateTime AdmissionDate, DateTime ClinicDate, int Num)
+        public Clinic GetClinicalNewMobile(DataConnection pclsCache, string UserId, DateTime AdmissionDate, DateTime ClinicDate, int Num)
         {
             //最终输出
             Clinic Clinic = new Clinic();
@@ -325,7 +325,7 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public ClinicInfoViewModel GetClinicInfoDetail(string UserId, string Type, string VisitId, string Date)
+        public ClinicInfoViewModel GetClinicInfoDetail(DataConnection pclsCache, string UserId, string Type, string VisitId, string Date)
         {
             try
             {
@@ -345,7 +345,7 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public List<LabTestDetails> GetLabTestDtlList(string UserId, string VisitId, string SortNo)
+        public List<LabTestDetails> GetLabTestDtlList(DataConnection pclsCache, string UserId, string VisitId, string SortNo)
         {
             try
             {
@@ -361,7 +361,7 @@ namespace CDMISrestful.Models
             }
         }
 
-        public ClinicalInfoListViewModel GetClinicalInfoList(string UserId)
+        public ClinicalInfoListViewModel GetClinicalInfoList(DataConnection pclsCache, string UserId)
         {
             try
             {
@@ -376,7 +376,7 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public string getLatestHUserIdByHCode(string UserId, string HospitalCode)
+        public string getLatestHUserIdByHCode(DataConnection pclsCache, string UserId, string HospitalCode)
         {
             try
             {
@@ -390,7 +390,7 @@ namespace CDMISrestful.Models
                 throw ex;
             }
         }
-        public List<SymptomsList> GetSymptomsList(string UserId, string VisitId)
+        public List<SymptomsList> GetSymptomsList(DataConnection pclsCache, string UserId, string VisitId)
         {
             try
             {
@@ -403,7 +403,7 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public List<DiagnosisInfo> GetDiagnosisInfoList(string UserId, string VisitId)
+        public List<DiagnosisInfo> GetDiagnosisInfoList(DataConnection pclsCache, string UserId, string VisitId)
         {
             try
             {
@@ -416,7 +416,7 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public List<ExamInfo> GetExaminationList(string UserId, string VisitId)
+        public List<ExamInfo> GetExaminationList(DataConnection pclsCache, string UserId, string VisitId)
         {
             try
             {
@@ -429,7 +429,7 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public List<ExamDetails> GetExamDtlList(string UserId, string VisitId, string SortNo, string ItemCode)
+        public List<ExamDetails> GetExamDtlList(DataConnection pclsCache, string UserId, string VisitId, string SortNo, string ItemCode)
         {
             try
             {
@@ -442,7 +442,7 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public List<LabTestList> GetLabTestList(string UserId, string VisitId)
+        public List<LabTestList> GetLabTestList(DataConnection pclsCache, string UserId, string VisitId)
         {
             try
             {
@@ -455,7 +455,7 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public List<DrugRecordList> GetDrugRecordList(string UserId, string VisitId)
+        public List<DrugRecordList> GetDrugRecordList(DataConnection pclsCache, string UserId, string VisitId)
         {
             try
             {

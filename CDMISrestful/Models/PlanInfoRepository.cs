@@ -10,64 +10,64 @@ namespace CDMISrestful.Models
 {
     public class PlanInfoRepository : IPlanInfoRepository
     {
-        DataConnection pclsCache = new DataConnection();
+      
 
         //CSQ 20151026 获取任务子表数据
-        public List<TaskDetail> GetTaskDetails(string CategoryCode, string Code)
+        public List<TaskDetail> GetTaskDetails(DataConnection pclsCache, string CategoryCode, string Code)
         {
             return new PlanInfoMethod().GetTaskDetails(pclsCache, CategoryCode, Code);
         }
 
         //专员建立计划模板 父表写数 csq 20151026
-        public int PsTemplateSetData(string DoctorId, int TemplateCode, string TemplateName, string Description, DateTime RecordDate, string Redundance,string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public int PsTemplateSetData(DataConnection pclsCache, string DoctorId, int TemplateCode, string TemplateName, string Description, DateTime RecordDate, string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             return new PlanInfoMethod().PsTemplateSetData(pclsCache, DoctorId, TemplateCode, TemplateName, Description, RecordDate, Redundance,  piUserId, piTerminalName, piTerminalIP, piDeviceType);
         }
 
          //专员建立计划模板 子表写数 csq 20151026
-        public int PsTemplateDetailSetData(string DoctorId, int TemplateCode, string CategoryCode, string ItemCode, string Value, string Description,string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public int PsTemplateDetailSetData(DataConnection pclsCache, string DoctorId, int TemplateCode, string CategoryCode, string ItemCode, string Value, string Description, string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             return new PlanInfoMethod().PsTemplateDetailSetData(pclsCache, DoctorId, TemplateCode, CategoryCode, ItemCode, Value,Description, Redundance, piUserId, piTerminalName, piTerminalIP, piDeviceType);
         }
 
         
         //获取专员计划模板列表 CSQ 20151026
-        public List<TemplateInfo> GetTemplateList(string DoctorId)
+        public List<TemplateInfo> GetTemplateList(DataConnection pclsCache, string DoctorId)
         {
             return new PlanInfoMethod().GetTemplateList(pclsCache, DoctorId);
         }
 
         //获取专员某个计划模板的详细信息 CSQ 20151026
-        public List<TemplateInfoDtl> GetTemplateDetails(string DoctorId, string TemplateCode, string ParentCode)
+        public List<TemplateInfoDtl> GetTemplateDetails(DataConnection pclsCache, string DoctorId, string TemplateCode, string ParentCode)
         {
             return new PlanInfoMethod().GetTemplateDetails(pclsCache, DoctorId, TemplateCode, ParentCode);
         }
 
         //Ps.Plan.SetData GL 2015-10-13
-        public int SetPlan(string PlanNo, string PatientId, int StartDate, int EndDate, string Module, int Status, string DoctorId, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public int SetPlan(DataConnection pclsCache, string PlanNo, string PatientId, int StartDate, int EndDate, string Module, int Status, string DoctorId, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             return new PlanInfoMethod().PsPlanSetData(pclsCache, PlanNo, PatientId, StartDate, EndDate, Module, Status, DoctorId, piUserId, piTerminalName, piTerminalIP, piDeviceType);
         }
 
         //Ps.ComplianceDetail.SetData CSQ 20151027
-        public int SetComplianceDetail(string PlanNo, int Date, string CategoryCode,string Code,string SortNo,int Status, string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
+        public int SetComplianceDetail(DataConnection pclsCache, string PlanNo, int Date, string CategoryCode, string Code, string SortNo, int Status, string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType)
         {
             return new PlanInfoMethod().PsComplianceDetailSetData(pclsCache, PlanNo, Date, CategoryCode, Code,SortNo, Status, Description, CoUserId, CoTerminalName, CoTerminalIP, CoDeviceType);
         }
 
-        public TargetByCode GetTarget(string PlanNo, string Type, string Code)
+        public TargetByCode GetTarget(DataConnection pclsCache, string PlanNo, string Type, string Code)
         {
             return new PlanInfoMethod().GetTarget(pclsCache, PlanNo, Type, Code);
         }
 
         //GL 2015-10-13
-        public List<LifeStyleDetail> GetLifeStyleDetail(string Module)
+        public List<LifeStyleDetail> GetLifeStyleDetail(DataConnection pclsCache, string Module)
         {
             return new DictMethod().GetLifeStyleDetail(pclsCache, Module);
         }
 
         //根据患者Id，获取药物治疗列表 GL 2015-10-13
-        public List<PsDrugRecord> GetPatientDrugRecord(string PatientId, string Module)
+        public List<PsDrugRecord> GetPatientDrugRecord(DataConnection pclsCache, string PatientId, string Module)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace CDMISrestful.Models
         }
 
         //创建计划 GL 2015-10-13
-        public int CreateTask(string PlanNo, string  Type,string Code,string SortNo,string Instruction, string UserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int CreateTask(DataConnection pclsCache, string PlanNo, string Type, string Code, string SortNo, string Instruction, string UserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             try
             {
@@ -106,26 +106,26 @@ namespace CDMISrestful.Models
         }
 
         //Ps.Compliance.SetData CSQ 20151027
-        public int SetCompliance(string PlanNo, int Date, Double Compliance, string Description, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int SetCompliance(DataConnection pclsCache, string PlanNo, int Date, Double Compliance, string Description, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             return new PlanInfoMethod().PsComplianceSetData(pclsCache, PlanNo, Date, Compliance, Description, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
 
         //Ps.Target.SetData CSQ 20151027
-        public int SetTarget(string Plan, string Type, string Code, string Value, string Origin, string Instruction, string Unit, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public int SetTarget(DataConnection pclsCache, string Plan, string Type, string Code, string Value, string Origin, string Instruction, string Unit, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             return new PlanInfoMethod().PsTargetSetData(pclsCache, Plan, Type, Code, Value, Origin, Instruction, Unit, piUserId, piTerminalName, piTerminalIP, piDeviceType);
         }
 
         //获取某计划的进度和剩余天数（取PlanNo，StartDate，EndDate） GL 2015-10-13
-        public GPlanInfo GetPlanInfo(string PlanNo)
+        public GPlanInfo GetPlanInfo(DataConnection pclsCache, string PlanNo)
         {
             return new PlanInfoMethod().GetPlanInfo(pclsCache, PlanNo);
         }
 
         //通过某计划的日期，获取该天的任务完成详情 用于图上点点击时弹框内容 GL 2015-10-13
-        public TaskComDetailByD GetImplementationByDate(string PatientId, string PlanNo, string DateSelected)
+        public TaskComDetailByD GetImplementationByDate(DataConnection pclsCache, string PatientId, string PlanNo, string DateSelected)
         {
             TaskComDetailByD TaskComDetailByD = new TaskComDetailByD(); //voidDateTime
             //string str_result = "";  //最终的输出-ImplementationInfo转化成json格式
@@ -152,7 +152,7 @@ namespace CDMISrestful.Models
 
         //获取某体征的数据和画图信息（收缩压、舒张压、脉率) Pad和Phone都要用 GL 2015-10-13
         //关于输入 StartDate，EndDate  Pad首次没有拿出StartDate，EndDate    Phone拿出了 这样规划比较好
-        public ChartData GetSignInfoByCode(string PatientId, string PlanNo, string ItemCode, int StartDate, int EndDate)
+        public ChartData GetSignInfoByCode(DataConnection pclsCache, string PatientId, string PlanNo, string ItemCode, int StartDate, int EndDate)
         {
             ChartData ChartData = new ChartData();
             List<Graph> GraphList = new List<Graph>();
@@ -238,7 +238,7 @@ namespace CDMISrestful.Models
         }
 
         //根据模块获取正在执行的计划 GL 2015-10-13
-        public GPlanInfo GetExecutingPlanByModule(string PatientId, string Module)
+        public GPlanInfo GetExecutingPlanByModule(DataConnection pclsCache, string PatientId, string Module)
         {
             try
             {
@@ -268,7 +268,7 @@ namespace CDMISrestful.Models
         }
 
         //更新计划状态 GL 2015-10-13
-        public int SetPlanStart(string PlanNo, int Status, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public int SetPlanStart(DataConnection pclsCache, string PlanNo, int Status, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             return new PlanInfoMethod().PlanStart(pclsCache, PlanNo, Status, piUserId, piTerminalName, piTerminalIP, piDeviceType);
         }
@@ -902,7 +902,7 @@ namespace CDMISrestful.Models
 
 
         //获取健康专员负责的所有患者（最新结束但未达标的）计划列表 GL 2015-10-13
-        public List<OverDuePlanDetail> GetOverDuePlanList(string DoctorId, string ModuleType)
+        public List<OverDuePlanDetail> GetOverDuePlanList(DataConnection pclsCache, string DoctorId, string ModuleType)
         {
             List<OverDuePlanDetail> PlanList = new List<OverDuePlanDetail>();
             try
@@ -996,23 +996,23 @@ namespace CDMISrestful.Models
         }     
 
         //根据计划编码和日期，获取依从率 GL 2015-10-13
-        public List<GPlanInfo> GetPlanList34ByM(string PatientId, string Module)
+        public List<GPlanInfo> GetPlanList34ByM(DataConnection pclsCache, string PatientId, string Module)
         {
             return new PlanInfoMethod().GetPlanList34ByM(pclsCache, PatientId, Module);
         }
 
         //获取某计划的某段时间(包括端点)的依从率列表 GL 2015-10-13
-        public List<ComplianceListByPeriod> GetAllComplianceListByPeriod(string PlanNo, int StartDate, int EndDate)
+        public List<ComplianceListByPeriod> GetAllComplianceListByPeriod(DataConnection pclsCache, string PlanNo, int StartDate, int EndDate)
         {
             return new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PlanNo, StartDate, EndDate);
         }
 
-        public List<PsTask> GetTasks(string PlanNo, string ParentCode, string Date, string PatientId)
+        public List<PsTask> GetTasks(DataConnection pclsCache, string PlanNo, string ParentCode, string Date, string PatientId)
         {
             return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date,PatientId);
         }
 
-        public List<TasksForClick> GetTasksForClick(string PlanNo, string ParentCode, string Date)
+        public List<TasksForClick> GetTasksForClick(DataConnection pclsCache, string PlanNo, string ParentCode, string Date)
         {
             List<TasksForClick> tasks = new List<TasksForClick>();
             List<PsTask> tasksOne = new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode, Date, "");
@@ -1053,7 +1053,7 @@ namespace CDMISrestful.Models
         /// <param name="ItemType"></param>
         /// <param name="ItemCode"></param>
         /// <returns></returns>
-        public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate, string ItemType, string ItemCode)
+        public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(DataConnection pclsCache, string UserId, string PlanNo, int StartDate, int EndDate, string ItemType, string ItemCode)
         {
             List<ComplianceAllSignsListByPeriod> items = new List<ComplianceAllSignsListByPeriod>();
             //依从率
@@ -1062,81 +1062,86 @@ namespace CDMISrestful.Models
             List<SignByPeriod> items2 = new PlanInfoMethod().GetSignByPeriod(pclsCache,UserId,ItemType,ItemCode,StartDate,EndDate);
             //List<VitalInfo> items2 = new VitalInfoMethod().GetAllSignsByPeriod(pclsCache, UserId, StartDate, EndDate);
 
-            for (int i = 0; i < items1.Count; i++)
+            if (items1 != null)
             {
-                ComplianceAllSignsListByPeriod item = new ComplianceAllSignsListByPeriod();
-                item.Date = items1[i].Date.ToString();
-                item.Compliance = Math.Round(items1[i].Compliance * 100, 0) + "%";
-                item.Description = items1[i].Description;
-                if (items1[i].Compliance == 1)
+                for (int i = 0; i < items1.Count; i++)
                 {
-                    item.BulletColor = "#77777";
-                }
-                else if (items1[i].Compliance == 0)
-                {
-                    item.BulletColor = "#DADADA";
-                }
-                else
-                {
-                    item.CustomBullet = "img/amcharts/customBullet.png";
-                }
-                item.BulletValue = "1";
-
-                List<PsTask> tasks = new PlanInfoMethod().GetTasks(pclsCache, PlanNo, "T", item.Date, "");
-                string str = "";
-                for (int j = 0; j < tasks.Count; j++)
-                {
-                    if (j % 2 == 0)
+                    ComplianceAllSignsListByPeriod item = new ComplianceAllSignsListByPeriod();
+                    item.Date = items1[i].Date.ToString();
+                    item.Compliance = Math.Round(items1[i].Compliance * 100, 0) + "%";
+                    item.Description = items1[i].Description;
+                    if (items1[i].Compliance == 1)
                     {
-                        //str = str + tasks[j].Name + "：" + tasks[j].Status + "   ";
-                        str = str + tasks[j].Name + "   ";
-
+                        item.BulletColor = "#77777";
+                    }
+                    else if (items1[i].Compliance == 0)
+                    {
+                        item.BulletColor = "#DADADA";
                     }
                     else
                     {
-                        //str = str + tasks[j].Name + "：" + tasks[j].Status + "<br>";
-                        str = str + tasks[j].Name +  "<br>";
+                        item.CustomBullet = "img/amcharts/customBullet.png";
+                    }
+                    item.BulletValue = "1";
 
-                    }
-                }
-                item.Task = str; //需要修改
-                if (items2 != null)
-                {
-                    SignByPeriod vitalSign = items2.Find(s => s.RecordDate == item.Date);
-                    if (vitalSign != null)
+                    List<PsTask> tasks = new PlanInfoMethod().GetTasks(pclsCache, PlanNo, "T", item.Date, "");
+                    string str = "";
+                    for (int j = 0; j < tasks.Count; j++)
                     {
-                        item.VitalCode = ItemCode;
-                        item.Value = vitalSign.Value; //需要修改
+                        if (j % 2 == 0)
+                        {
+                            //str = str + tasks[j].Name + "：" + tasks[j].Status + "   ";
+                            str = str + tasks[j].Name + "   ";
+
+                        }
+                        else
+                        {
+                            //str = str + tasks[j].Name + "：" + tasks[j].Status + "<br>";
+                            str = str + tasks[j].Name + "<br>";
+
+                        }
                     }
-                    else
+                    item.Task = str; //需要修改
+                    if (items2 != null)
                     {
-                        item.VitalCode = ItemCode;
-                        item.Value = "#"; //需要修改
+                        SignByPeriod vitalSign = items2.Find(s => s.RecordDate == item.Date);
+                        if (vitalSign != null)
+                        {
+                            item.VitalCode = ItemCode;
+                            item.Value = vitalSign.Value; //需要修改
+                        }
+                        else
+                        {
+                            item.VitalCode = ItemCode;
+                            item.Value = "#"; //需要修改
+                        }
                     }
+                    items.Add(item);
                 }
-                items.Add(item);
             }
-
             return items;
         }
             
 
         //根据主键删除Ps.Task一条数据 SYF 2015-10-29
-        public int DeteteTask(string Plan, string Type, string Code, string SortNo)
+        public int DeteteTask(DataConnection pclsCache, string Plan, string Type, string Code, string SortNo)
         {
             return new PlanInfoMethod().DeteteTask(pclsCache, Plan, Type, Code, SortNo);
 
         }
 
-        public double GetComplianceByPlanNo(string PlanNo)
+        public double GetComplianceByPlanNo(DataConnection pclsCache, string PlanNo)
         {
             return new PlanInfoMethod().GetComplianceByPlanNo(pclsCache, PlanNo);
         }
-        public List<GPlanInfo> GetPlanListByMS(string PatientId, string Module, int Status)
+        public List<GPlanInfo> GetPlanListByMS(DataConnection pclsCache, string PatientId, string Module, int Status)
         {
             return new PlanInfoMethod().GetPlanListByMS(pclsCache, PatientId, Module, Status);
         }
 
-      
+        public List<ComplianceDate> GetComplianceListInC(DataConnection pclsCache, string PatientId, string StartDate, string EndDate, string Module)
+        {
+            return new PlanInfoMethod().GetComplianceListInC(pclsCache, PatientId, StartDate, EndDate, Module);
+        }
     }
 }

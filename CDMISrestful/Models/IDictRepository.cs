@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CDMISrestful.DataModels;
+using CDMISrestful.CommonLibrary;
 
 namespace CDMISrestful.Models
 {
     public interface IDictRepository
     {
-        List<TypeAndName> GetHypertensionDrugTypeNameList();
-        List<CmAbsType> GetHypertensionDrug();
-        List<TypeAndName> GetDiabetesDrugTypeNameList();
-        List<CmAbsType> GetDiabetesDrug();
-        List<TypeAndName> GetTypeList(string Category);
-        List<MstBloodPressure> GetBloodPressure();
-        List<Insurance> GetInsuranceType();
-        int CmMstTaskSetData(string CategoryCode, string Code, string Name, string ParentCode, string Description, int StartDate, int EndDate, int GroupHeaderFlag, int ControlType, string OptionCategory, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
-        List<CmMstTask> GetMstTaskByParentCode(string ParentCode);
-        string GetNo(int NumberingType, string TargetDate);
+        List<TypeAndName> GetHypertensionDrugTypeNameList(DataConnection pclsCache);
+        List<CmAbsType> GetHypertensionDrug(DataConnection pclsCache) ;
+        List<TypeAndName> GetDiabetesDrugTypeNameList(DataConnection pclsCache);
+        List<CmAbsType> GetDiabetesDrug(DataConnection pclsCache);
+        List<TypeAndName> GetTypeList(DataConnection pclsCache, string Category);
+        List<MstBloodPressure> GetBloodPressure(DataConnection pclsCache);
+        List<Insurance> GetInsuranceType(DataConnection pclsCache);
+        int CmMstTaskSetData(DataConnection pclsCache, string CategoryCode, string Code, string Name, string ParentCode, string Description, int StartDate, int EndDate, int GroupHeaderFlag, int ControlType, string OptionCategory, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+        List<CmMstTask> GetMstTaskByParentCode(DataConnection pclsCache, string ParentCode);
+        string GetNo(DataConnection pclsCache, int NumberingType, string TargetDate);
     }
 }

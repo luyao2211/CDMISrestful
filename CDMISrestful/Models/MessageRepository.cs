@@ -11,14 +11,14 @@ namespace CDMISrestful.Models
 {
     public class MessageRepository : IMessageRepository
     {
-        DataConnection pclsCache = new DataConnection();
+       
         /// <summary>
         /// 获取消息对话 GL 2015-10-10
         /// </summary>
         /// <param name="Reciever"></param>
         /// <param name="SendBy"></param>
         /// <returns></returns>
-        public List<Message> GetSMSDialogue(string Reciever, string SendBy)
+        public List<Message> GetSMSDialogue(DataConnection pclsCache, string Reciever, string SendBy)
         {
             return new MessageMethod().GetSMSDialogue(pclsCache, Reciever, SendBy);
         }
@@ -34,7 +34,7 @@ namespace CDMISrestful.Models
         /// <param name="piTerminalIP"></param>
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
-        public Message SetSMS(string SendBy, string Reciever, string Content, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public Message SetSMS(DataConnection pclsCache, string SendBy, string Reciever, string Content, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             return new MessageMethod().SetSMS(pclsCache, SendBy, Reciever, Content, piUserId, piTerminalName, piTerminalIP, piDeviceType);         
         }
@@ -45,7 +45,7 @@ namespace CDMISrestful.Models
         /// <param name="DoctorId"></param>
         /// <param name="PatientId"></param>
         /// <returns></returns>
-        public Message GetLatestSMS(string DoctorId, string PatientId)
+        public Message GetLatestSMS(DataConnection pclsCache, string DoctorId, string PatientId)
         {
             return new MessageMethod().GetLatestSMS(pclsCache, DoctorId, PatientId);             
         }
@@ -60,7 +60,7 @@ namespace CDMISrestful.Models
         /// <param name="piTerminalIP"></param>
         /// <param name="piDeviceType"></param>
         /// <returns></returns>
-        public int SetSMSRead(string Reciever, string SendBy, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public int SetSMSRead(DataConnection pclsCache, string Reciever, string SendBy, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             return new MessageMethod().SetSMSRead(pclsCache, Reciever, SendBy, piUserId, piTerminalName, piTerminalIP, piDeviceType);       
         }
@@ -71,7 +71,7 @@ namespace CDMISrestful.Models
         /// <param name="Reciever"></param>
         /// <param name="SendBy"></param>
         /// <returns></returns>
-        public int GetSMSCountForOne(string Reciever, string SendBy)
+        public int GetSMSCountForOne(DataConnection pclsCache, string Reciever, string SendBy)
         {
             return new MessageMethod().GetSMSCountForOne(pclsCache, Reciever, SendBy);         
         }
@@ -82,7 +82,7 @@ namespace CDMISrestful.Models
         /// <param name="DoctorId"></param>
         /// <param name="CategoryCode"></param>
         /// <returns></returns>
-        public List<Message> GetSMSList(string DoctorId, string CategoryCode)
+        public List<Message> GetSMSList(DataConnection pclsCache, string DoctorId, string CategoryCode)
         {
             return new MessageMethod().GetSMSList(pclsCache, DoctorId, CategoryCode);
         }
@@ -92,7 +92,7 @@ namespace CDMISrestful.Models
         /// </summary>
         /// <param name="DoctorId"></param>
         /// <returns></returns>
-        public int GetSMSCountForAll(string DoctorId)
+        public int GetSMSCountForAll(DataConnection pclsCache, string DoctorId)
         {
             return new MessageMethod().GetSMSCountForAll(pclsCache, DoctorId);        
         }

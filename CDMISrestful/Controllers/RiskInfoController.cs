@@ -15,7 +15,7 @@ namespace CDMISrestful.Controllers
     public class RiskInfoController : ApiController
     {
         static readonly IRiskInfoRepository repository = new RiskInfoRepository();
-
+        DataConnection pclsCache = new DataConnection();
 
         /// <summary>
         /// 根据收缩压获取血压等级说明 LY 2015-10-13
@@ -25,7 +25,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/RiskInfo/GetDescription")]
         public HttpResponseMessage GetDescription(int SBP)
         {
-            string ret = repository.GetDescription(SBP);
+            string ret = repository.GetDescription(pclsCache, SBP);
             return new ExceptionHandler().Common(Request, ret);
         }
 
@@ -47,7 +47,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage PostRiskResult(RiskResult Item)
         {
-            int ret = repository.SetRiskResult(Item.UserId, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
+            int ret = repository.SetRiskResult(pclsCache, Item.UserId, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, new CommonFunction().getRemoteIPAddress(), Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -61,7 +61,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/RiskInfo/RiskResult")]
         public HttpResponseMessage GetRiskResult(string UserId, string AssessmentType)
         {
-            string ret = repository.GetRiskResult(UserId,  AssessmentType);
+            string ret = repository.GetRiskResult(pclsCache, UserId, AssessmentType);
             return new ExceptionHandler().Common(Request, ret);
         }
 
@@ -73,7 +73,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/RiskInfo/RiskInput")]
         public RiskInput GetRiskInput(string UserId)
         {
-            return repository.GetRiskInput(UserId);
+            return repository.GetRiskInput(pclsCache, UserId);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public List<PsTreatmentIndicators> GetPsTreatmentIndicators(string UserId)
         {
-            List<PsTreatmentIndicators> ret = repository.GetPsTreatmentIndicators(UserId);
+            List<PsTreatmentIndicators> ret = repository.GetPsTreatmentIndicators(pclsCache, UserId);
             return ret;
         }
 
@@ -100,7 +100,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage POSTPsTreatmentIndicatorsSetData(RiskResult Item)
         {
-            int ret = repository.PsTreatmentIndicatorsSetData(Item.UserId, Item.SortNo, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
+            int ret = repository.PsTreatmentIndicatorsSetData(pclsCache, Item.UserId, Item.SortNo, Item.AssessmentType, Item.AssessmentName, Item.AssessmentTime, Item.Result, Item.revUserId, Item.TerminalName, new CommonFunction().getRemoteIPAddress(), Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -114,7 +114,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage POSTPsParametersSetData(Parameters Item)
         {
-            int ret = repository.PsParametersSetData(Item.Indicators, Item.Id, Item.Name, Item.Value, Item.Unit, Item.revUserId, Item.TerminalName, Item.TerminalIP, Item.DeviceType);
+            int ret = repository.PsParametersSetData(pclsCache, Item.Indicators, Item.Id, Item.Name, Item.Value, Item.Unit, Item.revUserId, Item.TerminalName, new CommonFunction().getRemoteIPAddress(), Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -129,7 +129,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public List<Parameters> GetParameters(string Indicators)
         {
-            List<Parameters> ret = repository.GetParameters(Indicators);
+            List<Parameters> ret = repository.GetParameters(pclsCache, Indicators);
             return ret;
         }
         /// <summary>
@@ -143,7 +143,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public HttpResponseMessage GetMaxSortNo(string UserId)
         {
-            int ret = repository.GetMaxSortNo(UserId);
+            int ret = repository.GetMaxSortNo(pclsCache, UserId);
             return new ExceptionHandler().Common(Request,ret.ToString());
         }
     }

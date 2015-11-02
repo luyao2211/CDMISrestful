@@ -8,6 +8,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CDMISrestful.DataModels
 {
+    public class ComplianceDate
+    {
+        public int Date { get; set; }
+        public string PlanNo { get; set; }
+        public double Compliance { get; set; }
+    }
+
     public class DeleteTask
     {
         public string Plan { get; set; }

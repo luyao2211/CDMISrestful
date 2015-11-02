@@ -15,7 +15,7 @@ namespace CDMISrestful.Models
 {
     public class ServiceRepository : IServiceRepository
     {
-        DataConnection pclsCache = new DataConnection();
+       
         public string sendSMS(string mobile, string smsType)
         {
             try
@@ -226,10 +226,10 @@ namespace CDMISrestful.Models
         /// </summary>
         /// <param name="PatientId"></param>
         /// <returns></returns>
-        public List<TypeAndName> GetPatientInfo(string PatientId)
+        public List<TypeAndName> GetPatientInfo(DataConnection pclsCache, string PatientId)
         {
             List<TypeAndName> List = new List<TypeAndName>();
-            PatBasicInfo BasicInfo = new UsersRepository().GetPatBasicInfo(PatientId);
+            PatBasicInfo BasicInfo = new UsersRepository().GetPatBasicInfo(pclsCache, PatientId);
             TypeAndName NewLine1 = new TypeAndName
             {
                 Type = "name",
@@ -248,14 +248,14 @@ namespace CDMISrestful.Models
                 Name = BasicInfo.Gender
             };
             List.Add(NewLine3);
-            string Height = new VitalInfoRepository().GetLatestPatientVitalSigns(PatientId, "Height", "Height_1");
+            string Height = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Height", "Height_1");
             TypeAndName NewLine4 = new TypeAndName
             {
                 Type = "height",
                 Name = Height
             };
             List.Add(NewLine4);
-            string Weight = new VitalInfoRepository().GetLatestPatientVitalSigns(PatientId, "Weight", "Weight_1");
+            string Weight = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Weight", "Weight_1");
             TypeAndName NewLine5 = new TypeAndName
             {
                 Type = "weight",
@@ -281,7 +281,7 @@ namespace CDMISrestful.Models
         /// <param name="TerminalIP"></param>
         /// <param name="DeviceType"></param>
         /// <returns></returns>
-        public int VitalSignFromZKY(VitalSignFromDevice VitalSigns, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int VitalSignFromZKY(DataConnection pclsCache, VitalSignFromDevice VitalSigns, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             string UserId = new UsersMethod().GetIDByInput(pclsCache, "PhoneNo", VitalSigns.mobilephone);
             int RecordDate = Convert.ToInt32(VitalSigns.DateTime.Split('|')[0]);
@@ -289,43 +289,43 @@ namespace CDMISrestful.Models
             int ret = 0;
             if (VitalSigns.Bloodpressure_1.Type != "" && VitalSigns.Bloodpressure_1.Name != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_1", VitalSigns.Bloodpressure_1.Type, VitalSigns.Bloodpressure_1.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_1", VitalSigns.Bloodpressure_1.Type, VitalSigns.Bloodpressure_1.Name, revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
             if (VitalSigns.Bloodpressure_2.Type != "" && VitalSigns.Bloodpressure_2.Name != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_2", VitalSigns.Bloodpressure_2.Type, VitalSigns.Bloodpressure_2.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_2", VitalSigns.Bloodpressure_2.Type, VitalSigns.Bloodpressure_2.Name, revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
             if (VitalSigns.Pulserate_1.Type != "" && VitalSigns.Pulserate_1.Name != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "Pulserate", "Pulserate_1", VitalSigns.Pulserate_1.Type, VitalSigns.Pulserate_1.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Pulserate", "Pulserate_1", VitalSigns.Pulserate_1.Type, VitalSigns.Pulserate_1.Name, revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
             if (VitalSigns.Bloodglucose.Type != "" && VitalSigns.Bloodglucose.Name != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "BloodSugar", "BloodSugar_1", VitalSigns.Bloodglucose.Type, VitalSigns.Bloodglucose.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BloodSugar", "BloodSugar_1", VitalSigns.Bloodglucose.Type, VitalSigns.Bloodglucose.Name, revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
             if (VitalSigns.Respiratoryrate.Type != "" && VitalSigns.Respiratoryrate.Name != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "BreathStatus", "Respiratoryrate", VitalSigns.Respiratoryrate.Type, VitalSigns.Respiratoryrate.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BreathStatus", "Respiratoryrate", VitalSigns.Respiratoryrate.Type, VitalSigns.Respiratoryrate.Name, revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
             if (VitalSigns.ECG != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "ECG", "ECG_1", VitalSigns.ECG, "", revUserId, TerminalName, TerminalIP, DeviceType);
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "ECG", "ECG_1", VitalSigns.ECG, "", revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
             if (VitalSigns.Activity != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(UserId, RecordDate, RecordTime, "Activity", "Activity_1", VitalSigns.Activity, "", revUserId, TerminalName, TerminalIP, DeviceType);
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Activity", "Activity_1", VitalSigns.Activity, "", revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }

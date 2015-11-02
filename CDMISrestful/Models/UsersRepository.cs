@@ -15,7 +15,7 @@ namespace CDMISrestful.Models
     public class UsersRepository : IUsersRepository
     {
         //DataConnection
-        DataConnection pclsCache = new DataConnection();
+      
         UsersMethod usersMethod = new UsersMethod();
         CommonMethod commonMethod = new CommonMethod();
         PlanInfoMethod planInfoMethod = new PlanInfoMethod();
@@ -33,7 +33,7 @@ namespace CDMISrestful.Models
             return SecurityManager.IsTokenValid(token);
         }
 
-        public ForToken LogOn(string PwType, string userId, string password, string role)
+        public ForToken LogOn(DataConnection pclsCache, string PwType, string userId, string password, string role)
         {
             int result = usersMethod.CheckPasswordByInput(pclsCache, PwType, userId, password);
             ForToken response = new ForToken();
@@ -104,7 +104,7 @@ namespace CDMISrestful.Models
         /// <param name="TerminalIP"></param>
         /// <param name="DeviceType"></param>
         /// <returns></returns>
-        public int Register(string PwType, string userId, string UserName, string Password, string role, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int Register(DataConnection pclsCache, string PwType, string userId, string UserName, string Password, string role, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             //userID：系统唯一标识
 
@@ -172,7 +172,7 @@ namespace CDMISrestful.Models
             return ret;
         }
 
-        public int Activition(string UserId, string InviteCode, string role)
+        public int Activition(DataConnection pclsCache, string UserId, string InviteCode, string role)
         {
             int ret = 0;
             int Flag = usersMethod.SetActivition(pclsCache, UserId, role, InviteCode);
@@ -187,385 +187,387 @@ namespace CDMISrestful.Models
             return ret;
         }
 
-        public int ChangePassword(string OldPassword, string NewPassword, string UserId, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int ChangePassword(DataConnection pclsCache, string OldPassword, string NewPassword, string UserId, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             int ret = 0;
             ret = usersMethod.ChangePassword(pclsCache, UserId, OldPassword, NewPassword, revUserId, TerminalName, TerminalIP, DeviceType);
             return ret;
         }
 
-        public PatientsDataSet GetPatientsList(string DoctorId, string ModuleType, int Plan, int Compliance, int Goal)
-        {
-            int patientTotalCount = 0;  //某个模块下的患者总数
-            int planCount = 0;          //已有计划的患者数
-            int complianceCount = 0;    //依从的患者数
-            int goalCount = 0;          //达标的患者数
-            double planRate = 0;
-            double complianceRateTotal = 0;
-            double goalRate = 0;
+        #region 弃用 20151101 CSQ 用GetPatientsPlan方法代替
+        //public PatientsDataSet GetPatientsList(string DoctorId, string ModuleType, int Plan, int Compliance, int Goal)
+        //{
+        //    int patientTotalCount = 0;  //某个模块下的患者总数
+        //    int planCount = 0;          //已有计划的患者数
+        //    int complianceCount = 0;    //依从的患者数
+        //    int goalCount = 0;          //达标的患者数
+        //    double planRate = 0;
+        //    double complianceRateTotal = 0;
+        //    double goalRate = 0;
 
-            RateTable DT_Rates = new RateTable();
+        //    RateTable DT_Rates = new RateTable();
 
-            List<PatientListTable> DT_PatientList = new List<PatientListTable>();
+        //    List<PatientListTable> DT_PatientList = new List<PatientListTable>();
 
-            List<PatientPlan> DT_Patients = new List<PatientPlan>();
+        //    List<PatientPlan> DT_Patients = new List<PatientPlan>();
 
-            PatientsDataSet DS_Patients = new PatientsDataSet();
+        //    PatientsDataSet DS_Patients = new PatientsDataSet();
 
-            try
-            {
-                int nowDate = commonMethod.GetServerDate(pclsCache);
-                DT_Patients = planInfoMethod.GetPatientsPlanByDoctorId(pclsCache, DoctorId, ModuleType);
-                if (DT_Patients != null)
-                    patientTotalCount = DT_Patients.Count;
-                else
-                    return DS_Patients;
+        //    try
+        //    {
+        //        int nowDate = commonMethod.GetServerDate(pclsCache);
+        //        DT_Patients = planInfoMethod.GetPatientsPlanByDoctorId(pclsCache, DoctorId, ModuleType);
+        //        if (DT_Patients != null)
+        //            patientTotalCount = DT_Patients.Count;
+        //        else
+        //            return DS_Patients;
            
-                for (int i = 0; i < patientTotalCount; i++)
-                {
-                    string patientId = DT_Patients[i].PatientId; // item["PatientId"].ToString();
-                    string planNo = DT_Patients[i].PlanNo;  //item["PlanNo"].ToString();
-                    if (planNo != "")
-                    {
-                        planCount++;
-                    }
+        //        for (int i = 0; i < patientTotalCount; i++)
+        //        {
+        //            string patientId = DT_Patients[i].PatientId; // item["PatientId"].ToString();
+        //            string planNo = DT_Patients[i].PlanNo;  //item["PlanNo"].ToString();
+        //            if (planNo != "")
+        //            {
+        //                planCount++;
+        //            }
 
-                    //HavePlan 0 1 2
-                    if ((Plan == 1 && planNo == "") || (Plan == 2 && planNo != ""))
-                    {
-                        continue;
-                    }
-                    string startDate = DT_Patients[i].StartDate;   //item["StartDate"].ToString();
-                    string totalDays = DT_Patients[i].TotalDays;   //item["TotalDays"].ToString();
-                    string remainingDays = DT_Patients[i].RemainingDays;   //item["RemainingDays"].ToString();
-                    string status = DT_Patients[i].Status;   //item["Status"].ToString();
+        //            //HavePlan 0 1 2
+        //            if ((Plan == 1 && planNo == "") || (Plan == 2 && planNo != ""))
+        //            {
+        //                continue;
+        //            }
+        //            string startDate = DT_Patients[i].StartDate;   //item["StartDate"].ToString();
+        //            string totalDays = DT_Patients[i].TotalDays;   //item["TotalDays"].ToString();
+        //            string remainingDays = DT_Patients[i].RemainingDays;   //item["RemainingDays"].ToString();
+        //            string status = DT_Patients[i].Status;   //item["Status"].ToString();
 
-                    double process = 0.0;
-                    double complianceRate = 0.0;
-                    //VitalSign
-                    List<string> vitalsigns = new List<string>();
+        //            double process = 0.0;
+        //            double complianceRate = 0.0;
+        //            //VitalSign
+        //            List<string> vitalsigns = new List<string>();
 
-                    if (planNo != "")
-                    {
-                        complianceRate = planInfoMethod.GetComplianceByDate(pclsCache, planNo, nowDate);
-                        if (complianceRate > 0)
-                        {
-                            complianceCount++;
-                        }
-                        if (complianceRate < 0)
-                        {
-                            complianceRate = 0;
-                        }
-                        //Compliance
-                        if (Compliance == 1 && complianceRate <= 0)
-                        {
-                            continue;
-                        }
-                        if (Compliance == 2 && complianceRate > 0)
-                        {
-                            continue;
-                        }
+        //            if (planNo != "")
+        //            {
+        //                complianceRate = planInfoMethod.GetComplianceByDate(pclsCache, planNo, nowDate);
+        //                if (complianceRate > 0)
+        //                {
+        //                    complianceCount++;
+        //                }
+        //                if (complianceRate < 0)
+        //                {
+        //                    complianceRate = 0;
+        //                }
+        //                //Compliance
+        //                if (Compliance == 1 && complianceRate <= 0)
+        //                {
+        //                    continue;
+        //                }
+        //                if (Compliance == 2 && complianceRate > 0)
+        //                {
+        //                    continue;
+        //                }
 
-                        //Vitalsign 
-                        string itemType = "Bloodpressure";
-                        string itemCode = "Bloodpressure_1";
-                        int recordDate = nowDate; //nowDate
-                        //recordDate = 20150422;
-                        bool goalFlag = false;
-                        VitalInfo list = vitalInfoMethod.GetSignByDay(pclsCache, patientId, itemType, itemCode, recordDate);
-                        if (list != null)
-                        {
-                            vitalsigns.Add(list.Value);
-                        }
-                        else
-                        {
-                            //   vitalsigns.Add("115");
-                            //ZAM 2015-6-17
-                            vitalsigns.Add("");
-                        }
+        //                //Vitalsign 
+        //                string itemType = "Bloodpressure";
+        //                string itemCode = "Bloodpressure_1";
+        //                int recordDate = nowDate; //nowDate
+        //                //recordDate = 20150422;
+        //                bool goalFlag = false;
+        //                VitalInfo list = vitalInfoMethod.GetSignByDay(pclsCache, patientId, itemType, itemCode, recordDate);
+        //                if (list != null)
+        //                {
+        //                    vitalsigns.Add(list.Value);
+        //                }
+        //                else
+        //                {
+        //                    //   vitalsigns.Add("115");
+        //                    //ZAM 2015-6-17
+        //                    vitalsigns.Add("");
+        //                }
 
-                        TargetByCode targetlist = planInfoMethod.GetTarget(pclsCache, planNo, itemType, itemCode);
-                        if (targetlist != null)
-                        {
-                            vitalsigns.Add(targetlist.Origin);  //index 4 for Origin value
-                            vitalsigns.Add(targetlist.Value);  //index 3 for target value
-                        }
-                        else
-                        {
-                            //vitalsigns.Add("200");
-                            //vitalsigns.Add("120");
-                            //ZAM 2015-6-17
-                            vitalsigns.Add("");
-                            vitalsigns.Add("");
-                        }
-                        //非法数据判断 zam 2015-5-18
-                        if (list != null && targetlist != null)
-                        {
-                            double m, n;
-                            bool misNumeric = double.TryParse(list.Value.ToString(), out m);
-                            bool nisNumeric = double.TryParse(targetlist.Value.ToString(), out n);
-                            if (misNumeric && nisNumeric)
-                            {
-                                //if (Convert.ToInt32(list[2]) <= Convert.ToInt32(targetlist[3])) //已达标
-                                if (m <= n)
-                                {
-                                    goalCount++;
-                                    goalFlag = true;
-                                }
-                            }
-                        }
-                        //Goal 
-                        if (Goal == 1 && goalFlag == false)
-                        {
-                            continue;
-                        }
-                        if (Goal == 2 && goalFlag == true)
-                        {
-                            continue;
-                        }
+        //                TargetByCode targetlist = planInfoMethod.GetTarget(pclsCache, planNo, itemType, itemCode);
+        //                if (targetlist != null)
+        //                {
+        //                    vitalsigns.Add(targetlist.Origin);  //index 4 for Origin value
+        //                    vitalsigns.Add(targetlist.Value);  //index 3 for target value
+        //                }
+        //                else
+        //                {
+        //                    //vitalsigns.Add("200");
+        //                    //vitalsigns.Add("120");
+        //                    //ZAM 2015-6-17
+        //                    vitalsigns.Add("");
+        //                    vitalsigns.Add("");
+        //                }
+        //                //非法数据判断 zam 2015-5-18
+        //                if (list != null && targetlist != null)
+        //                {
+        //                    double m, n;
+        //                    bool misNumeric = double.TryParse(list.Value.ToString(), out m);
+        //                    bool nisNumeric = double.TryParse(targetlist.Value.ToString(), out n);
+        //                    if (misNumeric && nisNumeric)
+        //                    {
+        //                        //if (Convert.ToInt32(list[2]) <= Convert.ToInt32(targetlist[3])) //已达标
+        //                        if (m <= n)
+        //                        {
+        //                            goalCount++;
+        //                            goalFlag = true;
+        //                        }
+        //                    }
+        //                }
+        //                //Goal 
+        //                if (Goal == 1 && goalFlag == false)
+        //                {
+        //                    continue;
+        //                }
+        //                if (Goal == 2 && goalFlag == true)
+        //                {
+        //                    continue;
+        //                }
 
-                        //非法数据判断 zam 2015-5-18
-                        if (startDate != "" && totalDays != "" && remainingDays != "")
-                        {
-                            double m, n;
-                            bool misNumeric = double.TryParse(totalDays, out m);
-                            bool nisNumeric = double.TryParse(remainingDays, out n);
+        //                //非法数据判断 zam 2015-5-18
+        //                if (startDate != "" && totalDays != "" && remainingDays != "")
+        //                {
+        //                    double m, n;
+        //                    bool misNumeric = double.TryParse(totalDays, out m);
+        //                    bool nisNumeric = double.TryParse(remainingDays, out n);
 
-                            if (misNumeric && nisNumeric)
-                            {
-                                //process = (Convert.ToDouble(totalDays) - Convert.ToDouble(remainingDays)) / Convert.ToDouble(totalDays);
-                                process = m != 0.0 ? (m - n) / m : 0;
-                            }
+        //                    if (misNumeric && nisNumeric)
+        //                    {
+        //                        //process = (Convert.ToDouble(totalDays) - Convert.ToDouble(remainingDays)) / Convert.ToDouble(totalDays);
+        //                        process = m != 0.0 ? (m - n) / m : 0;
+        //                    }
 
-                        }
-                    }
+        //                }
+        //            }
 
-                    //PhotoAddress
-                    string photoAddress = "";
-                    PatDetailInfo patientInfolist = moduleInfoMethod.PsBasicInfoDetailGetPatientDetailInfo(pclsCache, patientId);
-                    if (patientInfolist != null)
-                    {
-                        photoAddress = patientInfolist.PhotoAddress;
+        //            //PhotoAddress
+        //            string photoAddress = "";
+        //            PatDetailInfo patientInfolist = moduleInfoMethod.PsBasicInfoDetailGetPatientDetailInfo(pclsCache, patientId);
+        //            if (patientInfolist != null)
+        //            {
+        //                photoAddress = patientInfolist.PhotoAddress;
 
-                    }
+        //            }
 
-                    string patientName = "";
-                    patientName = usersMethod.GetNameByUserId(pclsCache, patientId);
-                    PatientListTable NewLine = new PatientListTable();
-                    NewLine.PatientId = patientId;
-                    NewLine.PatientName = patientName;
-                    NewLine.photoAddress = photoAddress;
-                    NewLine.PlanNo = planNo;
-                    NewLine.StartDate = startDate;
-                    NewLine.Process = process;
-                    NewLine.RemainingDays = remainingDays;
-                    NewLine.VitalSign = vitalsigns;
-                    NewLine.ComplianceRate = complianceRate;
-                    NewLine.TotalDays = totalDays;
-                    NewLine.Status = status;
+        //            string patientName = "";
+        //            patientName = usersMethod.GetNameByUserId(pclsCache, patientId);
+        //            PatientListTable NewLine = new PatientListTable();
+        //            NewLine.PatientId = patientId;
+        //            NewLine.PatientName = patientName;
+        //            NewLine.photoAddress = photoAddress;
+        //            NewLine.PlanNo = planNo;
+        //            NewLine.StartDate = startDate;
+        //            NewLine.Process = process;
+        //            NewLine.RemainingDays = remainingDays;
+        //            NewLine.VitalSign = vitalsigns;
+        //            NewLine.ComplianceRate = complianceRate;
+        //            NewLine.TotalDays = totalDays;
+        //            NewLine.Status = status;
 
-                    DT_PatientList.Add(NewLine);
+        //            DT_PatientList.Add(NewLine);
                                 
-                }
-                DS_Patients.DT_PatientList = DT_PatientList;
-                //The main rates for Plan, Compliance , Goal
-                planRate = patientTotalCount != 0 ? (double)planCount / patientTotalCount : 0;
-                complianceRateTotal = planCount != 0 ? (double)complianceCount / planCount : 0;
-                goalRate = planCount != 0 ? (double)goalCount / planCount : 0;
-                DT_Rates.PlanRate = planRate;
-                DT_Rates.ComplianceRate = complianceRateTotal;
-                DT_Rates.GoalRate = goalRate;
+        //        }
+        //        DS_Patients.DT_PatientList = DT_PatientList;
+        //        //The main rates for Plan, Compliance , Goal
+        //        planRate = patientTotalCount != 0 ? (double)planCount / patientTotalCount : 0;
+        //        complianceRateTotal = planCount != 0 ? (double)complianceCount / planCount : 0;
+        //        goalRate = planCount != 0 ? (double)goalCount / planCount : 0;
+        //        DT_Rates.PlanRate = planRate;
+        //        DT_Rates.ComplianceRate = complianceRateTotal;
+        //        DT_Rates.GoalRate = goalRate;
 
-                DS_Patients.DT_Rates = DT_Rates;
-                return DS_Patients;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetPatientsByDoctorId", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-                throw (ex);
-            }
-        }
+        //        DS_Patients.DT_Rates = DT_Rates;
+        //        return DS_Patients;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetPatientsByDoctorId", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+        //        return null;
+        //        throw (ex);
+        //    }
+        //}
 
-        public PatientsDataSet GetPatientsListTemp(string DoctorId, string ModuleType, int Plan, int Compliance, int Goal, string itemType, string itemCode)
-        {
-            int patientTotalCount = 0;  //某个模块下的患者总数
-            int planCount = 0;          //已有计划的患者数
-            int complianceCount = 0;    //依从的患者数
-            int goalCount = 0;          //达标的患者数
-            double planRate = 0;
-            double complianceRateTotal = 0;
-            double goalRate = 0;
+        //public PatientsDataSet GetPatientsListTemp(string DoctorId, string ModuleType, int Plan, int Compliance, int Goal, string itemType, string itemCode)
+        //{
+        //    int patientTotalCount = 0;  //某个模块下的患者总数
+        //    int planCount = 0;          //已有计划的患者数
+        //    int complianceCount = 0;    //依从的患者数
+        //    int goalCount = 0;          //达标的患者数
+        //    double planRate = 0;
+        //    double complianceRateTotal = 0;
+        //    double goalRate = 0;
 
-            RateTable DT_Rates = new RateTable();
+        //    RateTable DT_Rates = new RateTable();
 
-            List<PatientListTable> DT_PatientList = new List<PatientListTable>();
+        //    List<PatientListTable> DT_PatientList = new List<PatientListTable>();
 
-            List<PatientPlan> DT_Patients = new List<PatientPlan>();
+        //    List<PatientPlan> DT_Patients = new List<PatientPlan>();
 
-            PatientsDataSet DS_Patients = new PatientsDataSet();
+        //    PatientsDataSet DS_Patients = new PatientsDataSet();
 
-            try
-            {
-                int nowDate = commonMethod.GetServerDate(pclsCache);
+        //    try
+        //    {
+        //        int nowDate = commonMethod.GetServerDate(pclsCache);
 
-                //同时返回依从率 complianceRate = planInfoMethod.GetComplianceByDate(pclsCache, planNo, nowDate);
-                //同时输出体征的目标值 增加输入string itemType, string itemCode
-                //同时输出VitalInfo list = vitalInfoMethod.GetSignByDay(pclsCache, patientId, itemType, itemCode, recordDate);
-                //PatDetailInfo patientInfolist = moduleInfoMethod.PsBasicInfoDetailGetPatientDetailInfo(pclsCache, patientId);
-                //patientName = usersMethod.GetNameByUserId(pclsCache, patientId);
-                DT_Patients = planInfoMethod.GetPatientsPlanByDoctorId(pclsCache, DoctorId, ModuleType);
-                if (DT_Patients != null)
-                    patientTotalCount = DT_Patients.Count;
-                else
-                    return DS_Patients;
+        //        //同时返回依从率 complianceRate = planInfoMethod.GetComplianceByDate(pclsCache, planNo, nowDate);
+        //        //同时输出体征的目标值 增加输入string itemType, string itemCode
+        //        //同时输出VitalInfo list = vitalInfoMethod.GetSignByDay(pclsCache, patientId, itemType, itemCode, recordDate);
+        //        //PatDetailInfo patientInfolist = moduleInfoMethod.PsBasicInfoDetailGetPatientDetailInfo(pclsCache, patientId);
+        //        //patientName = usersMethod.GetNameByUserId(pclsCache, patientId);
+        //        DT_Patients = planInfoMethod.GetPatientsPlanByDoctorId(pclsCache, DoctorId, ModuleType);
+        //        if (DT_Patients != null)
+        //            patientTotalCount = DT_Patients.Count;
+        //        else
+        //            return DS_Patients;
 
-                for (int i = 0; i < patientTotalCount; i++)
-                {
-                    string patientId = DT_Patients[i].PatientId; // item["PatientId"].ToString();
-                    string planNo = DT_Patients[i].PlanNo;  //item["PlanNo"].ToString();
-                    if (planNo != "")
-                    {
-                        planCount++;
-                    }
+        //        for (int i = 0; i < patientTotalCount; i++)
+        //        {
+        //            string patientId = DT_Patients[i].PatientId; // item["PatientId"].ToString();
+        //            string planNo = DT_Patients[i].PlanNo;  //item["PlanNo"].ToString();
+        //            if (planNo != "")
+        //            {
+        //                planCount++;
+        //            }
 
-                    //HavePlan 0 1 2
-                    if ((Plan == 1 && planNo == "") || (Plan == 2 && planNo != ""))
-                    {
-                        continue;
-                    }
-                    string startDate = DT_Patients[i].StartDate;   //item["StartDate"].ToString();
-                    string totalDays = DT_Patients[i].TotalDays;   //item["TotalDays"].ToString();
-                    string remainingDays = DT_Patients[i].RemainingDays;   //item["RemainingDays"].ToString();
-                    string status = DT_Patients[i].Status;   //item["Status"].ToString();
+        //            //HavePlan 0 1 2
+        //            if ((Plan == 1 && planNo == "") || (Plan == 2 && planNo != ""))
+        //            {
+        //                continue;
+        //            }
+        //            string startDate = DT_Patients[i].StartDate;   //item["StartDate"].ToString();
+        //            string totalDays = DT_Patients[i].TotalDays;   //item["TotalDays"].ToString();
+        //            string remainingDays = DT_Patients[i].RemainingDays;   //item["RemainingDays"].ToString();
+        //            string status = DT_Patients[i].Status;   //item["Status"].ToString();
 
-                    double process = 0.0;
-                    double complianceRate = 0.0;
-                    //VitalSign
-                    List<string> vitalsigns = new List<string>();
+        //            double process = 0.0;
+        //            double complianceRate = 0.0;
+        //            //VitalSign
+        //            List<string> vitalsigns = new List<string>();
 
-                    if (planNo != "")
-                    {               
+        //            if (planNo != "")
+        //            {               
                                                                  
-                        //Vitalsign 
+        //                //Vitalsign 
                   
-                        int recordDate = nowDate; //nowDate
-                        //recordDate = 20150422;
-                        bool goalFlag = false;
-                        VitalInfo list = vitalInfoMethod.GetSignByDay(pclsCache, patientId, itemType, itemCode, recordDate);
-                        if (list != null)
-                        {
-                            vitalsigns.Add(list.Value);
-                        }
-                        else
-                        {
-                            //   vitalsigns.Add("115");
-                            //ZAM 2015-6-17
-                            vitalsigns.Add("");
-                        }
+        //                int recordDate = nowDate; //nowDate
+        //                //recordDate = 20150422;
+        //                bool goalFlag = false;
+        //                VitalInfo list = vitalInfoMethod.GetSignByDay(pclsCache, patientId, itemType, itemCode, recordDate);
+        //                if (list != null)
+        //                {
+        //                    vitalsigns.Add(list.Value);
+        //                }
+        //                else
+        //                {
+        //                    //   vitalsigns.Add("115");
+        //                    //ZAM 2015-6-17
+        //                    vitalsigns.Add("");
+        //                }
 
-                        TargetByCode targetlist = planInfoMethod.GetTarget(pclsCache, planNo, itemType, itemCode);
-                        if (targetlist != null)
-                        {
-                            vitalsigns.Add(targetlist.Origin);  //index 4 for Origin value
-                            vitalsigns.Add(targetlist.Value);  //index 3 for target value
-                        }
-                        else
-                        {
-                            //vitalsigns.Add("200");
-                            //vitalsigns.Add("120");
-                            //ZAM 2015-6-17
-                            vitalsigns.Add("");
-                            vitalsigns.Add("");
-                        }
-                        //非法数据判断 zam 2015-5-18
-                        if (list != null && targetlist != null)
-                        {
-                            double m, n;
-                            bool misNumeric = double.TryParse(list.Value.ToString(), out m);
-                            bool nisNumeric = double.TryParse(targetlist.Value.ToString(), out n);
-                            if (misNumeric && nisNumeric)
-                            {
-                                //if (Convert.ToInt32(list[2]) <= Convert.ToInt32(targetlist[3])) //已达标
-                                if (m <= n)
-                                {
-                                    goalCount++;
-                                    goalFlag = true;
-                                }
-                            }
-                        }
-                        //Goal 
-                        if (Goal == 1 && goalFlag == false)
-                        {
-                            continue;
-                        }
-                        if (Goal == 2 && goalFlag == true)
-                        {
-                            continue;
-                        }
+        //                TargetByCode targetlist = planInfoMethod.GetTarget(pclsCache, planNo, itemType, itemCode);
+        //                if (targetlist != null)
+        //                {
+        //                    vitalsigns.Add(targetlist.Origin);  //index 4 for Origin value
+        //                    vitalsigns.Add(targetlist.Value);  //index 3 for target value
+        //                }
+        //                else
+        //                {
+        //                    //vitalsigns.Add("200");
+        //                    //vitalsigns.Add("120");
+        //                    //ZAM 2015-6-17
+        //                    vitalsigns.Add("");
+        //                    vitalsigns.Add("");
+        //                }
+        //                //非法数据判断 zam 2015-5-18
+        //                if (list != null && targetlist != null)
+        //                {
+        //                    double m, n;
+        //                    bool misNumeric = double.TryParse(list.Value.ToString(), out m);
+        //                    bool nisNumeric = double.TryParse(targetlist.Value.ToString(), out n);
+        //                    if (misNumeric && nisNumeric)
+        //                    {
+        //                        //if (Convert.ToInt32(list[2]) <= Convert.ToInt32(targetlist[3])) //已达标
+        //                        if (m <= n)
+        //                        {
+        //                            goalCount++;
+        //                            goalFlag = true;
+        //                        }
+        //                    }
+        //                }
+        //                //Goal 
+        //                if (Goal == 1 && goalFlag == false)
+        //                {
+        //                    continue;
+        //                }
+        //                if (Goal == 2 && goalFlag == true)
+        //                {
+        //                    continue;
+        //                }
 
-                        //非法数据判断 zam 2015-5-18
-                        if (startDate != "" && totalDays != "" && remainingDays != "")
-                        {
-                            double m, n;
-                            bool misNumeric = double.TryParse(totalDays, out m);
-                            bool nisNumeric = double.TryParse(remainingDays, out n);
+        //                //非法数据判断 zam 2015-5-18
+        //                if (startDate != "" && totalDays != "" && remainingDays != "")
+        //                {
+        //                    double m, n;
+        //                    bool misNumeric = double.TryParse(totalDays, out m);
+        //                    bool nisNumeric = double.TryParse(remainingDays, out n);
 
-                            if (misNumeric && nisNumeric)
-                            {
-                                //process = (Convert.ToDouble(totalDays) - Convert.ToDouble(remainingDays)) / Convert.ToDouble(totalDays);
-                                process = m != 0.0 ? (m - n) / m : 0;
-                            }
+        //                    if (misNumeric && nisNumeric)
+        //                    {
+        //                        //process = (Convert.ToDouble(totalDays) - Convert.ToDouble(remainingDays)) / Convert.ToDouble(totalDays);
+        //                        process = m != 0.0 ? (m - n) / m : 0;
+        //                    }
 
-                        }
-                    }
+        //                }
+        //            }
 
-                    //PhotoAddress
-                    string photoAddress = "";
-                    PatDetailInfo patientInfolist = moduleInfoMethod.PsBasicInfoDetailGetPatientDetailInfo(pclsCache, patientId);
-                    if (patientInfolist != null)
-                    {
-                        photoAddress = patientInfolist.PhotoAddress;
+        //            //PhotoAddress
+        //            string photoAddress = "";
+        //            PatDetailInfo patientInfolist = moduleInfoMethod.PsBasicInfoDetailGetPatientDetailInfo(pclsCache, patientId);
+        //            if (patientInfolist != null)
+        //            {
+        //                photoAddress = patientInfolist.PhotoAddress;
 
-                    }
+        //            }
 
-                    string patientName = "";
-                    patientName = usersMethod.GetNameByUserId(pclsCache, patientId);
-                    PatientListTable NewLine = new PatientListTable();
-                    NewLine.PatientId = patientId;
-                    NewLine.PatientName = patientName;
-                    NewLine.photoAddress = photoAddress;
-                    NewLine.PlanNo = planNo;
-                    NewLine.StartDate = startDate;
-                    NewLine.Process = process;
-                    NewLine.RemainingDays = remainingDays;
-                    NewLine.VitalSign = vitalsigns;
-                    NewLine.ComplianceRate = complianceRate;
-                    NewLine.TotalDays = totalDays;
-                    NewLine.Status = status;
+        //            string patientName = "";
+        //            patientName = usersMethod.GetNameByUserId(pclsCache, patientId);
+        //            PatientListTable NewLine = new PatientListTable();
+        //            NewLine.PatientId = patientId;
+        //            NewLine.PatientName = patientName;
+        //            NewLine.photoAddress = photoAddress;
+        //            NewLine.PlanNo = planNo;
+        //            NewLine.StartDate = startDate;
+        //            NewLine.Process = process;
+        //            NewLine.RemainingDays = remainingDays;
+        //            NewLine.VitalSign = vitalsigns;
+        //            NewLine.ComplianceRate = complianceRate;
+        //            NewLine.TotalDays = totalDays;
+        //            NewLine.Status = status;
 
-                    DT_PatientList.Add(NewLine);
+        //            DT_PatientList.Add(NewLine);
 
-                }
-                DS_Patients.DT_PatientList = DT_PatientList;
-                //The main rates for Plan, Compliance , Goal
-                planRate = patientTotalCount != 0 ? (double)planCount / patientTotalCount : 0;
-                complianceRateTotal = planCount != 0 ? (double)complianceCount / planCount : 0;
-                goalRate = planCount != 0 ? (double)goalCount / planCount : 0;
-                DT_Rates.PlanRate = planRate;
-                DT_Rates.ComplianceRate = complianceRateTotal;
-                DT_Rates.GoalRate = goalRate;
+        //        }
+        //        DS_Patients.DT_PatientList = DT_PatientList;
+        //        //The main rates for Plan, Compliance , Goal
+        //        planRate = patientTotalCount != 0 ? (double)planCount / patientTotalCount : 0;
+        //        complianceRateTotal = planCount != 0 ? (double)complianceCount / planCount : 0;
+        //        goalRate = planCount != 0 ? (double)goalCount / planCount : 0;
+        //        DT_Rates.PlanRate = planRate;
+        //        DT_Rates.ComplianceRate = complianceRateTotal;
+        //        DT_Rates.GoalRate = goalRate;
 
-                DS_Patients.DT_Rates = DT_Rates;
-                return DS_Patients;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetPatientsByDoctorId", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-                throw (ex);
-            }
-        }
+        //        DS_Patients.DT_Rates = DT_Rates;
+        //        return DS_Patients;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetPatientsByDoctorId", "WebService调用异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+        //        return null;
+        //        throw (ex);
+        //    }
+        //}
+        #endregion
 
         /// <summary>
         /// 验证用户是否存在
@@ -573,7 +575,7 @@ namespace CDMISrestful.Models
         /// <param name="userId">手机号/邮箱等</param>
         /// <param name="PwType"></param>
         /// <returns></returns>
-        public int Verification(string userId, string PwType)
+        public int Verification(DataConnection pclsCache, string userId, string PwType)
         {
             int ret = 0;
 
@@ -589,8 +591,8 @@ namespace CDMISrestful.Models
 
             return ret;
         }
-       
-        public PatBasicInfo GetPatBasicInfo(string UserId)
+
+        public PatBasicInfo GetPatBasicInfo(DataConnection pclsCache, string UserId)
         {
             try
             {
@@ -633,7 +635,7 @@ namespace CDMISrestful.Models
             }
         }
 
-        public PatientDetailInfo GetPatientDetailInfo(string UserId)
+        public PatientDetailInfo GetPatientDetailInfo(DataConnection pclsCache, string UserId)
         {
             try
             {
@@ -715,18 +717,18 @@ namespace CDMISrestful.Models
             }
 
         }
-   
 
-        public DocInfoDetail GetDoctorDetailInfo(string UserId)
+
+        public DocInfoDetail GetDoctorDetailInfo(DataConnection pclsCache, string UserId)
         {
             return moduleInfoMethod.PsDoctorInfoDetailGetDoctorInfoDetail(pclsCache, UserId);
         }
-     
-        public DoctorInfo GetDoctorInfo(string DoctorId)
+
+        public DoctorInfo GetDoctorInfo(DataConnection pclsCache, string DoctorId)
         {
             return usersMethod.GetDoctorInfo(pclsCache, DoctorId);
         }
-        public int SetDoctorInfoDetail(string Doctor, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        public int SetDoctorInfoDetail(DataConnection pclsCache, string Doctor, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
             try
             {
@@ -740,7 +742,7 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public int SetPsDoctor(string UserId, string UserName, int Birthday, int Gender, string IDNo, int InvalidFlag, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int SetPsDoctor(DataConnection pclsCache, string UserId, string UserName, int Birthday, int Gender, string IDNo, int InvalidFlag, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             try
             {
@@ -754,8 +756,8 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-     
-        public int SetPatBasicInfo(string UserId, string UserName, int Birthday, int Gender, int BloodType, string IDNo, string DoctorId, string InsuranceType, int InvalidFlag, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+
+        public int SetPatBasicInfo(DataConnection pclsCache, string UserId, string UserName, int Birthday, int Gender, int BloodType, string IDNo, string DoctorId, string InsuranceType, int InvalidFlag, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             try
             {
@@ -784,64 +786,70 @@ namespace CDMISrestful.Models
         /// <param name="TerminalIP"></param>
         /// <param name="DeviceType"></param>
         /// <returns></returns>
-        public int SetPatBasicInfoDetail(string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int SetPatBasicInfoDetail(DataConnection pclsCache, string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             return new ModuleInfoMethod().PsBasicInfoDetailSetData(pclsCache, Patient, CategoryCode, ItemCode, ItemSeq, Value, Description, SortNo, revUserId, TerminalName, TerminalIP, DeviceType);
         }
-   
-        public string GetIDByInputPhone(string Type, string Name)
+
+        public string GetIDByInputPhone(DataConnection pclsCache, string Type, string Name)
         {
             return new UsersMethod().GetIDByInputPhone(pclsCache, Type, Name);
         }
-        public List<Calendar> GetCalendar(string DoctorId)
+        public List<Calendar> GetCalendar(DataConnection pclsCache, string DoctorId)
         {
             return usersMethod.GetCalendar(pclsCache, DoctorId);
 
         }
-        public List<PatientListTable> GetPatientsPlan(string DoctorId, string Module, string VitalType, string VitalCode)
+        public List<PatientListTable> GetPatientsPlan(DataConnection pclsCache, string DoctorId, string Module, string VitalType, string VitalCode)
         {
             return planInfoMethod.GetPatientsPlan(pclsCache, DoctorId, Module, VitalType, VitalCode);
 
         }
         #region<新增bySYF>
-        public List<HealthCoachList> GetHealthCoachList()
+        public List<HealthCoachList> GetHealthCoachList(DataConnection pclsCache)
         {
             return usersMethod.GetHealthCoachList(pclsCache);
         }
 
-        public HealthCoachInfo GetHealthCoachInfo(string HealthCoachID)
+        public HealthCoachInfo GetHealthCoachInfo(DataConnection pclsCache, string HealthCoachID)
         {
             return usersMethod.GetHealthCoachInfo(pclsCache, HealthCoachID);
         }
 
-        public int ReserveHealthCoach(string DoctorId, string PatientId, string Module, string Description, int Status, DateTime ApplicationTime, DateTime AppointmentTime, string AppointmentAdd, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int ReserveHealthCoach(DataConnection pclsCache, string DoctorId, string PatientId, string Module, string Description, int Status, DateTime ApplicationTime, DateTime AppointmentTime, string AppointmentAdd, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             return usersMethod.ReserveHealthCoach(pclsCache, DoctorId, PatientId, Module, Description, Status, ApplicationTime, AppointmentTime, AppointmentAdd, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
-        public int UpdateReservation(string DoctorId, string PatientId, int Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int UpdateReservation(DataConnection pclsCache, string DoctorId, string PatientId, int Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             return usersMethod.UpdateReservation(pclsCache, DoctorId, PatientId, Status, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
-        public List<CommentList> GetCommentList(string DoctorId, string CategoryCode)
+        public List<CommentList> GetCommentList(DataConnection pclsCache, string DoctorId, string CategoryCode)
         {
             return usersMethod.GetCommentList(pclsCache, DoctorId, CategoryCode);
         }
 
-        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(string PatientId, string CategoryCode)
+        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(DataConnection pclsCache, string PatientId, string CategoryCode)
         {
             return usersMethod.GetHealthCoachListByPatient(pclsCache, PatientId, CategoryCode);
         }
 
-        public int RemoveHealthCoach(string PatientId, string DoctorId, string CategoryCode)
+        public int RemoveHealthCoach(DataConnection pclsCache, string PatientId, string DoctorId, string CategoryCode)
         {
             return usersMethod.RemoveHealthCoach(pclsCache, PatientId, DoctorId, CategoryCode);
         }
 
-        public List<AppoitmentPatient> GetAppoitmentPatientList(string healthCoachID, string Status)
+        public List<AppoitmentPatient> GetAppoitmentPatientList(DataConnection pclsCache, string healthCoachID, string Status)
         {
             return usersMethod.GetAppoitmentPatientList(pclsCache, healthCoachID, Status);
+        }
+
+        public List<string> GetAllRoleMatch(DataConnection pclsCache, string UserId)
+        {
+            return usersMethod.GetAllRoleMatch(pclsCache, UserId);
+
         }
 
         #endregion

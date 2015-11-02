@@ -488,6 +488,12 @@
             <param name="time"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.CommonLibrary.CommonFunction.getRemoteIPAddress">
+            <summary>
+            获取远程调用的IP CSQ 20151026
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.CommonLibrary.HygeiaComUtility.WriteClientLog(CDMISrestful.CommonLibrary.HygeiaEnum.LogType,System.String,System.String)">
             <summary>
             Writes the system log.
@@ -782,28 +788,6 @@
             <param name="VisitId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.CmMstInfoItemController.GetAll">
-            <summary>
-            路径：有待确定
-            功能：获取Cm.MstInfoItem表的所有数据
-            输入：/
-            输出：全表字段
-            开发者：CSQ
-            开发时间：20150930
-            修改记录1：/
-            修改记录2：/
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.CmMstInfoItemController.Delete(System.String,System.String,System.Int32)">
-            <summary>
-            删除数据
-            </summary>
-            <param name="CategoryCode"></param>
-            <param name="Code"></param>
-            <param name="StartDate"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.Controllers.DictController.GetHypertensionDrugTypeNameList">
             <summary>
             获取高血压药物类型名称列表 LY 2015-10-13
@@ -1072,6 +1056,16 @@
             <param name="Date"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetComplianceListInC(System.String,System.String,System.String,System.String)">
+            <summary>
+            获取某个病人某个模块指定时间段内的依从率 SYF
+            </summary>
+            <param name="PatientId"></param>
+            <param name="StartDate"></param>
+            <param name="EndDate"></param>
+            <param name="Module"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
             <summary>
             根据收缩压获取血压等级说明 LY 2015-10-13
@@ -1169,12 +1163,6 @@
             <param name="notification"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.ServiceController.getRemoteIPAddress">
-            <summary>
-            获取远程调用的IP CSQ 20151026
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.Controllers.ServiceController.GetPatientInfo(System.String)">
             <summary>
             浙大输出接口 LY 2015-10-29
@@ -1229,17 +1217,6 @@
             <param name="ChangePassword"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.UsersController.GetPatientsList(System.String,System.String,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            获取健康专员负责的患者列表
-            </summary>
-            <param name="DoctorId"></param>
-            <param name="ModuleType"></param>
-            <param name="Plan"></param>
-            <param name="Compliance"></param>
-            <param name="Goal"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.Controllers.UsersController.Verification(CDMISrestful.DataModels.Verification)">
             <summary>
             验证用户名
@@ -1275,7 +1252,7 @@
             <param name="UserId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.UsersController.SetDoctorInfoDetail(CDMISrestful.DataModels.SetDoctorInfoDetail)">
+        <member name="M:CDMISrestful.Controllers.UsersController.SetDoctorInfoDetail(System.Collections.Generic.List{CDMISrestful.DataModels.SetDoctorInfoDetail})">
             <summary>
             Ps.DoctorInfoDetail写数据
             </summary>
@@ -1371,6 +1348,21 @@
             </summary>
             <param name="healthCoachID"></param>
             <param name="Status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetPatientsPlan(System.String,System.String,System.String,System.String)">
+            <summary>
+            替代GetPatientsList 用于pad登录后获得专员的病人列表
+            </summary>
+            <param name="healthCoachID"></param>
+            <param name="Status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetAllRoleMatch(System.String)">
+            <summary>
+            根据UID获取用户所有角色
+            </summary>
+            <param name="UserId"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.VitalInfoController.GetLatestPatientVitalSigns(System.String,System.String,System.String)">
@@ -1850,15 +1842,6 @@
             <param name="PlanNo"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetPatientsPlanByDoctorId(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
-            <summary>
-            SYF 20151010 获取健康专员负责的所有患者列表
-            </summary>
-            <param name="pclsCache"></param>
-            <param name="DoctorId"></param>
-            <param name="Module"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetOverDuePlanByDoctorId(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             SYF 2015-10-10 获取健康专员负责的所有患者最新结束(status = 4)计划列表
@@ -2045,6 +2028,17 @@
             <param name="ItemCode"></param>
             <param name="StartDate"></param>
             <param name="EndDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetComplianceListInC(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.String)">
+            <summary>
+            获取某个病人某个模块指定时间段内的依从率 SYF 20151102
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="PatientId"></param>
+            <param name="StartDate"></param>
+            <param name="EndDate"></param>
+            <param name="Module"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.RiskInfoMethod.PsTreatmentIndicatorsSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.Int32)">
@@ -2820,46 +2814,46 @@
             模块大分类，如M1，M2
             </summary>
         </member>
-        <member name="M:CDMISrestful.Models.DictRepository.GetHypertensionDrugTypeNameList">
+        <member name="M:CDMISrestful.Models.DictRepository.GetHypertensionDrugTypeNameList(CDMISrestful.CommonLibrary.DataConnection)">
             <summary>
             获取高血压药物类型名称列表 LY 2015-10-14
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.DictRepository.GetHypertensionDrug">
+        <member name="M:CDMISrestful.Models.DictRepository.GetHypertensionDrug(CDMISrestful.CommonLibrary.DataConnection)">
             <summary>
             获取高血压药物名称列表 LY 2015-10-14
             </summary>
             <param name="Type"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.DictRepository.GetDiabetesDrugTypeNameList">
+        <member name="M:CDMISrestful.Models.DictRepository.GetDiabetesDrugTypeNameList(CDMISrestful.CommonLibrary.DataConnection)">
             <summary>
             获取糖尿病药物类型名称列表 LY 2015-10-14
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.DictRepository.GetDiabetesDrug">
+        <member name="M:CDMISrestful.Models.DictRepository.GetDiabetesDrug(CDMISrestful.CommonLibrary.DataConnection)">
             <summary>
             获取糖尿病药物名称列表 LY 2015-10-14
             </summary>
             <param name="Type"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.DictRepository.GetTypeList(System.String)">
+        <member name="M:CDMISrestful.Models.DictRepository.GetTypeList(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
             获取某个分类的类别 LY 2015-10-14
             </summary>
             <param name="Category"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.DictRepository.GetBloodPressure">
+        <member name="M:CDMISrestful.Models.DictRepository.GetBloodPressure(CDMISrestful.CommonLibrary.DataConnection)">
             <summary>
             获取血压等级字典表的所有信息 LY 2015-10-13
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.IVitalInfoRepository.GetLatestPatientVitalSigns(System.String,System.String,System.String)">
+        <member name="M:CDMISrestful.Models.IVitalInfoRepository.GetLatestPatientVitalSigns(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String)">
             <summary>
             获取最新一条体征信息
             </summary>
@@ -2868,7 +2862,7 @@
             <param name="ItemCode"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.MessageRepository.GetSMSDialogue(System.String,System.String)">
+        <member name="M:CDMISrestful.Models.MessageRepository.GetSMSDialogue(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             获取消息对话 GL 2015-10-10
             </summary>
@@ -2876,7 +2870,7 @@
             <param name="SendBy"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.MessageRepository.SetSMS(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.Models.MessageRepository.SetSMS(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             将消息写入数据库并获取发送时间与显示时间 GL 2015-10-10(修改：2015-10-26)
             </summary>
@@ -2889,7 +2883,7 @@
             <param name="piDeviceType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.MessageRepository.GetLatestSMS(System.String,System.String)">
+        <member name="M:CDMISrestful.Models.MessageRepository.GetLatestSMS(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             获取最新一条消息 GL 2015-10-10
             </summary>
@@ -2897,7 +2891,7 @@
             <param name="PatientId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.MessageRepository.SetSMSRead(System.String,System.String,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.Models.MessageRepository.SetSMSRead(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             将多条消息设为已读 GL 2015-10-10
             </summary>
@@ -2909,7 +2903,7 @@
             <param name="piDeviceType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.MessageRepository.GetSMSCountForOne(System.String,System.String)">
+        <member name="M:CDMISrestful.Models.MessageRepository.GetSMSCountForOne(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             获取一对一未读消息数 GL 2015-10-10
             </summary>
@@ -2917,7 +2911,7 @@
             <param name="SendBy"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.MessageRepository.GetSMSList(System.String,System.String)">
+        <member name="M:CDMISrestful.Models.MessageRepository.GetSMSList(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             获取消息联系人列表 GL 2015-10-10
             </summary>
@@ -2925,14 +2919,14 @@
             <param name="CategoryCode"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.MessageRepository.GetSMSCountForAll(System.String)">
+        <member name="M:CDMISrestful.Models.MessageRepository.GetSMSCountForAll(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
             获取某医生未读消息总数 GL 2015-10-10
             </summary>
             <param name="DoctorId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.ModuleInfoRepository.GetItemInfoByPIdAndModule(System.String,System.String)">
+        <member name="M:CDMISrestful.Models.ModuleInfoRepository.GetItemInfoByPIdAndModule(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             输入PatientId和CategoryCode，获取患者已经购买的某个模块的详细信息 LY 2015-10-14
             </summary>
@@ -2940,21 +2934,21 @@
             <param name="CategoryCode"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.ModuleInfoRepository.GetMstInfoItemByCategoryCode(System.String)">
+        <member name="M:CDMISrestful.Models.ModuleInfoRepository.GetMstInfoItemByCategoryCode(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
             获取模块关注详细信息 LY 2015-10-14
             </summary>
             <param name="CategoryCode"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.ModuleInfoRepository.SynBasicInfoDetail(System.String)">
+        <member name="M:CDMISrestful.Models.ModuleInfoRepository.SynBasicInfoDetail(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
             同步患者购买模块下的某些信息 LY 2015-10-14
             </summary>
             <param name="UserId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.PlanInfoRepository.GetComplianceAllSignsListByPeriod(System.String,System.String,System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:CDMISrestful.Models.PlanInfoRepository.GetComplianceAllSignsListByPeriod(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.Int32,System.Int32,System.String,System.String)">
             <summary>
             需要修改 20151029
             </summary>
@@ -2966,14 +2960,14 @@
             <param name="ItemCode"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetDescription(System.Int32)">
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetDescription(CDMISrestful.CommonLibrary.DataConnection,System.Int32)">
             <summary>
             根据收缩压获取血压等级说明 LY 2015-10-13
             </summary>
             <param name="SBP"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.RiskInfoRepository.SetRiskResult(System.String,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.SetRiskResult(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             插入风险评估结果 LY 2015-10-13
             </summary>
@@ -2988,14 +2982,14 @@
             <param name="DeviceType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetRiskResult(System.String,System.String)">
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetRiskResult(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             根据UserId获取最新风险评估结果 LY 2015-10-13
             </summary>
             <param name="UserId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetRiskInput(System.String)">
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetRiskInput(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
             获取风险评估所需输入 LY 2015-10-13
             </summary>
@@ -3011,14 +3005,14 @@
             <param name="notification"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.ServiceRepository.GetPatientInfo(System.String)">
+        <member name="M:CDMISrestful.Models.ServiceRepository.GetPatientInfo(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
             浙大输出接口 LY 2015-10-29
             </summary>
             <param name="PatientId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.ServiceRepository.VitalSignFromZKY(CDMISrestful.DataModels.VitalSignFromDevice,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.Models.ServiceRepository.VitalSignFromZKY(CDMISrestful.CommonLibrary.DataConnection,CDMISrestful.DataModels.VitalSignFromDevice,System.String,System.String,System.String,System.Int32)">
             <summary>
             浙大接收接口处理 LY 2015-10-31
             </summary>
@@ -3036,7 +3030,7 @@
             <param name="token"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.UsersRepository.Register(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.Models.UsersRepository.Register(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             
             </summary>
@@ -3051,7 +3045,7 @@
             <param name="DeviceType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.UsersRepository.Verification(System.String,System.String)">
+        <member name="M:CDMISrestful.Models.UsersRepository.Verification(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             验证用户是否存在
             </summary>
@@ -3059,7 +3053,7 @@
             <param name="PwType"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.UsersRepository.SetPatBasicInfoDetail(System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.Models.UsersRepository.SetPatBasicInfoDetail(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
             <summary>
             插入患者详细信息 LY 2015-10-14
             </summary>

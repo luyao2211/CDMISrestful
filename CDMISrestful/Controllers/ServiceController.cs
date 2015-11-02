@@ -16,7 +16,7 @@ namespace CDMISrestful.Controllers
     public class ServiceController : ApiController
     {
         static readonly IServiceRepository repository = new ServiceRepository();
-
+        DataConnection pclsCache = new DataConnection();
         /// <summary>
         /// 发送验证码短信 20151016 CSQ
         /// </summary>
@@ -55,16 +55,7 @@ namespace CDMISrestful.Controllers
             return new ExceptionHandler().Common(Request, ret);
         }
 
-        /// <summary>
-        /// 获取远程调用的IP CSQ 20151026
-        /// </summary>
-        /// <returns></returns>
-        public HttpResponseMessage getRemoteIPAddress()
-        {
-            string visitorIP = "";
-            visitorIP = HttpContext.Current.Request.UserHostAddress;
-            return new ExceptionHandler().Common(Request, visitorIP);
-        }
+      
 
         /// <summary>
         /// 浙大输出接口 LY 2015-10-29
@@ -73,7 +64,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         public HttpResponseMessage GetPatientInfo(string PatientId)
         {
-            List<TypeAndName> list = repository.GetPatientInfo(PatientId);
+            List<TypeAndName> list = repository.GetPatientInfo(pclsCache, PatientId);
             HttpResponseMessage ret = new ExceptionHandler().toJson(list);
             ret.Headers.Add("type", "docapp");
             ret.Headers.Add("action", "004");
@@ -104,7 +95,7 @@ namespace CDMISrestful.Controllers
                 HeaderContent = Header.Value.First();
             if (HeaderContent != "#zjuBME319*application/json; charset=utf-8")
                 return new ExceptionHandler().SetData(Request, ret);
-            ret = repository.VitalSignFromZKY(VitalSigns, revUserId, TerminalName, TerminalIP, DeviceType);
+            ret = repository.VitalSignFromZKY(pclsCache, VitalSigns, revUserId, TerminalName, TerminalIP, DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
     }

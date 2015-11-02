@@ -609,6 +609,7 @@ H:\新建文件夹\bme319\chronic disease management\github\CDMISrestful\CDMISre
 H:\新建文件夹\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\bin\zh-Hans\System.Web.Optimization.resources.dll
 H:\新建文件夹\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\obj\Debug\CDMISrestful.dll
 H:\新建文件夹\bme319\chronic disease management\github\CDMISrestful\CDMISrestful\obj\Debug\CDMISrestful.pdb
+F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.Razor.xml
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\CDMISrestful.dll.config
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\CDMISrestful.dll
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\CDMISrestful.pdb
@@ -655,7 +656,6 @@ F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.W
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.Http.WebHost.xml
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.Mvc.xml
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.OData.xml
-F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.Razor.xml
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.WebPages.xml
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.WebPages.Deployment.xml
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\System.Web.WebPages.Razor.xml

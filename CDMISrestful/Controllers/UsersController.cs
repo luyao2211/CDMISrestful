@@ -18,7 +18,7 @@ namespace CDMISrestful.Controllers
     public class UsersController : ApiController
     {
         static readonly IUsersRepository repository = new UsersRepository();
-
+        DataConnection pclsCache = new DataConnection();
         /// <summary>
         /// 根据输入的手机号和邮箱等获取系统唯一标识符 20151023 CSQ
         /// </summary>
@@ -28,7 +28,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/UID")]
         public HttpResponseMessage GetIDByInputPhone(string Type, string Name)
         {
-            string ret = repository.GetIDByInputPhone(Type,Name);
+            string ret = repository.GetIDByInputPhone(pclsCache, Type, Name);
             return new ExceptionHandler().Common(Request, ret);   
         }
 
@@ -47,7 +47,7 @@ namespace CDMISrestful.Controllers
             //if (SecurityManager.IsTokenValid(token))
             //{
             ForToken ret = new ForToken();
-            ret = repository.LogOn(logOn.PwType, logOn.username, logOn.password, logOn.role);
+            ret = repository.LogOn(pclsCache, logOn.PwType, logOn.username, logOn.password, logOn.role);
             return new ExceptionHandler().LogOn(Request,ret);          
         }
      
@@ -60,7 +60,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage Register(Register Register)
         {
-            int ret = repository.Register(Register.PwType, Register.userId, Register.UserName, Register.Password, Register.role, Register.revUserId, Register.TerminalName, Register.TerminalIP, Register.DeviceType);
+            int ret = repository.Register(pclsCache, Register.PwType, Register.userId, Register.UserName, Register.Password, Register.role, Register.revUserId, Register.TerminalName, new CommonFunction().getRemoteIPAddress(), Register.DeviceType);
             return new ExceptionHandler().Register(Request, ret);
         }
 
@@ -73,7 +73,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage Activition(Activation activation)
         {
-            int ret = repository.Activition(activation.UserId, activation.InviteCode, activation.role);
+            int ret = repository.Activition(pclsCache, activation.UserId, activation.InviteCode, activation.role);
             return new ExceptionHandler().Activation(Request, ret);
         }
 
@@ -86,10 +86,11 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage ChangePassword(ChangePassword ChangePassword)
         {
-            int ret = repository.ChangePassword(ChangePassword.OldPassword, ChangePassword.NewPassword, ChangePassword.UserId, ChangePassword.revUserId, ChangePassword.TerminalName, ChangePassword.TerminalIP, ChangePassword.DeviceType);
+            int ret = repository.ChangePassword(pclsCache, ChangePassword.OldPassword, ChangePassword.NewPassword, ChangePassword.UserId, ChangePassword.revUserId, ChangePassword.TerminalName, new CommonFunction().getRemoteIPAddress(), ChangePassword.DeviceType);
             return new ExceptionHandler().ChangePassword(Request, ret);
         }
 
+        #region csq 20151101 用GetPatientsPlan方法替代
         /// <summary>
         /// 获取健康专员负责的患者列表
         /// </summary>
@@ -99,15 +100,16 @@ namespace CDMISrestful.Controllers
         /// <param name="Compliance"></param>
         /// <param name="Goal"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/GetPatientsList")]
-        [ModelValidationFilter]
-        [EnableQuery]
-        [RESTAuthorizeAttribute]
-        public PatientsDataSet GetPatientsList(string DoctorId, string ModuleType, int Plan, int Compliance,int Goal)
-        {
-            PatientsDataSet ret = repository.GetPatientsList(DoctorId, ModuleType, Plan, Compliance, Goal);
-            return ret;
-        }
+        //[Route("Api/v1/Users/GetPatientsList")]
+        //[ModelValidationFilter]
+        //[EnableQuery]
+        //[RESTAuthorizeAttribute]
+        //public PatientsDataSet GetPatientsList(string DoctorId, string ModuleType, int Plan, int Compliance,int Goal)
+        //{
+        //    PatientsDataSet ret = repository.GetPatientsList(DoctorId, ModuleType, Plan, Compliance, Goal);
+        //    return ret;
+        //}
+        #endregion
 
         /// <summary>
         /// 验证用户名
@@ -118,7 +120,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage Verification(Verification Verification)
         {
-            int ret = repository.Verification(Verification.userId, Verification.PwType);
+            int ret = repository.Verification(pclsCache, Verification.userId, Verification.PwType);
             return new ExceptionHandler().Verification(Request, ret);
         }
 
@@ -132,9 +134,10 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public PatBasicInfo GetPatBasicInfo(string UserId)
         {
-            PatBasicInfo ret = repository.GetPatBasicInfo(UserId);
+            PatBasicInfo ret = repository.GetPatBasicInfo(pclsCache, UserId);
             return ret;
         }
+
         /// <summary>
         /// 根据用户名获取用户详细信息
         /// </summary>
@@ -145,7 +148,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public PatientDetailInfo GetPatientDetailInfo(string UserId)
         {
-            PatientDetailInfo ret = repository.GetPatientDetailInfo(UserId);
+            PatientDetailInfo ret = repository.GetPatientDetailInfo(pclsCache, UserId);
             return ret;
         }
         /// <summary>
@@ -158,7 +161,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public DocInfoDetail GetDoctorDetailInfo(string UserId)
         {
-            DocInfoDetail ret = repository.GetDoctorDetailInfo(UserId);
+            DocInfoDetail ret = repository.GetDoctorDetailInfo(pclsCache, UserId);
             return ret;
         }
 
@@ -172,7 +175,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public DoctorInfo GetDoctorInfo(string UserId)
         {
-            DoctorInfo ret = repository.GetDoctorInfo(UserId);
+            DoctorInfo ret = repository.GetDoctorInfo(pclsCache, UserId);
             return ret;
         }
         /// <summary>
@@ -183,9 +186,20 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/DoctorDtlInfo")]
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
-        public HttpResponseMessage SetDoctorInfoDetail(SetDoctorInfoDetail SetDoctorInfoDetail)
+        public HttpResponseMessage SetDoctorInfoDetail(List<SetDoctorInfoDetail> items)
         {
-            int ret = repository.SetDoctorInfoDetail(SetDoctorInfoDetail.Doctor, SetDoctorInfoDetail.CategoryCode, SetDoctorInfoDetail.ItemCode, SetDoctorInfoDetail.ItemSeq, SetDoctorInfoDetail.Value, SetDoctorInfoDetail.Description, SetDoctorInfoDetail.SortNo, SetDoctorInfoDetail.piUserId, SetDoctorInfoDetail.piTerminalName, SetDoctorInfoDetail.piTerminalIP, SetDoctorInfoDetail.piDeviceType);
+            int ret = 2;
+            if (items != null)
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    ret = repository.SetDoctorInfoDetail(pclsCache, items[i].Doctor, items[i].CategoryCode, items[i].ItemCode, items[i].ItemSeq, items[i].Value, items[i].Description, items[i].SortNo, items[i].piUserId, items[i].piTerminalName, new CommonFunction().getRemoteIPAddress(), items[i].piDeviceType);
+                    if (ret != 1)
+                    {
+                        break;
+                    }
+                }
+            }
             return new ExceptionHandler().SetData(Request, ret);
         }
         /// <summary>
@@ -198,7 +212,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public HttpResponseMessage SetPsDoctor(SetPsDoctor SetPsDoctor)
         {
-            int ret = repository.SetPsDoctor(SetPsDoctor.UserId, SetPsDoctor.UserName, SetPsDoctor.Birthday, SetPsDoctor.Gender, SetPsDoctor.IDNo, SetPsDoctor.InvalidFlag, SetPsDoctor.piUserId, SetPsDoctor.piTerminalName, SetPsDoctor.piTerminalIP, SetPsDoctor.piDeviceType);
+            int ret = repository.SetPsDoctor(pclsCache, SetPsDoctor.UserId, SetPsDoctor.UserName, SetPsDoctor.Birthday, SetPsDoctor.Gender, SetPsDoctor.IDNo, SetPsDoctor.InvalidFlag, SetPsDoctor.piUserId, SetPsDoctor.piTerminalName, new CommonFunction().getRemoteIPAddress(), SetPsDoctor.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
         
@@ -212,7 +226,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public HttpResponseMessage SetPatBasicInfo(SetPatBasicInfo SetPatBasicInfo)
         {
-            int ret = repository.SetPatBasicInfo(SetPatBasicInfo.UserId, SetPatBasicInfo.UserName, SetPatBasicInfo.Birthday, SetPatBasicInfo.Gender, SetPatBasicInfo.BloodType, SetPatBasicInfo.IDNo, SetPatBasicInfo.DoctorId, SetPatBasicInfo.InsuranceType, SetPatBasicInfo.InvalidFlag, SetPatBasicInfo.piUserId, SetPatBasicInfo.piTerminalName, SetPatBasicInfo.piTerminalIP, SetPatBasicInfo.piDeviceType);
+            int ret = repository.SetPatBasicInfo(pclsCache, SetPatBasicInfo.UserId, SetPatBasicInfo.UserName, SetPatBasicInfo.Birthday, SetPatBasicInfo.Gender, SetPatBasicInfo.BloodType, SetPatBasicInfo.IDNo, SetPatBasicInfo.DoctorId, SetPatBasicInfo.InsuranceType, SetPatBasicInfo.InvalidFlag, SetPatBasicInfo.piUserId, SetPatBasicInfo.piTerminalName, new CommonFunction().getRemoteIPAddress(), SetPatBasicInfo.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -240,7 +254,7 @@ namespace CDMISrestful.Controllers
             int ret = 0;
             for (int i = 0; i < length;i++ )
             {
-                ret = repository.SetPatBasicInfoDetail(items[i].Patient, items[i].CategoryCode, items[i].ItemCode, items[i].ItemSeq, items[i].Value, items[i].Description, items[i].SortNo, items[i].revUserId, items[i].TerminalName, items[i].TerminalIP, items[i].DeviceType);
+                ret = repository.SetPatBasicInfoDetail(pclsCache, items[i].Patient, items[i].CategoryCode, items[i].ItemCode, items[i].ItemSeq, items[i].Value, items[i].Description, items[i].SortNo, items[i].revUserId, items[i].TerminalName, new CommonFunction().getRemoteIPAddress(), items[i].DeviceType);
                 if (ret !=1)
                     break;
             } 
@@ -252,7 +266,7 @@ namespace CDMISrestful.Controllers
         [RESTAuthorizeAttribute]
         public List<Calendar> GetCalendar(string DoctorId)
         {
-            List<Calendar> ret = repository.GetCalendar(DoctorId);
+            List<Calendar> ret = repository.GetCalendar(pclsCache, DoctorId);
             return ret;
         }
 
@@ -263,7 +277,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/HealthCoaches")]
         public List<HealthCoachList> GetHealthCoachList()
         {
-            return repository.GetHealthCoachList();
+            return repository.GetHealthCoachList(pclsCache);
         }
 
         /// <summary>
@@ -274,7 +288,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/GetHealthCoachInfo")]
         public HealthCoachInfo GetHealthCoachInfo(string HealthCoachID)
         {
-            return repository.GetHealthCoachInfo(HealthCoachID);
+            return repository.GetHealthCoachInfo(pclsCache, HealthCoachID);
         }
 
         /// <summary>
@@ -285,7 +299,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/ReserveHealthCoach")]
         public HttpResponseMessage ReserveHealthCoach(ReserveHealthCoach ReserveHealthCoach)
         {
-            int ret = repository.ReserveHealthCoach(ReserveHealthCoach.DoctorId, ReserveHealthCoach.PatientId, ReserveHealthCoach.Module, ReserveHealthCoach.Description, ReserveHealthCoach.Status, ReserveHealthCoach.ApplicationTime, ReserveHealthCoach.AppointmentTime, ReserveHealthCoach.AppointmentAdd, ReserveHealthCoach.Redundancy, ReserveHealthCoach.revUserId, ReserveHealthCoach.TerminalName, ReserveHealthCoach.TerminalIP, ReserveHealthCoach.DeviceType);
+            int ret = repository.ReserveHealthCoach(pclsCache, ReserveHealthCoach.DoctorId, ReserveHealthCoach.PatientId, ReserveHealthCoach.Module, ReserveHealthCoach.Description, ReserveHealthCoach.Status, ReserveHealthCoach.ApplicationTime, ReserveHealthCoach.AppointmentTime, ReserveHealthCoach.AppointmentAdd, ReserveHealthCoach.Redundancy, ReserveHealthCoach.revUserId, ReserveHealthCoach.TerminalName, new CommonFunction().getRemoteIPAddress(), ReserveHealthCoach.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -297,7 +311,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/UpdateReservation")]
         public HttpResponseMessage UpdateReservation(UpdateReservation UpdateReservation)
         {
-            int ret = repository.UpdateReservation(UpdateReservation.DoctorId, UpdateReservation.PatientId, UpdateReservation.Status, UpdateReservation.revUserId, UpdateReservation.TerminalName, UpdateReservation.TerminalIP, UpdateReservation.DeviceType);
+            int ret = repository.UpdateReservation(pclsCache, UpdateReservation.DoctorId, UpdateReservation.PatientId, UpdateReservation.Status, UpdateReservation.revUserId, UpdateReservation.TerminalName, new CommonFunction().getRemoteIPAddress(), UpdateReservation.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -310,7 +324,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/GetCommentList")]
         public List<CommentList> GetCommentList(string DoctorId, string CategoryCode)
         {
-            return repository.GetCommentList(DoctorId, CategoryCode);
+            return repository.GetCommentList(pclsCache, DoctorId, CategoryCode);
         }
 
         /// <summary>
@@ -322,7 +336,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/GetHealthCoachListByPatient")]
         public List<HealthCoachListByPatient> GetHealthCoachListByPatient(string PatientId, string CategoryCode)
         {
-            return repository.GetHealthCoachListByPatient(PatientId, CategoryCode);
+            return repository.GetHealthCoachListByPatient(pclsCache, PatientId, CategoryCode);
         }
 
         /// <summary>
@@ -335,7 +349,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/RemoveHealthCoach")]
         public HttpResponseMessage RemoveHealthCoach(string PatientId, string DoctorId, string CategoryCode)
         {
-            int ret = repository.RemoveHealthCoach(PatientId, DoctorId, CategoryCode);
+            int ret = repository.RemoveHealthCoach(pclsCache, PatientId, DoctorId, CategoryCode);
             return new ExceptionHandler().DeleteData(Request, ret);
         }
 
@@ -348,7 +362,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/GetAppoitmentPatientList")]
         public List<AppoitmentPatient> GetAppoitmentPatientList(string healthCoachID, string Status)
         {
-            return repository.GetAppoitmentPatientList(healthCoachID, Status);
+            return repository.GetAppoitmentPatientList(pclsCache, healthCoachID, Status);
         }
         /// <summary>
         /// 替代GetPatientsList 用于pad登录后获得专员的病人列表
@@ -357,9 +371,21 @@ namespace CDMISrestful.Controllers
         /// <param name="Status"></param>
         /// <returns></returns>
         [Route("Api/v1/Users/GetPatientsPlan")]
+         [EnableQuery]
         public List<PatientListTable> GetPatientsPlan(string DoctorId, string Module, string VitalType, string VitalCode)
         {
-            return repository.GetPatientsPlan(DoctorId, Module, VitalType, VitalCode);
+            return repository.GetPatientsPlan(pclsCache, DoctorId, Module, VitalType, VitalCode);
+        }
+
+        /// <summary>
+        /// 根据UID获取用户所有角色
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        [Route("Api/v1/Users/Roles")]
+        public List<string> GetAllRoleMatch(string UserId)
+        {
+            return repository.GetAllRoleMatch(pclsCache,UserId);
         }
     }
 }

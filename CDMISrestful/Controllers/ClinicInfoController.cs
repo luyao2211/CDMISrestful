@@ -16,7 +16,7 @@ namespace CDMISrestful.Controllers
     public class ClinicInfoController : ApiController
     {
         static readonly IClinicInfoRepository repository = new ClinicInfoRepository();
-
+        DataConnection pclsCache = new DataConnection();
         /// <summary>
         /// 获取目前最新Num条临床数据
         /// </summary>
@@ -30,7 +30,7 @@ namespace CDMISrestful.Controllers
         
         public Clinic GetClinicalNewMobile(string UserId, DateTime AdmissionDate, DateTime ClinicDate, int Num)
         {
-            Clinic ret = repository.GetClinicalNewMobile(UserId, AdmissionDate, ClinicDate, Num);
+            Clinic ret = repository.GetClinicalNewMobile(pclsCache,UserId, AdmissionDate, ClinicDate, Num);
             return ret;
         }
         /// <summary>
@@ -47,7 +47,7 @@ namespace CDMISrestful.Controllers
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public ClinicInfoViewModel GetClinicInfoDetail(string UserId, string Type, string VisitId, string Date)
         {
-            ClinicInfoViewModel ret = repository.GetClinicInfoDetail(UserId,Type, VisitId, Date);
+            ClinicInfoViewModel ret = repository.GetClinicInfoDetail(pclsCache, UserId, Type, VisitId, Date);
             return ret;
         }
         /// <summary>
@@ -63,7 +63,7 @@ namespace CDMISrestful.Controllers
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public List<LabTestDetails> GetLabTestDtlList(string UserId, string VisitId, string SortNo)
         {
-            List<LabTestDetails> ret = repository.GetLabTestDtlList(UserId,  VisitId, SortNo);
+            List<LabTestDetails> ret = repository.GetLabTestDtlList(pclsCache, UserId, VisitId, SortNo);
             return ret;
         }
         /// <summary>
@@ -77,7 +77,7 @@ namespace CDMISrestful.Controllers
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public ClinicalInfoListViewModel GetClinicalInfoList(string UserId)
         {
-            ClinicalInfoListViewModel ret = repository.GetClinicalInfoList(UserId);
+            ClinicalInfoListViewModel ret = repository.GetClinicalInfoList(pclsCache, UserId);
             return ret;
         }
         /// <summary>
@@ -92,7 +92,7 @@ namespace CDMISrestful.Controllers
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public HttpResponseMessage GetLatestHUserIdByHCode(string UserId, string HospitalCode)
         {
-            string ret = repository.getLatestHUserIdByHCode(UserId, HospitalCode);
+            string ret = repository.getLatestHUserIdByHCode(pclsCache, UserId, HospitalCode);
             return new ExceptionHandler().Common(Request,ret);
         }
         /// <summary>
@@ -107,7 +107,7 @@ namespace CDMISrestful.Controllers
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public List<SymptomsList> GetSymptomsList(string UserId, string VisitId)
         {
-            List<SymptomsList> ret = repository.GetSymptomsList(UserId, VisitId);
+            List<SymptomsList> ret = repository.GetSymptomsList(pclsCache, UserId, VisitId);
             return ret;
         }
         /// <summary>
@@ -122,7 +122,7 @@ namespace CDMISrestful.Controllers
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public List<DiagnosisInfo> GetDiagnosisInfoList(string UserId, string VisitId)
         {
-            List<DiagnosisInfo> ret = repository.GetDiagnosisInfoList(UserId, VisitId);
+            List<DiagnosisInfo> ret = repository.GetDiagnosisInfoList(pclsCache, UserId, VisitId);
             return ret;
         }
         /// <summary>
@@ -137,7 +137,7 @@ namespace CDMISrestful.Controllers
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public List<ExamInfo> GetExaminationList(string UserId, string VisitId)
         {
-            List<ExamInfo> ret = repository.GetExaminationList(UserId, VisitId);
+            List<ExamInfo> ret = repository.GetExaminationList(pclsCache, UserId, VisitId);
             return ret;
         }
         /// <summary>
@@ -154,7 +154,7 @@ namespace CDMISrestful.Controllers
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public List<ExamDetails> GetExamDtlList(string UserId, string VisitId, string SortNo, string ItemCode)
         {
-            List<ExamDetails> ret = repository.GetExamDtlList(UserId,  VisitId,  SortNo,  ItemCode);
+            List<ExamDetails> ret = repository.GetExamDtlList(pclsCache, UserId, VisitId, SortNo, ItemCode);
             return ret;
         }
         /// <summary>
@@ -169,7 +169,7 @@ namespace CDMISrestful.Controllers
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public List<LabTestList> GetLabTestList(string UserId, string VisitId)
         {
-            List<LabTestList> ret = repository.GetLabTestList(UserId, VisitId);
+            List<LabTestList> ret = repository.GetLabTestList(pclsCache, UserId, VisitId);
             return ret;
         }
         [Route("Api/v1/ClinicInfo/GetDrugRecordList")]
@@ -178,7 +178,7 @@ namespace CDMISrestful.Controllers
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public List<DrugRecordList> GetDrugRecordList(string UserId, string VisitId)
         {
-            List<DrugRecordList> ret = repository.GetDrugRecordList(UserId, VisitId);
+            List<DrugRecordList> ret = repository.GetDrugRecordList(pclsCache, UserId, VisitId);
             return ret;
         }
     }

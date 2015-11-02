@@ -16,6 +16,7 @@ namespace CDMISrestful.Controllers
     public class PlanInfoController : ApiController
     {
         static readonly IPlanInfoRepository repository = new PlanInfoRepository();
+        DataConnection pclsCache = new DataConnection();
 
         /// <summary>
         /// 计划信息展示 WF20151029 测试用例：U201510260001 PLN201510260001 20151028 20151039 Bloodpressure Bloodpressure_1
@@ -30,7 +31,7 @@ namespace CDMISrestful.Controllers
         public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate, string ItemType, string ItemCode)
         //public List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(string UserId, string PlanNo, int StartDate, int EndDate)
         {
-            return repository.GetComplianceAllSignsListByPeriod(UserId, PlanNo, StartDate, EndDate, ItemType, ItemCode);
+            return repository.GetComplianceAllSignsListByPeriod(pclsCache, UserId, PlanNo, StartDate, EndDate, ItemType, ItemCode);
         }
 
         /// <summary>
@@ -45,12 +46,15 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage DeleteTask(List<DeleteTask> items)
         {
             int ret = 2;
-            for (int i = 0; i < items.Count; i++)
+            if (items != null)
             {
-                ret = repository.DeteteTask(items[i].Plan, items[i].Type, items[i].Code, items[i].SortNo);
-                if(ret!=1)
+                for (int i = 0; i < items.Count; i++)
                 {
-                    break;
+                    ret = repository.DeteteTask(pclsCache, items[i].Plan, items[i].Type, items[i].Code, items[i].SortNo);
+                    if (ret != 1)
+                    {
+                        break;
+                    }
                 }
             }
             return new ExceptionHandler().DeleteData(Request, ret);
@@ -65,7 +69,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage PostPlan(GPlanInfo item)
         {
-            int ret = repository.SetPlan(item.PlanNo, item.PatientId, Convert.ToInt32(item.StartDate), Convert.ToInt32(item.EndDate), item.Module, Convert.ToInt32(item.Status), item.DoctorId, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetPlan(pclsCache, item.PlanNo, item.PatientId, Convert.ToInt32(item.StartDate), Convert.ToInt32(item.EndDate), item.Module, Convert.ToInt32(item.Status), item.DoctorId, item.piUserId, item.piTerminalName, new CommonFunction().getRemoteIPAddress(), item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -78,7 +82,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage PostComplianceDetail(ComplianceDetail item)
         {
-            int ret = repository.SetComplianceDetail(item.PlanNo, item.Date, item.CategoryCode,  item.Code,item.SortNo, item.Status, item.Description,item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetComplianceDetail(pclsCache, item.PlanNo, item.Date, item.CategoryCode, item.Code, item.SortNo, item.Status, item.Description, item.piUserId, item.piTerminalName, new CommonFunction().getRemoteIPAddress(), item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
    
@@ -94,7 +98,7 @@ namespace CDMISrestful.Controllers
             int ret = 2;
             for (int i = 0; i < items.Count; i++)
             {
-                ret = repository.CreateTask(items[i].PlanNo, items[i].Type, items[i].Code, items[i].SortNo, items[i].Instruction, items[i].piUserId, items[i].piTerminalName, items[i].piTerminalIP, items[i].piDeviceType);
+                ret = repository.CreateTask(pclsCache, items[i].PlanNo, items[i].Type, items[i].Code, items[i].SortNo, items[i].Instruction, items[i].piUserId, items[i].piTerminalName, new CommonFunction().getRemoteIPAddress(), items[i].piDeviceType);
                 if(ret!=1)
                 {
                     break;
@@ -112,7 +116,7 @@ namespace CDMISrestful.Controllers
         [EnableQuery]
         public List<PsTask> GetTasks(string PlanNo, string ParentCode, string Date, string PatientId)
         {
-            return repository.GetTasks(PlanNo, ParentCode, Date, PatientId);
+            return repository.GetTasks(pclsCache, PlanNo, ParentCode, Date, PatientId);
         }
 
         /// <summary>
@@ -124,7 +128,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/PlanInfo/TaskDetails")]
         public List<TaskDetail> GetTaskDetails(string CategoryCode, string Code)
         {
-            return repository.GetTaskDetails(CategoryCode, Code);
+            return repository.GetTaskDetails(pclsCache, CategoryCode, Code);
         }
 
         /// <summary>
@@ -145,7 +149,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/PlanInfo/Template")]
         public HttpResponseMessage PostPsTemplateSetData(Template template)
         {
-            int ret = repository.PsTemplateSetData(template.DoctorId, template.TemplateCode, template.TemplateName, template.Description, template.RecordDate, template.Redundance, template.piUserId, template.piTerminalName, template.piTerminalIP, template.piDeviceType);
+            int ret = repository.PsTemplateSetData(pclsCache, template.DoctorId, template.TemplateCode, template.TemplateName, template.Description, template.RecordDate, template.Redundance, template.piUserId, template.piTerminalName, new CommonFunction().getRemoteIPAddress(), template.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -157,7 +161,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/PlanInfo/TemplateDetail")]
         public HttpResponseMessage PostPsTemplateDetailSetData(TemplateDetail templateDtl)
         {
-            int ret = repository.PsTemplateDetailSetData(templateDtl.DoctorId, templateDtl.TemplateCode, templateDtl.CategoryCode, templateDtl.ItemCode, templateDtl.Value, templateDtl.Description, templateDtl.Redundance, templateDtl.piUserId, templateDtl.piTerminalName, templateDtl.piTerminalIP, templateDtl.piDeviceType);
+            int ret = repository.PsTemplateDetailSetData(pclsCache, templateDtl.DoctorId, templateDtl.TemplateCode, templateDtl.CategoryCode, templateDtl.ItemCode, templateDtl.Value, templateDtl.Description, templateDtl.Redundance, templateDtl.piUserId, templateDtl.piTerminalName, new CommonFunction().getRemoteIPAddress(), templateDtl.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -170,7 +174,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/PlanInfo/Templates")]
         public List<TemplateInfo> GetTemplateList(string DoctorId)
         {
-            return repository.GetTemplateList(DoctorId);
+            return repository.GetTemplateList(pclsCache, DoctorId);
         }
 
         /// <summary>
@@ -183,7 +187,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/PlanInfo/TemplateDetails")]
         public List<TemplateInfoDtl> GetTemplateDetails(string DoctorId, string TemplateCode, string ParentCode)
         {
-            return repository.GetTemplateDetails(DoctorId, TemplateCode, ParentCode);
+            return repository.GetTemplateDetails(pclsCache, DoctorId, TemplateCode, ParentCode);
         }
 
        /// <summary>
@@ -195,7 +199,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage PostCompliance(SetComplance item)
         {
-            int ret = repository.SetCompliance(item.PlanNo, item.Date, item.Compliance, item.Description, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetCompliance(pclsCache, item.PlanNo, item.Date, item.Compliance, item.Description, item.piUserId, item.piTerminalName, new CommonFunction().getRemoteIPAddress(), item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -208,7 +212,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage PostTarget(TargetByCode item)
         {
-            int ret = repository.SetTarget(item.Plan, item.Type, item.Code, item.Value, item.Origin, item.Instruction, item.Unit, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetTarget(pclsCache, item.Plan, item.Type, item.Code, item.Value, item.Origin, item.Instruction, item.Unit, item.piUserId, item.piTerminalName, new CommonFunction().getRemoteIPAddress(), item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -222,7 +226,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/PlanInfo/Target")]
         public HttpResponseMessage GetTarget(string PlanNo, string Type, string Code)
         {
-            TargetByCode ret = repository.GetTarget(PlanNo, Type, Code);
+            TargetByCode ret = repository.GetTarget(pclsCache, PlanNo, Type, Code);
             return new ExceptionHandler().toJson(ret);
         }
 
@@ -240,7 +244,7 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage PostPlanStart(GPlanInfo item)
         {
-            int ret = repository.SetPlanStart(item.PlanNo, Convert.ToInt32(item.Status), item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            int ret = repository.SetPlanStart(pclsCache, item.PlanNo, Convert.ToInt32(item.Status), item.piUserId, item.piTerminalName, new CommonFunction().getRemoteIPAddress(), item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
         }
 
@@ -254,10 +258,8 @@ namespace CDMISrestful.Controllers
         [EnableQuery]
         public List<OverDuePlanDetail> GetOverDuePlanList(string DoctorId, string ModuleType)
         {
-            return repository.GetOverDuePlanList(DoctorId, ModuleType);
+            return repository.GetOverDuePlanList(pclsCache, DoctorId, ModuleType);
         }
-
-
 
         /// <summary>
         /// GetPlanInfo 根据PlanNo或PatientId/Module/Status,获取某计划详情 CSQ 20151031 
@@ -267,26 +269,59 @@ namespace CDMISrestful.Controllers
         /// <param name="PlanNo"></param>
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/Plan")]
-        public HttpResponseMessage GetPlanInfo(string PatientId, string PlanNo, string Module,int Status)
+        public HttpResponseMessage GetPlanInfo(string PatientId, string PlanNo, string Module, int Status)
         {
-            if (PlanNo!="NULL")
+            if (PlanNo != "NULL")
             {
-                GPlanInfo ret = repository.GetPlanInfo(PlanNo);
-                ret.PlanCompliance = repository.GetComplianceByPlanNo(PlanNo).ToString();
+                GPlanInfo ret = repository.GetPlanInfo(pclsCache, PlanNo);
+                ret.PlanCompliance = repository.GetComplianceByPlanNo(pclsCache, PlanNo).ToString();
                 List<GPlanInfo> list = new List<GPlanInfo>();
                 list.Add(ret);
                 return new ExceptionHandler().toJson(list);
             }
             else
             {
-                if(Module=="{Module}")
+                if (Module == "{Module}")
                 {
                     Module = null;
                 }
-                List<GPlanInfo> ret = repository.GetPlanListByMS(PatientId, Module, Status);
+                List<GPlanInfo> ret = repository.GetPlanListByMS(pclsCache, PatientId, Module, Status);
                 return new ExceptionHandler().toJson(ret);
             }
         }
+
+        ///// <summary>
+        ///// GetPlanInfo 根据PlanNo获取某计划详情 CSQ 20151102 
+        ///// </summary>
+        ///// <param name="PlanNo"></param>
+        ///// <returns></returns>
+        //[Route("Api/v1/PlanInfo/Plan")]
+        //public HttpResponseMessage GetPlanInfo(string PlanNo)
+        //{         
+        //        GPlanInfo ret = repository.GetPlanInfo(pclsCache, PlanNo);
+        //        ret.PlanCompliance = repository.GetComplianceByPlanNo(pclsCache, PlanNo).ToString();
+        //        List<GPlanInfo> list = new List<GPlanInfo>();
+        //        list.Add(ret);
+        //        return new ExceptionHandler().toJson(list);       
+        //}
+
+        ///// <summary>
+        ///// GetPlans 根据PatientId/Module/Status,获取某计划详情 CSQ 20151031 
+        ///// 用法：PlanNo输入NULL，PatientId按界面输入，Module根据需要的模块输入，若为空则取全部模块数据；status根据需要输入2（未开始计划）/3（当前计划）/4（往前计划/已结束计划），若为0，则取全部状态的数据
+        ///// </summary>
+        ///// <param name="PlanNo"></param>
+        ///// <returns></returns>
+        //[Route("Api/v1/PlanInfo/Plans")]
+        //public HttpResponseMessage GetPlans(string PatientId, string Module, int Status)
+        //{      
+        //        if (Module == "{Module}")
+        //        {
+        //            Module = null;
+        //        }
+        //        List<GPlanInfo> ret = repository.GetPlanListByMS(pclsCache, PatientId, Module, Status);
+        //        return new ExceptionHandler().toJson(ret);           
+        //}
+
 
         /// <summary>
         /// CSQ 20151031 计划信息展示时 图的点击事件响应
@@ -298,8 +333,22 @@ namespace CDMISrestful.Controllers
          [Route("Api/v1/PlanInfo/PlanInfoChartDtl")]
         public List<TasksForClick> GetTasksForClick(string PlanNo, string ParentCode, string Date)
         {
-            return repository.GetTasksForClick(PlanNo, ParentCode, Date);
+            return repository.GetTasksForClick(pclsCache, PlanNo, ParentCode, Date);
         }
+
+         /// <summary>
+         /// 获取某个病人某个模块指定时间段内的依从率 SYF
+         /// </summary>
+         /// <param name="PatientId"></param>
+         /// <param name="StartDate"></param>
+         /// <param name="EndDate"></param>
+         /// <param name="Module"></param>
+         /// <returns></returns>
+         [Route("Api/v1/PlanInfo/GetComplianceListInC")]
+         public List<ComplianceDate> GetComplianceListInC(string PatientId, string StartDate, string EndDate, string Module)
+         {
+             return repository.GetComplianceListInC(pclsCache,PatientId, StartDate, EndDate, Module);
+         }
 
         #region 暂时不用
         ///// <summary>
@@ -433,9 +482,6 @@ namespace CDMISrestful.Controllers
         //    return repository.GetPlanList34ByM(PatientId, Module);
         //}
         #endregion
-
       
-
-
     }
 }

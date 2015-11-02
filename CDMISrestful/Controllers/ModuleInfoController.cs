@@ -16,6 +16,8 @@ namespace CDMISrestful.Controllers
     public class ModuleInfoController : ApiController
     {
         static readonly IModuleInfoRepository repository = new ModuleInfoRepository();
+        DataConnection pclsCache = new DataConnection();
+
         /// <summary>
         /// 输入PatientId和CategoryCode，获取患者已经购买的某个模块的详细信息 LY 2015-10-13
         /// </summary>
@@ -26,7 +28,7 @@ namespace CDMISrestful.Controllers
         //public List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(string UserId, string CategoryCode)
         public List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(string UserId, string CategoryCode)
         {
-            return repository.GetItemInfoByPIdAndModule(UserId, CategoryCode);
+            return repository.GetItemInfoByPIdAndModule(pclsCache, UserId, CategoryCode);
             //return ExceptionHandler.toJson(ret);
             //var list = repository.GetItemInfoByPIdAndModule(UserId, CategoryCode);
             //var res = new System.Web.Mvc.JsonResult();
@@ -55,7 +57,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/ModuleInfo/{UserId}/SynInfo")]
         public SynBasicInfo GetSynBasicInfoDetail(string UserId)
         {
-            return repository.SynBasicInfoDetail(UserId);
+            return repository.SynBasicInfoDetail(pclsCache, UserId);
         }
     }
 }

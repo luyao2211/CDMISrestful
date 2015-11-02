@@ -10,13 +10,13 @@ namespace CDMISrestful.Models
 {
     public class DictRepository : IDictRepository
     {
-        DataConnection pclsCache = new DataConnection();
+      
         DictMethod dictMethod = new DictMethod();
         /// <summary>
         /// 获取高血压药物类型名称列表 LY 2015-10-14
         /// </summary>
         /// <returns></returns>
-        public List<TypeAndName> GetHypertensionDrugTypeNameList()
+        public List<TypeAndName> GetHypertensionDrugTypeNameList(DataConnection pclsCache)
         {
             return dictMethod.CmMstHypertensionDrugGetTypeList(pclsCache);
         }
@@ -26,7 +26,7 @@ namespace CDMISrestful.Models
         /// </summary>
         /// <param name="Type"></param>
         /// <returns></returns>
-        public List<CmAbsType> GetHypertensionDrug()
+        public List<CmAbsType> GetHypertensionDrug(DataConnection pclsCache)
         {
             return dictMethod.GetHypertensionDrug(pclsCache);
             
@@ -36,7 +36,7 @@ namespace CDMISrestful.Models
         /// 获取糖尿病药物类型名称列表 LY 2015-10-14
         /// </summary>
         /// <returns></returns>
-        public List<TypeAndName> GetDiabetesDrugTypeNameList()
+        public List<TypeAndName> GetDiabetesDrugTypeNameList(DataConnection pclsCache)
         {
             return dictMethod.CmMstDiabetesDrugGetTypeList(pclsCache);
         }
@@ -46,7 +46,7 @@ namespace CDMISrestful.Models
         /// </summary>
         /// <param name="Type"></param>
         /// <returns></returns>
-        public List<CmAbsType> GetDiabetesDrug()
+        public List<CmAbsType> GetDiabetesDrug(DataConnection pclsCache)
         {
             return dictMethod.GetDiabetesDrug(pclsCache);
             
@@ -57,7 +57,7 @@ namespace CDMISrestful.Models
         /// </summary>
         /// <param name="Category"></param>
         /// <returns></returns>
-        public List<TypeAndName> GetTypeList(string Category)
+        public List<TypeAndName> GetTypeList(DataConnection pclsCache, string Category)
         {
             return dictMethod.CmMstTypeGetTypeList(pclsCache, Category);
         }
@@ -66,12 +66,12 @@ namespace CDMISrestful.Models
         /// 获取血压等级字典表的所有信息 LY 2015-10-13
         /// </summary>
         /// <returns></returns>
-        public List<MstBloodPressure> GetBloodPressure()
+        public List<MstBloodPressure> GetBloodPressure(DataConnection pclsCache)
         {
             return new PlanInfoMethod().GetBPGrades(pclsCache);
         }
 
-        public List<Insurance> GetInsuranceType()
+        public List<Insurance> GetInsuranceType(DataConnection pclsCache)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace CDMISrestful.Models
             }
         }
 
-        public int CmMstTaskSetData(string CategoryCode, string Code, string Name, string ParentCode, string Description, int StartDate, int EndDate, int GroupHeaderFlag, int ControlType, string OptionCategory, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int CmMstTaskSetData(DataConnection pclsCache, string CategoryCode, string Code, string Name, string ParentCode, string Description, int StartDate, int EndDate, int GroupHeaderFlag, int ControlType, string OptionCategory, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             try
             {
@@ -99,13 +99,13 @@ namespace CDMISrestful.Models
                 throw (ex);
             }
         }
-        public List<CmMstTask> GetMstTaskByParentCode(string ParentCode)
+        public List<CmMstTask> GetMstTaskByParentCode(DataConnection pclsCache, string ParentCode)
         {
             return dictMethod.GetMstTaskByParentCode(pclsCache, ParentCode);
 
         }
 
-        public string GetNo(int NumberingType, string TargetDate)
+        public string GetNo(DataConnection pclsCache, int NumberingType, string TargetDate)
         {
             if(TargetDate == "{TargetDate}")
             {

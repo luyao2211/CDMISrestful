@@ -51,7 +51,10 @@ namespace CDMISrestful.CommonLibrary
         public const string CLIENT_LOG_DIR = "..\\Log";
         //20141202 ZAM
         //public const string CLIENT_LOG_BASENAME = "HYGEIA"; 
-        public const string CLIENT_LOG_BASENAME = "WebService"; 
+        //20151102 CSQ
+        //public const string CLIENT_LOG_BASENAME = "WebService";
+        //20151102 CSQ
+        public const string CLIENT_LOG_BASENAME = "RESTful"; 
 
 
         public const int CLIENT_LOG_RETRY = 1;

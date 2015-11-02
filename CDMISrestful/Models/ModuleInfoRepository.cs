@@ -10,7 +10,7 @@ namespace CDMISrestful.Models
 {
     public class ModuleInfoRepository : IModuleInfoRepository
     {
-        DataConnection pclsCache = new DataConnection();
+       
 
         /// <summary>
         /// 输入PatientId和CategoryCode，获取患者已经购买的某个模块的详细信息 LY 2015-10-14
@@ -18,7 +18,7 @@ namespace CDMISrestful.Models
         /// <param name="UserId"></param>
         /// <param name="CategoryCode"></param>
         /// <returns></returns>
-        public List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(string UserId, string CategoryCode)
+        public List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(DataConnection pclsCache, string UserId, string CategoryCode)
         {
             return new ModuleInfoMethod().PsBasicInfoDetailGetPatientBasicInfoDetail(pclsCache, UserId, CategoryCode);
         }
@@ -30,7 +30,7 @@ namespace CDMISrestful.Models
         /// </summary>
         /// <param name="CategoryCode"></param>
         /// <returns></returns>
-        public List<MstInfoItemByCategoryCode> GetMstInfoItemByCategoryCode(string CategoryCode)
+        public List<MstInfoItemByCategoryCode> GetMstInfoItemByCategoryCode(DataConnection pclsCache, string CategoryCode)
         {
             return new DictMethod().GetMstInfoItemByCategoryCode(pclsCache, CategoryCode);
         }
@@ -40,7 +40,7 @@ namespace CDMISrestful.Models
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        public SynBasicInfo SynBasicInfoDetail(string UserId)
+        public SynBasicInfo SynBasicInfoDetail(DataConnection pclsCache, string UserId)
         {
             SynBasicInfo ret = new SynBasicInfo();
             ret.ExamInfo = new ClinicInfoMethod().GetNewExam(pclsCache, UserId);

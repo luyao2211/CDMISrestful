@@ -27,12 +27,13 @@ namespace CDMISrestful.CommonLibrary
 
             if (TextLog.LogFileDirectory.Length == 0)
             {
-                //修改Log文件保存路径 20141202 ZAM 
+                //修改Log文件保存路径 20151102 CSQ
                 string physicalPath = System.Web.HttpContext.Current.Request.PhysicalPath;
                 int index = physicalPath.LastIndexOf('\\');
+                //int index = physicalPath.IndexOf("Api")+6;
                 string logdir = physicalPath.Substring(0, index);
                 //string dir = Path.Combine(HygeiaConst.CLIENT_LOG_DIR, GetTerminalID());
-                string dir = Path.Combine(logdir + "\\Log", GetTerminalID());
+                string dir = Path.Combine(logdir + "\\DBLog", GetTerminalID());
                 TextLog.Initialize(dir, HygeiaConst.CLIENT_LOG_BASENAME, HygeiaConst.CLIENT_LOG_RETRY, HygeiaConst.CLIENT_LOG_SAVEDAYS);
                 TextLog.LogSeparator = HygeiaConst.CLIENT_LOG_SEPARATOR;
             }
@@ -57,13 +58,14 @@ namespace CDMISrestful.CommonLibrary
             //Output
             //ZAM visitor tracking 2014-12-31 update log visitor name 2015-1-14
             string visitorIP = "";
-            string machineName = "";
+            //string machineName = "";
             visitorIP = HttpContext.Current.Request.UserHostAddress;
-            System.Net.IPHostEntry host = new System.Net.IPHostEntry();
-            host = System.Net.Dns.GetHostEntry(HttpContext.Current.Request.UserHostAddress);
-            machineName = host.HostName;
+            //CSQ 20151102 该方法无法获取客户端主机名 先注释掉
+            //System.Net.IPHostEntry host = new System.Net.IPHostEntry();
+            //host = System.Net.Dns.GetHostEntry(HttpContext.Current.Request.UserHostAddress);
+            //machineName = host.HostName;
 
-            sbLog.Append(SetSpace(machineName, 10) + HygeiaConst.CLIENT_LOG_SEPARATOR);
+            //sbLog.Append(SetSpace(machineName, 10) + HygeiaConst.CLIENT_LOG_SEPARATOR);
             sbLog.Append(SetSpace(visitorIP, 16) + HygeiaConst.CLIENT_LOG_SEPARATOR);
             sbLog.Append(SetSpace(strLogType, 3) + HygeiaConst.CLIENT_LOG_SEPARATOR);
             // string logSource display completed ZAM 2014-12-25 (iMax 30 to 60)

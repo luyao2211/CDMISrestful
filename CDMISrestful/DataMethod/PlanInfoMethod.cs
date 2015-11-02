@@ -369,70 +369,70 @@ namespace CDMISrestful.DataMethod
         }
 
 
-        /// <summary>
-        /// SYF 20151010 获取健康专员负责的所有患者列表
-        /// </summary>
-        /// <param name="pclsCache"></param>
-        /// <param name="DoctorId"></param>
-        /// <param name="Module"></param>
-        /// <returns></returns>
-        public List<PatientPlan> GetPatientsPlanByDoctorId(DataConnection pclsCache, string DoctorId, string Module)
-        {
-            List<PatientPlan> list = new List<PatientPlan>();
-            CacheCommand cmd = null;
-            CacheDataReader cdr = null;
-            try
-            {
-                if (!pclsCache.Connect())
-                {
-                    return null;
-                }
-                cmd = new CacheCommand();
-                cmd = Ps.Plan.GetPatientsPlanByDoctorId(pclsCache.CacheConnectionObject);
-                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
-                cmd.Parameters.Add("Module", CacheDbType.NVarChar).Value = Module;
+        ///// <summary>
+        ///// SYF 20151010 获取健康专员负责的所有患者列表
+        ///// </summary>
+        ///// <param name="pclsCache"></param>
+        ///// <param name="DoctorId"></param>
+        ///// <param name="Module"></param>
+        ///// <returns></returns>
+        //public List<PatientPlan> GetPatientsPlanByDoctorId(DataConnection pclsCache, string DoctorId, string Module)
+        //{
+        //    List<PatientPlan> list = new List<PatientPlan>();
+        //    CacheCommand cmd = null;
+        //    CacheDataReader cdr = null;
+        //    try
+        //    {
+        //        if (!pclsCache.Connect())
+        //        {
+        //            return null;
+        //        }
+        //        cmd = new CacheCommand();
+        //        cmd = Ps.Plan.GetPatientsPlanByDoctorId(pclsCache.CacheConnectionObject);
+        //        cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
+        //        cmd.Parameters.Add("Module", CacheDbType.NVarChar).Value = Module;
 
-                cdr = cmd.ExecuteReader();
-                while (cdr.Read())
-                {
-                    if (cdr["PatientId"].ToString() == string.Empty)
-                    {
-                        continue;
-                    }
-                    PatientPlan NewLine = new PatientPlan();
-                    NewLine.PatientId = cdr["PatientId"].ToString();
-                    NewLine.PlanNo = cdr["PlanNo"].ToString();
-                    NewLine.StartDate = cdr["StartDate"].ToString();
-                    NewLine.EndDate = cdr["EndDate"].ToString();
-                    NewLine.TotalDays = cdr["TotalDays"].ToString();
-                    NewLine.RemainingDays = cdr["RemainingDays"].ToString();
-                    NewLine.Status = cdr["Status"].ToString();
-                    list.Add(NewLine);
-                }
-                return list;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetPatientsPlanByDoctorId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-            }
-            finally
-            {
-                if ((cdr != null))
-                {
-                    cdr.Close();
-                    cdr.Dispose(true);
-                    cdr = null;
-                }
-                if ((cmd != null))
-                {
-                    cmd.Parameters.Clear();
-                    cmd.Dispose();
-                    cmd = null;
-                }
-                pclsCache.DisConnect();
-            }
-        }
+        //        cdr = cmd.ExecuteReader();
+        //        while (cdr.Read())
+        //        {
+        //            if (cdr["PatientId"].ToString() == string.Empty)
+        //            {
+        //                continue;
+        //            }
+        //            PatientPlan NewLine = new PatientPlan();
+        //            NewLine.PatientId = cdr["PatientId"].ToString();
+        //            NewLine.PlanNo = cdr["PlanNo"].ToString();
+        //            NewLine.StartDate = cdr["StartDate"].ToString();
+        //            NewLine.EndDate = cdr["EndDate"].ToString();
+        //            NewLine.TotalDays = cdr["TotalDays"].ToString();
+        //            NewLine.RemainingDays = cdr["RemainingDays"].ToString();
+        //            NewLine.Status = cdr["Status"].ToString();
+        //            list.Add(NewLine);
+        //        }
+        //        return list;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetPatientsPlanByDoctorId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if ((cdr != null))
+        //        {
+        //            cdr.Close();
+        //            cdr.Dispose(true);
+        //            cdr = null;
+        //        }
+        //        if ((cmd != null))
+        //        {
+        //            cmd.Parameters.Clear();
+        //            cmd.Dispose();
+        //            cmd = null;
+        //        }
+        //        pclsCache.DisConnect();
+        //    }
+        //}
 
 
         /// <summary>
@@ -2820,6 +2820,7 @@ namespace CDMISrestful.DataMethod
             }
         }
 
+        //20151101 wf 健康专员首页加载患者列表
         public List<PatientListTable> GetPatientsPlan(DataConnection pclsCache, string DoctorId, string Module, string VitalType, string VitalCode)
         {
             List<PatientListTable> list = new List<PatientListTable>();
@@ -2855,7 +2856,15 @@ namespace CDMISrestful.DataMethod
                     NewLine.TotalDays = cdr["TotalDays"].ToString();
                     NewLine.RemainingDays = cdr["RemainingDays"].ToString();
                     NewLine.Status = cdr["Status"].ToString();
-                    NewLine.ComplianceRate = Convert.ToDouble(cdr["ComplianceRate"]);
+                    if (cdr["ComplianceRate"].ToString() == "")
+                    {
+                        NewLine.ComplianceRate = 0;
+                    }
+                    else
+                    {
+                        NewLine.ComplianceRate = Convert.ToDouble(cdr["ComplianceRate"]);
+                    }
+                    //NewLine.ComplianceRate = Convert.ToDouble(cdr["ComplianceRate"]);
                     NewLine.VitalValue = cdr["VitalValue"].ToString();
                     NewLine.VitalUnit = cdr["VitalUnit"].ToString();
                     NewLine.TargetOrigin = cdr["TargetOrigin"].ToString();
@@ -2887,6 +2896,70 @@ namespace CDMISrestful.DataMethod
             }
         }
 
+        /// <summary>
+        /// 获取某个病人某个模块指定时间段内的依从率 SYF 20151102
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="PatientId"></param>
+        /// <param name="StartDate"></param>
+        /// <param name="EndDate"></param>
+        /// <param name="Module"></param>
+        /// <returns></returns>
+        public List<ComplianceDate> GetComplianceListInC(DataConnection pclsCache, string PatientId, string StartDate, string EndDate, string Module)
+        {
+
+            List<ComplianceDate> ComplianceList = new List<ComplianceDate>();
+            try
+            {
+                List<GPlanInfo> list1 = new List<GPlanInfo>();
+                List<ComplianceListByPeriod> list2 = new List<ComplianceListByPeriod>();
+
+                list1 = new PlanInfoMethod().GetPlanListByMS(pclsCache, PatientId, Module, 0);
+                int i = 0;
+                int j = 0;//为了找两个特殊的计划，即包括输入的StartDate和EndDate的两个计划，后面取依从率就在这两个计划之间取
+                int k = 0;
+              
+                    for (; i < list1.Count; i++)// && (int.Parse(list1[i].EndDate) >= int.Parse(StartDate))
+                    {
+                        if ((int.Parse(list1[i].StartDate) <= int.Parse(StartDate)))
+                        {
+                            break;
+                        }
+                    }
+
+                    for (; j < list1.Count; j++)//(int.Parse(list1[j].StartDate) <= int.Parse(EndDate)) && 
+                    {
+                        if ((int.Parse(list1[j].EndDate) >= int.Parse(EndDate)))
+                        {
+                            break;
+                        }
+                    }
+                
+                for (k = i; k >= j; k--)
+                {//每次取一个计划的信息，但每个计划里面还是有多条信息
+                    int SD = int.Parse(list1[k].StartDate) > int.Parse(StartDate) ? int.Parse(list1[k].StartDate) : int.Parse(StartDate);
+                    int ED = int.Parse(list1[k].EndDate) < int.Parse(EndDate) ? int.Parse(list1[k].EndDate) : int.Parse(EndDate);
+                    list2 = new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, list1[k].PlanNo, SD, ED);
+                    for (int m = 0; m < list2.Count; m++)
+                    {
+                        ComplianceDate oneday = new ComplianceDate();   //输出
+                        oneday.Date = list2[m].Date;
+                        oneday.PlanNo = list1[k].PlanNo;
+                        oneday.Compliance = list2[k].Compliance;
+                        ComplianceList.Add(oneday);
+                    }
+                }
+                return ComplianceList;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetComplianceListInC", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+            }
+        }
     }
 
 }

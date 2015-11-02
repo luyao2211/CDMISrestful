@@ -131,5 +131,26 @@ namespace CDMISrestful.CommonLibrary
 
         }
 
+        /// <summary>
+        /// 获取远程调用的IP CSQ 20151026
+        /// </summary>
+        /// <returns></returns>
+        public string getRemoteIPAddress()
+        {
+            string visitorIP = "";
+            visitorIP = HttpContext.Current.Request.UserHostAddress;
+            return visitorIP;
+        }
+
+        public string getTerminalName()
+        {
+            //string visitorIP = "";
+            string machineName = "";
+            //visitorIP = HttpContext.Current.Request.UserHostAddress;
+            System.Net.IPHostEntry host = new System.Net.IPHostEntry();
+            host = System.Net.Dns.GetHostEntry(HttpContext.Current.Request.UserHostAddress);
+            machineName = host.HostName;
+            return machineName;
+        }
     }
 }

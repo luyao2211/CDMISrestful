@@ -16,6 +16,7 @@ namespace CDMISrestful.Controllers
     public class MessageController : ApiController
     {
         static readonly IMessageRepository repository = new MessageRepository();
+        DataConnection pclsCache = new DataConnection();
         /// <summary>
         /// GetSMSDialogue 获取消息对话 GL 2015-10-10
         /// </summary>
@@ -27,7 +28,7 @@ namespace CDMISrestful.Controllers
         [EnableQuery]
         public List<Message> GetSMSDialogue(string Reciever, string SendBy)
         {
-            return repository.GetSMSDialogue(Reciever, SendBy);
+            return repository.GetSMSDialogue(pclsCache, Reciever, SendBy);
         }
 
         /// <summary>
@@ -44,8 +45,8 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/MessageInfo/message")]
         [ModelValidationFilter]
         public HttpResponseMessage PutSMSRead(Message item)
-        {         
-            int ret= repository.SetSMSRead(item.Receiver, item.SendBy, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);                       
+        {
+            int ret = repository.SetSMSRead(pclsCache, item.Receiver, item.SendBy, item.piUserId, item.piTerminalName, new CommonFunction().getRemoteIPAddress(), item.piDeviceType);                       
             return new ExceptionHandler().SetData(Request,ret);
         }
         /// <summary>
@@ -56,7 +57,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/MessageInfo/message")]
         public Message PostSMS(Message item)
         {
-            return repository.SetSMS(item.SendBy, item.Receiver, item.Content, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
+            return repository.SetSMS(pclsCache, item.SendBy, item.Receiver, item.Content, item.piUserId, item.piTerminalName, new CommonFunction().getRemoteIPAddress(), item.piDeviceType);
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/MessageInfo/message")]
         public Message GetLatestSMS(string DoctorId, string PatientId)
         {
-            return repository.GetLatestSMS(DoctorId, PatientId);
+            return repository.GetLatestSMS(pclsCache, DoctorId, PatientId);
         }
 
         /// <summary>
@@ -83,11 +84,11 @@ namespace CDMISrestful.Controllers
             string ret = "0";
             if (SendBy == "")
             {
-                ret = repository.GetSMSCountForAll(Reciever).ToString();
+                ret = repository.GetSMSCountForAll(pclsCache, Reciever).ToString();
             }
             else
             {
-                ret =  repository.GetSMSCountForOne(Reciever, SendBy).ToString();
+                ret = repository.GetSMSCountForOne(pclsCache, Reciever, SendBy).ToString();
             }
             return new ExceptionHandler().Common(Request, ret);
         }
@@ -102,7 +103,7 @@ namespace CDMISrestful.Controllers
         [EnableQuery]
         public List<Message> GetSMSList(string DoctorId, string CategoryCode)
         {
-            return repository.GetSMSList(DoctorId, CategoryCode);
+            return repository.GetSMSList(pclsCache, DoctorId, CategoryCode);
         }
 
     }
