@@ -579,62 +579,8 @@ namespace CDMISrestful.DataMethod
             }
         }
 
-        //GetPlanList34ByM 获取某模块患者的正在执行的和结束的计划列表 GL 2015-10-12
-        public List<GPlanInfo> GetPlanList34ByM(DataConnection pclsCache, string PatientId, string Module)
-        {
-            List<GPlanInfo> result = new List<GPlanInfo>();
-            try
-            {
-                GPlanInfo list = GetExecutingPlanByM(pclsCache, PatientId, Module);
-                if (list != null)
-                {
-                    //GPlanInfo PlanDeatil = new GPlanInfo();
-                    //PlanDeatil.PlanNo = list.PlanNo;
-                    //PlanDeatil.StartDate = Convert.ToInt32(list.StartDate);
-                    //PlanDeatil.EndDate = Convert.ToInt32(list.EndDate);
-                    string temp = list.StartDate.ToString().Substring(0, 4) + "/" + list.StartDate.ToString().Substring(4, 2) + "/" + list.StartDate.ToString().Substring(6, 2);
-                    string temp1 = list.EndDate.ToString().Substring(0, 4) + "/" + list.EndDate.ToString().Substring(4, 2) + "/" + list.EndDate.ToString().Substring(6, 2);
-                    list.PlanName = "当前计划：" + temp + "-" + temp1;
-                    list.PlanCompliance = GetComplianceByPlanNo(pclsCache, list.PlanNo).ToString();
-                    list.RemainingDays = new PlanInfoMethod().GetProgressRate(pclsCache, list.PlanNo).RemainingDays;
-                }
-                else
-                {
-                    //PlanDeatil PlanDeatil = new PlanDeatil();
-                    //PlanDeatil.PlanNo = "";
-                    list.PlanName = "当前计划";
-                }
-                result.Add(list);
 
 
-                List<PlanDeatil> endingPlanList = new List<PlanDeatil>();
-                endingPlanList = GetEndingPlan(pclsCache, PatientId, Module);
-                foreach (PlanDeatil item in endingPlanList)
-                {
-                    GPlanInfo PlanDeatil = new GPlanInfo();
-                    PlanDeatil.PlanNo = item.PlanNo;
-                    PlanDeatil.StartDate = item.StartDate.ToString();
-                    PlanDeatil.EndDate = item.EndDate.ToString();
-                    string temp = PlanDeatil.StartDate.ToString().Substring(0, 4) + "/" + PlanDeatil.StartDate.ToString().Substring(4, 2) + "/" + PlanDeatil.StartDate.ToString().Substring(6, 2);
-                    string temp1 = PlanDeatil.EndDate.ToString().Substring(0, 4) + "/" + PlanDeatil.EndDate.ToString().Substring(4, 2) + "/" + PlanDeatil.EndDate.ToString().Substring(6, 2);
-                    PlanDeatil.PlanName = "往期：" + temp + "-" + temp1;
-                    PlanDeatil.PlanCompliance = GetComplianceByPlanNo(pclsCache, list.PlanNo).ToString();
-                    PlanDeatil.RemainingDays = new PlanInfoMethod().GetProgressRate(pclsCache, list.PlanNo).RemainingDays;
-                    result.Add(PlanDeatil);
-                }
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetPlanList34ByM", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-            }
-            finally
-            {
-                pclsCache.DisConnect();
-            }
-        }
         //GetEndingPlan 获取某模块已经结束的计划 GL 2015-10-12
         public List<PlanDeatil> GetEndingPlan(DataConnection pclsCache, string PatientId, string Module)
         {
@@ -1724,7 +1670,6 @@ namespace CDMISrestful.DataMethod
             double ret=0;
             try
             {
-
                 ret = Convert.ToDouble(Ps.Compliance.GetComplianceByPlanNo(pclsCache.CacheConnectionObject, PlanNo));
                 return ret;
             }
@@ -2961,6 +2906,65 @@ namespace CDMISrestful.DataMethod
             {
             }
         }
-    }
 
+        #region 暂时不用
+        ////GetPlanList34ByM 获取某模块患者的正在执行的和结束的计划列表 GL 2015-10-12
+        //public List<GPlanInfo> GetPlanList34ByM(DataConnection pclsCache, string PatientId, string Module)
+        //{
+        //    List<GPlanInfo> result = new List<GPlanInfo>();
+        //    try
+        //    {
+        //        GPlanInfo list = GetExecutingPlanByM(pclsCache, PatientId, Module);
+        //        if (list != null)
+        //        {
+        //            //GPlanInfo PlanDeatil = new GPlanInfo();
+        //            //PlanDeatil.PlanNo = list.PlanNo;
+        //            //PlanDeatil.StartDate = Convert.ToInt32(list.StartDate);
+        //            //PlanDeatil.EndDate = Convert.ToInt32(list.EndDate);
+        //            string temp = list.StartDate.ToString().Substring(0, 4) + "/" + list.StartDate.ToString().Substring(4, 2) + "/" + list.StartDate.ToString().Substring(6, 2);
+        //            string temp1 = list.EndDate.ToString().Substring(0, 4) + "/" + list.EndDate.ToString().Substring(4, 2) + "/" + list.EndDate.ToString().Substring(6, 2);
+        //            list.PlanName = "当前计划：" + temp + "-" + temp1;
+        //            list.PlanCompliance = GetComplianceByPlanNo(pclsCache, list.PlanNo).ToString();
+        //            list.RemainingDays = new PlanInfoMethod().GetProgressRate(pclsCache, list.PlanNo).RemainingDays;
+        //        }
+        //        else
+        //        {
+        //            //PlanDeatil PlanDeatil = new PlanDeatil();
+        //            //PlanDeatil.PlanNo = "";
+        //            list.PlanName = "当前计划";
+        //        }
+        //        result.Add(list);
+
+
+        //        List<PlanDeatil> endingPlanList = new List<PlanDeatil>();
+        //        endingPlanList = GetEndingPlan(pclsCache, PatientId, Module);
+        //        foreach (PlanDeatil item in endingPlanList)
+        //        {
+        //            GPlanInfo PlanDeatil = new GPlanInfo();
+        //            PlanDeatil.PlanNo = item.PlanNo;
+        //            PlanDeatil.StartDate = item.StartDate.ToString();
+        //            PlanDeatil.EndDate = item.EndDate.ToString();
+        //            string temp = PlanDeatil.StartDate.ToString().Substring(0, 4) + "/" + PlanDeatil.StartDate.ToString().Substring(4, 2) + "/" + PlanDeatil.StartDate.ToString().Substring(6, 2);
+        //            string temp1 = PlanDeatil.EndDate.ToString().Substring(0, 4) + "/" + PlanDeatil.EndDate.ToString().Substring(4, 2) + "/" + PlanDeatil.EndDate.ToString().Substring(6, 2);
+        //            PlanDeatil.PlanName = "往期：" + temp + "-" + temp1;
+        //            PlanDeatil.PlanCompliance = GetComplianceByPlanNo(pclsCache, list.PlanNo).ToString();
+        //            PlanDeatil.RemainingDays = new PlanInfoMethod().GetProgressRate(pclsCache, list.PlanNo).RemainingDays;
+        //            result.Add(PlanDeatil);
+        //        }
+
+        //        return result;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetPlanList34ByM", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        pclsCache.DisConnect();
+        //    }
+        //}
+        #endregion
+
+    }
 }

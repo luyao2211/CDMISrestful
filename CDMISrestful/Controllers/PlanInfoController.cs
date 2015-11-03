@@ -274,7 +274,7 @@ namespace CDMISrestful.Controllers
             if (PlanNo != "NULL")
             {
                 GPlanInfo ret = repository.GetPlanInfo(pclsCache, PlanNo);
-                ret.PlanCompliance = repository.GetComplianceByPlanNo(pclsCache, PlanNo).ToString();
+                //ret.PlanCompliance = repository.GetComplianceByPlanNo(pclsCache, PlanNo).ToString();
                 List<GPlanInfo> list = new List<GPlanInfo>();
                 list.Add(ret);
                 return new ExceptionHandler().toJson(list);

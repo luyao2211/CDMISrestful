@@ -121,7 +121,9 @@ namespace CDMISrestful.Models
         //获取某计划的进度和剩余天数（取PlanNo，StartDate，EndDate） GL 2015-10-13
         public GPlanInfo GetPlanInfo(DataConnection pclsCache, string PlanNo)
         {
-            return new PlanInfoMethod().GetPlanInfo(pclsCache, PlanNo);
+           GPlanInfo ret = new PlanInfoMethod().GetPlanInfo(pclsCache, PlanNo);
+           ret.PlanCompliance = new PlanInfoMethod().GetComplianceByPlanNo(pclsCache, PlanNo).ToString();
+           return ret;
         }
 
         //通过某计划的日期，获取该天的任务完成详情 用于图上点点击时弹框内容 GL 2015-10-13
@@ -995,11 +997,11 @@ namespace CDMISrestful.Models
             }
         }     
 
-        //根据计划编码和日期，获取依从率 GL 2015-10-13
-        public List<GPlanInfo> GetPlanList34ByM(DataConnection pclsCache, string PatientId, string Module)
-        {
-            return new PlanInfoMethod().GetPlanList34ByM(pclsCache, PatientId, Module);
-        }
+        ////根据计划编码和日期，获取依从率 GL 2015-10-13
+        //public List<GPlanInfo> GetPlanList34ByM(DataConnection pclsCache, string PatientId, string Module)
+        //{
+        //    return new PlanInfoMethod().GetPlanList34ByM(pclsCache, PatientId, Module);
+        //}
 
         //获取某计划的某段时间(包括端点)的依从率列表 GL 2015-10-13
         public List<ComplianceListByPeriod> GetAllComplianceListByPeriod(DataConnection pclsCache, string PlanNo, int StartDate, int EndDate)

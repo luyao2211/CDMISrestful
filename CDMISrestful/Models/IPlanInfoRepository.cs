@@ -29,7 +29,7 @@ namespace CDMISrestful.Models
         //string GetPlanInfobyPID(string PatientId);
         //ImplementationPhone GetImplementationForPhone(string PatientId, string Module);
 
-        List<GPlanInfo> GetPlanList34ByM(DataConnection pclsCache, string PatientId, string Module);
+        //List<GPlanInfo> GetPlanList34ByM(DataConnection pclsCache, string PatientId, string Module);
         List<ComplianceListByPeriod> GetAllComplianceListByPeriod(DataConnection pclsCache, string PlanNo, int StartDate, int EndDate);
         List<PsTask> GetTasks(DataConnection pclsCache, string PlanNo, string ParentCode, string Date, string PatientId);
         List<TaskDetail> GetTaskDetails(DataConnection pclsCache, string CategoryCode, string Code);
