@@ -108,55 +108,71 @@ namespace CDMISrestful.DataMethod
                 //诊断
                 List<DiagnosisInfo> List_Diagnosis = new List<DiagnosisInfo>();
                 List_Diagnosis = PsDiagnosisGetDiagnosisInfo(pclsCache, UserId, VisitId);
-                for (int i = 0; i < List_Diagnosis.Count; i++)
+                if (List_Diagnosis != null)
                 {
-                    ClinicalTrans NewLine = new ClinicalTrans();
-                    NewLine.精确时间 = Convert.ToDateTime(List_Diagnosis[i].RecordDate);
-                    NewLine.类型 = "诊断";
-                    NewLine.VisitId = VisitId;
-                    NewLine.事件 = "诊断：" + List_Diagnosis[i].TypeName;
-                    NewLine.关键属性 = "DiagnosisInfo" + "|" + VisitId + "|" + Convert.ToDateTime(List_Diagnosis[i].RecordDate).ToString("yyyy-MM-ddHH:mm:ss");
-                    List_Trans.Add(NewLine);
+                    for (int i = 0; i < List_Diagnosis.Count; i++)
+                    {
+                         ClinicalTrans NewLine = new ClinicalTrans();
+                         NewLine.精确时间 = Convert.ToDateTime(List_Diagnosis[i].RecordDate);
+                         NewLine.类型 = "诊断";
+                         NewLine.VisitId = VisitId;
+                         NewLine.事件 = "诊断：" + List_Diagnosis[i].TypeName;
+                         NewLine.关键属性 = "DiagnosisInfo" + "|" + VisitId + "|" + Convert.ToDateTime(List_Diagnosis[i].RecordDate).ToString("yyyy-MM-ddHH:mm:ss");
+                         List_Trans.Add(NewLine);
+                     }
                 }
+                
                 //检查
                 List<ExamInfo> List_Examination = new List<ExamInfo>();
                 List_Examination = PsExaminationGetExaminationList(pclsCache, UserId, VisitId);
-                for (int i = 0; i < List_Examination.Count; i++)
+                if (List_Examination != null)
                 {
-                    ClinicalTrans NewLine = new ClinicalTrans();
-                    NewLine.精确时间 = Convert.ToDateTime(List_Examination[i].ExamDate);
-                    NewLine.类型 = "检查";
-                    NewLine.VisitId = VisitId;
-                    NewLine.事件 = "检查：" + List_Examination[i].ExamTypeName;
-                    NewLine.关键属性 = "ExaminationInfo" + "|" + VisitId + "|" + Convert.ToDateTime(List_Examination[i].ExamDate).ToString("yyyy-MM-ddHH:mm:ss");
-                    List_Trans.Add(NewLine);
+                    for (int i = 0; i < List_Examination.Count; i++)
+                    {
+                        ClinicalTrans NewLine = new ClinicalTrans();
+                        NewLine.精确时间 = Convert.ToDateTime(List_Examination[i].ExamDate);
+                        NewLine.类型 = "检查";
+                        NewLine.VisitId = VisitId;
+                        NewLine.事件 = "检查：" + List_Examination[i].ExamTypeName;
+                        NewLine.关键属性 = "ExaminationInfo" + "|" + VisitId + "|" + Convert.ToDateTime(List_Examination[i].ExamDate).ToString("yyyy-MM-ddHH:mm:ss");
+                        List_Trans.Add(NewLine);
+                    }
                 }
+
                 //化验
                 List<LabTestList> List_LabTest = new List<LabTestList>();
                 List_LabTest = GetLabTestList(pclsCache, UserId, VisitId);
-                for (int i = 0; i < List_LabTest.Count; i++)
+                if (List_LabTest != null)
                 {
-                    ClinicalTrans NewLine = new ClinicalTrans();
-                    NewLine.精确时间 = Convert.ToDateTime(List_LabTest[i].LabTestDate);
-                    NewLine.类型 = "化验";
-                    NewLine.VisitId = VisitId;
-                    NewLine.事件 = "化验：" + List_LabTest[i].LabItemName;
-                    NewLine.关键属性 = "LabTestInfo" + "|" + VisitId + "|" + Convert.ToDateTime(List_LabTest[i].LabTestDate).ToString("yyyy-MM-ddHH:mm:ss");
-                    List_Trans.Add(NewLine);
+                    for (int i = 0; i < List_LabTest.Count; i++)
+                    {
+                        ClinicalTrans NewLine = new ClinicalTrans();
+                        NewLine.精确时间 = Convert.ToDateTime(List_LabTest[i].LabTestDate);
+                        NewLine.类型 = "化验";
+                        NewLine.VisitId = VisitId;
+                        NewLine.事件 = "化验：" + List_LabTest[i].LabItemName;
+                        NewLine.关键属性 = "LabTestInfo" + "|" + VisitId + "|" + Convert.ToDateTime(List_LabTest[i].LabTestDate).ToString("yyyy-MM-ddHH:mm:ss");
+                        List_Trans.Add(NewLine);
+                    }
                 }
+
                 //用药    
                 List<DrugRecord> List_DrugRecord = new List<DrugRecord>();
                 List_DrugRecord = GetDrugRecord(pclsCache, UserId, VisitId);
-                for (int i = 0; i < List_DrugRecord.Count; i++)
+                if (List_DrugRecord != null)
                 {
-                    ClinicalTrans NewLine = new ClinicalTrans();
-                    NewLine.精确时间 = Convert.ToDateTime(List_DrugRecord[i].StartDateTime);
-                    NewLine.类型 = "用药";
-                    NewLine.VisitId = VisitId;
-                    NewLine.事件 = "用药：" + List_DrugRecord[i].HistoryContent;
-                    NewLine.关键属性 = "DrugRecord" + "|" + VisitId + "|" + Convert.ToDateTime(List_DrugRecord[i].StartDateTime).ToString("yyyy-MM-ddHH:mm:ss");
-                    List_Trans.Add(NewLine);
+                    for (int i = 0; i < List_DrugRecord.Count; i++)
+                    {
+                        ClinicalTrans NewLine = new ClinicalTrans();
+                        NewLine.精确时间 = Convert.ToDateTime(List_DrugRecord[i].StartDateTime);
+                        NewLine.类型 = "用药";
+                        NewLine.VisitId = VisitId;
+                        NewLine.事件 = "用药：" + List_DrugRecord[i].HistoryContent;
+                        NewLine.关键属性 = "DrugRecord" + "|" + VisitId + "|" + Convert.ToDateTime(List_DrugRecord[i].StartDateTime).ToString("yyyy-MM-ddHH:mm:ss");
+                        List_Trans.Add(NewLine);
+                    }
                 }
+
                 return List_Trans;
             }
             catch (Exception ex)
@@ -1064,25 +1080,28 @@ namespace CDMISrestful.DataMethod
                     //住院-出院（DischargeDate为1900/1/1 0:00:00，表示目前正在住院）  【注意：应该取该Vid下最大sortNo】   出院时间必须提前取出，考虑门诊在住院期间的情况
                     DateTime DischargeDate;
                     DischargeDate = (DateTime)Ps.InPatientInfo.GetDischargeDate(pclsCache.CacheConnectionObject, UserId, cdr["VisitId"].ToString());
-                    if (DischargeDate.ToString() == "9999/1/1 0:00:00")
+                    if (DischargeDate != null)
                     {
-                        ClinicalTrans NewLine_1 = new ClinicalTrans();
-                        DischargeDate = DateTime.Now; //取当前时间
-                        NewLine_1.精确时间 = DischargeDate;
-                        NewLine_1.类型 = "当前住院中";
-                        NewLine_1.VisitId = cdr["VisitId"].ToString();
-                        NewLine_1.事件 = cdr["HospitalName"].ToString() + "：" + cdr["DepartmentName"].ToString() + "（当前住院中）";
-                        list.Add(NewLine_1);
-                    }
-                    else
-                    {
-                        //已经出院
-                        ClinicalTrans NewLine_1 = new ClinicalTrans();
-                        NewLine_1.精确时间 = DischargeDate;
-                        NewLine_1.类型 = "出院";
-                        NewLine_1.VisitId = cdr["VisitId"].ToString();
-                        NewLine_1.事件 = cdr["HospitalName"].ToString() + "：" + cdr["DepartmentName"].ToString() + "（出院）";
-                        list.Add(NewLine_1);
+                        if (DischargeDate.ToString() == "9999/1/1 0:00:00")
+                        {
+                            ClinicalTrans NewLine_1 = new ClinicalTrans();
+                            DischargeDate = DateTime.Now; //取当前时间
+                            NewLine_1.精确时间 = DischargeDate;
+                            NewLine_1.类型 = "当前住院中";
+                            NewLine_1.VisitId = cdr["VisitId"].ToString();
+                            NewLine_1.事件 = cdr["HospitalName"].ToString() + "：" + cdr["DepartmentName"].ToString() + "（当前住院中）";
+                            list.Add(NewLine_1);
+                        }
+                        else
+                        {
+                            //已经出院
+                            ClinicalTrans NewLine_1 = new ClinicalTrans();
+                            NewLine_1.精确时间 = DischargeDate;
+                            NewLine_1.类型 = "出院";
+                            NewLine_1.VisitId = cdr["VisitId"].ToString();
+                            NewLine_1.事件 = cdr["HospitalName"].ToString() + "：" + cdr["DepartmentName"].ToString() + "（出院）";
+                            list.Add(NewLine_1);
+                        }
                     }
                 }
                 //Ps.OutPatientInfo 包括门诊和急诊
@@ -1119,90 +1138,96 @@ namespace CDMISrestful.DataMethod
                 #endregion
                 #region list有数据时→排序,取Num条，并确定标记 （注意：极端情况-住院期间嵌套很多门诊  解决方案，后期判断取够或到底为止，满足 门诊日期<入院日期）
                 //就诊有数据时，排序→确定标记（取出<=Num条数据）
-                if (list.Count > 0)   //保证有数据
+                if(list != null)
                 {
-                    //住院、门诊按时间排序
-                    list.Sort((x, y) => -x.精确时间.CompareTo(y.精确时间));
-                    int NumMark = 0;
-                    int TypeMark = 0;     //TypeMark：遇到入院，变为1；出院变为0 （确定是否在住院期间）
-                    int j = 0;
-                    int CoNum = 0;  //从dtNew中拿出的实际条数
-                    for (j = 0; j < list.Count; j++)  //for循环是在，内容执行完成后，j才加1；若中途break
+                    #region
+                    if (list.Count > 0)   //保证有数据
                     {
-                        if ((list[j].类型 == "出院") || (list[j].类型 == "当前住院中"))
+                        //住院、门诊按时间排序
+                        list.Sort((x, y) => -x.精确时间.CompareTo(y.精确时间));
+                        int NumMark = 0;
+                        int TypeMark = 0;     //TypeMark：遇到入院，变为1；出院变为0 （确定是否在住院期间）
+                        int j = 0;
+                        int CoNum = 0;  //从dtNew中拿出的实际条数
+                        for (j = 0; j < list.Count; j++)  //for循环是在，内容执行完成后，j才加1；若中途break
                         {
-                            TypeMark = 1; //表明在住院
+                            if ((list[j].类型 == "出院") || (list[j].类型 == "当前住院中"))
+                            {
+                                TypeMark = 1; //表明在住院
+                            }
+                            if (list[j].类型 == "入院")
+                            {
+                                TypeMark = 0; //表明某一住院阶段结束
+                            }
+                            if (((list[j].类型 == "门诊") && (TypeMark == 0)) || ((list[j].类型 == "急诊") && (TypeMark == 0))) { NumMark++; } //在住院期间的门诊不作为NumMark的计数
+                            if (list[j].类型 == "入院") { NumMark++; }
+                            if (NumMark == Num)
+                            {
+                                CoNum = j + 1; //break的时候 j不会继续自加直接跳出for循环
+                                break;
+                            }
                         }
-                        if (list[j].类型 == "入院")
+                        if (CoNum == 0)   //不是所需条数达到Num、break的情况
                         {
-                            TypeMark = 0; //表明某一住院阶段结束
+                            CoNum = j;
                         }
-                        if (((list[j].类型 == "门诊") && (TypeMark == 0)) || ((list[j].类型 == "急诊") && (TypeMark == 0))) { NumMark++; } //在住院期间的门诊不作为NumMark的计数
-                        if (list[j].类型 == "入院") { NumMark++; }
-                        if (NumMark == Num)
+                        //分析：最后一条 要么是门诊（不在住院阶段），要么入院
+                        //表格输出（注意入院和出院拆开了，一条变两条影响计数，所以用j,而不是Num)
+                        for (int i = 0; i < CoNum; i++)     //j+1的情况：是有剩余   【有问题：只有门诊的话 ，只取到j】
                         {
-                            CoNum = j + 1; //break的时候 j不会继续自加直接跳出for循环
-                            break;
+                            //NewTable.ImportRow((DataRow)rows[i]);
+                            ClinicalTrans NewLine = list[i];
+                            NewTable.Add(NewLine);
                         }
-                    }
-                    if (CoNum == 0)   //不是所需条数达到Num、break的情况
-                    {
-                        CoNum = j;
-                    }
-                    //分析：最后一条 要么是门诊（不在住院阶段），要么入院
-                    //表格输出（注意入院和出院拆开了，一条变两条影响计数，所以用j,而不是Num)
-                    for (int i = 0; i < CoNum; i++)     //j+1的情况：是有剩余   【有问题：只有门诊的话 ，只取到j】
-                    {
-                        //NewTable.ImportRow((DataRow)rows[i]);
-                        ClinicalTrans NewLine = list[i];
-                        NewTable.Add(NewLine);
-                    }
-                    //获取两张表的当前标记  由于表默认取出（是按时间倒序，所以应该去最后一条，才是标记
-                    //住院
-                    List<ClinicalTrans> InRows = NewTable.FindAll(delegate(ClinicalTrans x)
-                    {
-                        return x.类型.Contains("入院");
-                    });
-                    InRows.Sort((x, y) => -x.精确时间.CompareTo(y.精确时间));
-                    if (InRows == null || InRows.Count == 0)
-                    {
-                        AdmissionDateMark = AdmissionDate;
+                        //获取两张表的当前标记  由于表默认取出（是按时间倒序，所以应该去最后一条，才是标记
+                        //住院
+                        List<ClinicalTrans> InRows = NewTable.FindAll(delegate(ClinicalTrans x)
+                        {
+                            return x.类型.Contains("入院");
+                        });
+                        InRows.Sort((x, y) => -x.精确时间.CompareTo(y.精确时间));
+                        if (InRows == null || InRows.Count == 0)
+                        {
+                            AdmissionDateMark = AdmissionDate;
+                        }
+                        else
+                        {
+                            AdmissionDateMark = DateTime.Parse(InRows[InRows.Count - 1].精确时间.ToString());
+                        }
+                        //门诊
+                        List<ClinicalTrans> OutRows = NewTable.FindAll(delegate(ClinicalTrans x)
+                        {
+                            return x.类型.Contains("诊");
+                        });
+                        OutRows.Sort((x, y) => -x.精确时间.CompareTo(y.精确时间));
+                        if (OutRows == null || OutRows.Count == 0)
+                        {
+                            ClinicDateMark = ClinicDate;
+                        }
+                        else
+                        {
+                            ClinicDateMark = DateTime.Parse(OutRows[OutRows.Count - 1].精确时间.ToString());
+                        }
+                        //将两张表当前指针标记，放在表的最后，用VisitTypeName="标志"，做区分
+                        ClinicalTrans Pointer = new ClinicalTrans();
+                        Pointer.精确时间 = AdmissionDateMark;
+                        Pointer.类型 = ClinicDateMark.ToString();
+                        Pointer.VisitId = "指针";
+                        Pointer.事件 = "";
+                        NewTable.Add(Pointer);
                     }
                     else
                     {
-                        AdmissionDateMark = DateTime.Parse(InRows[InRows.Count - 1].精确时间.ToString());
+                        ClinicalTrans Pointer = new ClinicalTrans();
+                        Pointer.精确时间 = AdmissionDate;
+                        Pointer.类型 = ClinicDate.ToString();
+                        Pointer.VisitId = "指针";
+                        Pointer.事件 = "";
+                        NewTable.Add(Pointer);
                     }
-                    //门诊
-                    List<ClinicalTrans> OutRows = NewTable.FindAll(delegate(ClinicalTrans x)
-                    {
-                        return x.类型.Contains("诊");
-                    });
-                    OutRows.Sort((x, y) => -x.精确时间.CompareTo(y.精确时间));
-                    if (OutRows == null || OutRows.Count == 0)
-                    {
-                        ClinicDateMark = ClinicDate;
-                    }
-                    else
-                    {
-                        ClinicDateMark = DateTime.Parse(OutRows[OutRows.Count - 1].精确时间.ToString());
-                    }
-                    //将两张表当前指针标记，放在表的最后，用VisitTypeName="标志"，做区分
-                    ClinicalTrans Pointer = new ClinicalTrans();
-                    Pointer.精确时间 = AdmissionDateMark;
-                    Pointer.类型 = ClinicDateMark.ToString();
-                    Pointer.VisitId = "指针";
-                    Pointer.事件 = "";
-                    NewTable.Add(Pointer);
+                    #endregion
                 }
-                else
-                {
-                    ClinicalTrans Pointer = new ClinicalTrans();
-                    Pointer.精确时间 = AdmissionDate;
-                    Pointer.类型 = ClinicDate.ToString();
-                    Pointer.VisitId = "指针";
-                    Pointer.事件 = "";
-                    NewTable.Add(Pointer);
-                }
+                
                 #endregion
                 //DateSort、LeftShow、VisitTypeName、VisitId、Location
                 return NewTable;
@@ -1435,10 +1460,14 @@ namespace CDMISrestful.DataMethod
 
                 DT_InPatientInfo = PsInPatientInfoGetInfobyId(pclsCache, UserId);
                 DT_OutPatientInfo = PsOutPatientInfoGetInfobyId(pclsCache, UserId);
-
-                DS_ClinicalInfo.DT_InPatientInfo = DT_InPatientInfo;
-                DS_ClinicalInfo.DT_OutPatientInfo = DT_OutPatientInfo;
-
+                if (DT_InPatientInfo != null)
+                {
+                    DS_ClinicalInfo.DT_InPatientInfo = DT_InPatientInfo;
+                }
+                if (DT_OutPatientInfo != null)
+                {
+                    DS_ClinicalInfo.DT_OutPatientInfo = DT_OutPatientInfo;
+                }
                 return DS_ClinicalInfo;
             }
             catch (Exception ex)
