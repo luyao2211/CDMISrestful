@@ -50,12 +50,15 @@ namespace CDMISrestful.Models
                     {
                         int flag = 0;
                         List<string> AllRoleMatch = usersMethod.GetAllRoleMatch(pclsCache, UId);
-                        for (int i = 0; i < AllRoleMatch.Count; i++)
+                        if (AllRoleMatch != null)
                         {
-                            if (AllRoleMatch[i].ToString() == role)//查询条件
+                            for (int i = 0; i < AllRoleMatch.Count; i++)
                             {
-                                flag = 1;
-                                break;
+                                if (AllRoleMatch[i].ToString() == role)//查询条件
+                                {
+                                    flag = 1;
+                                    break;
+                                }
                             }
                         }
                         if (flag == 1)

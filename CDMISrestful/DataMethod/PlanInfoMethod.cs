@@ -596,7 +596,12 @@ namespace CDMISrestful.DataMethod
                     string temp1 = list.EndDate.ToString().Substring(0, 4) + "/" + list.EndDate.ToString().Substring(4, 2) + "/" + list.EndDate.ToString().Substring(6, 2);
                     list.PlanName = "当前计划：" + temp + "-" + temp1;
                     list.PlanCompliance = GetComplianceByPlanNo(pclsCache, list.PlanNo).ToString();
-                    list.RemainingDays = new PlanInfoMethod().GetProgressRate(pclsCache, list.PlanNo).RemainingDays;
+                    Progressrate temp2 = new PlanInfoMethod().GetProgressRate(pclsCache, list.PlanNo);
+                    list.RemainingDays = "";
+                    if(temp2 != null)
+                    {
+                        list.RemainingDays = temp2.RemainingDays;
+                    }
                 }
                 else
                 {
@@ -609,20 +614,27 @@ namespace CDMISrestful.DataMethod
 
                 List<PlanDeatil> endingPlanList = new List<PlanDeatil>();
                 endingPlanList = GetEndingPlan(pclsCache, PatientId, Module);
-                foreach (PlanDeatil item in endingPlanList)
+                if (endingPlanList!= null)
                 {
-                    GPlanInfo PlanDeatil = new GPlanInfo();
-                    PlanDeatil.PlanNo = item.PlanNo;
-                    PlanDeatil.StartDate = item.StartDate.ToString();
-                    PlanDeatil.EndDate = item.EndDate.ToString();
-                    string temp = PlanDeatil.StartDate.ToString().Substring(0, 4) + "/" + PlanDeatil.StartDate.ToString().Substring(4, 2) + "/" + PlanDeatil.StartDate.ToString().Substring(6, 2);
-                    string temp1 = PlanDeatil.EndDate.ToString().Substring(0, 4) + "/" + PlanDeatil.EndDate.ToString().Substring(4, 2) + "/" + PlanDeatil.EndDate.ToString().Substring(6, 2);
-                    PlanDeatil.PlanName = "往期：" + temp + "-" + temp1;
-                    PlanDeatil.PlanCompliance = GetComplianceByPlanNo(pclsCache, list.PlanNo).ToString();
-                    PlanDeatil.RemainingDays = new PlanInfoMethod().GetProgressRate(pclsCache, list.PlanNo).RemainingDays;
-                    result.Add(PlanDeatil);
+                    foreach (PlanDeatil item in endingPlanList)
+                    {
+                        GPlanInfo PlanDeatil = new GPlanInfo();
+                        PlanDeatil.PlanNo = item.PlanNo;
+                        PlanDeatil.StartDate = item.StartDate.ToString();
+                        PlanDeatil.EndDate = item.EndDate.ToString();
+                        string temp = PlanDeatil.StartDate.ToString().Substring(0, 4) + "/" + PlanDeatil.StartDate.ToString().Substring(4, 2) + "/" + PlanDeatil.StartDate.ToString().Substring(6, 2);
+                        string temp1 = PlanDeatil.EndDate.ToString().Substring(0, 4) + "/" + PlanDeatil.EndDate.ToString().Substring(4, 2) + "/" + PlanDeatil.EndDate.ToString().Substring(6, 2);
+                        PlanDeatil.PlanName = "往期：" + temp + "-" + temp1;
+                        PlanDeatil.PlanCompliance = GetComplianceByPlanNo(pclsCache, list.PlanNo).ToString();
+                        PlanDeatil.RemainingDays = "";
+                        Progressrate temp2 = new PlanInfoMethod().GetProgressRate(pclsCache, list.PlanNo);
+                        if (temp2 != null)
+                        {
+                            PlanDeatil.RemainingDays = temp2.RemainingDays;
+                        }
+                        result.Add(PlanDeatil);
+                    }
                 }
-
                 return result;
             }
             catch (Exception ex)
@@ -1239,12 +1251,13 @@ namespace CDMISrestful.DataMethod
                 list.Columns.Add(new DataColumn("TaskName", typeof(string)));
                 list.Columns.Add(new DataColumn("Status", typeof(int)));
                 list.Columns.Add(new DataColumn("Type", typeof(string))); //英文
-
-                foreach (TasksComByPeriodDT item in list0)
+                if (list0 != null)
                 {
-                    list.Rows.Add(item.Date, item.ComplianceValue, item.TaskType, item.TaskId, item.TaskName, item.Status, item.Type);
+                    foreach (TasksComByPeriodDT item in list0)
+                    {
+                        list.Rows.Add(item.Date, item.ComplianceValue, item.TaskType, item.TaskId, item.TaskName, item.Status, item.Type);
+                    }
                 }
-
                 //确保排序
                 DataView dv = list.DefaultView;
                 dv.Sort = "Date Asc, Type desc, Status Asc"; //体征s 生活l 用药d   前提：某计划内任务维持不变  即计划内每天的任务是一样的
@@ -1541,11 +1554,14 @@ namespace CDMISrestful.DataMethod
 
                     //string conditionBP1 = " TaskCode = 'Bloodpressure|Bloodpressure_1'";
                     List<TasksComList> BP1Rows = new List<TasksComList>();
-                    foreach (TasksComList item in ComplianceList)
+                    if (ComplianceList != null)
                     {
-                        if (item.TaskCode == "Bloodpressure|Bloodpressure_1")
+                        foreach (TasksComList item in ComplianceList)
                         {
-                            BP1Rows.Add(item);
+                            if (item.TaskCode == "Bloodpressure|Bloodpressure_1")
+                            {
+                                BP1Rows.Add(item);
+                            }
                         }
                     }
                     if ((BP1Rows != null) && (BP1Rows.Count == 1))
@@ -1565,11 +1581,14 @@ namespace CDMISrestful.DataMethod
 
                     // string conditionBP2 = " TaskCode = 'Bloodpressure|Bloodpressure_2'";
                     List<TasksComList> BP2Rows = new List<TasksComList>();
-                    foreach (TasksComList item in ComplianceList)
+                    if (ComplianceList != null)
                     {
-                        if (item.TaskCode == "Bloodpressure|Bloodpressure_2")
+                        foreach (TasksComList item in ComplianceList)
                         {
-                            BP2Rows.Add(item);
+                            if (item.TaskCode == "Bloodpressure|Bloodpressure_2")
+                            {
+                                BP2Rows.Add(item);
+                            }
                         }
                     }
                     if ((BP2Rows != null) && (BP2Rows.Count == 1))
@@ -1610,11 +1629,14 @@ namespace CDMISrestful.DataMethod
                     //脉率任务可能没没有，需要确认
                     //string conditionPR = " TaskCode = 'Pulserate|Pulserate_1'";
                     List<TasksComList> PulserateRows = new List<TasksComList>();
-                    foreach (TasksComList item in ComplianceList)
+                    if (ComplianceList != null)
                     {
-                        if (item.TaskCode == "Pulserate|Pulserate_1")
+                        foreach (TasksComList item in ComplianceList)
                         {
-                            BP2Rows.Add(item);
+                            if (item.TaskCode == "Pulserate|Pulserate_1")
+                            {
+                                BP2Rows.Add(item);
+                            }
                         }
                     }
                     if ((PulserateRows != null) && (PulserateRows.Count == 1))
@@ -1658,14 +1680,16 @@ namespace CDMISrestful.DataMethod
                 //生活方式 
                 //string condition = " Type = 'LifeStyle'";
                 List<TasksComList> LifeStyleRows = new List<TasksComList>();
-                foreach (TasksComList item in ComplianceList)
+                if (ComplianceList != null)
                 {
-                    if (item.Type == "LifeStyle")
+                    foreach (TasksComList item in ComplianceList)
                     {
-                        LifeStyleRows.Add(item);
+                        if (item.Type == "LifeStyle")
+                        {
+                            LifeStyleRows.Add(item);
+                        }
                     }
                 }
-
                 if ((LifeStyleRows != null) && (LifeStyleRows.Count > 0))
                 {
                     TaskComByType = new TaskComByType();
@@ -1687,11 +1711,14 @@ namespace CDMISrestful.DataMethod
                 //用药情况
                 //condition = " Type = 'Drug'";
                 List<TasksComList> DrugRows = new List<TasksComList>();
-                foreach (TasksComList item in ComplianceList)
+                if (ComplianceList != null)
                 {
-                    if (item.Type == "Drug")
+                    foreach (TasksComList item in ComplianceList)
                     {
-                        DrugRows.Add(item);
+                        if (item.Type == "Drug")
+                        {
+                            DrugRows.Add(item);
+                        }
                     }
                 }
                 if ((DrugRows != null) && (DrugRows.Count > 0))
@@ -2236,156 +2263,159 @@ namespace CDMISrestful.DataMethod
                 List<SignDetailByPeriod> pulInfo = new List<SignDetailByPeriod>();
                 pulInfo = GetSignDetailByPeriod(pclsCache, UserId, PlanNo, "Pulserate", "Pulserate_1", StartDate, EndDate);
                 //三张表都有数据
-                if ((sysInfo.Count == diaInfo.Count) && (sysInfo.Count == pulInfo.Count) && (sysInfo.Count > 0))
+                if ((sysInfo != null)&&(diaInfo != null)&&(pulInfo != null))
                 {
-                    for (int rowsCount = 0; rowsCount < sysInfo.Count; rowsCount++)
+                    if ((sysInfo.Count == diaInfo.Count) && (sysInfo.Count == pulInfo.Count) && (sysInfo.Count > 0))
                     {
-                        Graph Graph = new Graph();
-                        Graph.Date = sysInfo[rowsCount].RecordDate;
-                        #region 值、等级、颜色
-                        //值、等级、颜色、描述文本
-                        if ((Code == "Bloodpressure|Bloodpressure_1") && (reference != null)) //血压要求 reference 不为空
+                        for (int rowsCount = 0; rowsCount < sysInfo.Count; rowsCount++)
                         {
-                            #region 收缩压
-                            Graph.SignValue = "#";
-                            if (sysInfo[rowsCount].Value != "")
+                            Graph Graph = new Graph();
+                            Graph.Date = sysInfo[rowsCount].RecordDate;
+                            #region 值、等级、颜色
+                            //值、等级、颜色、描述文本
+                            if ((Code == "Bloodpressure|Bloodpressure_1") && (reference != null)) //血压要求 reference 不为空
                             {
-                                Graph.SignValue = sysInfo[rowsCount].Value;
+                                #region 收缩压
+                                Graph.SignValue = "#";
+                                if (sysInfo[rowsCount].Value != "")
+                                {
+                                    Graph.SignValue = sysInfo[rowsCount].Value;
+                                }
+                                //Graph.SignValue = sysInfo.Rows[rowsCount]["Value"].ToString();
+                                if (Graph.SignValue != "#")
+                                {
+                                    Graph.SignGrade = GetSignBPGrade("Bloodpressure_1", Convert.ToInt32(Graph.SignValue), reference);
+                                    Graph.SignColor = GetBPColor(Graph.SignGrade, "bullet");
+                                    //判断是否都有值
+                                    if ((sysInfo[rowsCount].Value != "") && (diaInfo[rowsCount].Value != "") && (pulInfo[rowsCount].Value != ""))
+                                    {
+                                        Graph.SignDescription = "血压：<b><span style='font-size:14px;'>" + sysInfo[rowsCount].Value + "</span></b>/" + diaInfo[rowsCount].Value + "mmHg<br>脉搏：" + pulInfo[rowsCount].Value + "次/分";
+                                    }
+                                    else if ((sysInfo[rowsCount].Value != "") || (diaInfo[rowsCount].Value != "") && (pulInfo[rowsCount].Value == ""))
+                                    {
+                                        Graph.SignDescription = "血压：<b><span style='font-size:14px;'>" + sysInfo[rowsCount].Value + "</span></b>/" + diaInfo[rowsCount].Value + "mmHg";
+                                    }
+                                    else if ((sysInfo[rowsCount].Value == "") && (diaInfo[rowsCount].Value == "") && (pulInfo[rowsCount].Value != ""))
+                                    {
+                                        Graph.SignDescription = "脉搏：" + pulInfo[rowsCount].Value + "次/分";
+                                    }
+                                    //Graph.SignDescription = "血压：<b><span style='font-size:14px;'>" + sysInfo.Rows[rowsCount]["Value"].ToString() + "</span></b>/" + diaInfo.Rows[rowsCount]["Value"].ToString() + "mmHg<br>脉搏：" + pulInfo.Rows[rowsCount]["Value"].ToString() + "次/分";
+                                    //"[[category]]<br>血压：<b><span style='font-size:14px;'>[[SBPvalue]] </span></b>/[[DBPvalue]]mmHg<br>脉搏：66次/分"
+                                }
+                                else
+                                {
+                                    Graph.SignGrade = "";
+                                    Graph.SignColor = "";
+                                    Graph.SignDescription = "";
+                                }
+                                #endregion
                             }
-                            //Graph.SignValue = sysInfo.Rows[rowsCount]["Value"].ToString();
-                            if (Graph.SignValue != "#")
+                            else if ((Code == "Bloodpressure|Bloodpressure_2") && (reference != null))  //舒张压
                             {
-                                Graph.SignGrade = GetSignBPGrade("Bloodpressure_1", Convert.ToInt32(Graph.SignValue), reference);
-                                Graph.SignColor = GetBPColor(Graph.SignGrade, "bullet");
+                                #region 舒张压
+                                Graph.SignValue = "#";
+                                if (diaInfo[rowsCount].Value != "")
+                                {
+                                    Graph.SignValue = diaInfo[rowsCount].Value;
+                                }
+                                //Graph.SignValue = diaInfo.Rows[rowsCount]["Value"].ToString();
+                                if (Graph.SignValue != "#")
+                                {
+                                    Graph.SignGrade = GetSignBPGrade("Bloodpressure_2", Convert.ToInt32(Graph.SignValue), reference);
+                                    Graph.SignColor = GetBPColor(Graph.SignGrade, "bullet");
+                                    //Graph.SignDescription = "血压：" + sysInfo.Rows[rowsCount]["Value"].ToString() + "/<b><span style='font-size:14px;'>" + diaInfo.Rows[rowsCount]["Value"].ToString() + "</span></b>mmHg<br>脉搏：" + pulInfo.Rows[rowsCount]["Value"].ToString() + "次/分";
+                                    //判断是否都有值
+                                    if ((sysInfo[rowsCount].Value != "") && (diaInfo[rowsCount].Value != "") && (pulInfo[rowsCount].Value != ""))
+                                    {
+                                        Graph.SignDescription = "血压：" + sysInfo[rowsCount].Value + "/<b><span style='font-size:14px;'>" + diaInfo[rowsCount].Value + "</span></b>mmHg<br>脉搏：" + pulInfo[rowsCount].Value + "次/分";
+                                    }
+                                    else if ((sysInfo[rowsCount].Value != "") || (diaInfo[rowsCount].Value != "") && (pulInfo[rowsCount].Value == ""))
+                                    {
+                                        Graph.SignDescription = "血压：" + sysInfo[rowsCount].Value + "/<b><span style='font-size:14px;'>" + diaInfo[rowsCount].Value + "</span></b>mmHg";
+                                    }
+                                    else if ((sysInfo[rowsCount].Value == "") && (diaInfo[rowsCount].Value == "") && (pulInfo[rowsCount].Value != ""))
+                                    {
+                                        Graph.SignDescription = "脉搏：" + pulInfo[rowsCount].Value + "次/分";
+                                    }
+                                }
+                                else
+                                {
+                                    Graph.SignGrade = "";
+                                    Graph.SignColor = "";
+                                    Graph.SignDescription = "";
+                                }
+                                #endregion
+                            }
+                            else if (Code == "Pulserate|Pulserate_1")  //脉率
+                            {
+                                #region 脉率
+                                Graph.SignValue = "#";
+                                if (pulInfo[rowsCount].Value != "")
+                                {
+                                    Graph.SignValue = pulInfo[rowsCount].Value;
+                                }
                                 //判断是否都有值
                                 if ((sysInfo[rowsCount].Value != "") && (diaInfo[rowsCount].Value != "") && (pulInfo[rowsCount].Value != ""))
                                 {
-                                    Graph.SignDescription = "血压：<b><span style='font-size:14px;'>" + sysInfo[rowsCount].Value + "</span></b>/" + diaInfo[rowsCount].Value + "mmHg<br>脉搏：" + pulInfo[rowsCount].Value + "次/分";
+                                    Graph.SignDescription = "血压：" + sysInfo[rowsCount].Value + "/" + diaInfo[rowsCount].Value + "mmHg<br>脉率：<b><span style='font-size:14px;'>" + pulInfo[rowsCount].Value + "</span></b>次/分";
                                 }
                                 else if ((sysInfo[rowsCount].Value != "") || (diaInfo[rowsCount].Value != "") && (pulInfo[rowsCount].Value == ""))
                                 {
-                                    Graph.SignDescription = "血压：<b><span style='font-size:14px;'>" + sysInfo[rowsCount].Value + "</span></b>/" + diaInfo[rowsCount].Value + "mmHg";
+                                    Graph.SignDescription = "血压：" + sysInfo[rowsCount].Value + "/" + diaInfo[rowsCount].Value + "mmHg";
                                 }
                                 else if ((sysInfo[rowsCount].Value == "") && (diaInfo[rowsCount].Value == "") && (pulInfo[rowsCount].Value != ""))
                                 {
-                                    Graph.SignDescription = "脉搏：" + pulInfo[rowsCount].Value + "次/分";
+                                    Graph.SignDescription = "脉率：<b><span style='font-size:14px;'>" + pulInfo[rowsCount].Value + "</span></b>次/分";
                                 }
-                                //Graph.SignDescription = "血压：<b><span style='font-size:14px;'>" + sysInfo.Rows[rowsCount]["Value"].ToString() + "</span></b>/" + diaInfo.Rows[rowsCount]["Value"].ToString() + "mmHg<br>脉搏：" + pulInfo.Rows[rowsCount]["Value"].ToString() + "次/分";
-                                //"[[category]]<br>血压：<b><span style='font-size:14px;'>[[SBPvalue]] </span></b>/[[DBPvalue]]mmHg<br>脉搏：66次/分"
-                            }
-                            else
-                            {
-                                Graph.SignGrade = "";
-                                Graph.SignColor = "";
-                                Graph.SignDescription = "";
+                                if (Graph.SignValue != "#")
+                                {
+                                    //脉率的分级 写死
+                                    if (Convert.ToDouble(Graph.SignValue) < 60)  //过慢
+                                    {
+                                        Graph.SignGrade = "过慢";
+                                        Graph.SignColor = "#8080C0"; //微紫
+                                    }
+                                    else if (Convert.ToDouble(Graph.SignValue) > 100) //过快
+                                    {
+                                        Graph.SignGrade = "过快";
+                                        Graph.SignColor = "#FF60AF";  //微红
+                                    }
+                                    else //成人 60~100之间包括端点 正常
+                                    {
+                                        Graph.SignGrade = "正常";
+                                        Graph.SignColor = "#00DB00";  //绿色
+                                    }
+                                }
+                                else
+                                {
+                                    Graph.SignGrade = "";
+                                    Graph.SignColor = "";
+                                    Graph.SignDescription = "";
+                                }
+                                #endregion
                             }
                             #endregion
-                        }
-                        else if ((Code == "Bloodpressure|Bloodpressure_2") && (reference != null))  //舒张压
-                        {
-                            #region 舒张压
-                            Graph.SignValue = "#";
-                            if (diaInfo[rowsCount].Value != "")
-                            {
-                                Graph.SignValue = diaInfo[rowsCount].Value;
-                            }
-                            //Graph.SignValue = diaInfo.Rows[rowsCount]["Value"].ToString();
-                            if (Graph.SignValue != "#")
-                            {
-                                Graph.SignGrade = GetSignBPGrade("Bloodpressure_2", Convert.ToInt32(Graph.SignValue), reference);
-                                Graph.SignColor = GetBPColor(Graph.SignGrade, "bullet");
-                                //Graph.SignDescription = "血压：" + sysInfo.Rows[rowsCount]["Value"].ToString() + "/<b><span style='font-size:14px;'>" + diaInfo.Rows[rowsCount]["Value"].ToString() + "</span></b>mmHg<br>脉搏：" + pulInfo.Rows[rowsCount]["Value"].ToString() + "次/分";
-                                //判断是否都有值
-                                if ((sysInfo[rowsCount].Value != "") && (diaInfo[rowsCount].Value != "") && (pulInfo[rowsCount].Value != ""))
-                                {
-                                    Graph.SignDescription = "血压：" + sysInfo[rowsCount].Value + "/<b><span style='font-size:14px;'>" + diaInfo[rowsCount].Value + "</span></b>mmHg<br>脉搏：" + pulInfo[rowsCount].Value + "次/分";
-                                }
-                                else if ((sysInfo[rowsCount].Value != "") || (diaInfo[rowsCount].Value != "") && (pulInfo[rowsCount].Value == ""))
-                                {
-                                    Graph.SignDescription = "血压：" + sysInfo[rowsCount].Value + "/<b><span style='font-size:14px;'>" + diaInfo[rowsCount].Value + "</span></b>mmHg";
-                                }
-                                else if ((sysInfo[rowsCount].Value == "") && (diaInfo[rowsCount].Value == "") && (pulInfo[rowsCount].Value != ""))
-                                {
-                                    Graph.SignDescription = "脉搏：" + pulInfo[rowsCount].Value + "次/分";
-                                }
-                            }
-                            else
-                            {
-                                Graph.SignGrade = "";
-                                Graph.SignColor = "";
-                                Graph.SignDescription = "";
-                            }
-                            #endregion
-                        }
-                        else if (Code == "Pulserate|Pulserate_1")  //脉率
-                        {
-                            #region 脉率
-                            Graph.SignValue = "#";
-                            if (pulInfo[rowsCount].Value != "")
-                            {
-                                Graph.SignValue = pulInfo[rowsCount].Value;
-                            }
-                            //判断是否都有值
-                            if ((sysInfo[rowsCount].Value != "") && (diaInfo[rowsCount].Value != "") && (pulInfo[rowsCount].Value != ""))
-                            {
-                                Graph.SignDescription = "血压：" + sysInfo[rowsCount].Value + "/" + diaInfo[rowsCount].Value + "mmHg<br>脉率：<b><span style='font-size:14px;'>" + pulInfo[rowsCount].Value + "</span></b>次/分";
-                            }
-                            else if ((sysInfo[rowsCount].Value != "") || (diaInfo[rowsCount].Value != "") && (pulInfo[rowsCount].Value == ""))
-                            {
-                                Graph.SignDescription = "血压：" + sysInfo[rowsCount].Value + "/" + diaInfo[rowsCount].Value + "mmHg";
-                            }
-                            else if ((sysInfo[rowsCount].Value == "") && (diaInfo[rowsCount].Value == "") && (pulInfo[rowsCount].Value != ""))
-                            {
-                                Graph.SignDescription = "脉率：<b><span style='font-size:14px;'>" + pulInfo[rowsCount].Value + "</span></b>次/分";
-                            }
-                            if (Graph.SignValue != "#")
-                            {
-                                //脉率的分级 写死
-                                if (Convert.ToDouble(Graph.SignValue) < 60)  //过慢
-                                {
-                                    Graph.SignGrade = "过慢";
-                                    Graph.SignColor = "#8080C0"; //微紫
-                                }
-                                else if (Convert.ToDouble(Graph.SignValue) > 100) //过快
-                                {
-                                    Graph.SignGrade = "过快";
-                                    Graph.SignColor = "#FF60AF";  //微红
-                                }
-                                else //成人 60~100之间包括端点 正常
-                                {
-                                    Graph.SignGrade = "正常";
-                                    Graph.SignColor = "#00DB00";  //绿色
-                                }
-                            }
-                            else
-                            {
-                                Graph.SignGrade = "";
-                                Graph.SignColor = "";
-                                Graph.SignDescription = "";
-                            }
-                            #endregion
-                        }
-                        #endregion
-                        //形状
-                        if (rowsCount != sysInfo.Count - 1)
-                        {
-                            Graph.SignShape = "round";
-                            Graph.SignShape = "round";
-                        }
-                        else
-                        {
-                            if (serverTime == Graph.Date)  //当天的血压点形状用菱形
-                            {
-                                Graph.SignShape = "diamond";
-                                Graph.SignShape = "diamond";
-                            }
-                            else
+                            //形状
+                            if (rowsCount != sysInfo.Count - 1)
                             {
                                 Graph.SignShape = "round";
                                 Graph.SignShape = "round";
                             }
+                            else
+                            {
+                                if (serverTime == Graph.Date)  //当天的血压点形状用菱形
+                                {
+                                    Graph.SignShape = "diamond";
+                                    Graph.SignShape = "diamond";
+                                }
+                                else
+                                {
+                                    Graph.SignShape = "round";
+                                    Graph.SignShape = "round";
+                                }
+                            }
+                            graphList.Add(Graph);
                         }
-                        graphList.Add(Graph);
                     }
                 }
                 //有血压任务，没有脉率
@@ -2918,7 +2948,8 @@ namespace CDMISrestful.DataMethod
                 int i = 0;
                 int j = 0;//为了找两个特殊的计划，即包括输入的StartDate和EndDate的两个计划，后面取依从率就在这两个计划之间取
                 int k = 0;
-              
+                if (list1 != null)
+                {
                     for (; i < list1.Count; i++)// && (int.Parse(list1[i].EndDate) >= int.Parse(StartDate))
                     {
                         if ((int.Parse(list1[i].StartDate) <= int.Parse(StartDate)))
@@ -2935,18 +2966,22 @@ namespace CDMISrestful.DataMethod
                         }
                     }
                 
-                for (k = i; k >= j; k--)
-                {//每次取一个计划的信息，但每个计划里面还是有多条信息
-                    int SD = int.Parse(list1[k].StartDate) > int.Parse(StartDate) ? int.Parse(list1[k].StartDate) : int.Parse(StartDate);
-                    int ED = int.Parse(list1[k].EndDate) < int.Parse(EndDate) ? int.Parse(list1[k].EndDate) : int.Parse(EndDate);
-                    list2 = new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, list1[k].PlanNo, SD, ED);
-                    for (int m = 0; m < list2.Count; m++)
-                    {
-                        ComplianceDate oneday = new ComplianceDate();   //输出
-                        oneday.Date = list2[m].Date;
-                        oneday.PlanNo = list1[k].PlanNo;
-                        oneday.Compliance = list2[k].Compliance;
-                        ComplianceList.Add(oneday);
+                    for (k = i; k >= j; k--)
+                    {//每次取一个计划的信息，但每个计划里面还是有多条信息
+                        int SD = int.Parse(list1[k].StartDate) > int.Parse(StartDate) ? int.Parse(list1[k].StartDate) : int.Parse(StartDate);
+                        int ED = int.Parse(list1[k].EndDate) < int.Parse(EndDate) ? int.Parse(list1[k].EndDate) : int.Parse(EndDate);
+                        list2 = new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, list1[k].PlanNo, SD, ED);
+                        if (list2 != null)
+                        {
+                            for (int m = 0; m < list2.Count; m++)
+                            {
+                                ComplianceDate oneday = new ComplianceDate();   //输出
+                                oneday.Date = list2[m].Date;
+                                oneday.PlanNo = list1[k].PlanNo;
+                                oneday.Compliance = list2[k].Compliance;
+                                ComplianceList.Add(oneday);
+                            }
+                        }
                     }
                 }
                 return ComplianceList;

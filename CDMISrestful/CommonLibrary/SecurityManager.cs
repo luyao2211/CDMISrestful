@@ -130,8 +130,12 @@ namespace CDMISrestful.CommonLibrary
                                    //string password = "password";
                                    UserInfoByUserId list = new UserInfoByUserId();
                                    list = new UsersMethod().GetUserInfoByUserId(pclsCache, UserIdCheck);
-                                   string password = list.Password;
-                                   // Hash the message with the key to generate a token.
+                                   string password = "";
+                                   if (list != null)
+                                   {
+                                       password = list.Password;
+                                   }
+                                    // Hash the message with the key to generate a token.
                                    string computedToken = GenerateToken(UserId, password, role, tokentime);
 
                                    // Compare the computed token with the one supplied and ensure they match.
