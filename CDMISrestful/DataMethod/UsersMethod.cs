@@ -966,10 +966,15 @@ namespace CDMISrestful.DataMethod
 
                         dcf = new UsersMethod().GetDoctorInfo(pclsCache, list1[i].UserId);//获取基本信息
                         hcf.healthCoachID = list1[i].UserId;
-                        hcf.name = dcf.DoctorName;
-                        hcf.sex = dcf.Gender;
-                        hcf.age = Convert.ToString(new UsersMethod().GetAgeByBirthDay(pclsCache, Convert.ToInt32(dcf.Birthday)));
-
+                        hcf.name = "";
+                        hcf.sex = "";
+                        hcf.age = "";
+                        if (dcf != null)
+                        {
+                            hcf.name = dcf.DoctorName;
+                            hcf.sex = dcf.Gender;
+                            hcf.age = Convert.ToString(new UsersMethod().GetAgeByBirthDay(pclsCache, Convert.ToInt32(dcf.Birthday)));
+                        }
                         moudlecodes = new UsersMethod().GetModuleByDoctorId(pclsCache, list1[i].UserId);
                         if (moudlecodes != null)
                         {
@@ -1034,11 +1039,15 @@ namespace CDMISrestful.DataMethod
             try
             {
                 DoctorInfo ret1 = GetDoctorInfo(pclsCache, HealthCoachID);//获取基本信息
-
-                ret.name = ret1.DoctorName;
-                ret.sex = ret1.Gender;
-                //ret.age = Convert.ToString(Ps.BasicInfo.GetAgeByBirthDay(pclsCache.CacheConnectionObject, Convert.ToInt32(ret1.Birthday)));
-                ret.age = Convert.ToString(new UsersMethod().GetAgeByBirthDay(pclsCache, Convert.ToInt32(ret1.Birthday)));
+                ret.name = "";
+                ret.sex = "";
+                ret.age = "";
+                if (ret1 != null)
+                {
+                    ret.name = ret1.DoctorName;
+                    ret.sex = ret1.Gender;
+                    ret.age = Convert.ToString(new UsersMethod().GetAgeByBirthDay(pclsCache, Convert.ToInt32(ret1.Birthday)));
+                }
                 string moudlecodes = "";
                 string[] moudlecode = null;
                 moudlecodes = new UsersMethod().GetModuleByDoctorId(pclsCache, HealthCoachID);

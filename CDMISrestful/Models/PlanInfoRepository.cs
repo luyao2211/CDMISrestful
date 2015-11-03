@@ -73,9 +73,12 @@ namespace CDMISrestful.Models
             {
                 List<PsDrugRecord> list = new List<PsDrugRecord>();
                 list = new ClinicInfoMethod().GetPsDrugRecord(pclsCache, PatientId, Module);
-                if (list.Count > 0) //排序(降序)
+                if (list != null)
                 {
-                    list.Sort((x, y) => -(x.StartDateTime).CompareTo(y.StartDateTime));
+                    if (list.Count > 0) //排序(降序)
+                    {
+                        list.Sort((x, y) => -(x.StartDateTime).CompareTo(y.StartDateTime));
+                    }
                 }
                 return list;
             }
@@ -181,10 +184,13 @@ namespace CDMISrestful.Models
                     GraphList = new PlanInfoMethod().GetSignInfoByM1(pclsCache, PatientId, PlanNo, ItemCode, StartDate, EndDate, reference);
 
                     //初始值、目标值、分级规则加工
-                    if (GraphList.Count > 0)
+                    if (GraphList != null)
                     {
-                        GraphGuide = new PlanInfoMethod().GetGuidesByCode(pclsCache, PlanNo, ItemCode, reference);
-                        ChartData.GraphGuide = GraphGuide;
+                        if (GraphList.Count > 0)
+                        {
+                            GraphGuide = new PlanInfoMethod().GetGuidesByCode(pclsCache, PlanNo, ItemCode, reference);
+                            ChartData.GraphGuide = GraphGuide;
+                        }
                     }
                 }
 
@@ -246,8 +252,12 @@ namespace CDMISrestful.Models
             {
                 //string ret = "";
                 GPlanInfo planInfo = new PlanInfoMethod().GetExecutingPlanByM(pclsCache, PatientId, Module);
-                planInfo.RemainingDays = new PlanInfoMethod().GetProgressRate(pclsCache, planInfo.PlanNo).RemainingDays;
-
+                planInfo.RemainingDays = "";
+                Progressrate temp2 = new PlanInfoMethod().GetProgressRate(pclsCache, planInfo.PlanNo);
+                if (temp2 != null)
+                {
+                    planInfo.RemainingDays = temp2.RemainingDays;
+                }
                 if (planInfo != null)
                 {
                     //ret = planInfo.PlanNo;
@@ -1030,13 +1040,16 @@ namespace CDMISrestful.Models
                         task.Name = tasksOne[i].Name;
                         task.Status = tasksOne[i].Status;
                         List<PsTask> tasksTwo = new PlanInfoMethod().GetTasks(pclsCache, PlanNo, tasksOne[i].Code, Date, "");
-                        for (int j = 0; j < tasksTwo.Count; j++)
+                        if (tasksTwo != null)
                         {
-                            TasksForClickDtl dtl = new TasksForClickDtl();
-                            dtl.Code = tasksTwo[j].Code;
-                            dtl.Name = tasksTwo[j].Name;
-                            dtl.Status = tasksTwo[j].Status;
-                            task.SubTasks.Add(dtl);
+                            for (int j = 0; j < tasksTwo.Count; j++)
+                            {
+                                TasksForClickDtl dtl = new TasksForClickDtl();
+                                dtl.Code = tasksTwo[j].Code;
+                                dtl.Name = tasksTwo[j].Name;
+                                dtl.Status = tasksTwo[j].Status;
+                                task.SubTasks.Add(dtl);
+                            }
                         }
                         tasks.Add(task);
                     }
@@ -1088,19 +1101,22 @@ namespace CDMISrestful.Models
 
                     List<PsTask> tasks = new PlanInfoMethod().GetTasks(pclsCache, PlanNo, "T", item.Date, "");
                     string str = "";
-                    for (int j = 0; j < tasks.Count; j++)
+                    if (tasks != null)
                     {
-                        if (j % 2 == 0)
+                        for (int j = 0; j < tasks.Count; j++)
                         {
-                            //str = str + tasks[j].Name + "：" + tasks[j].Status + "   ";
-                            str = str + tasks[j].Name + "   ";
+                            if (j % 2 == 0)
+                            {
+                                //str = str + tasks[j].Name + "：" + tasks[j].Status + "   ";
+                                str = str + tasks[j].Name + "   ";
 
-                        }
-                        else
-                        {
-                            //str = str + tasks[j].Name + "：" + tasks[j].Status + "<br>";
-                            str = str + tasks[j].Name + "<br>";
+                            }
+                            else
+                            {
+                                //str = str + tasks[j].Name + "：" + tasks[j].Status + "<br>";
+                                str = str + tasks[j].Name + "<br>";
 
+                            }
                         }
                     }
                     item.Task = str; //需要修改
