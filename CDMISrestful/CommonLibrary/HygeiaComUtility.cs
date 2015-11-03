@@ -29,8 +29,8 @@ namespace CDMISrestful.CommonLibrary
             {
                 //修改Log文件保存路径 20151102 CSQ
                 string physicalPath = System.Web.HttpContext.Current.Request.PhysicalPath;
-                int index = physicalPath.LastIndexOf('\\');
-                //int index = physicalPath.IndexOf("Api")+6;
+                //int index = physicalPath.LastIndexOf('\\');
+                int index = physicalPath.IndexOf("Api")+6;
                 string logdir = physicalPath.Substring(0, index);
                 //string dir = Path.Combine(HygeiaConst.CLIENT_LOG_DIR, GetTerminalID());
                 string dir = Path.Combine(logdir + "\\DBLog", GetTerminalID());

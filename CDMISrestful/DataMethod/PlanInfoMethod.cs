@@ -1943,6 +1943,7 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+        
         //WF 20151010  只针对一种参数   使用
         public TargetByCode GetTarget(DataConnection pclsCache, string PlanNo, string Type, string Code)
         {
