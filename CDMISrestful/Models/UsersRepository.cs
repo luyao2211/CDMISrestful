@@ -834,10 +834,11 @@ namespace CDMISrestful.Models
             return usersMethod.GetCommentList(pclsCache, DoctorId, CategoryCode);
         }
 
-        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(DataConnection pclsCache, string PatientId, string CategoryCode)
+        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(DataConnection pclsCache, string PatientId)
         {
-            return usersMethod.GetHealthCoachListByPatient(pclsCache, PatientId, CategoryCode);
+            return usersMethod.GetHealthCoachListByPatient(pclsCache, PatientId);
         }
+
 
         public int RemoveHealthCoach(DataConnection pclsCache, string PatientId, string DoctorId, string CategoryCode)
         {
@@ -855,6 +856,11 @@ namespace CDMISrestful.Models
 
         }
 
+        public string GetPhoneNoByUserId(DataConnection pclsCache, string UserId)
+        {
+            return usersMethod.GetPhoneNoByUserId(pclsCache,UserId);
+        }
+       
         #endregion
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CDMISrestful.CommonLibrary;
+using System.Web.OData;
 
 namespace CDMISrestful.Controllers
 {
@@ -51,6 +52,7 @@ namespace CDMISrestful.Controllers
         /// <param name="EndDate"></param>
         /// <returns></returns>
         [Route("Api/v1/VitalInfo/VitalSigns")]
+        [EnableQuery]
         [HttpGet]
         public List<VitalInfo> GetVitalSignsByPeriod(string UserId, int StartDate, int EndDate)
         {

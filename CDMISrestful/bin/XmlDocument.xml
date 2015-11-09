@@ -831,6 +831,19 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.DictController.GetAllDivisionType">
+            <summary>
+            获取科室所有Type和TypeName字段 SYF 20151109
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.DictController.GetDivisionDeptList(System.String)">
+            <summary>
+            根据Type获取科室Code和Name SYF 20151109
+            </summary>
+            <param name="Type"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.MessageController.GetSMSDialogue(System.String,System.String)">
             <summary>
             GetSMSDialogue 获取消息对话 GL 2015-10-10
@@ -908,7 +921,7 @@
             <param name="EndDate"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.DeleteTask(System.Collections.Generic.List{CDMISrestful.DataModels.DeleteTask})">
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.PostTask(System.Collections.Generic.List{CDMISrestful.DataModels.DeleteTask})">
             <summary>
             根据主键删除Ps.Task任务表的一条数据 SYF 20151029
             </summary>
@@ -918,7 +931,7 @@
             <param name="SortNo"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.PostPlan(CDMISrestful.DataModels.GPlanInfo)">
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.PostPlan(CDMISrestful.DataModels.SetPlanInfo)">
             <summary>
             Ps.Plan.SetData GL 2015-10-13
             </summary>
@@ -1028,14 +1041,6 @@
             <param name="piTerminalName"></param>
             <param name="piTerminalIP"></param>
             <param name="piDeviceType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetOverDuePlanList(System.String,System.String)">
-            <summary>
-            GetOverDuePlanList 获取健康专员负责的所有患者（最新结束但未达标的）计划列表 GL 2015-10-13
-            </summary>
-            <param name="DoctorId"></param>
-            <param name="ModuleType"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.PlanInfoController.GetPlanInfo(System.String,System.String,System.String,System.Int32)">
@@ -1325,7 +1330,7 @@
             <param name="CategoryCode"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.UsersController.GetHealthCoachListByPatient(System.String,System.String)">
+        <member name="M:CDMISrestful.Controllers.UsersController.GetHealthCoachListByPatient(System.String)">
             <summary>
             GetHealthCoachListByPatient 获取某病人对应的专员列表 SYF
             </summary>
@@ -1361,6 +1366,13 @@
         <member name="M:CDMISrestful.Controllers.UsersController.GetAllRoleMatch(System.String)">
             <summary>
             根据UID获取用户所有角色
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetPhoneNoByUserId(System.String)">
+            <summary>
+            根据UserId获取手机号 CSQ20151109
             </summary>
             <param name="UserId"></param>
             <returns></returns>
@@ -1631,6 +1643,21 @@
             <param name="pclsCache"></param>
             <param name="NumberingType"></param>
             <param name="TargetDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.DictMethod.GetAllDivisionType(CDMISrestful.CommonLibrary.DataConnection)">
+            <summary>
+            获取科室所有Type和TypeName字段 SYF 20151109
+            </summary>
+            <param name="pclsCache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.DictMethod.GetDivisionDeptList(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            SYf 20151109
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="Type"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.MessageMethod.GetSMSDialogue(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
@@ -2072,6 +2099,14 @@
             <param name="SortNo"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetModulesByPID(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            GetModulesByPID LS 2014-12-4 //SYF20151109
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="PatientId"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.DataMethod.UsersMethod.GetUserInfoByUserId(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
              GetUserInfoByUserId ZAM 2014-12-02 //syf 20151014
@@ -2362,6 +2397,22 @@
             <param name="CategoryCode"></param>
             <param name="ItemCode"></param>
             <param name="ItemSeq"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetHModulesByPID(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            GetModulesByPID LS 2014-12-4 //SYF20151109
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="PatientId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetHealthCoachListByPatient(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            SYF 20151109
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="PatientId"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.UsersMethod.RemoveHealthCoach(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String)">

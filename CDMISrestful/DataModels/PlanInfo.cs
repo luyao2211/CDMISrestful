@@ -17,7 +17,7 @@ namespace CDMISrestful.DataModels
 
     public class DeleteTask
     {
-        public string Plan { get; set; }
+        public string PlanNo { get; set; }
         public string Type { get; set; }
         public string Code { get; set; }
         public string SortNo { get; set; }
@@ -127,6 +127,22 @@ namespace CDMISrestful.DataModels
         public int EndDate { get; set; }
     }
 
+    public class SetPlanInfo
+    {
+        [Required]
+        public string PlanNo { get; set; }
+        public string PatientId { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string Module { get; set; }
+        [Required]
+        public string Status { get; set; }
+        public string DoctorId { get; set; }
+        public string piUserId { get; set; }
+        public string piTerminalName { get; set; }
+        public string piTerminalIP { get; set; }
+        public int piDeviceType { get; set; }
+    }
     public class GPlanInfo
     {
         [Required]

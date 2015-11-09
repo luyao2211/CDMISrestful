@@ -43,9 +43,11 @@ namespace CDMISrestful.Models
 
         List<CommentList> GetCommentList(DataConnection pclsCache, string DoctorId, string CategoryCode);
 
-        List<HealthCoachListByPatient> GetHealthCoachListByPatient(DataConnection pclsCache, string PatientId, string CategoryCode);
-
         int RemoveHealthCoach(DataConnection pclsCache, string PatientId, string DoctorId, string CategoryCode);
+
+        List<HealthCoachListByPatient> GetHealthCoachListByPatient(DataConnection pclsCache, string PatientId);
+
+        string GetPhoneNoByUserId(DataConnection pclsCache, string UserId);
 
         List<string> GetAllRoleMatch(DataConnection pclsCache, string UserId);
         List<AppoitmentPatient> GetAppoitmentPatientList(DataConnection pclsCache, string healthCoachID, string Status);

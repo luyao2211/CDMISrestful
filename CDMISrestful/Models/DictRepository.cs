@@ -113,5 +113,16 @@ namespace CDMISrestful.Models
             }
             return dictMethod.GetNo(pclsCache, NumberingType, TargetDate);
         }
+
+        public List<TypeAndName> GetAllDivisionType(DataConnection pclsCache)
+        {
+            return dictMethod.GetAllDivisionType(pclsCache);
+        }
+
+        public List<TypeAndName> GetDivisionDeptList(DataConnection pclsCache, string Type)
+        {
+            return dictMethod.GetDivisionDeptList(pclsCache, Type);
+        }
+
     }
 }

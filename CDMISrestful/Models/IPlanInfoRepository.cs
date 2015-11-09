@@ -12,8 +12,7 @@ namespace CDMISrestful.Models
         int SetPlan(DataConnection pclsCache, string PlanNo, string PatientId, int StartDate, int EndDate, string Module, int Status, string DoctorId, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
         int SetComplianceDetail(DataConnection pclsCache, string PlanNo, int Date, string CategoryCode, string Code, string SortNo, int Status, string Description, string CoUserId, string CoTerminalName, string CoTerminalIP, int CoDeviceType);
 
-        List<LifeStyleDetail> GetLifeStyleDetail(DataConnection pclsCache, string Module);
-        List<PsDrugRecord> GetPatientDrugRecord(DataConnection pclsCache, string PatientId, string Module);
+        //List<PsDrugRecord> GetPatientDrugRecord(DataConnection pclsCache, string PatientId, string Module);
         int CreateTask(DataConnection pclsCache, string PlanNo, string Type, string Code, string SortNo, string Instruction, string UserId, string TerminalName, string TerminalIP, int DeviceType);
 
         int SetCompliance(DataConnection pclsCache, string PlanNo, int Date, Double Compliance, string Description, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
@@ -21,7 +20,6 @@ namespace CDMISrestful.Models
         GPlanInfo GetPlanInfo(DataConnection pclsCache, string PlanNo);
         TaskComDetailByD GetImplementationByDate(DataConnection pclsCache, string PatientId, string PlanNo, string DateSelected);
         ChartData GetSignInfoByCode(DataConnection pclsCache, string PatientId, string PlanNo, string ItemCode, int StartDate, int EndDate);
-        GPlanInfo GetExecutingPlanByModule(DataConnection pclsCache, string PatientId, string Module);
         int SetPlanStart(DataConnection pclsCache, string PlanNo, int Status, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
         //ImplementationInfo GetImplementationForPadFirst(string PatientId, string Module);
         //ImplementationInfo GetImplementationForPadSecond(string PatientId, string PlanNo);
@@ -30,7 +28,6 @@ namespace CDMISrestful.Models
         //ImplementationPhone GetImplementationForPhone(string PatientId, string Module);
 
         //List<GPlanInfo> GetPlanList34ByM(DataConnection pclsCache, string PatientId, string Module);
-        List<ComplianceListByPeriod> GetAllComplianceListByPeriod(DataConnection pclsCache, string PlanNo, int StartDate, int EndDate);
         List<PsTask> GetTasks(DataConnection pclsCache, string PlanNo, string ParentCode, string Date, string PatientId);
         List<TaskDetail> GetTaskDetails(DataConnection pclsCache, string CategoryCode, string Code);
         int PsTemplateSetData(DataConnection pclsCache, string DoctorId, int TemplateCode, string TemplateName, string Description, DateTime RecordDate, string Redundance, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
@@ -43,8 +40,6 @@ namespace CDMISrestful.Models
         List<ComplianceAllSignsListByPeriod> GetComplianceAllSignsListByPeriod(DataConnection pclsCache, string UserId, string PlanNo, int StartDate, int EndDate, string ItemType, string ItemCode);
 
         int DeteteTask(DataConnection pclsCache, string Plan, string Type, string Code, string SortNo);
-        double GetComplianceByPlanNo(DataConnection pclsCache, string PlanNo);
-
 
         List<GPlanInfo> GetPlanListByMS(DataConnection pclsCache, string PatientId, string Module, int Status);
         List<TasksForClick> GetTasksForClick(DataConnection pclsCache, string PlanNo, string ParentCode, string Date);

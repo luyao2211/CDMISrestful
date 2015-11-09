@@ -9,7 +9,66 @@ using CDMISrestful.DataModels;
 namespace CDMISrestful.DataMethod
 {
     public class UsersMethod
-    { 
+    {
+        /// <summary>
+        /// GetModulesByPID LS 2014-12-4 //SYF20151109
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="PatientId"></param>
+        /// <returns></returns>
+        public List<ModulesByPID> GetModulesByPID(DataConnection pclsCache, string PatientId)
+        {
+            List<ModulesByPID> list = new List<ModulesByPID>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return null;
+                }
+
+                cmd = new CacheCommand();
+                cmd = Ps.BasicInfoDetail.GetModulesByPID(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("PatientId", CacheDbType.NVarChar).Value = PatientId;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    ModulesByPID NewLine = new ModulesByPID();
+                    NewLine.CategoryCode = cdr["CategoryCode"].ToString();
+                    NewLine.Modules = cdr["Modules"].ToString();
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetModulesByPID", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+
         /// <summary>
         ///  GetUserInfoByUserId ZAM 2014-12-02 //syf 20151014
         /// </summary>
@@ -1573,29 +1632,101 @@ namespace CDMISrestful.DataMethod
             }
         }
 
+        /// <summary>
+        /// GetModulesByPID LS 2014-12-4 //SYF20151109
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="PatientId"></param>
+        /// <returns></returns>
+        public List<ModulesByPID> GetHModulesByPID(DataConnection pclsCache, string PatientId)
+        {
+            List<ModulesByPID> list = new List<ModulesByPID>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return null;
+                }
+
+                cmd = new CacheCommand();
+                cmd = Ps.BasicInfoDetail.GetHModulesByPID(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("PatientId", CacheDbType.NVarChar).Value = PatientId;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    ModulesByPID NewLine = new ModulesByPID();
+                    NewLine.CategoryCode = cdr["CategoryCode"].ToString();
+                    NewLine.Modules = cdr["Modules"].ToString();
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetModulesByPID", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
 
 
-        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(DataConnection pclsCache, string PatientId, string CategoryCode)
+
+        /// <summary>
+        /// SYF 20151109
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="PatientId"></param>
+        /// <returns></returns>
+        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(DataConnection pclsCache, string PatientId)
         {
             List<HealthCoachListByPatient> list = new List<HealthCoachListByPatient>();
             List<DoctorsByPatientId> list1 = new List<DoctorsByPatientId>();
+            List<ModulesByPID> list2 = new List<ModulesByPID>();
             try
             {
-                list1 = GetDoctorsByPatientId(pclsCache, PatientId, CategoryCode);//根据PatientId和CategoryCode取对应模块医生列表
-                if (list1 != null)
+                list2 = GetHModulesByPID(pclsCache, PatientId);
+
+                if (list2 != null)
                 {
-                    for (int i = 0; i < list1.Count; i++)
+                    for (int i = 0; i < list2.Count; i++)
                     {
-                        HealthCoachListByPatient lt = new HealthCoachListByPatient();
-                        lt.HealthCoachID = list1[i].DoctorId;//专员Id
-                        lt.Name = list1[i].DoctorName;//专员名字
-                        lt.imageURL = new UsersMethod().GetValue(pclsCache, lt.HealthCoachID, "Contact", "Contact001_4", 1);//专员照片
-                        lt.module = new UsersMethod().GetCategoryName(pclsCache, CategoryCode);//负责模块，由输入决定
-                        if (lt.HealthCoachID != "")
+                        list1 = GetDoctorsByPatientId(pclsCache, PatientId, list2[i].CategoryCode);//根据PatientId和CategoryCode取对应模块医生列表
+                        if (list1 != null)
                         {
-                            lt.latestMessage = new MessageMethod().GetLatestSMS(pclsCache, lt.HealthCoachID, PatientId);//最新消息
+                            for (int j = 0; j < list1.Count; j++)
+                            {
+                                HealthCoachListByPatient lt = new HealthCoachListByPatient();
+                                lt.HealthCoachID = list1[j].DoctorId;//专员Id
+                                lt.Name = list1[j].DoctorName;//专员名字
+                                lt.imageURL = list1[j].ImageURL;//专员照片
+                                lt.moduleCode = list2[i].CategoryCode;//负责模块，由输入决定
+                                lt.module = list2[i].Modules;//负责模块，由输入决定
+                                lt.latestMessage = list1[j].LatestMessage;//最新消息 
+
+                                list.Add(lt);
+                            }
                         }
-                        list.Add(lt);
                     }
                 }
                 return list;
@@ -1610,9 +1741,6 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
-
-
-
 
 
         /// <summary>
@@ -1849,6 +1977,34 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+
+      
+        ////GetDoctorDtlInfoMaxItemSeq CSQ 20151106
+        //public static int GetDoctorDtlInfoMaxItemSeq(DataConnection pclsCache, string DoctorId, string CategoryCode, string ItemCode)
+        //{
+        //    int ret = 0;
+        //    try
+        //    {
+        //        if (!pclsCache.Connect())
+        //        {
+        //            //MessageBox.Show("Cache数据库连接失败");
+        //            return ret;
+
+        //        }
+        //        ret = (int)Ps.DoctorInfoDetail.GetMaxItemSeq(pclsCache.CacheConnectionObject, DoctorId, CategoryCode, ItemCode);
+        //        return ret;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //MessageBox.Show(ex.ToString(), "保存失败！");
+        //        HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetDoctorDtlInfoMaxItemSeq", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+        //        return ret;
+        //    }
+        //    finally
+        //    {
+        //        pclsCache.DisConnect();
+        //    }
+        //}
 
         #region 第二层
         public int RegisterRelated(DataConnection pclsCache, string PwType,string userId,string Password, string UserName,string role,string revUserId,string TerminalName,string  TerminalIP,int DeviceType)

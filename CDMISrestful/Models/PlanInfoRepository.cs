@@ -60,35 +60,7 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().GetTarget(pclsCache, PlanNo, Type, Code);
         }
 
-        //GL 2015-10-13
-        public List<LifeStyleDetail> GetLifeStyleDetail(DataConnection pclsCache, string Module)
-        {
-            return new DictMethod().GetLifeStyleDetail(pclsCache, Module);
-        }
 
-        //根据患者Id，获取药物治疗列表 GL 2015-10-13
-        public List<PsDrugRecord> GetPatientDrugRecord(DataConnection pclsCache, string PatientId, string Module)
-        {
-            try
-            {
-                List<PsDrugRecord> list = new List<PsDrugRecord>();
-                list = new ClinicInfoMethod().GetPsDrugRecord(pclsCache, PatientId, Module);
-                if (list != null)
-                {
-                    if (list.Count > 0) //排序(降序)
-                    {
-                        list.Sort((x, y) => -(x.StartDateTime).CompareTo(y.StartDateTime));
-                    }
-                }
-                return list;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetPatientDrugRecord", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-                throw (ex);
-            }
-        }
 
         //创建计划 GL 2015-10-13
         public int CreateTask(DataConnection pclsCache, string PlanNo, string Type, string Code, string SortNo, string Instruction, string UserId, string TerminalName, string TerminalIP, int DeviceType)
@@ -245,40 +217,6 @@ namespace CDMISrestful.Models
             }
         }
 
-        //根据模块获取正在执行的计划 GL 2015-10-13
-        public GPlanInfo GetExecutingPlanByModule(DataConnection pclsCache, string PatientId, string Module)
-        {
-            try
-            {
-                //string ret = "";
-                GPlanInfo planInfo = new PlanInfoMethod().GetExecutingPlanByM(pclsCache, PatientId, Module);
-                planInfo.RemainingDays = "";
-                Progressrate temp2 = new PlanInfoMethod().GetProgressRate(pclsCache, planInfo.PlanNo);
-                if (temp2 != null)
-                {
-                    planInfo.RemainingDays = temp2.RemainingDays;
-                }
-                if (planInfo != null)
-                {
-                    //ret = planInfo.PlanNo;
-                    TypeAndName Doctor = new ModuleInfoMethod().PsBasicInfoDetailGetSDoctor(pclsCache, PatientId);
-                    if (Doctor != null && Doctor.Type != null) //Doctor.Count > 1
-                    {
-                        planInfo.DoctorId = Doctor.Type;
-                        planInfo.DoctorName = Doctor.Name;
-                    }
-                }
-                
-                return planInfo;
-            }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetExecutingPlanByModule", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-                throw ex;
-            }
-        }
-
         //更新计划状态 GL 2015-10-13
         public int SetPlanStart(DataConnection pclsCache, string PlanNo, int Status, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
         {
@@ -286,6 +224,31 @@ namespace CDMISrestful.Models
         }
 
         #region 暂时不用
+
+        ////根据患者Id，获取药物治疗列表 GL 2015-10-13
+        //public List<PsDrugRecord> GetPatientDrugRecord(DataConnection pclsCache, string PatientId, string Module)
+        //{
+        //    try
+        //    {
+        //        List<PsDrugRecord> list = new List<PsDrugRecord>();
+        //        list = new ClinicInfoMethod().GetPsDrugRecord(pclsCache, PatientId, Module);
+        //        if (list != null)
+        //        {
+        //            if (list.Count > 0) //排序(降序)
+        //            {
+        //                list.Sort((x, y) => -(x.StartDateTime).CompareTo(y.StartDateTime));
+        //            }
+        //        }
+        //        return list;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "GetPatientDrugRecord", "PlanInfoRepository error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+        //        return null;
+        //        throw (ex);
+        //    }
+        //}
+
         ////获取计划完成情况（Pad)-首次进入页面 PlanNo为空 GL 2015-10-13
         //public ImplementationInfo GetImplementationForPadFirst(string PatientId, string Module)
         //{
@@ -1007,18 +970,6 @@ namespace CDMISrestful.Models
             }
         }     
 
-        ////根据计划编码和日期，获取依从率 GL 2015-10-13
-        //public List<GPlanInfo> GetPlanList34ByM(DataConnection pclsCache, string PatientId, string Module)
-        //{
-        //    return new PlanInfoMethod().GetPlanList34ByM(pclsCache, PatientId, Module);
-        //}
-
-        //获取某计划的某段时间(包括端点)的依从率列表 GL 2015-10-13
-        public List<ComplianceListByPeriod> GetAllComplianceListByPeriod(DataConnection pclsCache, string PlanNo, int StartDate, int EndDate)
-        {
-            return new PlanInfoMethod().GetComplianceListByPeriod(pclsCache, PlanNo, StartDate, EndDate);
-        }
-
         public List<PsTask> GetTasks(DataConnection pclsCache, string PlanNo, string ParentCode, string Date, string PatientId)
         {
             return new PlanInfoMethod().GetTasks(pclsCache, PlanNo, ParentCode,Date,PatientId);
@@ -1083,7 +1034,7 @@ namespace CDMISrestful.Models
                 {
                     ComplianceAllSignsListByPeriod item = new ComplianceAllSignsListByPeriod();
                     item.Date = items1[i].Date.ToString();
-                    item.Compliance = Math.Round(items1[i].Compliance * 100, 0) + "%";
+                    item.Compliance = Math.Round(items1[i].Compliance , 2)*100 + "%";
                     item.Description = items1[i].Description;
                     if (items1[i].Compliance == 1)
                     {
@@ -1148,10 +1099,6 @@ namespace CDMISrestful.Models
 
         }
 
-        public double GetComplianceByPlanNo(DataConnection pclsCache, string PlanNo)
-        {
-            return new PlanInfoMethod().GetComplianceByPlanNo(pclsCache, PlanNo);
-        }
         public List<GPlanInfo> GetPlanListByMS(DataConnection pclsCache, string PatientId, string Module, int Status)
         {
             return new PlanInfoMethod().GetPlanListByMS(pclsCache, PatientId, Module, Status);

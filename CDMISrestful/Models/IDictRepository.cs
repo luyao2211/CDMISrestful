@@ -9,6 +9,8 @@ namespace CDMISrestful.Models
 {
     public interface IDictRepository
     {
+        List<TypeAndName> GetAllDivisionType(DataConnection pclsCache);
+        List<TypeAndName> GetDivisionDeptList(DataConnection pclsCache, string Type);
         List<TypeAndName> GetHypertensionDrugTypeNameList(DataConnection pclsCache);
         List<CmAbsType> GetHypertensionDrug(DataConnection pclsCache) ;
         List<TypeAndName> GetDiabetesDrugTypeNameList(DataConnection pclsCache);

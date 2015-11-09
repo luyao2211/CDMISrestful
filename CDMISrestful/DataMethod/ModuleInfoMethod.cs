@@ -401,6 +401,8 @@ namespace CDMISrestful.DataMethod
                     ret.JobTitle = list[3];
                     ret.Level = list[4];
                     ret.Dept = list[5];
+                    ret.ActivatePhotoAddr = list[6];
+                    ret.DeptName = list[7];
                 }
                 return ret;
             }

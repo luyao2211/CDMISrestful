@@ -1,0 +1,312 @@
+
+ 
+记录时间：2015-11-09 17:05:07,054 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetPatientsPlan
+            开始时间：2015/11/9 17:04:32
+            结束时间：2015/11/9 17:05:07
+            总 时 间：34.9508846秒
+            Action参数：DoctorId=D003&Module=HM1&VitalType={VitalType}&VitalCode={VitalCode}
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetPatientsPlan_DoctorId_Module_VitalType_VitalCode
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 19:42:59,681 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachListByPatient
+            开始时间：2015/11/9 19:42:36
+            结束时间：2015/11/9 19:42:59
+            总 时 间：23.2423345秒
+            Action参数：PatientId=U201507150020
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-HealthCoaches_PatientId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 19:45:20,325 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachListByPatient
+            开始时间：2015/11/9 19:45:03
+            结束时间：2015/11/9 19:45:20
+            总 时 间：16.3535365秒
+            Action参数：PatientId=U201507150020
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-HealthCoaches_PatientId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 20:09:20,684 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachListByPatient
+            开始时间：2015/11/9 20:08:04
+            结束时间：2015/11/9 20:09:20
+            总 时 间：76.5166519秒
+            Action参数：PatientId=U201511010001
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-HealthCoaches_PatientId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 20:09:27,641 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachListByPatient
+            开始时间：2015/11/9 20:09:25
+            结束时间：2015/11/9 20:09:27
+            总 时 间：2.1791276秒
+            Action参数：PatientId=U201511010001
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-HealthCoaches_PatientId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 20:09:43,594 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachListByPatient
+            开始时间：2015/11/9 20:09:36
+            结束时间：2015/11/9 20:09:43
+            总 时 间：7.3719961秒
+            Action参数：PatientId=U201511010001
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-HealthCoaches_PatientId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 20:16:11,894 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachListByPatient
+            开始时间：2015/11/9 20:13:05
+            结束时间：2015/11/9 20:16:11
+            总 时 间：186.0384103秒
+            Action参数：PatientId=U201511010001
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-HealthCoaches_PatientId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 20:16:36,351 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachListByPatient
+            开始时间：2015/11/9 20:16:15
+            结束时间：2015/11/9 20:16:36
+            总 时 间：20.3907241秒
+            Action参数：PatientId=U201511010001
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-HealthCoaches_PatientId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 21:32:06,767 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：DictController
+            ActionName:GetAllDivisionType
+            开始时间：2015/11/9 21:32:06
+            结束时间：2015/11/9 21:32:06
+            总 时 间：0.395318秒
+            Action参数：
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Dict-GetAllDivisionType
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 21:33:50,390 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：DictController
+            ActionName:GetAllDivisionType
+            开始时间：2015/11/9 21:32:54
+            结束时间：2015/11/9 21:33:50
+            总 时 间：55.6319221秒
+            Action参数：
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Dict-GetAllDivisionType
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 21:36:42,544 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：DictController
+            ActionName:GetAllDivisionType
+            开始时间：2015/11/9 21:36:39
+            结束时间：2015/11/9 21:36:42
+            总 时 间：3.1710997秒
+            Action参数：
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Dict-GetAllDivisionType
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-09 21:36:54,086 
+线程ID:[11] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：DictController
+            ActionName:GetDivisionDeptList
+            开始时间：2015/11/9 21:36:53
+            结束时间：2015/11/9 21:36:54
+            总 时 间：0.4864076秒
+            Action参数：Type=10
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; CSPWSERVERID=676bdea1fac75161355a03b17bd24d79f0ffa611
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Dict-GetDivisionDeptList_Type
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 

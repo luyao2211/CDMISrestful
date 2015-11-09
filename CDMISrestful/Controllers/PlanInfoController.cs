@@ -42,15 +42,15 @@ namespace CDMISrestful.Controllers
         /// <param name="Code"></param>
         /// <param name="SortNo"></param>
         /// <returns></returns>
-        [Route("Api/v1/PlanInfo/Task")]
-        public HttpResponseMessage DeleteTask(List<DeleteTask> items)
+        [Route("Api/v1/PlanInfo/deleteTask")]
+        public HttpResponseMessage PostTask(List<DeleteTask> items)
         {
             int ret = 2;
             if (items != null)
             {
                 for (int i = 0; i < items.Count; i++)
                 {
-                    ret = repository.DeteteTask(pclsCache, items[i].Plan, items[i].Type, items[i].Code, items[i].SortNo);
+                    ret = repository.DeteteTask(pclsCache, items[i].PlanNo, items[i].Type, items[i].Code, items[i].SortNo);
                     if (ret != 1)
                     {
                         break;
@@ -67,7 +67,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/PlanInfo/Plan")]
         [ModelValidationFilter]
-        public HttpResponseMessage PostPlan(GPlanInfo item)
+        public HttpResponseMessage PostPlan(SetPlanInfo item)
         {
             int ret = repository.SetPlan(pclsCache, item.PlanNo, item.PatientId, Convert.ToInt32(item.StartDate), Convert.ToInt32(item.EndDate), item.Module, Convert.ToInt32(item.Status), item.DoctorId, item.piUserId, item.piTerminalName, new CommonFunction().getRemoteIPAddress(), item.piDeviceType);
             return new ExceptionHandler().SetData(Request, ret);
@@ -249,19 +249,6 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// GetOverDuePlanList 获取健康专员负责的所有患者（最新结束但未达标的）计划列表 GL 2015-10-13
-        /// </summary>
-        /// <param name="DoctorId"></param>
-        /// <param name="ModuleType"></param>
-        /// <returns></returns>
-        [Route("Api/v1/PlanInfo/GetOverDuePlanList")]
-        [EnableQuery]
-        public List<OverDuePlanDetail> GetOverDuePlanList(string DoctorId, string ModuleType)
-        {
-            return repository.GetOverDuePlanList(pclsCache, DoctorId, ModuleType);
-        }
-
-        /// <summary>
         /// GetPlanInfo 根据PlanNo或PatientId/Module/Status,获取某计划详情 CSQ 20151031 
         /// 用法1：输入PlanNo，PatientId和Module为空，Status输入5 
         /// 用法2：PlanNo输入NULL，PatientId按界面输入，Module根据需要的模块输入，若为空则取全部模块数据；status根据需要输入2（未开始计划）/3（当前计划）/4（往前计划/已结束计划），若为0，则取全部状态的数据
@@ -288,7 +275,48 @@ namespace CDMISrestful.Controllers
                 List<GPlanInfo> ret = repository.GetPlanListByMS(pclsCache, PatientId, Module, Status);
                 return new ExceptionHandler().toJson(ret);
             }
+        }  
+
+        /// <summary>
+        /// CSQ 20151031 计划信息展示时 图的点击事件响应
+        /// </summary>
+        /// <param name="PlanNo"></param>
+        /// <param name="ParentCode"></param>
+        /// <param name="Date"></param>
+        /// <returns></returns>
+         [Route("Api/v1/PlanInfo/PlanInfoChartDtl")]
+        public List<TasksForClick> GetTasksForClick(string PlanNo, string ParentCode, string Date)
+        {
+            return repository.GetTasksForClick(pclsCache, PlanNo, ParentCode, Date);
         }
+
+         /// <summary>
+         /// 获取某个病人某个模块指定时间段内的依从率 SYF
+         /// </summary>
+         /// <param name="PatientId"></param>
+         /// <param name="StartDate"></param>
+         /// <param name="EndDate"></param>
+         /// <param name="Module"></param>
+         /// <returns></returns>
+         [Route("Api/v1/PlanInfo/GetComplianceListInC")]
+         public List<ComplianceDate> GetComplianceListInC(string PatientId, string StartDate, string EndDate, string Module)
+         {
+             return repository.GetComplianceListInC(pclsCache,PatientId, StartDate, EndDate, Module);
+         }
+
+        #region 暂时不用
+        ///// <summary>
+        ///// GetOverDuePlanList 获取健康专员负责的所有患者（最新结束但未达标的）计划列表 GL 2015-10-13
+        ///// </summary>
+        ///// <param name="DoctorId"></param>
+        ///// <param name="ModuleType"></param>
+        ///// <returns></returns>
+        //[Route("Api/v1/PlanInfo/GetOverDuePlanList")]
+        //[EnableQuery]
+        //public List<OverDuePlanDetail> GetOverDuePlanList(string DoctorId, string ModuleType)
+        //{
+        //    return repository.GetOverDuePlanList(pclsCache, DoctorId, ModuleType);
+        //}
 
         ///// <summary>
         ///// GetPlanInfo 根据PlanNo获取某计划详情 CSQ 20151102 
@@ -322,35 +350,6 @@ namespace CDMISrestful.Controllers
         //        return new ExceptionHandler().toJson(ret);           
         //}
 
-
-        /// <summary>
-        /// CSQ 20151031 计划信息展示时 图的点击事件响应
-        /// </summary>
-        /// <param name="PlanNo"></param>
-        /// <param name="ParentCode"></param>
-        /// <param name="Date"></param>
-        /// <returns></returns>
-         [Route("Api/v1/PlanInfo/PlanInfoChartDtl")]
-        public List<TasksForClick> GetTasksForClick(string PlanNo, string ParentCode, string Date)
-        {
-            return repository.GetTasksForClick(pclsCache, PlanNo, ParentCode, Date);
-        }
-
-         /// <summary>
-         /// 获取某个病人某个模块指定时间段内的依从率 SYF
-         /// </summary>
-         /// <param name="PatientId"></param>
-         /// <param name="StartDate"></param>
-         /// <param name="EndDate"></param>
-         /// <param name="Module"></param>
-         /// <returns></returns>
-         [Route("Api/v1/PlanInfo/GetComplianceListInC")]
-         public List<ComplianceDate> GetComplianceListInC(string PatientId, string StartDate, string EndDate, string Module)
-         {
-             return repository.GetComplianceListInC(pclsCache,PatientId, StartDate, EndDate, Module);
-         }
-
-        #region 暂时不用
         ///// <summary>
         ///// GetPatientDrugRecord 根据患者Id，获取药物治疗列表 GL 2015-10-13
         ///// </summary>

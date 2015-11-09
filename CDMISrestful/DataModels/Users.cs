@@ -9,6 +9,13 @@ namespace CDMISrestful.DataModels
     public class Users
     {
     }
+
+    public class ModulesByPID
+    {
+        public string CategoryCode { get; set; }
+        public string Modules { get; set; }
+    }
+
     public class ForToken
     {
         public string Status { get; set; }
@@ -407,6 +414,9 @@ namespace CDMISrestful.DataModels
         public string HealthCoachID { get; set; }
         public string imageURL { get; set; }
         public string Name { get; set; }
+
+        public string moduleCode { get; set; }
+
         public string module { get; set; }
         public Message latestMessage { get; set; }
     }
@@ -417,6 +427,10 @@ namespace CDMISrestful.DataModels
         public string DoctorId { get; set; }
         public string DoctorName { get; set; }
         public string ItemSeq { get; set; }
+        public string ImageURL { get; set; }
+        public string Module { get; set; }
+        public Message LatestMessage { get; set; }
+
     }
 
     public class AppoitmentPatient

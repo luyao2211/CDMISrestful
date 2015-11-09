@@ -737,5 +737,115 @@ namespace CDMISrestful.DataMethod
         }
         #endregion
 
+        #region<Cm.MstDivision>
+        /// <summary>
+        /// 获取科室所有Type和TypeName字段 SYF 20151109
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <returns></returns>
+        public List<TypeAndName> GetAllDivisionType(DataConnection pclsCache)
+        {
+            List<TypeAndName> list = new List<TypeAndName>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return null;
+                }
+
+                cmd = new CacheCommand();
+                cmd = Cm.MstDivision.GetAllType(pclsCache.CacheConnectionObject);
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new TypeAndName { Type = cdr["Type"].ToString(), Name = cdr["TypeName"].ToString() });
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "DictMethod.GetAllDivisionType", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// SYf 20151109
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="Type"></param>
+        /// <returns></returns>
+        public List<TypeAndName> GetDivisionDeptList(DataConnection pclsCache, string Type)
+        {
+            List<TypeAndName> list = new List<TypeAndName>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return null;
+                }
+
+                cmd = new CacheCommand();
+                cmd = Cm.MstDivision.GetDeptList(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("Type", CacheDbType.NVarChar).Value = Type;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new TypeAndName { Type = cdr["Code"].ToString(), Name = cdr["Name"].ToString() });
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "DictMethod.GetDivisionDeptList", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+        #endregion
     }
 }

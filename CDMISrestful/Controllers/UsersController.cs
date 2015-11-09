@@ -333,10 +333,10 @@ namespace CDMISrestful.Controllers
         /// <param name="PatientId"></param>
         /// <param name="CategoryCode"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/GetHealthCoachListByPatient")]
-        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(string PatientId, string CategoryCode)
+        [Route("Api/v1/Users/HealthCoaches")]
+        public List<HealthCoachListByPatient> GetHealthCoachListByPatient(string PatientId)
         {
-            return repository.GetHealthCoachListByPatient(pclsCache, PatientId, CategoryCode);
+            return repository.GetHealthCoachListByPatient(pclsCache, PatientId);
         }
 
         /// <summary>
@@ -386,6 +386,17 @@ namespace CDMISrestful.Controllers
         public List<string> GetAllRoleMatch(string UserId)
         {
             return repository.GetAllRoleMatch(pclsCache,UserId);
+        }
+
+         /// <summary>
+         /// 根据UserId获取手机号 CSQ20151109
+         /// </summary>
+         /// <param name="UserId"></param>
+         /// <returns></returns>
+         [Route("Api/v1/Users/PhoneNo")]
+        public string GetPhoneNoByUserId(string UserId)
+        {
+            return repository.GetPhoneNoByUserId(pclsCache, UserId);
         }
     }
 }

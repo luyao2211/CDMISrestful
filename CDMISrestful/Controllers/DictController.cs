@@ -118,5 +118,28 @@ namespace CDMISrestful.Controllers
             string ret = repository.GetNo(pclsCache, NumberingType, TargetDate);
             return new ExceptionHandler().Common(Request,ret);
         }
+
+        /// <summary>
+        /// 获取科室所有Type和TypeName字段 SYF 20151109
+        /// </summary>
+        /// <returns></returns>
+        [Route("Api/v1/Dict/DivisionTypes")]
+        [ModelValidationFilter]
+        public List<TypeAndName> GetAllDivisionType()
+        {
+            return repository.GetAllDivisionType(pclsCache);
+        }
+        /// <summary>
+        /// 根据Type获取科室Code和Name SYF 20151109
+        /// </summary>
+        /// <param name="Type"></param>
+        /// <returns></returns>
+        [Route("Api/v1/Dict/Divisions")]
+        [ModelValidationFilter]
+        public List<TypeAndName> GetDivisionDeptList(string Type)
+        {
+            return repository.GetDivisionDeptList(pclsCache, Type);
+        }
+
     }
 }
