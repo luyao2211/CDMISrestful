@@ -167,16 +167,52 @@ namespace CDMISrestful.DataModels
 
     public class VitalSignFromDevice
     {
-        public string name { get; set; }
+        public string ubid { get; set; }
         public string mobilephone { get; set; }
-        public TypeAndName Bloodpressure_1 { get; set; }
-        public TypeAndName Bloodpressure_2 { get; set; }
-        public TypeAndName Pulserate_1 { get; set; }
-        public TypeAndName Bloodglucose { get; set; }
-        public TypeAndName Respiratoryrate { get; set; }
-        public string ECG { get; set; }
-        public string Activity { get; set; }
-        public string DateTime { get; set; }
+        public string sex { get; set; }
+        public int age { get; set; }
+        public string birthday { get; set; }
+        public DailyInfos dailyinfos { get; set; }
     }
 
+    public class DailyInfos
+    {
+        public string date { get; set; }
+        public string height { get; set; }
+        public string weight { get; set; }
+        public string remark { get; set; }
+        public BloodPressureInfos bloodpressureinfos { get; set; }
+        public BloodSugarInfos bloodsugarinfos { get; set; }
+        public ECGInfos ecginfos { get; set; }
+        public BreatheInfos breatheinfos { get; set; }
+    }
+
+    public class BloodPressureInfos
+    {
+        public string time { get; set; }
+        public string high { get; set; }
+        public string low { get; set; }
+        public int source { get; set; }
+    }
+
+    public class BloodSugarInfos
+    {
+        public string time { get; set; }
+        public string type { get; set; }
+        public string glu { get; set; }
+        public int source { get; set; }
+    }
+
+    public class ECGInfos
+    {
+        public string time { get; set; }
+        public string bpm { get; set; }
+        public int source { get; set; }
+    }
+
+    public class BreatheInfos
+    {
+        public string time { get; set; }
+        public double oximetry { get; set; }
+    }
 }

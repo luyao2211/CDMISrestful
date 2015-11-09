@@ -12,7 +12,7 @@ namespace CDMISrestful.Models
         string sendSMS(string mobile, string smsType);
         int checkverification(string mobile, string smsType, string verification);
         string PushNotification(string platform, string Alias, string notification);
-        List<TypeAndName> GetPatientInfo(DataConnection pclsCache, string PatientId);
+        string GetPatientInfo(DataConnection pclsCache, string PatientId);
         int VitalSignFromZKY(DataConnection pclsCache, VitalSignFromDevice VitalSigns, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
     }
 }

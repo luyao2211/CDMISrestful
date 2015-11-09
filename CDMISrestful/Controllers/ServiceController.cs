@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CDMISrestful.Models;
 using CDMISrestful.CommonLibrary;
-using System.Web;
 using CDMISrestful.DataModels;
+using System.Text;
 
 namespace CDMISrestful.Controllers
 {
@@ -64,13 +63,8 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         public HttpResponseMessage GetPatientInfo(string PatientId)
         {
-            List<TypeAndName> list = repository.GetPatientInfo(pclsCache, PatientId);
-            HttpResponseMessage ret = new ExceptionHandler().toJson(list);
-            ret.Headers.Add("type", "docapp");
-            ret.Headers.Add("action", "004");
-            ret.Headers.Add("content", "#base64");
-            ret.Headers.Add("contentkey", "#HQ*#base64");
-            return ret;
+            string ret = repository.GetPatientInfo(pclsCache, PatientId);
+            return new ExceptionHandler().Common(Request, ret);
         }
 
         /// <summary>
@@ -93,7 +87,7 @@ namespace CDMISrestful.Controllers
             });
             if (Header.Key != null)
                 HeaderContent = Header.Value.First();
-            if (HeaderContent != "#zjuBME319*application/json; charset=utf-8")
+            if (HeaderContent != "#zjuBME319*")
                 return new ExceptionHandler().SetData(Request, ret);
             ret = repository.VitalSignFromZKY(pclsCache, VitalSigns, revUserId, TerminalName, TerminalIP, DeviceType);
             return new ExceptionHandler().SetData(Request, ret);
