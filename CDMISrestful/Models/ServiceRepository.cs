@@ -226,50 +226,111 @@ namespace CDMISrestful.Models
         /// </summary>
         /// <param name="PatientId"></param>
         /// <returns></returns>
-        public List<TypeAndName> GetPatientInfo(DataConnection pclsCache, string PatientId)
+        public string GetPatientInfo(DataConnection pclsCache, string PatientId)
         {
             List<TypeAndName> List = new List<TypeAndName>();
+            List.Add(new TypeAndName
+            {
+                Type = "doctorId",
+                Name = "1234567890"
+            });
             PatBasicInfo BasicInfo = new UsersRepository().GetPatBasicInfo(pclsCache, PatientId);
-            TypeAndName NewLine1 = new TypeAndName
+            if (BasicInfo == null)
+                return "病人不存在";
+            List.Add(new TypeAndName
             {
                 Type = "name",
                 Name = BasicInfo.UserName
-            };
-            List.Add(NewLine1);
-            TypeAndName NewLine2 = new TypeAndName
+            });
+            List.Add(new TypeAndName
             {
                 Type = "age",
                 Name = BasicInfo.Age
-            };
-            List.Add(NewLine2);
-            TypeAndName NewLine3 = new TypeAndName
+            });
+            List.Add(new TypeAndName
             {
                 Type = "sex",
                 Name = BasicInfo.Gender
-            };
-            List.Add(NewLine3);
-            string Height = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Height", "Height_1");
-            TypeAndName NewLine4 = new TypeAndName
-            {
-                Type = "height",
-                Name = Height
-            };
-            List.Add(NewLine4);
-            string Weight = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Weight", "Weight_1");
-            TypeAndName NewLine5 = new TypeAndName
-            {
-                Type = "weight",
-                Name = Weight
-            };
-            List.Add(NewLine5);
+            });
             string PhoneNumber = new UsersMethod().GetPhoneNoByUserId(pclsCache, PatientId);
-            TypeAndName NewLine6 = new TypeAndName
+            List.Add(new TypeAndName
             {
                 Type = "mobilephone",
                 Name = PhoneNumber
-            };
-            List.Add(NewLine6);
-            return List;
+            });
+            string Height = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Height", "Height_1");
+            string Weight = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Weight", "Weight_1");
+            string Waistline = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Waistline", "Waistline_1");
+            if (Height == null)
+                Height = "";
+            if (Weight == null)
+                Weight = "";
+            List.Add(new TypeAndName
+            {
+                Type = "height",
+                Name = Height
+            });
+            List.Add(new TypeAndName
+            {
+                Type = "weight",
+                Name = Weight
+            });
+            List.Add(new TypeAndName
+            {
+                Type = "birthday",
+                Name = BasicInfo.Birthday.Insert(4,"-").Insert(7,"-")
+            });
+            if (Waistline != null)
+                List.Add(new TypeAndName
+                {
+                    Type = "waistline",
+                    Name = Waistline
+                });
+            try
+            {
+                string BasicJson = "{";
+                foreach (TypeAndName Line in List)
+                {
+                    BasicJson = BasicJson + '"' + Line.Type + '"' + ':' + '"' + Line.Name + '"' + ',';
+                }
+                BasicJson = BasicJson.TrimEnd(',');
+                BasicJson += "}";
+                byte[] bytedata = Encoding.UTF8.GetBytes(BasicJson);
+                string content = Convert.ToBase64String(bytedata, 0, bytedata.Length);
+                content = "type=docapp&action=004&content=" + content + "&contentkey=#HQ*" + content;
+                string Url = "http://qacsupport.duapp.com/port/port.php";
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                byte[] bytes = Encoding.UTF8.GetBytes(content);
+                request.ContentLength = bytes.Length;
+                //request.Timeout = 10000;
+                Stream reqstream = request.GetRequestStream();
+                reqstream.Write(bytes, 0, bytes.Length);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Stream streamReceive = response.GetResponseStream();
+                Encoding encoding = Encoding.UTF8;
+                StreamReader streamReader = new StreamReader(streamReceive, encoding);
+                string strResult = streamReader.ReadToEnd();
+                streamReceive.Dispose();
+                streamReader.Dispose();
+                return strResult;
+            }
+            catch (WebException ex)
+            {
+                using (WebResponse response = ex.Response)
+                {
+                    HttpWebResponse httpResponse = (HttpWebResponse)response;
+                    Console.WriteLine("Error code: {0}", httpResponse.StatusCode);
+                    using (Stream data = response.GetResponseStream())
+                    using (var reader = new StreamReader(data))
+                    {
+                        string text = reader.ReadToEnd();
+                        Console.WriteLine(text);
+                    }
+                }
+                return ex.Message;
+            }
         }
 
         /// <summary>
@@ -284,48 +345,39 @@ namespace CDMISrestful.Models
         public int VitalSignFromZKY(DataConnection pclsCache, VitalSignFromDevice VitalSigns, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             string UserId = new UsersMethod().GetIDByInput(pclsCache, "PhoneNo", VitalSigns.mobilephone);
-            int RecordDate = Convert.ToInt32(VitalSigns.DateTime.Split('|')[0]);
-            int RecordTime = Convert.ToInt32(VitalSigns.DateTime.Split('|')[1]);
+            int RecordDate = Convert.ToInt32(VitalSigns.dailyinfos.date.Replace("-",""));
             int ret = 0;
-            if (VitalSigns.Bloodpressure_1.Type != "" && VitalSigns.Bloodpressure_1.Name != "")
+            if (VitalSigns.dailyinfos.bloodpressureinfos.high != "" && VitalSigns.dailyinfos.bloodpressureinfos.low != "" && VitalSigns.dailyinfos.bloodpressureinfos.time != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_1", VitalSigns.Bloodpressure_1.Type, VitalSigns.Bloodpressure_1.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                int RecordTime = Convert.ToInt32(VitalSigns.dailyinfos.bloodpressureinfos.time.Substring(0, 5).Replace(":", ""));
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_1", VitalSigns.dailyinfos.bloodpressureinfos.high, "mmHg", revUserId, TerminalName, TerminalIP, DeviceType);
+                if (ret == 0)
+                    return ret;
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_2", VitalSigns.dailyinfos.bloodpressureinfos.low, "mmHg", revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
-            if (VitalSigns.Bloodpressure_2.Type != "" && VitalSigns.Bloodpressure_2.Name != "")
+            if (VitalSigns.dailyinfos.bloodsugarinfos.type != "" && VitalSigns.dailyinfos.bloodsugarinfos.glu != "" && VitalSigns.dailyinfos.bloodsugarinfos.time != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_2", VitalSigns.Bloodpressure_2.Type, VitalSigns.Bloodpressure_2.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                int RecordTime = Convert.ToInt32(VitalSigns.dailyinfos.bloodpressureinfos.time.Substring(0, 5).Replace(":", ""));
+                if (VitalSigns.dailyinfos.bloodsugarinfos.type == "fbg")
+                    ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BloodSugar", "BloodSugar_10", VitalSigns.dailyinfos.bloodsugarinfos.glu, "mmol/l", revUserId, TerminalName, TerminalIP, DeviceType);
+                if (VitalSigns.dailyinfos.bloodsugarinfos.type == "pbg")
+                    ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BloodSugar", "BloodSugar_11", VitalSigns.dailyinfos.bloodsugarinfos.glu, "mmol/l", revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
-            if (VitalSigns.Pulserate_1.Type != "" && VitalSigns.Pulserate_1.Name != "")
+            if (VitalSigns.dailyinfos.ecginfos.bpm != "" && VitalSigns.dailyinfos.ecginfos.time != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Pulserate", "Pulserate_1", VitalSigns.Pulserate_1.Type, VitalSigns.Pulserate_1.Name, revUserId, TerminalName, TerminalIP, DeviceType);
+                int RecordTime = Convert.ToInt32(VitalSigns.dailyinfos.bloodpressureinfos.time.Substring(0, 5).Replace(":", ""));
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "HeartRate", "HeartRate_1", VitalSigns.dailyinfos.ecginfos.bpm, "次/分", revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
-            if (VitalSigns.Bloodglucose.Type != "" && VitalSigns.Bloodglucose.Name != "")
+            if (VitalSigns.dailyinfos.breatheinfos.time != "")
             {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BloodSugar", "BloodSugar_1", VitalSigns.Bloodglucose.Type, VitalSigns.Bloodglucose.Name, revUserId, TerminalName, TerminalIP, DeviceType);
-                if (ret == 0)
-                    return ret;
-            }
-            if (VitalSigns.Respiratoryrate.Type != "" && VitalSigns.Respiratoryrate.Name != "")
-            {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BreathStatus", "Respiratoryrate", VitalSigns.Respiratoryrate.Type, VitalSigns.Respiratoryrate.Name, revUserId, TerminalName, TerminalIP, DeviceType);
-                if (ret == 0)
-                    return ret;
-            }
-            if (VitalSigns.ECG != "")
-            {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "ECG", "ECG_1", VitalSigns.ECG, "", revUserId, TerminalName, TerminalIP, DeviceType);
-                if (ret == 0)
-                    return ret;
-            }
-            if (VitalSigns.Activity != "")
-            {
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Activity", "Activity_1", VitalSigns.Activity, "", revUserId, TerminalName, TerminalIP, DeviceType);
+                int RecordTime = Convert.ToInt32(VitalSigns.dailyinfos.bloodpressureinfos.time.Substring(0, 5).Replace(":", ""));
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BreathStatus", "Oximetry", VitalSigns.dailyinfos.breatheinfos.oximetry.ToString(), "", revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
