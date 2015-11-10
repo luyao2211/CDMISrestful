@@ -342,9 +342,13 @@ namespace CDMISrestful.Models
         /// <param name="TerminalIP"></param>
         /// <param name="DeviceType"></param>
         /// <returns></returns>
-        public int VitalSignFromZKY(DataConnection pclsCache, VitalSignFromDevice VitalSigns, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int VitalSignFromZKY(DataConnection pclsCache, VitalSignFromDevice VitalSigns)
         {
             string UserId = new UsersMethod().GetIDByInput(pclsCache, "PhoneNo", VitalSigns.mobilephone);
+            string revUserId = UserId;
+            string TerminalName = "DeviceFromZKY";
+            string TerminalIP = new CommonFunction().getRemoteIPAddress();
+            int DeviceType = 4;
             int RecordDate = Convert.ToInt32(VitalSigns.dailyinfos.date.Replace("-",""));
             int ret = 0;
             if (VitalSigns.dailyinfos.bloodpressureinfos.high != "" && VitalSigns.dailyinfos.bloodpressureinfos.low != "" && VitalSigns.dailyinfos.bloodpressureinfos.time != "")

@@ -76,7 +76,7 @@ namespace CDMISrestful.Controllers
         /// <param name="TerminalIP"></param>
         /// <param name="DeviceType"></param>
         /// <returns></returns>
-        public HttpResponseMessage VitalSignFromZKY(VitalSignFromDevice VitalSigns, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public HttpResponseMessage VitalSignFromZKY(VitalSignFromDevice VitalSigns)
         {
             int ret = 0;
             var HeaderList = Request.Headers.ToList();
@@ -89,7 +89,7 @@ namespace CDMISrestful.Controllers
                 HeaderContent = Header.Value.First();
             if (HeaderContent != "#zjuBME319*")
                 return new ExceptionHandler().SetData(Request, ret);
-            ret = repository.VitalSignFromZKY(pclsCache, VitalSigns, revUserId, TerminalName, TerminalIP, DeviceType);
+            ret = repository.VitalSignFromZKY(pclsCache, VitalSigns);
             return new ExceptionHandler().SetData(Request, ret);
         }
     }
