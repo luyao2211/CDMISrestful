@@ -145,7 +145,6 @@ namespace CDMISrestful.DataModels
         public int ItemSeq { get; set; }
         [Required(ErrorMessage = "请输入Value")]
         public string Value { get; set; }
-        [Required(ErrorMessage = "请输入Description")]
         public string Description { get; set; }
         [Required(ErrorMessage = "请输入SortNo")]
         public int SortNo { get; set; }

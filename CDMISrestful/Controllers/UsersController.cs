@@ -299,6 +299,7 @@ namespace CDMISrestful.Controllers
 
         /// <summary>
         /// ReserveHealthCoach 预约健康专员 SYF
+        /// 没有预约0，正在处理1，预约失败2，加好友成功3，预约成功4
         /// </summary>
         /// <param name="ReserveHealthCoach"></param>
         /// <returns></returns>
@@ -360,7 +361,7 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// GetAppoitmentPatientList 获取某专员对应的病人列表 SYF
+        /// GetAppoitmentPatientList 获取某专员对应的预约列表 SYF
         /// </summary>
         /// <param name="healthCoachID"></param>
         /// <param name="Status"></param>
