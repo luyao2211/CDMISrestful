@@ -351,37 +351,47 @@ namespace CDMISrestful.Models
             int DeviceType = 4;
             int RecordDate = Convert.ToInt32(VitalSigns.dailyinfos.date.Replace("-",""));
             int ret = 0;
-            if (VitalSigns.dailyinfos.bloodpressureinfos.high != "" && VitalSigns.dailyinfos.bloodpressureinfos.low != "" && VitalSigns.dailyinfos.bloodpressureinfos.time != "")
+            foreach (BloodPressureInfos Line in VitalSigns.dailyinfos.bloodpressureinfos)
             {
-                int RecordTime = Convert.ToInt32(VitalSigns.dailyinfos.bloodpressureinfos.time.Substring(0, 5).Replace(":", ""));
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_1", VitalSigns.dailyinfos.bloodpressureinfos.high, "mmHg", revUserId, TerminalName, TerminalIP, DeviceType);
-                if (ret == 0)
-                    return ret;
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_2", VitalSigns.dailyinfos.bloodpressureinfos.low, "mmHg", revUserId, TerminalName, TerminalIP, DeviceType);
-                if (ret == 0)
-                    return ret;
+                if (Line.high != "" && Line.low != "" && Line.time != "")
+                {
+                    int RecordTime = Convert.ToInt32(Line.time.Substring(0, 5).Replace(":", ""));
+                    ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_1", Line.high, "mmHg", revUserId, TerminalName, TerminalIP, DeviceType);
+                    if (ret == 0)
+                        return ret;
+                    ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "Bloodpressure", "Bloodpressure_2", Line.low, "mmHg", revUserId, TerminalName, TerminalIP, DeviceType);
+                    if (ret == 0)
+                        return ret;
+                }
             }
-            if (VitalSigns.dailyinfos.bloodsugarinfos.type != "" && VitalSigns.dailyinfos.bloodsugarinfos.glu != "" && VitalSigns.dailyinfos.bloodsugarinfos.time != "")
+            foreach (BloodSugarInfos Line in VitalSigns.dailyinfos.bloodsugarinfos)
             {
-                int RecordTime = Convert.ToInt32(VitalSigns.dailyinfos.bloodpressureinfos.time.Substring(0, 5).Replace(":", ""));
-                if (VitalSigns.dailyinfos.bloodsugarinfos.type == "fbg")
-                    ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BloodSugar", "BloodSugar_10", VitalSigns.dailyinfos.bloodsugarinfos.glu, "mmol/l", revUserId, TerminalName, TerminalIP, DeviceType);
-                if (VitalSigns.dailyinfos.bloodsugarinfos.type == "pbg")
-                    ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BloodSugar", "BloodSugar_11", VitalSigns.dailyinfos.bloodsugarinfos.glu, "mmol/l", revUserId, TerminalName, TerminalIP, DeviceType);
-                if (ret == 0)
-                    return ret;
+                if (Line.glu != "" && Line.time != "")
+                {
+                    int RecordTime = Convert.ToInt32(Line.time.Substring(0, 5).Replace(":", ""));
+                    if (Line.type == 0)
+                        ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BloodSugar", "BloodSugar_10", Line.glu, "mmol/l", revUserId, TerminalName, TerminalIP, DeviceType);
+                    if (Line.type == 1)
+                        ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BloodSugar", "BloodSugar_11", Line.glu, "mmol/l", revUserId, TerminalName, TerminalIP, DeviceType);
+                    if (ret == 0)
+                        return ret;
+                }
             }
-            if (VitalSigns.dailyinfos.ecginfos.bpm != "" && VitalSigns.dailyinfos.ecginfos.time != "")
+            foreach (ECGInfos Line in VitalSigns.dailyinfos.ecginfos)
             {
-                int RecordTime = Convert.ToInt32(VitalSigns.dailyinfos.bloodpressureinfos.time.Substring(0, 5).Replace(":", ""));
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "HeartRate", "HeartRate_1", VitalSigns.dailyinfos.ecginfos.bpm, "次/分", revUserId, TerminalName, TerminalIP, DeviceType);
-                if (ret == 0)
-                    return ret;
+                if (Line.bpm != "" && Line.time != "")
+                {
+                    int RecordTime = Convert.ToInt32(Line.time.Substring(0, 5).Replace(":", ""));
+                    ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "HeartRate", "HeartRate_1", Line.bpm, "次/分", revUserId, TerminalName, TerminalIP, DeviceType);
+                    if (ret == 0)
+                        return ret;
+                }
             }
-            if (VitalSigns.dailyinfos.breatheinfos.time != "")
+            foreach (BreatheInfos Line in VitalSigns.dailyinfos.breatheinfos)
+            if (Line.time != "")
             {
-                int RecordTime = Convert.ToInt32(VitalSigns.dailyinfos.bloodpressureinfos.time.Substring(0, 5).Replace(":", ""));
-                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BreathStatus", "Oximetry", VitalSigns.dailyinfos.breatheinfos.oximetry.ToString(), "", revUserId, TerminalName, TerminalIP, DeviceType);
+                int RecordTime = Convert.ToInt32(Line.time.Substring(0, 5).Replace(":", ""));
+                ret = new VitalInfoRepository().SetPatientVitalSigns(pclsCache, UserId, RecordDate, RecordTime, "BreathStatus", "Oximetry", Line.oximetry.ToString(), "", revUserId, TerminalName, TerminalIP, DeviceType);
                 if (ret == 0)
                     return ret;
             }
