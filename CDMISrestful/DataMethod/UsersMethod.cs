@@ -1009,7 +1009,7 @@ namespace CDMISrestful.DataMethod
             List<HealthCoachList> list = new List<HealthCoachList>();
 
             List<ActiveUser> list1 = new List<ActiveUser>();
-            List<CategoryByDoctorId> list2 = new List<CategoryByDoctorId>();
+            GetDoctorInfoDetail list2 = new GetDoctorInfoDetail();
             string moudlecodes = "";
             string[] moudlecode = null;
             //string DoctorId = "";
@@ -1052,26 +1052,13 @@ namespace CDMISrestful.DataMethod
                                 }
                             }
                         }
-                        list2 = new UsersMethod().GetCategoryByDoctorId(pclsCache, list1[i].UserId);
-                        //获取某个健康专员的所有CategoryCode信息
+                        list2 = new UsersMethod().GetDoctorInfoDetail(pclsCache, list1[i].UserId);
                         if (list2 != null)
                         {
-                            #region
-                            for (int j = 0; j < list2.Count; j++)
-                            {
-                                if ((list2[j].CategoryCode == "Contact") && (list2[j].ItemCode == "Contact001_4"))
-                                {
-                                    hcf.imageURL = list2[j].Value;
-                                }
-                                //获取头像
-                                else if ((list2[j].CategoryCode == "Score") && (list2[j].ItemCode == "Score_1"))
-                                {
-                                    hcf.score = list2[j].Value;
-                                }
-                                //获取该专员总体评分
-                            }
-                            #endregion
+                            hcf.imageURL = list2.PhotoAddress;
+                            hcf.score = list2.GeneralScore;  
                         }
+                     
                         list.Add(hcf);
                     }
                 }
@@ -1128,45 +1115,16 @@ namespace CDMISrestful.DataMethod
                     }
                 }
 
-                List<CategoryByDoctorId> ret2 = new List<CategoryByDoctorId>();
-                ret2 = new UsersMethod().GetCategoryByDoctorId(pclsCache, HealthCoachID);
+                GetDoctorInfoDetail ret2 = new GetDoctorInfoDetail();
+                ret2 = new UsersMethod().GetDoctorInfoDetail(pclsCache, HealthCoachID);
                 if (ret2 != null)
-                {
-                    #region
-                    for (int j = 0; j < ret2.Count; j++)
-                    {
-                        if ((ret2[j].CategoryCode == "Contact") && (ret2[j].ItemCode == "Contact001_4"))
-                        {
-                            ret.imageURL = ret2[j].Value;
-                        }
-                        //获取头像
-                        else if ((ret2[j].CategoryCode == "Score") && (ret2[j].ItemCode == "Score_1"))
-                        {
-                            ret.generalscore = ret2[j].Value;
-                        }
-                        //获取该专员总体评分
-                        else if ((ret2[j].CategoryCode == "Score") && (ret2[j].ItemCode == "activityDegree"))
-                        {
-                            ret.activityDegree = ret2[j].Value;
-                        }
-                        //获取该专员活跃度
-                        else if ((ret2[j].CategoryCode == "Score") && (ret2[j].ItemCode == "generalComment"))
-                        {
-                            ret.generalComment = ret2[j].Value;
-                        }
-                        //获取该专员整体评价
-                        else if ((ret2[j].CategoryCode == "Score") && (ret2[j].ItemCode == "patientNum"))
-                        {
-                            ret.patientNum = ret2[j].Value;
-                        }
-                        //获取该专员负责病人数量
-                        else if ((ret2[j].CategoryCode == "Personal") && (ret2[j].ItemCode == "Description"))
-                        {
-                            ret.Description = ret2[j].Value;
-                        }
-                        //获取该专员的简介
-                    }
-                    #endregion
+                {                   
+                    ret.imageURL = ret2.PhotoAddress;
+                    ret.generalscore = ret2.GeneralScore;
+                    ret.activityDegree = ret2.ActivityDegree;
+                    ret.generalComment = ret2.GeneralComment;
+                    ret.patientNum = ret2.patientNum;
+                    ret.Description = ret2.Description;
                 }
                 return ret;
             }
@@ -2030,6 +1988,53 @@ namespace CDMISrestful.DataMethod
                 //MessageBox.Show(ex.ToString(), "获取名称失败！");
                 HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "CmMstUser.GetPhoneNoByUserId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
                 return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// 获取医生具体信息 SYF 20151112
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public GetDoctorInfoDetail GetDoctorInfoDetail(DataConnection pclsCache, string UserId)
+        {
+            GetDoctorInfoDetail ret = new GetDoctorInfoDetail();
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Ps.DoctorInfoDetail.GetDoctorInfoDetail(pclsCache.CacheConnectionObject, UserId);
+                if (list != null)
+                {
+                    ret.IDNo = list[0];
+                    ret.PhotoAddress = list[1];
+                    ret.UnitName = list[2];
+                    ret.JobTitle = list[3];
+                    ret.Level = list[4];
+                    ret.Dept = list[5];
+                    ret.GeneralScore = list[6];
+                    ret.ActivityDegree = list[7];
+
+                    ret.GeneralComment = list[8];
+                    ret.patientNum = list[9];
+                    ret.Description = list[10];
+                }
+                //DataCheck ZAM 2015-1-7
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetPatientDetailInfo", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
             }
             finally
             {
