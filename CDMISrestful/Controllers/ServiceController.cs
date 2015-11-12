@@ -78,7 +78,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         public HttpResponseMessage VitalSignFromZKY(VitalSignFromDevice VitalSigns)
         {
-            int ret = 0;
+            int ret = 9;
             var HeaderList = Request.Headers.ToList();
             string HeaderContent = "";
             KeyValuePair<string, IEnumerable<string>> Header = HeaderList.Find(delegate(KeyValuePair<string, IEnumerable<string>> x)
