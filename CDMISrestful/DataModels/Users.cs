@@ -379,6 +379,7 @@ namespace CDMISrestful.DataModels
 
     public class DetailsByDoctorId
     {
+        public string CategoryCode { get; set; }
         public string PatientId { get; set; }
         public string Name { get; set; }
         public string Comment { get; set; }
@@ -388,6 +389,7 @@ namespace CDMISrestful.DataModels
 
     public class CommentList
     {
+        public string CategoryCode { get; set; }
         public string PatientId { get; set; }
         public string imageURL { get; set; }
         public string Name { get; set; }

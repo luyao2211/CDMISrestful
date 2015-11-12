@@ -1390,6 +1390,7 @@ namespace CDMISrestful.DataMethod
                     for (int i = 0; i < list1.Count; i++)
                     {
                         CommentList clt = new CommentList();
+                        clt.CategoryCode = list1[i].CategoryCode;
                         clt.PatientId = list1[i].PatientId;
                         clt.Name = list1[i].Name;
                         clt.Comment = list1[i].Comment;
@@ -1421,7 +1422,6 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
-
 
         /// <summary>
         /// GetCategoryName WF 2014-12-2 //syf 20151027
@@ -1584,6 +1584,10 @@ namespace CDMISrestful.DataMethod
         //GetDetailsByDoctorId 获取健康专员所负责的病人对他的评价及评分信息 SYF 2015-10-26
         public List<DetailsByDoctorId> GetDetailsByDoctorId(DataConnection pclsCache, string DoctorId, string CategoryCode)
         {
+            if (CategoryCode == "{CategoryCode}")
+            {
+                CategoryCode = null;
+            }
             List<DetailsByDoctorId> items = new List<DetailsByDoctorId>();
             CacheCommand cmd = null;
             CacheDataReader cdr = null;
@@ -1602,6 +1606,7 @@ namespace CDMISrestful.DataMethod
                 while (cdr.Read())
                 {
                     DetailsByDoctorId item = new DetailsByDoctorId();
+                    item.CategoryCode = cdr["CategoryCode"].ToString();
                     item.PatientId = cdr["PatientId"].ToString();
                     item.Name = cdr["Name"].ToString();
                     item.Comment = cdr["Comment"].ToString();
