@@ -409,18 +409,20 @@ namespace CDMISrestful.DataModels
         public string Height { get; set; }
         public string Weight { get; set; }
     }
+
     public class HealthCoachListByPatient
     {
         public string HealthCoachID { get; set; }
         public string imageURL { get; set; }
         public string Name { get; set; }
-
-        public string moduleCode { get; set; }
-
         public string module { get; set; }
-        public Message latestMessage { get; set; }
-    }
+        public string MessageNo { get; set; }
+        public string Content { get; set; }
+        public string SendDateTime { get; set; }
+        public string SendByName { get; set; }
+        public string Flag { get; set; }
 
+    }
 
     public class DoctorsByPatientId
     {
@@ -429,9 +431,15 @@ namespace CDMISrestful.DataModels
         public string ItemSeq { get; set; }
         public string ImageURL { get; set; }
         public string Module { get; set; }
-        public Message LatestMessage { get; set; }
+        public string MessageNo { get; set; }
+        public string Content { get; set; }
+        public string SendDateTime { get; set; }
+        public string SendByName { get; set; }
+        public string Flag { get; set; }
+
 
     }
+
 
     public class AppoitmentPatient
     {

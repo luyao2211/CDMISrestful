@@ -19,6 +19,7 @@ namespace CDMISrestful.Controllers
     {
         static readonly IUsersRepository repository = new UsersRepository();
         DataConnection pclsCache = new DataConnection();
+
         /// <summary>
         /// 根据输入的手机号和邮箱等获取系统唯一标识符 20151023 CSQ
         /// </summary>
@@ -261,6 +262,11 @@ namespace CDMISrestful.Controllers
             return new ExceptionHandler().SetData(Request, ret);
         }
 
+         /// <summary>
+         /// 获取专员日程安排
+         /// </summary>
+         /// <param name="DoctorId"></param>
+         /// <returns></returns>
         [Route("Api/v1/Users/GetCalendar")]
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
@@ -364,6 +370,7 @@ namespace CDMISrestful.Controllers
         {
             return repository.GetAppoitmentPatientList(pclsCache, healthCoachID, Status);
         }
+
         /// <summary>
         /// 替代GetPatientsList 用于pad登录后获得专员的病人列表
         /// </summary>

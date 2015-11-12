@@ -1175,7 +1175,7 @@
             <param name="PatientId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.ServiceController.VitalSignFromZKY(CDMISrestful.DataModels.VitalSignFromDevice,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.Controllers.ServiceController.VitalSignFromZKY(CDMISrestful.DataModels.VitalSignFromDevice)">
             <summary>
             浙大接收接口处理 LY 2015-10-31
             </summary>
@@ -1293,6 +1293,13 @@
             <param name="TerminalName"></param>
             <param name="TerminalIP"></param>
             <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetCalendar(System.String)">
+            <summary>
+            获取专员日程安排
+            </summary>
+            <param name="DoctorId"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.UsersController.GetHealthCoachList">
@@ -2399,14 +2406,6 @@
             <param name="ItemSeq"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetHModulesByPID(CDMISrestful.CommonLibrary.DataConnection,System.String)">
-            <summary>
-            GetModulesByPID LS 2014-12-4 //SYF20151109
-            </summary>
-            <param name="pclsCache"></param>
-            <param name="PatientId"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.DataMethod.UsersMethod.GetHealthCoachListByPatient(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
             SYF 20151109
@@ -3063,7 +3062,7 @@
             <param name="PatientId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.ServiceRepository.VitalSignFromZKY(CDMISrestful.CommonLibrary.DataConnection,CDMISrestful.DataModels.VitalSignFromDevice,System.String,System.String,System.String,System.Int32)">
+        <member name="M:CDMISrestful.Models.ServiceRepository.VitalSignFromZKY(CDMISrestful.CommonLibrary.DataConnection,CDMISrestful.DataModels.VitalSignFromDevice)">
             <summary>
             浙大接收接口处理 LY 2015-10-31
             </summary>
