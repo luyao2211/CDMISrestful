@@ -71,6 +71,11 @@ namespace CDMISrestful.CommonLibrary
                     res.result = "数据插入失败";
                     resp = request.CreateResponse(HttpStatusCode.InternalServerError,res);       
                     break;
+                case 9:
+                    //没有权限
+                    res.result = "没有权限";
+                    resp = request.CreateResponse(HttpStatusCode.BadRequest, res);
+                    break;
                 default:
                     break;
             }
