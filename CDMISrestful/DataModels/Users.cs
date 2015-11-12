@@ -528,6 +528,9 @@ namespace CDMISrestful.DataModels
         public string JobTitle { get; set; }
         public string Level { get; set; }
         public string Dept { get; set; }
+        public string ActivatePhotoAddr { get; set; }
+        public string DeptName { get; set; }
+
         public string GeneralScore { get; set; }
         public string ActivityDegree { get; set; }
 

@@ -2021,12 +2021,15 @@ namespace CDMISrestful.DataMethod
                     ret.JobTitle = list[3];
                     ret.Level = list[4];
                     ret.Dept = list[5];
-                    ret.GeneralScore = list[6];
-                    ret.ActivityDegree = list[7];
 
-                    ret.GeneralComment = list[8];
-                    ret.patientNum = list[9];
-                    ret.Description = list[10];
+                    ret.ActivatePhotoAddr = list[6];
+                    ret.DeptName = list[7];
+
+                    ret.GeneralScore = list[8];
+                    ret.ActivityDegree = list[9];
+                    ret.GeneralComment = list[10];
+                    ret.patientNum = list[11];
+                    ret.Description = list[12];
                 }
                 //DataCheck ZAM 2015-1-7
                 return ret;
