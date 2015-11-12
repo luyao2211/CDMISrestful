@@ -181,10 +181,10 @@ namespace CDMISrestful.DataModels
         public string height { get; set; }
         public string weight { get; set; }
         public string remark { get; set; }
-        public BloodPressureInfos bloodpressureinfos { get; set; }
-        public BloodSugarInfos bloodsugarinfos { get; set; }
-        public ECGInfos ecginfos { get; set; }
-        public BreatheInfos breatheinfos { get; set; }
+        public List<BloodPressureInfos> bloodpressureinfos { get; set; }
+        public List<BloodSugarInfos> bloodsugarinfos { get; set; }
+        public List<ECGInfos> ecginfos { get; set; }
+        public List<BreatheInfos> breatheinfos { get; set; }
     }
 
     public class BloodPressureInfos
@@ -198,7 +198,7 @@ namespace CDMISrestful.DataModels
     public class BloodSugarInfos
     {
         public string time { get; set; }
-        public string type { get; set; }
+        public int type { get; set; }
         public string glu { get; set; }
         public int source { get; set; }
     }
