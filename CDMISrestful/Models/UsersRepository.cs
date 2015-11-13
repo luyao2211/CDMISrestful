@@ -808,6 +808,11 @@ namespace CDMISrestful.Models
             return planInfoMethod.GetPatientsPlan(pclsCache, DoctorId, Module, VitalType, VitalCode);
 
         }
+
+        public int SetComment(DataConnection pclsCache, string DoctorId, string CategoryCode, string Value, string Description, string SortNo, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            return new UsersMethod().SetComment(pclsCache, DoctorId, CategoryCode, Value, Description, SortNo, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+        }
         #region<新增bySYF>
         public List<HealthCoachList> GetHealthCoachList(DataConnection pclsCache)
         {
