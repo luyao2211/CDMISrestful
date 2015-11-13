@@ -407,6 +407,11 @@ namespace CDMISrestful.Controllers
             return repository.GetPhoneNoByUserId(pclsCache, UserId);
         }
 
+         /// <summary>
+         /// 用户插入对某一专员的评分和评价，并更新该专员总评分 SYF 20151113
+         /// </summary>
+         /// <param name="SetComment"></param>
+         /// <returns></returns>
          [Route("Api/v1/Users/SetComment")]
          public HttpResponseMessage SetComment(SetComment SetComment)
          {
