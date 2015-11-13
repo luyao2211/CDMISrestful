@@ -1056,7 +1056,8 @@ namespace CDMISrestful.DataMethod
                         if (list2 != null)
                         {
                             hcf.imageURL = list2.PhotoAddress;
-                            hcf.score = list2.GeneralScore;  
+                            hcf.score = list2.GeneralScore;
+                            hcf.score = Double.Parse(hcf.score).ToString("F1");
                         }
                      
                         list.Add(hcf);
@@ -1120,14 +1121,15 @@ namespace CDMISrestful.DataMethod
                 if (ret2 != null)
                 {                   
                     ret.imageURL = ret2.PhotoAddress;
-                    ret.generalscore = ret2.GeneralScore;
+                    //ret.generalscore = ret2.GeneralScore;
+                    ret.generalscore = Double.Parse(ret2.GeneralScore).ToString("F1");
                     ret.activityDegree = ret2.ActivityDegree;
                     ret.generalComment = ret2.GeneralComment;
-                    ret.patientNum = ret2.patientNum;
+                    ret.commentNum = ret2.commentNum;
                     ret.Description = ret2.Description;
 
                     ret.UnitName = ret2.UnitName;
-                    ret.Dept = ret2.Dept;
+                    ret.Dept = ret2.DeptName;
                     ret.JobTitle = ret2.JobTitle;
                     ret.Level = ret2.Level;
                 }
@@ -2033,7 +2035,7 @@ namespace CDMISrestful.DataMethod
                     ret.GeneralScore = list[8];
                     ret.ActivityDegree = list[9];
                     ret.GeneralComment = list[10];
-                    ret.patientNum = list[11];
+                    ret.commentNum = list[11];
                     ret.Description = list[12];
                 }
                 //DataCheck ZAM 2015-1-7
