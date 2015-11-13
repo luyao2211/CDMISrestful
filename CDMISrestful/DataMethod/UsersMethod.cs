@@ -1125,6 +1125,11 @@ namespace CDMISrestful.DataMethod
                     ret.generalComment = ret2.GeneralComment;
                     ret.patientNum = ret2.patientNum;
                     ret.Description = ret2.Description;
+
+                    ret.UnitName = ret2.UnitName;
+                    ret.Dept = ret2.Dept;
+                    ret.JobTitle = ret2.JobTitle;
+                    ret.Level = ret2.Level;
                 }
                 return ret;
             }
@@ -2037,6 +2042,44 @@ namespace CDMISrestful.DataMethod
             catch (Exception ex)
             {
                 HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetPatientDetailInfo", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// 病人对专员进行评价,并更新总评分和总评价 SYF 20151113
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="DoctorId"></param>
+        /// <param name="CategoryCode"></param>
+        /// <param name="Value"></param>
+        /// <param name="Description"></param>
+        /// <param name="SortNo"></param>
+        /// <param name="piUserId"></param>
+        /// <param name="piTerminalName"></param>
+        /// <param name="piTerminalIP"></param>
+        /// <param name="piDeviceType"></param>
+        /// <returns></returns>
+        public int SetComment(DataConnection pclsCache, string DoctorId, string CategoryCode, string Value, string Description, string SortNo, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            int ret = 0;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+
+                ret = (int)Ps.DoctorInfoDetail.SetComment(pclsCache.CacheConnectionObject, DoctorId, CategoryCode, Value, Description, Int32.Parse(SortNo), piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.SetComment", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
                 return ret;
             }
             finally

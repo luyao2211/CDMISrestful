@@ -405,5 +405,12 @@ namespace CDMISrestful.Controllers
         {
             return repository.GetPhoneNoByUserId(pclsCache, UserId);
         }
+
+         [Route("Api/v1/Users/SetComment")]
+         public HttpResponseMessage SetComment(SetComment SetComment)
+         {
+             int ret = repository.SetComment(pclsCache, SetComment.DoctorId, SetComment.CategoryCode, SetComment.Value, SetComment.Description, SetComment.SortNo, SetComment.piUserId, SetComment.piTerminalName, SetComment.piTerminalIP, SetComment.piDeviceType);
+             return new ExceptionHandler().SetData(Request, ret);
+         }
     }
 }

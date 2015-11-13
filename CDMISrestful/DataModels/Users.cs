@@ -260,6 +260,8 @@ namespace CDMISrestful.DataModels
         public string Gender { get; set; }
         public string IDNo { get; set; }
         public string InvalidFlag { get; set; }
+
+
     }
     public class RateTable
     {
@@ -374,6 +376,12 @@ namespace CDMISrestful.DataModels
         public string patientNum { get; set; }
         public string activityDegree { get; set; }
         public string Description { get; set; }
+
+        public string UnitName { get; set; }
+        public string Dept { get; set; }
+        public string JobTitle { get; set; }
+
+        public string Level { get; set; }
 
     }
 
@@ -538,4 +546,20 @@ namespace CDMISrestful.DataModels
         public string patientNum { get; set; }
         public string Description { get; set; }
     }
+
+    public class SetComment
+    {
+        public string DoctorId { get; set; }
+        public string CategoryCode { get; set; }
+        public string Value { get; set; }
+        public string Description { get; set; }
+        public string SortNo { get; set; }
+        public string piUserId { get; set; }
+        public string piTerminalName { get; set; }
+        public string piTerminalIP { get; set; }
+
+        public int piDeviceType { get; set; }
+
+    }
+
 }
