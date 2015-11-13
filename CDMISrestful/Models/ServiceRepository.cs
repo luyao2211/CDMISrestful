@@ -231,8 +231,8 @@ namespace CDMISrestful.Models
             List<TypeAndName> List = new List<TypeAndName>();
             List.Add(new TypeAndName
             {
-                Type = "doctorId",
-                Name = "1234567890"
+                Type = "ubid",
+                Name = "DW0101111447049158"
             });
             PatBasicInfo BasicInfo = new UsersRepository().GetPatBasicInfo(pclsCache, PatientId);
             if (BasicInfo == null)
