@@ -1071,6 +1071,13 @@
             <param name="Module"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.PsCalendarSetData(CDMISrestful.DataModels.CalendarSetData)">
+            <summary>
+            日历表插入数据 syf 20151116
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
             <summary>
             根据收缩压获取血压等级说明 LY 2015-10-13
@@ -1100,9 +1107,9 @@
             <param name="UserId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetRiskInput(System.String)">
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetM1Risk(System.String)">
             <summary>
-            获取风险评估所需输入 LY 2015-10-13
+            获取高血压风险评估结果 SYF 2015-11-16
             </summary>
             <param name="UserId"></param>
             <returns></returns>
@@ -1130,7 +1137,7 @@
         </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetParameters(System.String)">
             <summary>
-            Ps.Parameters  GetParameters WF20151027
+            获取评估表Ps.Parameters的具体参数（对应一次评估）  GetParameters WF20151027
             </summary>
             <param name="Indicators"></param>
             <returns></returns>
@@ -1138,6 +1145,27 @@
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetMaxSortNo(System.String)">
             <summary>
             Ps.TreatmentIndicators GetMaxSortNo
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetM1RiskInput(System.String)">
+            <summary>
+            获取高血压模块评估参数所需输入 SYF 20151117
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetM3RiskInput(System.String)">
+            <summary>
+            获取心衰模型评估的所有输入 SYF 20151117
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetM3Risk(System.String)">
+            <summary>
+            获取心衰风险评估结果 SYF 2015-11-17
             </summary>
             <param name="UserId"></param>
             <returns></returns>
@@ -2293,6 +2321,22 @@
             <param name="UserId"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetM1RiskInput(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            获取高血压评估所需输入（BasicInfoDetail部分） SYF 20151117
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetM3RiskInput(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            获取心衰评估所需输入（BasicInfoDetail部分） SYF 20151117
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.DataMethod.UsersMethod.GetPatientBasicInfo(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
             GetBasicInfo WF 2014-12-2  //WF 20151010
@@ -3084,10 +3128,26 @@
             <param name="UserId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetRiskInput(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetM1Risk(CDMISrestful.CommonLibrary.DataConnection,System.String)">
             <summary>
-            获取风险评估所需输入 LY 2015-10-13
+            获取高血压风险评估结果 SYF 2015-11-16
             </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetM3RiskInput(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            获取心衰模型评估的所有输入 SYF 20151117
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.RiskInfoRepository.GetM3Risk(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            获取心衰风险评估结果 SYF 2015-11-17
+            </summary>
+            <param name="pclsCache"></param>
             <param name="UserId"></param>
             <returns></returns>
         </member>

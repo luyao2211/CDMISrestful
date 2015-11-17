@@ -8,45 +8,16 @@ namespace CDMISrestful.DataModels
     public class RiskInfo
     {
     }
-    public class RiskInput
-    {
-        public int Age { get; set; }
-        public int Gender { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
-        public int AbdominalGirth { get; set; }
-        public double BMI { get; set; }
-        public int Heartrate { get; set; }
-        public int Parent { get; set; }
-        public int Smoke { get; set; }
-        public int Stroke { get; set; }
-        public int Lvh { get; set; }
-        public int Diabetes { get; set; }
-        public int Treat { get; set; }
-        public int Heartattack { get; set; }
-        public int Af { get; set; }
-        public int Chd { get; set; }
-        public int Valve { get; set; }
-        public double Tcho { get; set; }
-        public double Creatinine { get; set; }
-        public double Hdlc { get; set; }
-        public double Hyperother { get; set; }
-        public int HarvardRiskInfactor { get; set; }
-        public double FraminghamRiskInfactor { get; set; }
-        public int StrokeRiskInfactor { get; set; }
-        public int HeartFailureRiskInfactor { get; set; }
+    public class M1Risk
+    {       
+        public double Hyper { get; set; }
+        public double Harvard { get; set; }
+        public double Framingham { get; set; }
+        public double StrokeRisk { get; set; }
+        public double HeartFailureRisk { get; set; }
         public int SBP { get; set; }
         public int DBP { get; set; }
-        public int piParent { get; set; }
-        public int piSmoke { get; set; }
-        public int piStroke { get; set; }
-        public int piLvh { get; set; }
-        public int piDiabetes { get; set; }
-        public int piTreat { get; set; }
-        public int piHeartattack { get; set; }
-        public int piAf { get; set; }
-        public int piChd { get; set; }
-        public int piValve { get; set; }
+
     }
     public class RiskResult
     {
@@ -83,4 +54,59 @@ namespace CDMISrestful.DataModels
         public string DocName { get; set; }
        
     }
+
+    public class M1RiskInput
+    {
+        public int Age { get; set; }
+        public int Gender { get; set; }
+        public int Height { get; set; }
+        public int Weight { get; set; }
+        public int AbdominalGirth { get; set; }
+        public double BMI { get; set; }
+        public int Heartrate { get; set; }
+        public int Parent { get; set; }
+        public int Smoke { get; set; }
+        public int Stroke { get; set; }
+        public int Lvh { get; set; }
+        public int Diabetes { get; set; }
+        public int Treat { get; set; }
+        public int Heartattack { get; set; }
+        public int Af { get; set; }
+        public int Chd { get; set; }
+        public int Valve { get; set; }
+        public double Tcho { get; set; }
+        public double Creatinine { get; set; }
+        public double Hdlc { get; set; }
+        public int SBP { get; set; }
+        public int DBP { get; set; }
+    }
+
+    public class M3RiskInput
+    {
+        public int Age { get; set; }
+        public int Gender { get; set; }
+        public int Height { get; set; }
+        public int Weight { get; set; }
+        public double BMI { get; set; }
+        public int Smoke { get; set; }
+        public int Diabetes { get; set; }
+        public double Creatinine { get; set; }      
+        public int SBP { get; set; }
+
+        public double EF { get; set; }
+        public int NYHA { get; set; }
+        public int Lung { get; set; }
+        public double HF18 { get; set; }
+
+        public int Beta { get; set; }
+        public int AA { get; set; }
+    }
+
+    public class M3Risk
+    {
+        public double One { get; set; }
+        public double Three { get; set; }
+
+    }
+
 }

@@ -676,6 +676,114 @@ namespace CDMISrestful.DataMethod
             }
 
         }
+
+        /// <summary>
+        /// 获取高血压评估所需输入（BasicInfoDetail部分） SYF 20151117
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public M1RiskInput GetM1RiskInput(DataConnection pclsCache, string UserId)
+        {
+            M1RiskInput Input = new M1RiskInput();
+            try
+            {
+
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Ps.BasicInfoDetail.GetM1RiskInput(pclsCache.CacheConnectionObject, UserId);
+                if (list != null)
+                {
+                    Input.Height = Int32.Parse(list[1]);
+                    Input.Weight = Int32.Parse(list[0]);
+                    Input.AbdominalGirth = Int32.Parse(list[2]);
+                    Input.BMI = Math.Round(Input.Weight / (Input.Height / 100.0) / (Input.Height / 100.0),2);
+                    Input.Heartrate = Int32.Parse(list[3]);
+                    Input.Parent = Int32.Parse(list[4]);
+                    Input.Smoke = Int32.Parse(list[5]);
+                    Input.Stroke = Int32.Parse(list[6]);
+                    Input.Lvh = Int32.Parse(list[7]);
+                    Input.Diabetes = Int32.Parse(list[8]);
+                    Input.Treat = Int32.Parse(list[9]);
+                    Input.Heartattack = Int32.Parse(list[10]);
+                    Input.Af = Int32.Parse(list[11]);
+                    Input.Chd = Int32.Parse(list[12]);
+                    Input.Valve = Int32.Parse(list[13]);
+                    Input.Tcho = Convert.ToDouble(list[14]);
+                    Input.Creatinine = Convert.ToDouble(list[15]);
+                    Input.Hdlc = Convert.ToDouble(list[16]);
+                    Input.SBP = Int32.Parse(list[17]);
+                    Input.DBP = Int32.Parse(list[18]);
+                }
+                return Input;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "获取名称失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetM1RiskInput", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+
+        }
+
+        /// <summary>
+        /// 获取心衰评估所需输入（BasicInfoDetail部分） SYF 20151117
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public M3RiskInput GetM3RiskInput(DataConnection pclsCache, string UserId)
+        {
+            M3RiskInput Input = new M3RiskInput();
+            try
+            {
+
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Ps.BasicInfoDetail.GetM3RiskInput(pclsCache.CacheConnectionObject, UserId);
+                if (list != null)
+                {
+                    Input.Height = Int32.Parse(list[1]);
+                    Input.Weight = Int32.Parse(list[0]);
+                    Input.BMI = Math.Round(Input.Weight / (Input.Height / 100.0) / (Input.Height / 100.0), 2);
+                    Input.Smoke = Int32.Parse(list[2]);
+                    Input.Diabetes = Int32.Parse(list[3]);
+                    Input.Creatinine = Convert.ToDouble(list[4]);
+                    Input.SBP = Int32.Parse(list[5]);
+                    Input.EF = Convert.ToDouble(list[6]);
+                    Input.NYHA = Int32.Parse(list[7]);
+                    Input.Lung = Int32.Parse(list[8]);
+
+                    Input.HF18 = Int32.Parse(list[9]);
+                    Input.Beta = Int32.Parse(list[10]);
+                    Input.AA = Int32.Parse(list[11]);
+
+                }
+                return Input;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "获取名称失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetM3RiskInput", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+
+        }
+
         /// <summary>
         /// GetBasicInfo WF 2014-12-2  //WF 20151010
         /// </summary>

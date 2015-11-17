@@ -661,4 +661,26 @@ namespace CDMISrestful.DataModels
             SubTasks = new List<TasksForClickDtl>();
         }
     }
+
+    public class CalendarSetData
+    {
+        public string DoctorId { get; set; }
+        public int DateTime { get; set; }
+
+        public string Period { get; set; }
+        public int SortNo { get; set; }
+
+        public string Description { get; set; }
+        public int Status { get; set; }
+
+        public string Redundancy { get; set; }
+        public string revUserId { get; set; }
+
+        public string TerminalName { get; set; }
+        public string TerminalIP { get; set; }
+
+        public int DeviceType { get; set; }
+    }
+
+
 }
