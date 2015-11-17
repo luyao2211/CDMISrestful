@@ -21,5 +21,6 @@ namespace CDMISrestful.Models
         int CmMstTaskSetData(DataConnection pclsCache, string CategoryCode, string Code, string Name, string ParentCode, string Description, int StartDate, int EndDate, int GroupHeaderFlag, int ControlType, string OptionCategory, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
         List<CmMstTask> GetMstTaskByParentCode(DataConnection pclsCache, string ParentCode);
         string GetNo(DataConnection pclsCache, int NumberingType, string TargetDate);
+
     }
 }

@@ -1,0 +1,2068 @@
+
+ 
+记录时间：2015-11-16 10:01:20,110 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetAppoitmentPatientList
+            开始时间：2015/11/16 10:01:19
+            结束时间：2015/11/16 10:01:20
+            总 时 间：0.5238096秒
+            Action参数：healthCoachID=D001&Status=3
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetAppoitmentPatientList_healthCoachID_Status
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 10:08:55,258 
+线程ID:[11] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetAppoitmentPatientList
+            开始时间：2015/11/16 10:03:20
+            结束时间：2015/11/16 10:08:55
+            总 时 间：334.9466082秒
+            Action参数：healthCoachID=D001&Status=3
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetAppoitmentPatientList_healthCoachID_Status
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 10:10:42,762 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：DictController
+            ActionName:GetHypertensionDrugTypeNameList
+            开始时间：2015/11/16 10:10:42
+            结束时间：2015/11/16 10:10:42
+            总 时 间：0.2025841秒
+            Action参数：
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Dict-HypertensionDrug-TypeNames
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:08:13,941 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:PsCalendarSetData
+            开始时间：2015/11/16 14:08:13
+            结束时间：2015/11/16 14:08:13
+            总 时 间：0.295621秒
+            Action参数：item=CDMISrestful.DataModels.CalendarSetData&__EntityParamsList__={
+  "DoctorId": "D001",
+  "DateTime": 20151115,
+  "Period": "123",
+  "SortNo": 4,
+  "Description": "sample string 5",
+  "Status": 6,
+  "Redundancy": "sample string 7",
+  "revUserId": "sample string 8",
+  "TerminalName": "sample string 9",
+  "TerminalIP": "sample string 10",
+  "DeviceType": 11
+}
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-PlanInfo-GetComplianceListInC
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:25:00,506 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetPsTreatmentIndicators
+            开始时间：2015/11/16 14:24:59
+            结束时间：2015/11/16 14:25:00
+            总 时 间：0.7470131秒
+            Action参数：UserId=U201510290001
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskResults_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:29:16,841 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetParameters
+            开始时间：2015/11/16 14:29:16
+            结束时间：2015/11/16 14:29:16
+            总 时 间：0.0861338秒
+            Action参数：Indicators="U201510290001"_"||"_1_"||"_"M1"
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-Parameters_Indicators
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:29:41,320 
+线程ID:[15] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetParameters
+            开始时间：2015/11/16 14:29:40
+            结束时间：2015/11/16 14:29:41
+            总 时 间：0.4408829秒
+            Action参数：Indicators="U201510290001||1||M1"
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-Parameters_Indicators
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:30:30,896 
+线程ID:[10] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetParameters
+            开始时间：2015/11/16 14:30:30
+            结束时间：2015/11/16 14:30:30
+            总 时 间：0.1446574秒
+            Action参数：Indicators=U201510290001||1||M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-Parameters_Indicators
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:31:33,323 
+线程ID:[10] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetParameters
+            开始时间：2015/11/16 14:30:45
+            结束时间：2015/11/16 14:31:32
+            总 时 间：46.1553258秒
+            Action参数：Indicators=U201510290001||1||M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-Parameters_Indicators
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:35:44,853 
+线程ID:[15] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetParameters
+            开始时间：2015/11/16 14:35:41
+            结束时间：2015/11/16 14:35:44
+            总 时 间：3.1850099秒
+            Action参数：Indicators=U201510290001||1||M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-Parameters_Indicators
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:40:06,284 
+线程ID:[9] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:POSTPsTreatmentIndicatorsSetData
+            开始时间：2015/11/16 14:40:06
+            结束时间：2015/11/16 14:40:06
+            总 时 间：0.0720564秒
+            Action参数：Item=CDMISrestful.DataModels.RiskResult&__EntityParamsList__={
+  "UserId": "U201507140001",
+  "SortNo": 2,
+  "AssessmentType": "M1",
+  "AssessmentName": "sample string 4",
+  "AssessmentTime": "2015-11-16T14:39:11.828481 08:00",
+  "Result": "sample string 6",
+  "revUserId": "sample string 7",
+  "TerminalName": "sample string 8",
+  "TerminalIP": "sample string 9",
+  "DeviceType": 10
+}
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-RiskInfo-TreatmentIndicators
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:40:40,600 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:POSTPsTreatmentIndicatorsSetData
+            开始时间：2015/11/16 14:40:40
+            结束时间：2015/11/16 14:40:40
+            总 时 间：0.582404秒
+            Action参数：Item=CDMISrestful.DataModels.RiskResult&__EntityParamsList__={
+  "UserId": "U201507140001",
+  "SortNo": 2,
+  "AssessmentType": "M1",
+  "AssessmentName": "sample string 4",
+  "AssessmentTime": "2015-11-16 14:39:11",
+  "Result": "sample string 6",
+  "revUserId": "sample string 7",
+  "TerminalName": "sample string 8",
+  "TerminalIP": "sample string 9",
+  "DeviceType": 10
+}
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-RiskInfo-TreatmentIndicators
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:42:43,873 
+线程ID:[11] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:POSTPsParametersSetData
+            开始时间：2015/11/16 14:42:43
+            结束时间：2015/11/16 14:42:43
+            总 时 间：0秒
+            Action参数：Item=&__EntityParamsList__={
+  "Indicators": U201510290001||1||M1,
+  "Id": "M2",
+  "Name": "sample string 3",
+  "Value": "sample string 4",
+  "Unit": "sample string 5",
+  "revUserId": "sample string 6",
+  "TerminalName": "sample string 7",
+  "TerminalIP": "sample string 8",
+  "DeviceType": 9
+}
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-RiskInfo-PsParameters
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:43:02,061 
+线程ID:[11] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:POSTPsParametersSetData
+            开始时间：2015/11/16 14:43:02
+            结束时间：2015/11/16 14:43:02
+            总 时 间：0秒
+            Action参数：Item=&__EntityParamsList__={
+  "Indicators": U201510290001||1||M1,
+  "Id": "M2",
+  "Name": "sample string 3",
+  "Value": "sample string 4",
+  "Unit": "sample string 5",
+  "revUserId": "sample string 6",
+  "TerminalName": "sample string 7",
+  "TerminalIP": "sample string 8",
+  "DeviceType": 9
+}
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-RiskInfo-PsParameters
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:43:35,739 
+线程ID:[15] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:POSTPsParametersSetData
+            开始时间：2015/11/16 14:43:35
+            结束时间：2015/11/16 14:43:35
+            总 时 间：0秒
+            Action参数：Item=&__EntityParamsList__={
+  "Indicators": U201507150019||1||M1,
+  "Id": "M2",
+  "Name": "sample string 3",
+  "Value": "sample string 4",
+  "Unit": "sample string 5",
+  "revUserId": "sample string 6",
+  "TerminalName": "sample string 7",
+  "TerminalIP": "sample string 8",
+  "DeviceType": 9
+}
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-RiskInfo-PsParameters
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:43:40,066 
+线程ID:[11] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:POSTPsParametersSetData
+            开始时间：2015/11/16 14:43:40
+            结束时间：2015/11/16 14:43:40
+            总 时 间：0秒
+            Action参数：Item=&__EntityParamsList__={
+  "Indicators": U201507150019||1||M1,
+  "Id": "M2",
+  "Name": "sample string 3",
+  "Value": "sample string 4",
+  "Unit": "sample string 5",
+  "revUserId": "sample string 6",
+  "TerminalName": "sample string 7",
+  "TerminalIP": "sample string 8",
+  "DeviceType": 9
+}
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-RiskInfo-PsParameters
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-16 14:43:55,733 
+线程ID:[11] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:POSTPsParametersSetData
+            开始时间：2015/11/16 14:43:55
+            结束时间：2015/11/16 14:43:55
+            总 时 间：0.3649615秒
+            Action参数：Item=CDMISrestful.DataModels.Parameters&__EntityParamsList__={
+  "Indicators": "U201507150019||1||M1",
+  "Id": "M2",
+  "Name": "sample string 3",
+  "Value": "sample string 4",
+  "Unit": "sample string 5",
+  "revUserId": "sample string 6",
+  "TerminalName": "sample string 7",
+  "TerminalIP": "sample string 8",
+  "DeviceType": 9
+}
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-RiskInfo-PsParameters
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:07:11,836 
+线程ID:[47] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 15:07:09
+            结束时间：2015/11/16 15:07:11
+            总 时 间：2.623963秒
+            Action参数：UserId=U201507150019
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:10:08,603 
+线程ID:[44] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 15:10:07
+            结束时间：2015/11/16 15:10:08
+            总 时 间：1.5569761秒
+            Action参数：UserId=U201507150019
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:14:17,118 
+线程ID:[55] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetPsTreatmentIndicators
+            开始时间：2015/11/16 15:14:16
+            结束时间：2015/11/16 15:14:17
+            总 时 间：0.4285547秒
+            Action参数：UserId=U201507150019
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskResults_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:16:30,825 
+线程ID:[58] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetParameters
+            开始时间：2015/11/16 15:16:26
+            结束时间：2015/11/16 15:16:30
+            总 时 间：4.6566633秒
+            Action参数：Indicators=U201507150019||1||M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-Parameters_Indicators
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:17:47,590 
+线程ID:[58] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetPsTreatmentIndicators
+            开始时间：2015/11/16 15:17:47
+            结束时间：2015/11/16 15:17:47
+            总 时 间：0.4309827秒
+            Action参数：UserId=U201507150019||1||M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskResults_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:17:56,268 
+线程ID:[58] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetPsTreatmentIndicators
+            开始时间：2015/11/16 15:17:56
+            结束时间：2015/11/16 15:17:56
+            总 时 间：0.1413287秒
+            Action参数：UserId=U201507150019
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskResults_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:18:32,894 
+线程ID:[58] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetParameters
+            开始时间：2015/11/16 15:18:31
+            结束时间：2015/11/16 15:18:32
+            总 时 间：1.8868377秒
+            Action参数：Indicators=U201507150019||1||M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-Parameters_Indicators
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:53:07,433 
+线程ID:[116] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 15:53:07
+            结束时间：2015/11/16 15:53:07
+            总 时 间：0.3756722秒
+            Action参数：PatientId=U201507170023	&StartDate=20151104&EndDate=20151116&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:55:58,183 
+线程ID:[116] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 15:55:58
+            结束时间：2015/11/16 15:55:58
+            总 时 间：0.1763961秒
+            Action参数：PatientId=U201507170023	&StartDate=20151104&EndDate=20151116&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:56:07,809 
+线程ID:[116] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 15:56:07
+            结束时间：2015/11/16 15:56:07
+            总 时 间：0.1803123秒
+            Action参数：PatientId=U201507170023	&StartDate=20151104&EndDate=20151116&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:56:48,638 
+线程ID:[128] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 15:56:31
+            结束时间：2015/11/16 15:56:48
+            总 时 间：16.9070868秒
+            Action参数：PatientId=U201507170023	&StartDate=20151104&EndDate=20151116&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:56:59,697 
+线程ID:[116] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 15:56:57
+            结束时间：2015/11/16 15:56:59
+            总 时 间：2.4541857秒
+            Action参数：PatientId=U201507170023&StartDate=20151104&EndDate=20151116&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:17:41,638 
+线程ID:[152] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:17:39
+            结束时间：2015/11/16 16:17:41
+            总 时 间：2.1362114秒
+            Action参数：PatientId=U201511120002&StartDate=20151104&EndDate=20151116&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:17:56,882 
+线程ID:[152] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:17:47
+            结束时间：2015/11/16 16:17:56
+            总 时 间：9.1411304秒
+            Action参数：PatientId=U201511120002&StartDate=20151104&EndDate=20151116&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:18:20,645 
+线程ID:[152] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:18:18
+            结束时间：2015/11/16 16:18:20
+            总 时 间：2.527151秒
+            Action参数：PatientId=U201507170023&StartDate=20151104&EndDate=20151116&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:18:32,757 
+线程ID:[152] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:18:30
+            结束时间：2015/11/16 16:18:32
+            总 时 间：2.2649053秒
+            Action参数：PatientId=U201507170023&StartDate=20151104&EndDate=20151119&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:18:42,545 
+线程ID:[152] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:18:40
+            结束时间：2015/11/16 16:18:42
+            总 时 间：2.1556705秒
+            Action参数：PatientId=U201507170023&StartDate=20151101&EndDate=20151119&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:22:16,375 
+线程ID:[152] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:18:49
+            结束时间：2015/11/16 16:22:16
+            总 时 间：207.2982343秒
+            Action参数：PatientId=U201507170023&StartDate=20151101&EndDate=20151119&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:29:58,468 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:29:55
+            结束时间：2015/11/16 16:29:58
+            总 时 间：2.696054秒
+            Action参数：PatientId=PID201511020002&StartDate=20150930 &EndDate=20151102&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:30:25,055 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:30:22
+            结束时间：2015/11/16 16:30:25
+            总 时 间：2.0582695秒
+            Action参数：PatientId=PID201511020002&StartDate=20150929&EndDate=20151110&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:34:36,720 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:30:46
+            结束时间：2015/11/16 16:34:36
+            总 时 间：229.9151966秒
+            Action参数：PatientId=PID201511020002&StartDate=20150930&EndDate=20151102&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:34:57,330 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:34:55
+            结束时间：2015/11/16 16:34:57
+            总 时 间：1.7351713秒
+            Action参数：PatientId=PID201511020002&StartDate=20150927&EndDate=20151102&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:40:23,966 
+线程ID:[17] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:39:50
+            结束时间：2015/11/16 16:40:23
+            总 时 间：33.6622099秒
+            Action参数：PatientId=PID201511020002&StartDate=20150927&EndDate=20151102&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:49:22,575 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:46:41
+            结束时间：2015/11/16 16:49:22
+            总 时 间：161.3561205秒
+            Action参数：PatientId=PID201511020002&StartDate=20150927&EndDate=20151109&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:49:27,046 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:49:25
+            结束时间：2015/11/16 16:49:27
+            总 时 间：1.6845512秒
+            Action参数：PatientId=PID201511020002&StartDate=20150927&EndDate=20151109&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:50:00,182 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:49:58
+            结束时间：2015/11/16 16:50:00
+            总 时 间：1.6070504秒
+            Action参数：PatientId=PID201511020002&StartDate=20150901&EndDate=20150930&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:53:04,399 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:50:15
+            结束时间：2015/11/16 16:53:04
+            总 时 间：168.7518439秒
+            Action参数：PatientId=PID201511020002&StartDate=20150901&EndDate=20150930&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:54:32,458 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:53:07
+            结束时间：2015/11/16 16:54:32
+            总 时 间：84.5208403秒
+            Action参数：PatientId=PID201511020002&StartDate=20150901&EndDate=20150930&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:54:43,404 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:54:38
+            结束时间：2015/11/16 16:54:43
+            总 时 间：5.0388164秒
+            Action参数：PatientId=PID201511020002&StartDate=20150901&EndDate=20150930&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:55:00,349 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:54:58
+            结束时间：2015/11/16 16:55:00
+            总 时 间：1.9545454秒
+            Action参数：PatientId=PID201511020002&StartDate=20151001&EndDate=20151031&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:57:35,944 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:57:32
+            结束时间：2015/11/16 16:57:35
+            总 时 间：3.1192334秒
+            Action参数：PatientId=U201507170023&StartDate=20151104&EndDate=20151116&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 16:57:46,822 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:GetComplianceListInC
+            开始时间：2015/11/16 16:57:45
+            结束时间：2015/11/16 16:57:46
+            总 时 间：0.9395346秒
+            Action参数：PatientId=U201507170023&StartDate=20151101&EndDate=20151130&Module=M1
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-PlanInfo-GetComplianceListInC_PatientId_StartDate_EndDate_Module
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 19:53:24,569 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 19:53:08
+            结束时间：2015/11/16 19:53:24
+            总 时 间：15.9416309秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:03:10,517 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 19:54:23
+            结束时间：2015/11/16 20:03:10
+            总 时 间：526.7859924秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:04:24,391 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:03:17
+            结束时间：2015/11/16 20:04:24
+            总 时 间：66.5375928秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:06:52,552 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:05:24
+            结束时间：2015/11/16 20:06:52
+            总 时 间：88.5011521秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:07:49,229 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:07:04
+            结束时间：2015/11/16 20:07:49
+            总 时 间：45.068915秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:09:49,156 
+线程ID:[9] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:09:38
+            结束时间：2015/11/16 20:09:49
+            总 时 间：10.9633659秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:11:32,545 
+线程ID:[9] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:10:39
+            结束时间：2015/11/16 20:11:32
+            总 时 间：53.3221097秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:13:25,938 
+线程ID:[9] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:11:57
+            结束时间：2015/11/16 20:13:25
+            总 时 间：88.8036138秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:15:10,687 
+线程ID:[9] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:13:29
+            结束时间：2015/11/16 20:15:10
+            总 时 间：100.9232383秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:16:25,006 
+线程ID:[9] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:15:14
+            结束时间：2015/11/16 20:16:25
+            总 时 间：70.4677133秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:28:13,369 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetDescription
+            开始时间：2015/11/16 20:28:12
+            结束时间：2015/11/16 20:28:13
+            总 时 间：0.6614704秒
+            Action参数：SBP=180
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-GetDescription_SBP
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:29:27,544 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：DictController
+            ActionName:GetBPDescription
+            开始时间：2015/11/16 20:29:18
+            结束时间：2015/11/16 20:29:27
+            总 时 间：8.9415021秒
+            Action参数：pclsCache=&SBP=180
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Dict-BPDescription_SBP
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:31:50,286 
+线程ID:[6] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:31:43
+            结束时间：2015/11/16 20:31:50
+            总 时 间：6.9162054秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:41:33,269 
+线程ID:[15] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:41:28
+            结束时间：2015/11/16 20:41:33
+            总 时 间：4.7939086秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:43:06,998 
+线程ID:[19] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetDescription
+            开始时间：2015/11/16 20:43:06
+            结束时间：2015/11/16 20:43:06
+            总 时 间：0.4847375秒
+            Action参数：SBP=200
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-GetDescription_SBP
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:44:46,002 
+线程ID:[15] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:44:16
+            结束时间：2015/11/16 20:44:46
+            总 时 间：29.9689819秒
+            Action参数：UserId={UserId}
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 20:45:21,882 
+线程ID:[19] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetRiskInput
+            开始时间：2015/11/16 20:45:05
+            结束时间：2015/11/16 20:45:21
+            总 时 间：15.8925018秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-RiskInput_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 21:40:41,245 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：RiskInfoController
+            ActionName:GetM1Risk
+            开始时间：2015/11/16 21:40:36
+            结束时间：2015/11/16 21:40:41
+            总 时 间：4.9531287秒
+            Action参数：UserId=U201509170040
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-RiskInfo-M1Risk_UserId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 21:57:35,241 
+线程ID:[10] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 21:57:24
+            结束时间：2015/11/16 21:57:35
+            总 时 间：10.7297139秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 21:59:19,443 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 21:59:10
+            结束时间：2015/11/16 21:59:19
+            总 时 间：9.3115737秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 22:00:17,856 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 21:59:25
+            结束时间：2015/11/16 22:00:17
+            总 时 间：51.9645285秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 22:06:50,836 
+线程ID:[15] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 22:06:44
+            结束时间：2015/11/16 22:06:50
+            总 时 间：5.8685896秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 22:07:22,999 
+线程ID:[15] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 22:07:11
+            结束时间：2015/11/16 22:07:22
+            总 时 间：11.4562977秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 22:22:41,007 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 22:22:20
+            结束时间：2015/11/16 22:22:41
+            总 时 间：20.9403025秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 22:23:09,085 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 22:23:04
+            结束时间：2015/11/16 22:23:09
+            总 时 间：4.8328076秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 22:25:42,266 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 22:25:36
+            结束时间：2015/11/16 22:25:42
+            总 时 间：5.3338919秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 22:38:41,588 
+线程ID:[19] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 22:38:36
+            结束时间：2015/11/16 22:38:41
+            总 时 间：5.3386972秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: state-C91E0DB9-C9C3-4E43-A3B8-CC90820A46FD=SYSEXP%3A1; Username=UnknownUser
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
