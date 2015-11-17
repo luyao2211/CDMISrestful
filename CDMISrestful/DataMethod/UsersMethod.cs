@@ -1056,7 +1056,7 @@ namespace CDMISrestful.DataMethod
                         if (list2 != null)
                         {
                             hcf.imageURL = list2.PhotoAddress;
-                            hcf.score = list2.GeneralScore;  
+                            hcf.score = Math.Round(Convert.ToDouble(list2.GeneralScore),1).ToString();  
                         }
                      
                         list.Add(hcf);
@@ -1120,10 +1120,10 @@ namespace CDMISrestful.DataMethod
                 if (ret2 != null)
                 {                   
                     ret.imageURL = ret2.PhotoAddress;
-                    ret.generalscore = ret2.GeneralScore;
+                    ret.generalscore = Math.Round(Convert.ToDouble(ret2.GeneralScore), 1).ToString(); 
                     ret.activityDegree = ret2.ActivityDegree;
                     ret.generalComment = ret2.GeneralComment;
-                    ret.patientNum = ret2.patientNum;
+                    ret.commentNum = ret2.commentNum;
                     ret.Description = ret2.Description;
 
                     ret.UnitName = ret2.UnitName;
@@ -1739,7 +1739,8 @@ namespace CDMISrestful.DataMethod
                                 lt.HealthCoachID = list1[j].DoctorId;//专员Id
                                 lt.Name = list1[j].DoctorName;//专员名字
                                 lt.imageURL = list1[j].ImageURL;//专员照片
-                                lt.module = list2[i].Modules;//负责模块，由输入决定
+                                lt.CategoryCode = list2[i].CategoryCode;//负责模块编码，由输入决定
+                                lt.module = list2[i].Modules;//负责模块名称，由输入决定
                                 lt.MessageNo = list1[j].MessageNo;//最新消息 
                                 lt.Content = list1[j].Content;
                                 lt.SendDateTime = list1[j].SendDateTime;
@@ -2033,7 +2034,7 @@ namespace CDMISrestful.DataMethod
                     ret.GeneralScore = list[8];
                     ret.ActivityDegree = list[9];
                     ret.GeneralComment = list[10];
-                    ret.patientNum = list[11];
+                    ret.commentNum = list[11];
                     ret.Description = list[12];
                 }
                 //DataCheck ZAM 2015-1-7

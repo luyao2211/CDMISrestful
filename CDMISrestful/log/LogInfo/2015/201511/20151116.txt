@@ -1,0 +1,231 @@
+
+ 
+记录时间：2015-11-16 13:36:17,322 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 13:36:17
+            结束时间：2015/11/16 13:36:17
+            总 时 间：0.2497716秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 13:37:52,442 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 13:36:58
+            结束时间：2015/11/16 13:37:52
+            总 时 间：54.2072991秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 13:47:53,804 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachList
+            开始时间：2015/11/16 13:47:38
+            结束时间：2015/11/16 13:47:53
+            总 时 间：15.0163689秒
+            Action参数：
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-HealthCoaches
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 13:48:36,996 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachInfo
+            开始时间：2015/11/16 13:48:30
+            结束时间：2015/11/16 13:48:36
+            总 时 间：6.7710246秒
+            Action参数：HealthCoachID=DOC201506180002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-GetHealthCoachInfo_HealthCoachID
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 13:50:27,317 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：UsersController
+            ActionName:GetHealthCoachListByPatient
+            开始时间：2015/11/16 13:50:18
+            结束时间：2015/11/16 13:50:27
+            总 时 间：8.5223013秒
+            Action参数：PatientId=U201511120002
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN, zh; q=0.8
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/GET-Api-v1-Users-HealthCoaches_PatientId
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+
+            客户端IP：::1,
+            HttpMethod:GET
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:10:32,450 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:PostTask
+            开始时间：2015/11/16 15:10:13
+            结束时间：2015/11/16 15:10:32
+            总 时 间：19.3255573秒
+            Action参数：items=System.Collections.Generic.List`1[CDMISrestful.DataModels.DeleteTask]&__EntityParamsList__=[
+  {
+    "PlanNo": "PLN201511160001",
+    "Type": "TA",
+    "Code": "TA0001",
+    "SortNo": "1"
+  },
+  {
+    "PlanNo": "sample string 1",
+    "Type": "sample string 2",
+    "Code": "sample string 3",
+    "SortNo": "sample string 4"
+  }
+]
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-PlanInfo-deleteTask
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:10:58,442 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:PostTask
+            开始时间：2015/11/16 15:10:42
+            结束时间：2015/11/16 15:10:58
+            总 时 间：15.7111564秒
+            Action参数：items=System.Collections.Generic.List`1[CDMISrestful.DataModels.DeleteTask]&__EntityParamsList__=[
+  {
+    "PlanNo": "PLN201511160001",
+    "Type": "TA",
+    "Code": "TA0001",
+    "SortNo": "1"
+  }
+]
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-PlanInfo-deleteTask
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-16 15:14:12,130 
+线程ID:[5] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:PostTask
+            开始时间：2015/11/16 15:13:08
+            结束时间：2015/11/16 15:14:12
+            总 时 间：63.6364458秒
+            Action参数：items=System.Collections.Generic.List`1[CDMISrestful.DataModels.DeleteTask]&__EntityParamsList__=[
+  {
+    "PlanNo": "PLN201511160001",
+    "Type": "TA",
+    "Code": "TA0000",
+    "SortNo": "1"
+  }
+]
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=e8fdFDD_KN7Y5d6gKXdWMw--; CSPWSERVERID=e9a5ddb031b4f208a685fb47b74aa0b64ec20cdc
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-PlanInfo-deleteTask
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 

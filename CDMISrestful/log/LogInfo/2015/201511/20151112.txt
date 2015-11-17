@@ -76,3 +76,85 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like
             HttpMethod:GET
                     
  
+
+ 
+记录时间：2015-11-12 22:49:59,810 
+线程ID:[8] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:PostTask
+            开始时间：2015/11/12 22:49:30
+            结束时间：2015/11/12 22:49:59
+            总 时 间：29.4310741秒
+            Action参数：items=System.Collections.Generic.List`1[CDMISrestful.DataModels.DeleteTask]&__EntityParamsList__=[
+  {
+    "PlanNo": "PLN201511100003",
+    "Type": "TA",
+    "Code": "TA0001",
+    "SortNo": "1"
+  },
+  {
+    "PlanNo": "PLN201511100003",
+    "Type": "TA",
+    "Code": "TA0000",
+    "SortNo": "1"
+  }
+]
+
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; ASP.NET_SessionId=qs2hlrze3sstr2zgsw3yaoca; .ASPXAUTH=B4765DFE6099F2592060A2FD233A21B20C26367A308A2E70B67EA7B0CA9AFE76B4E2B6DC389261A8288B9F6DBF9DBD74D335B8794FEC637C1BE89953F5F08E59DE2E203F6DA164A487FF54F76761DF74651844997AE83F1D36889C2615AD050258907DB5D2FCE4AF8E9944EE3AB1C011D4EFAE152E6660F8AE114B19723CE75F03F539AC3D02AE13F7DDD2F248D236AB61B3A2B2F7043DD1A2086DA747123F05; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=115ef0bad6ff2866ee20a02ad4f4a48b9ad7f0ed
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-PlanInfo-deleteTask
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 
+
+ 
+记录时间：2015-11-12 22:50:33,975 
+线程ID:[7] 
+日志级别：  INFO  
+日志描述：
+            Action执行时间监控：
+            ControllerName：PlanInfoController
+            ActionName:PostTask
+            开始时间：2015/11/12 22:50:02
+            结束时间：2015/11/12 22:50:33
+            总 时 间：31.583444秒
+            Action参数：items=System.Collections.Generic.List`1[CDMISrestful.DataModels.DeleteTask]&__EntityParamsList__=[
+  {
+    "PlanNo": "PLN201511100003",
+    "Type": "TA",
+    "Code": "TA0001",
+    "SortNo": "1"
+  },
+  {
+    "PlanNo": "PLN201511100003",
+    "Type": "TA",
+    "Code": "TA0000",
+    "SortNo": "1"
+  }
+]
+
+            Http请求头:Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN, zh; q=0.8
+Cookie: CacheBrowserId=F9$ePaJta8oduI4kWEUDxg--; ASP.NET_SessionId=qs2hlrze3sstr2zgsw3yaoca; .ASPXAUTH=B4765DFE6099F2592060A2FD233A21B20C26367A308A2E70B67EA7B0CA9AFE76B4E2B6DC389261A8288B9F6DBF9DBD74D335B8794FEC637C1BE89953F5F08E59DE2E203F6DA164A487FF54F76761DF74651844997AE83F1D36889C2615AD050258907DB5D2FCE4AF8E9944EE3AB1C011D4EFAE152E6660F8AE114B19723CE75F03F539AC3D02AE13F7DDD2F248D236AB61B3A2B2F7043DD1A2086DA747123F05; state-F745025A-55F3-483F-851A-692C4F1B50FA=SYSOP%3A; Username=UnknownUser; CSPWSERVERID=115ef0bad6ff2866ee20a02ad4f4a48b9ad7f0ed
+Host: localhost:7516
+Referer: http://localhost:7516/Help/Api/POST-Api-v1-PlanInfo-deleteTask
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2427.7 Safari/537.36
+Origin: http://localhost:7516
+
+            客户端IP：::1,
+            HttpMethod:POST
+                    
+ 

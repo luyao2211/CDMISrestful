@@ -51,7 +51,7 @@ namespace CDMISrestful.Controllers
                 for (int i = 0; i < items.Count; i++)
                 {
                     ret = repository.DeteteTask(pclsCache, items[i].PlanNo, items[i].Type, items[i].Code, items[i].SortNo);
-                    if (ret != 1)
+                    if (ret ==0)
                     {
                         break;
                     }

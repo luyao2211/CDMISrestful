@@ -53,6 +53,8 @@ namespace CDMISrestful.Models
         List<AppoitmentPatient> GetAppoitmentPatientList(DataConnection pclsCache, string healthCoachID, string Status);
         List<PatientListTable> GetPatientsPlan(DataConnection pclsCache, string DoctorId, string Module, string VitalType, string VitalCode);
 
+        string GetBasicInfoDtlValue(DataConnection pclsCache, string UserId, string CategoryCode, string ItemCode, int ItemSeq);
+
         int SetComment(DataConnection pclsCache, string DoctorId, string CategoryCode, string Value, string Description, string SortNo, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
     }
 }

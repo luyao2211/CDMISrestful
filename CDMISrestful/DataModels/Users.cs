@@ -372,7 +372,7 @@ namespace CDMISrestful.DataModels
         public string generalComment { get; set; }
         public string generalscore { get; set; }
 
-        public string patientNum { get; set; }
+        public string commentNum { get; set; }
         public string activityDegree { get; set; }
         public string Description { get; set; }
 
@@ -424,6 +424,7 @@ namespace CDMISrestful.DataModels
         public string HealthCoachID { get; set; }
         public string imageURL { get; set; }
         public string Name { get; set; }
+        public string CategoryCode { get; set; }
         public string module { get; set; }
         public string MessageNo { get; set; }
         public string Content { get; set; }
@@ -542,7 +543,7 @@ namespace CDMISrestful.DataModels
         public string ActivityDegree { get; set; }
 
         public string GeneralComment { get; set; }
-        public string patientNum { get; set; }
+        public string commentNum { get; set; }
         public string Description { get; set; }
     }
 
