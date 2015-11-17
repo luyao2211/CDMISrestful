@@ -1057,6 +1057,9 @@ namespace CDMISrestful.DataMethod
                         {
                             hcf.imageURL = list2.PhotoAddress;
                             hcf.score = Math.Round(Convert.ToDouble(list2.GeneralScore),1).ToString();  
+                            //hcf.score = list2.GeneralScore;
+                            //hcf.score = Double.Parse(hcf.score).ToString("F1");
+
                         }
                      
                         list.Add(hcf);
@@ -1121,13 +1124,14 @@ namespace CDMISrestful.DataMethod
                 {                   
                     ret.imageURL = ret2.PhotoAddress;
                     ret.generalscore = Math.Round(Convert.ToDouble(ret2.GeneralScore), 1).ToString(); 
+                    //ret.generalscore = Double.Parse(ret2.GeneralScore).ToString("F1");
                     ret.activityDegree = ret2.ActivityDegree;
                     ret.generalComment = ret2.GeneralComment;
                     ret.commentNum = ret2.commentNum;
                     ret.Description = ret2.Description;
 
                     ret.UnitName = ret2.UnitName;
-                    ret.Dept = ret2.Dept;
+                    ret.Dept = ret2.DeptName;
                     ret.JobTitle = ret2.JobTitle;
                     ret.Level = ret2.Level;
                 }

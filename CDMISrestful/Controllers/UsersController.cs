@@ -414,7 +414,7 @@ namespace CDMISrestful.Controllers
         }
 
          /// <summary>
-         /// 评论专员
+         /// 用户插入对某一专员的评分和评价，并更新该专员总评分 SYF 20151113
          /// </summary>
          /// <param name="SetComment"></param>
          /// <returns></returns>
