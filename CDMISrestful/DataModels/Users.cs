@@ -424,6 +424,7 @@ namespace CDMISrestful.DataModels
         public string HealthCoachID { get; set; }
         public string imageURL { get; set; }
         public string Name { get; set; }
+        public string CategoryCode { get; set; }
         public string module { get; set; }
         public string MessageNo { get; set; }
         public string Content { get; set; }

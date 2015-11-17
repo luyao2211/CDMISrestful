@@ -270,6 +270,7 @@ namespace CDMISrestful.Controllers
         [Route("Api/v1/Users/GetCalendar")]
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
+        [EnableQuery]
         public List<Calendar> GetCalendar(string DoctorId)
         {
             List<Calendar> ret = repository.GetCalendar(pclsCache, DoctorId);
@@ -281,6 +282,7 @@ namespace CDMISrestful.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("Api/v1/Users/HealthCoaches")]
+        [EnableQuery]
         public List<HealthCoachList> GetHealthCoachList()
         {
             return repository.GetHealthCoachList(pclsCache);
@@ -329,6 +331,7 @@ namespace CDMISrestful.Controllers
         /// <param name="CategoryCode"></param>
         /// <returns></returns>
         [Route("Api/v1/Users/GetCommentList")]
+         [EnableQuery]
         public List<CommentList> GetCommentList(string DoctorId, string CategoryCode)
         {
             return repository.GetCommentList(pclsCache, DoctorId, CategoryCode);
@@ -341,6 +344,7 @@ namespace CDMISrestful.Controllers
         /// <param name="CategoryCode"></param>
         /// <returns></returns>
         [Route("Api/v1/Users/HealthCoaches")]
+        [EnableQuery]
         public List<HealthCoachListByPatient> GetHealthCoachListByPatient(string PatientId)
         {
             return repository.GetHealthCoachListByPatient(pclsCache, PatientId);
@@ -361,13 +365,15 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// GetAppointmentPatientList 获取某专员对应的预约列表 SYF
+        /// GetAppoitmentPatientList 获取某专员对应的预约列表 SYF
+        /// 没有预约0，正在处理1，预约失败2，加好友成功3，预约成功4
         /// </summary>
         /// <param name="healthCoachID"></param>
         /// <param name="Status"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/GetAppointmentPatientList")]
-        public List<AppoitmentPatient> GetAppointmentPatientList(string healthCoachID, string Status)
+        [Route("Api/v1/Users/GetAppoitmentPatientList")]
+         [EnableQuery]
+        public List<AppoitmentPatient> GetAppoitmentPatientList(string healthCoachID, string Status)
         {
             return repository.GetAppoitmentPatientList(pclsCache, healthCoachID, Status);
         }
@@ -418,5 +424,21 @@ namespace CDMISrestful.Controllers
              int ret = repository.SetComment(pclsCache, SetComment.DoctorId, SetComment.CategoryCode, SetComment.Value, SetComment.Description, SetComment.SortNo, SetComment.piUserId, SetComment.piTerminalName, SetComment.piTerminalIP, SetComment.piDeviceType);
              return new ExceptionHandler().SetData(Request, ret);
          }
+
+         /// <summary>
+         /// 获取basicInfoDtl中Value字段的值：用于判断患者评价专员的权限 CSQ 20151116
+         /// </summary>
+         /// <param name="UserId"></param>
+         /// <param name="CategoryCode"></param>
+         /// <param name="ItemCode"></param>
+         /// <param name="ItemSeq"></param>
+         /// <returns></returns>
+          [Route("Api/v1/Users/BasicDtlValue")]
+         public HttpResponseMessage GetBasicInfoDtlValue(string UserId, string CategoryCode, string ItemCode, int ItemSeq)
+         {
+             string ret = repository.GetBasicInfoDtlValue(pclsCache, UserId, CategoryCode, ItemCode, ItemSeq);
+             return new ExceptionHandler().Common(Request, ret);
+         }
+
     }
 }

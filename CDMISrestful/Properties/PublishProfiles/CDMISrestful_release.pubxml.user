@@ -6,11 +6,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>F:\Work\chronic disease management\publish\restful</_PublishTargetUrl>
+    <_PublishTargetUrl>F:\Work\chronic disease management\publish\CDMISrestful_release</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/XmlDocument.xml">
-      <publishTime>11/16/2015 13:34:32</publishTime>
+      <publishTime>11/17/2015 16:38:22</publishTime>
     </File>
     <File Include="Areas/HelpPage/HelpPage.css">
       <publishTime>10/13/2015 19:27:06</publishTime>
@@ -85,9 +85,6 @@
       <publishTime>10/13/2015 19:27:06</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>10/13/2015 19:27:07</publishTime>
-    </File>
-    <File Include="bin/Antlr3.Runtime.pdb">
       <publishTime>10/13/2015 19:27:07</publishTime>
     </File>
     <File Include="bin/Cache.Cm.CommonLibrary.dll">
@@ -190,7 +187,7 @@
       <publishTime>10/13/2015 19:27:06</publishTime>
     </File>
     <File Include="bin/Cache.Mb.MessageRecord.dll">
-      <publishTime>10/26/2015 14:35:38</publishTime>
+      <publishTime>11/17/2015 16:37:38</publishTime>
     </File>
     <File Include="bin/Cache.Mp.DiagnosisCmp.dll">
       <publishTime>10/13/2015 19:27:06</publishTime>
@@ -252,14 +249,8 @@
     <File Include="bin/Cache.Ps.LabTest.dll">
       <publishTime>10/13/2015 19:27:06</publishTime>
     </File>
-    <File Include="bin/Cache.Ps.LabTestDetails.dll">
-      <publishTime>09/28/2015 22:24:44</publishTime>
-    </File>
     <File Include="bin/Cache.Ps.OutPatientInfo.dll">
       <publishTime>10/13/2015 19:27:06</publishTime>
-    </File>
-    <File Include="bin/Cache.Ps.Parameters.dll">
-      <publishTime>09/28/2015 22:24:44</publishTime>
     </File>
     <File Include="bin/Cache.Ps.Patient2VS.dll">
       <publishTime>10/13/2015 19:27:06</publishTime>
@@ -278,9 +269,6 @@
     </File>
     <File Include="bin/Cache.Ps.Symptoms.dll">
       <publishTime>10/13/2015 19:27:06</publishTime>
-    </File>
-    <File Include="bin/Cache.Ps.Task.dll">
-      <publishTime>09/28/2015 22:24:45</publishTime>
     </File>
     <File Include="bin/Cache.Ps.TaskList.dll">
       <publishTime>10/13/2015 19:27:06</publishTime>
@@ -334,10 +322,7 @@
       <publishTime>10/13/2015 19:27:06</publishTime>
     </File>
     <File Include="bin/CDMISrestful.dll">
-      <publishTime>11/16/2015 13:34:32</publishTime>
-    </File>
-    <File Include="bin/CDMISrestful.pdb">
-      <publishTime>11/16/2015 13:34:32</publishTime>
+      <publishTime>11/17/2015 16:38:29</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>10/13/2015 19:27:07</publishTime>
@@ -566,9 +551,6 @@
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>10/13/2015 19:27:08</publishTime>
-    </File>
-    <File Include="bin/XmlDocument.xml">
-      <publishTime>11/16/2015 13:34:32</publishTime>
     </File>
     <File Include="bin/zh-Hans/Microsoft.Data.Edm.resources.dll">
       <publishTime>10/13/2015 19:27:07</publishTime>
@@ -910,7 +892,7 @@
       <publishTime>10/13/2015 19:27:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/16/2015 13:34:42</publishTime>
+      <publishTime>11/16/2015 13:53:36</publishTime>
     </File>
   </ItemGroup>
 </Project>

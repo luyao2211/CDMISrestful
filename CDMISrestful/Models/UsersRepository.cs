@@ -866,6 +866,11 @@ namespace CDMISrestful.Models
             return usersMethod.GetPhoneNoByUserId(pclsCache,UserId);
         }
        
+        public string GetBasicInfoDtlValue(DataConnection pclsCache, string UserId, string CategoryCode, string ItemCode, int ItemSeq)
+        {
+            return usersMethod.GetPatientValue(pclsCache, UserId, CategoryCode, ItemCode, ItemSeq);
+        }
+
         #endregion
     }
 }

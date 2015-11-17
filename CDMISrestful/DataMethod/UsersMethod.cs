@@ -1164,8 +1164,10 @@ namespace CDMISrestful.DataMethod
                         if (list2 != null)
                         {
                             hcf.imageURL = list2.PhotoAddress;
-                            hcf.score = list2.GeneralScore;
-                            hcf.score = Double.Parse(hcf.score).ToString("F1");
+                            hcf.score = Math.Round(Convert.ToDouble(list2.GeneralScore),1).ToString();  
+                            //hcf.score = list2.GeneralScore;
+                            //hcf.score = Double.Parse(hcf.score).ToString("F1");
+
                         }
                      
                         list.Add(hcf);
@@ -1229,8 +1231,8 @@ namespace CDMISrestful.DataMethod
                 if (ret2 != null)
                 {                   
                     ret.imageURL = ret2.PhotoAddress;
-                    //ret.generalscore = ret2.GeneralScore;
-                    ret.generalscore = Double.Parse(ret2.GeneralScore).ToString("F1");
+                    ret.generalscore = Math.Round(Convert.ToDouble(ret2.GeneralScore), 1).ToString(); 
+                    //ret.generalscore = Double.Parse(ret2.GeneralScore).ToString("F1");
                     ret.activityDegree = ret2.ActivityDegree;
                     ret.generalComment = ret2.GeneralComment;
                     ret.commentNum = ret2.commentNum;
@@ -1849,7 +1851,8 @@ namespace CDMISrestful.DataMethod
                                 lt.HealthCoachID = list1[j].DoctorId;//专员Id
                                 lt.Name = list1[j].DoctorName;//专员名字
                                 lt.imageURL = list1[j].ImageURL;//专员照片
-                                lt.module = list2[i].Modules;//负责模块，由输入决定
+                                lt.CategoryCode = list2[i].CategoryCode;//负责模块编码，由输入决定
+                                lt.module = list2[i].Modules;//负责模块名称，由输入决定
                                 lt.MessageNo = list1[j].MessageNo;//最新消息 
                                 lt.Content = list1[j].Content;
                                 lt.SendDateTime = list1[j].SendDateTime;
