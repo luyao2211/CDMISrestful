@@ -361,13 +361,13 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// GetAppoitmentPatientList 获取某专员对应的预约列表 SYF
+        /// GetAppointmentPatientList 获取某专员对应的预约列表 SYF
         /// </summary>
         /// <param name="healthCoachID"></param>
         /// <param name="Status"></param>
         /// <returns></returns>
-        [Route("Api/v1/Users/GetAppoitmentPatientList")]
-        public List<AppoitmentPatient> GetAppoitmentPatientList(string healthCoachID, string Status)
+        [Route("Api/v1/Users/GetAppointmentPatientList")]
+        public List<AppoitmentPatient> GetAppointmentPatientList(string healthCoachID, string Status)
         {
             return repository.GetAppoitmentPatientList(pclsCache, healthCoachID, Status);
         }

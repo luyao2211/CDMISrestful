@@ -11,6 +11,34 @@ namespace CDMISrestful.DataMethod
 {
     public class PlanInfoMethod
     {
+        #region<PsCalendar>
+        public int PsCalendarSetData(DataConnection pclsCache, string DoctorId, int DateTime, string Period, int SortNo, string Description, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int ret = 0;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+
+                ret = (int)Ps.Calendar.SetData(pclsCache.CacheConnectionObject, DoctorId, DateTime, Period, SortNo, Description, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.ChangePlanStatus", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        #endregion
+
         #region PsTemplate
         //setdata CSQ 20151026
         public int PsTemplateSetData(DataConnection pclsCache, string DoctorId, int TemplateCode, string TemplateName, string Description, DateTime RecordDate, string Redundance,string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
@@ -2776,6 +2804,10 @@ namespace CDMISrestful.DataMethod
                             break;
                         }
                     }
+                    if (i == list1.Count)
+                    {
+                        i--;
+                    }
 
                     for (; j < list1.Count; j++)//(int.Parse(list1[j].StartDate) <= int.Parse(EndDate)) && 
                     {
@@ -2783,6 +2815,10 @@ namespace CDMISrestful.DataMethod
                         {
                             break;
                         }
+                    }
+                    if (j == list1.Count)
+                    {
+                        j--;
                     }
                 
                     for (k = i; k >= j; k--)
@@ -2797,7 +2833,7 @@ namespace CDMISrestful.DataMethod
                                 ComplianceDate oneday = new ComplianceDate();   //输出
                                 oneday.Date = list2[m].Date;
                                 oneday.PlanNo = list1[k].PlanNo;
-                                oneday.Compliance = list2[k].Compliance;
+                                oneday.Compliance = list2[m].Compliance;
                                 ComplianceList.Add(oneday);
                             }
                         }

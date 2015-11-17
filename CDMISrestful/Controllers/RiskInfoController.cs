@@ -66,14 +66,14 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// 获取风险评估所需输入 LY 2015-10-13
+        /// 获取高血压风险评估结果 SYF 2015-11-16
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        [Route("Api/v1/RiskInfo/RiskInput")]
-        public RiskInput GetRiskInput(string UserId)
+        [Route("Api/v1/RiskInfo/M1Risk")]
+        public M1Risk GetM1Risk(string UserId)
         {
-            return repository.GetRiskInput(pclsCache, UserId);
+            return repository.GetM1Risk(pclsCache, UserId);
         }
 
         /// <summary>
@@ -119,12 +119,11 @@ namespace CDMISrestful.Controllers
         }
 
         /// <summary>
-        /// Ps.Parameters  GetParameters WF20151027
+        /// 获取评估表Ps.Parameters的具体参数（对应一次评估）  GetParameters WF20151027
         /// </summary>
         /// <param name="Indicators"></param>
         /// <returns></returns>
         [Route("Api/v1/RiskInfo/Parameters")]
-
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
         public List<Parameters> GetParameters(string Indicators)
@@ -138,13 +137,45 @@ namespace CDMISrestful.Controllers
         /// <param name="UserId"></param>
         /// <returns></returns>
         [Route("Api/v1/RiskInfo/GetMaxSortNo")]
-
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
         public HttpResponseMessage GetMaxSortNo(string UserId)
         {
             int ret = repository.GetMaxSortNo(pclsCache, UserId);
             return new ExceptionHandler().Common(Request,ret.ToString());
+        }
+
+         /// <summary>
+         /// 获取高血压模块评估参数所需输入 SYF 20151117
+         /// </summary>
+         /// <param name="UserId"></param>
+         /// <returns></returns>
+        [Route("Api/v1/RiskInfo/M1RiskInput")]
+        public M1RiskInput GetM1RiskInput(string UserId)
+        {
+            return repository.GetM1RiskInput(pclsCache, UserId);
+        }
+
+         /// <summary>
+        /// 获取心衰模型评估的所有输入 SYF 20151117
+         /// </summary>
+         /// <param name="UserId"></param>
+         /// <returns></returns>
+        [Route("Api/v1/RiskInfo/M3RiskInput")]
+        public M3RiskInput GetM3RiskInput(string UserId)
+        {
+            return repository.GetM3RiskInput(pclsCache, UserId);
+        }
+        
+        /// <summary>
+        /// 获取心衰风险评估结果 SYF 2015-11-17
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        [Route("Api/v1/RiskInfo/M3Risk")]
+        public M3Risk GetM3Risk(string UserId)
+        {
+            return repository.GetM3Risk(pclsCache, UserId);
         }
     }
 }

@@ -13,11 +13,17 @@ namespace CDMISrestful.Models
         int SetRiskResult(DataConnection pclsCache, string UserId, string AssessmentType, string AssessmentName, DateTime AssessmentTime, string Result, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
 
         string GetRiskResult(DataConnection pclsCache, string UserId, string AssessmentType);
-        RiskInput GetRiskInput(DataConnection pclsCache, string UserId);
+        M1Risk GetM1Risk(DataConnection pclsCache, string UserId);
         List<PsTreatmentIndicators> GetPsTreatmentIndicators(DataConnection pclsCache, string UserId);
         int PsTreatmentIndicatorsSetData(DataConnection pclsCache, string UserId, int SortNo, string AssessmentType, string AssessmentName, DateTime AssessmentTime, string Result, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
         int PsParametersSetData(DataConnection pclsCache, string Indicators, string Id, string Name, string Value, string Unit, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
         List<Parameters> GetParameters(DataConnection pclsCache, string Indicators);
         int GetMaxSortNo(DataConnection pclsCache, string UserId);
+
+        M1RiskInput GetM1RiskInput(DataConnection pclsCache, string UserId);
+
+        M3RiskInput GetM3RiskInput(DataConnection pclsCache, string UserId);
+
+        M3Risk GetM3Risk(DataConnection pclsCache, string UserId);
     }
 }
