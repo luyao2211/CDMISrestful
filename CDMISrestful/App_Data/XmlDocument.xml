@@ -1100,13 +1100,6 @@
             <param name="UserId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetM1Risk(System.String)">
-            <summary>
-            获取高血压风险评估结果 SYF 2015-11-16
-            </summary>
-            <param name="UserId"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetPsTreatmentIndicators(System.String)">
             <summary>
             根据UserId获取风险评估结果 WF 20151027
@@ -1156,11 +1149,39 @@
             <param name="UserId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetM3Risk(System.String)">
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.GetRisk(System.String,System.String)">
             <summary>
-            获取心衰风险评估结果 SYF 2015-11-17
+            计算风险评估 SYF 2015-11-16
             </summary>
             <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.AddM1Risk(System.String,CDMISrestful.DataModels.M1RiskInput,System.Int32,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            新建高血压风险评估（修改参数） SYF 20151118
+            </summary>
+            <param name="PatientId"></param>
+            <param name="M1RiskInput"></param>
+            <param name="RecordDate"></param>
+            <param name="RecordTime"></param>
+            <param name="piUserId"></param>
+            <param name="piTerminalName"></param>
+            <param name="piTerminalIP"></param>
+            <param name="piDeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.AddM3Risk(System.String,CDMISrestful.DataModels.M3RiskInput,System.Int32,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            新建心衰模块风险评估（修改参数） SYF 20151118
+            </summary>
+            <param name="PatientId"></param>
+            <param name="M3RiskInput"></param>
+            <param name="RecordDate"></param>
+            <param name="RecordTime"></param>
+            <param name="piUserId"></param>
+            <param name="piTerminalName"></param>
+            <param name="piTerminalIP"></param>
+            <param name="piDeviceType"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.ServiceController.sendSMS(System.String,System.String,System.String)">

@@ -65,16 +65,7 @@ namespace CDMISrestful.Controllers
             return new ExceptionHandler().Common(Request, ret);
         }
 
-        /// <summary>
-        /// 获取高血压风险评估结果 SYF 2015-11-16
-        /// </summary>
-        /// <param name="UserId"></param>
-        /// <returns></returns>
-        [Route("Api/v1/RiskInfo/M1Risk")]
-        public M1Risk GetM1Risk(string UserId)
-        {
-            return repository.GetM1Risk(pclsCache, UserId);
-        }
+       
 
         /// <summary>
         /// 根据UserId获取风险评估结果 WF 20151027
@@ -166,16 +157,64 @@ namespace CDMISrestful.Controllers
         {
             return repository.GetM3RiskInput(pclsCache, UserId);
         }
-        
+
         /// <summary>
-        /// 获取心衰风险评估结果 SYF 2015-11-17
+        /// 计算风险评估 SYF 2015-11-16
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        [Route("Api/v1/RiskInfo/M3Risk")]
-        public M3Risk GetM3Risk(string UserId)
+        [Route("Api/v1/RiskInfo/Risk")]
+        public HttpResponseMessage GetRisk(string UserId, string Module)
         {
-            return repository.GetM3Risk(pclsCache, UserId);
+            if (Module == "M1")
+            {
+                return new ExceptionHandler().toJson(repository.GetM1Risk(pclsCache, UserId));
+            }
+            else if(Module == "M3")
+            {
+                return new ExceptionHandler().toJson(repository.GetM3Risk(pclsCache, UserId));
+            }
+            else
+            {
+                return new ExceptionHandler().toJson("无对应评估模型");
+            }
+            
+        }
+
+         /// <summary>
+         /// 新建高血压风险评估（修改参数） SYF 20151118
+         /// </summary>
+         /// <param name="PatientId"></param>
+         /// <param name="M1RiskInput"></param>
+         /// <param name="RecordDate"></param>
+         /// <param name="RecordTime"></param>
+         /// <param name="piUserId"></param>
+         /// <param name="piTerminalName"></param>
+         /// <param name="piTerminalIP"></param>
+         /// <param name="piDeviceType"></param>
+         /// <returns></returns>
+        [Route("Api/v1/RiskInfo/AddM1Risk")]
+        public M1Risk AddM1Risk(string PatientId, M1RiskInput M1RiskInput, int RecordDate, int RecordTime, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            return repository.AddM1Risk(pclsCache, PatientId, M1RiskInput, RecordDate, RecordTime, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+        }
+
+        /// <summary>
+        /// 新建心衰模块风险评估（修改参数） SYF 20151118
+        /// </summary>
+        /// <param name="PatientId"></param>
+        /// <param name="M3RiskInput"></param>
+        /// <param name="RecordDate"></param>
+        /// <param name="RecordTime"></param>
+        /// <param name="piUserId"></param>
+        /// <param name="piTerminalName"></param>
+        /// <param name="piTerminalIP"></param>
+        /// <param name="piDeviceType"></param>
+        /// <returns></returns>
+        [Route("Api/v1/RiskInfo/AddM3Risk")]
+        public M3Risk AddM3Risk(string PatientId, M3RiskInput M3RiskInput, int RecordDate, int RecordTime, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            return repository.AddM3Risk(pclsCache, PatientId, M3RiskInput, RecordDate, RecordTime, piUserId, piTerminalName, piTerminalIP, piDeviceType);
         }
     }
 }

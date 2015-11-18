@@ -238,5 +238,212 @@ namespace CDMISrestful.DataMethod
         }
         
         #endregion
+
+        #region<第二层>
+        public int SetM1RiskInput(DataConnection pclsCache, string PatientId, M1RiskInput M1RiskInput, int RecordDate, int RecordTime, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            int ret = 0;
+            int fret = 1;
+            try
+            {
+                #region//插入PsVitalSigns表
+                ret = new VitalInfoMethod().SetData(pclsCache, PatientId, RecordDate, RecordTime, "BodySigns", "Height", M1RiskInput.Height.ToString(), "cm", piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new VitalInfoMethod().SetData(pclsCache, PatientId, RecordDate, RecordTime, "BodySigns", "Weight", M1RiskInput.Weight.ToString(), "kg", piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new VitalInfoMethod().SetData(pclsCache, PatientId, RecordDate, RecordTime, "M1", "QG0018", M1RiskInput.AbdominalGirth.ToString(), "mm", piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new VitalInfoMethod().SetData(pclsCache, PatientId, RecordDate, RecordTime, "M1", "QG0007", M1RiskInput.Heartrate.ToString(), "次/分", piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new VitalInfoMethod().SetData(pclsCache, PatientId, RecordDate, RecordTime, "M1", "QG0013", M1RiskInput.SBP.ToString(), "mmHg", piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new VitalInfoMethod().SetData(pclsCache, PatientId, RecordDate, RecordTime, "M1", "QG0012", M1RiskInput.DBP.ToString(), "mmHg", piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                #endregion
+
+                #region//插入PsBasicInfoDetail表
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QC0001", 1, M1RiskInput.Parent.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QF0011", 1, M1RiskInput.Smoke.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QA0007", 1, M1RiskInput.Stroke.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QJ0024", 1, M1RiskInput.Lvh.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QB0045", 1, M1RiskInput.Diabetes.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QD0002", 1, M1RiskInput.Treat.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QA0004", 1, M1RiskInput.Heartattack.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QA0005", 1, M1RiskInput.Af.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QA0002", 1, M1RiskInput.Chd.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QA0006", 1, M1RiskInput.Valve.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QH0002", 1, M1RiskInput.Tcho.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QH0001", 1, M1RiskInput.Creatinine.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M1", "QH0003", 1, M1RiskInput.Hdlc.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                #endregion
+
+                return fret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "RiskInfoMethod.SetM1RiskInput", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return 0;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        public int SetM3RiskInput(DataConnection pclsCache, string PatientId, M3RiskInput M3RiskInput, int RecordDate, int RecordTime, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType)
+        {
+            int ret = 0;
+            int fret = 1;
+            try
+            {
+                #region//插入PsVitalSigns表
+                ret = new VitalInfoMethod().SetData(pclsCache, PatientId, RecordDate, RecordTime, "BodySigns", "Height", M3RiskInput.Height.ToString(), "cm", piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new VitalInfoMethod().SetData(pclsCache, PatientId, RecordDate, RecordTime, "BodySigns", "Weight", M3RiskInput.Weight.ToString(), "kg", piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new VitalInfoMethod().SetData(pclsCache, PatientId, RecordDate, RecordTime, "M3", "QG0013", M3RiskInput.SBP.ToString(), "mmHg", piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                #endregion
+
+                #region//插入PsBasicInfoDetail表
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M3", "QJ0025", 1, M3RiskInput.EF.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M3", "QF0011", 1, M3RiskInput.Smoke.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M3", "QB0045", 1, M3RiskInput.Diabetes.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M3", "QH0001", 1, M3RiskInput.Creatinine.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M3", "QJ0008", 1, M3RiskInput.NYHA.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M3", "QB0046", 1, M3RiskInput.Lung.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M3", "QB0047", 1, M3RiskInput.HF18.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M3", "QE0008", 1, M3RiskInput.Beta.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                ret = new UsersMethod().BasicInfoDetailSetData(pclsCache, PatientId, "M3", "QE0009", 1, M3RiskInput.AA.ToString(), "", 1, piUserId, piTerminalName, piTerminalIP, piDeviceType);
+                if (ret == 0)
+                {
+                    fret = 0;
+                }
+                #endregion
+
+                return fret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "RiskInfoMethod.SetM3RiskInput", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return 0;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+        #endregion
     }
 }
