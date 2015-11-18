@@ -112,7 +112,7 @@ namespace CDMISrestful.Controllers
          [Route("Api/v1/RiskInfo/PsParameters")]
 
         [ModelValidationFilter]
-        public HttpResponseMessage POSTPsParametersSetData(Parameters Item)
+        public HttpResponseMessage PostPsParametersSetData(Parameters Item)
         {
             int ret = repository.PsParametersSetData(pclsCache, Item.Indicators, Item.Id, Item.Name, Item.Value, Item.Unit, Item.revUserId, Item.TerminalName, new CommonFunction().getRemoteIPAddress(), Item.DeviceType);
             return new ExceptionHandler().SetData(Request, ret);

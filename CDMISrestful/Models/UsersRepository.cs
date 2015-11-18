@@ -813,6 +813,12 @@ namespace CDMISrestful.Models
         {
             return new UsersMethod().SetComment(pclsCache, DoctorId, CategoryCode, Value, Description, SortNo, piUserId, piTerminalName, piTerminalIP, piDeviceType);
         }
+
+        public int PsCalendarSetData(DataConnection pclsCache, string DoctorId, int DateTime, string Period, int SortNo, string Description, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            return new PlanInfoMethod().PsCalendarSetData(pclsCache, DoctorId, DateTime, Period, SortNo, Description, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
+        }
+
         #region<新增bySYF>
         public List<HealthCoachList> GetHealthCoachList(DataConnection pclsCache)
         {

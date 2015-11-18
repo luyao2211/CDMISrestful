@@ -304,17 +304,7 @@ namespace CDMISrestful.Controllers
              return repository.GetComplianceListInC(pclsCache,PatientId, StartDate, EndDate, Module);
          }
 
-         /// <summary>
-         /// 日历表插入数据 syf 20151116
-         /// </summary>
-         /// <param name="item"></param>
-         /// <returns></returns>
-         [Route("Api/v1/PlanInfo/PsCalendarSetData")]
-         public HttpResponseMessage PsCalendarSetData(CalendarSetData item)
-         {
-             int ret = repository.PsCalendarSetData(pclsCache, item.DoctorId, item.DateTime, item.Period, item.SortNo, item.Description, item.Status, item.Redundancy, item.revUserId, item.TerminalName, new CommonFunction().getRemoteIPAddress(), item.DeviceType);
-             return new ExceptionHandler().SetData(Request, ret);
-         }
+        
 
         #region 暂时不用
         ///// <summary>

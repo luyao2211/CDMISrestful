@@ -157,7 +157,8 @@ namespace CDMISrestful.Controllers
         /// <param name="Alias"></param>
         /// <param name="notification"></param>
         /// <returns></returns>
-        public string PushNotification(string platform, string Alias, string notification, string title, string ID) // platform 是平台，不输入的时候默认为全部（安卓和ios）,可以单独输入android或者ios,不支持winphone
+        [Route("Api/v1/Service/PushNotification")]
+        public string GetNotification(string platform, string Alias, string notification, string title, string id) // platform 是平台，不输入的时候默认为全部（安卓和ios）,可以单独输入android或者ios,不支持winphone
         {                                                                                  // Alias 是别名，用于定位推送，输入为空时会推送给全部用户,输入目标用户的UID即可
             try                                                                            // notification是要推送的消息内容 title是要推送的内容的标题，目前只有android可以用(platform必须填android，否则标题无效)， ID为发送者的UID
             {
@@ -189,7 +190,7 @@ namespace CDMISrestful.Controllers
                         }
                         else
                         {
-                            JSONData = J5 + '"' + J1 + '"' + ':' + '"' + platform + '"' + ',' + '"' + J2 + '"' + ':' + '{' + '"' + J6 + '"' + ':' + '[' + '"' + Alias + '"' + ']' + '}' + ',' + '"' + J3 + '"' + ':' + '{' + '"' + J8 + '"' + ':' + '{' + '"' + J4 + '"' + ':' + '"' + notification + '"' + ',' + '"' + J7 + '"' + ':' + '"' + title + '"' + ',' + '"' + J10 + '"' + ':' + '{' + '"' + J11 + '"' + ':' + '"' + title + '"' + ',' + '"' + J12 + '"' + ':' + '"' + ID + '"' + '}' + '}' + ',' + '"' + J9 + '"' + ':' + '{' + '"' + J4 + '"' + ':' + '"' + notification + '"' + ',' + '"' + J10 + '"' + ':' + '{' + '"' + J11 + '"' + ':' + '"' + title + '"' + ',' + '"' + J12 + '"' + ':' + '"' + ID + '"' + '}' + '}' + '}' + '}';
+                            JSONData = J5 + '"' + J1 + '"' + ':' + '"' + platform + '"' + ',' + '"' + J2 + '"' + ':' + '{' + '"' + J6 + '"' + ':' + '[' + '"' + Alias + '"' + ']' + '}' + ',' + '"' + J3 + '"' + ':' + '{' + '"' + J8 + '"' + ':' + '{' + '"' + J4 + '"' + ':' + '"' + notification + '"' + ',' + '"' + J7 + '"' + ':' + '"' + title + '"' + ',' + '"' + J10 + '"' + ':' + '{' + '"' + J11 + '"' + ':' + '"' + title + '"' + ',' + '"' + J12 + '"' + ':' + '"' + id + '"' + '}' + '}' + ',' + '"' + J9 + '"' + ':' + '{' + '"' + J4 + '"' + ':' + '"' + notification + '"' + ',' + '"' + J10 + '"' + ':' + '{' + '"' + J11 + '"' + ':' + '"' + title + '"' + ',' + '"' + J12 + '"' + ':' + '"' + id + '"' + '}' + '}' + '}' + '}';
                         }
                     }
                     else if (platform == "android")
@@ -201,7 +202,7 @@ namespace CDMISrestful.Controllers
                         }
                         else
                         {
-                            JSONData = J5 + '"' + J1 + '"' + ':' + '"' + platform + '"' + ',' + '"' + J2 + '"' + ':' + '{' + '"' + J6 + '"' + ':' + '[' + '"' + Alias + '"' + ']' + '}' + ',' + '"' + J3 + '"' + ':' + '{' + '"' + J8 + '"' + ':' + '{' + '"' + J4 + '"' + ':' + '"' + notification + '"' + ',' + '"' + J7 + '"' + ':' + '"' + title + '"' + ',' + '"' + J10 + '"' + ':' + '{' + '"' + J11 + '"' + ':' + '"' + title + '"' + ',' + '"' + J12 + '"' + ':' + '"' + ID + '"' + '}' + '}' + '}' + '}';
+                            JSONData = J5 + '"' + J1 + '"' + ':' + '"' + platform + '"' + ',' + '"' + J2 + '"' + ':' + '{' + '"' + J6 + '"' + ':' + '[' + '"' + Alias + '"' + ']' + '}' + ',' + '"' + J3 + '"' + ':' + '{' + '"' + J8 + '"' + ':' + '{' + '"' + J4 + '"' + ':' + '"' + notification + '"' + ',' + '"' + J7 + '"' + ':' + '"' + title + '"' + ',' + '"' + J10 + '"' + ':' + '{' + '"' + J11 + '"' + ':' + '"' + title + '"' + ',' + '"' + J12 + '"' + ':' + '"' + id + '"' + '}' + '}' + '}' + '}';
                         }
                     }
                     else if (platform == "ios")
@@ -213,7 +214,7 @@ namespace CDMISrestful.Controllers
                         }
                         else
                         {
-                            JSONData = J5 + '"' + J1 + '"' + ':' + '"' + platform + '"' + ',' + '"' + J2 + '"' + ':' + '{' + '"' + J6 + '"' + ':' + '[' + '"' + Alias + '"' + ']' + '}' + ',' + '"' + J3 + '"' + ':' + '{' + '"' + J9 + '"' + ':' + '{' + '"' + J4 + '"' + ':' + '"' + notification + '"' + ',' + '"' + J10 + '"' + ':' + '{' + '"' + J11 + '"' + ':' + '"' + title + '"' + ',' + '"' + J12 + '"' + ':' + '"' + ID + '"' + '}' + '}' + '}' + '}';
+                            JSONData = J5 + '"' + J1 + '"' + ':' + '"' + platform + '"' + ',' + '"' + J2 + '"' + ':' + '{' + '"' + J6 + '"' + ':' + '[' + '"' + Alias + '"' + ']' + '}' + ',' + '"' + J3 + '"' + ':' + '{' + '"' + J9 + '"' + ':' + '{' + '"' + J4 + '"' + ':' + '"' + notification + '"' + ',' + '"' + J10 + '"' + ':' + '{' + '"' + J11 + '"' + ':' + '"' + title + '"' + ',' + '"' + J12 + '"' + ':' + '"' + id + '"' + '}' + '}' + '}' + '}';
                         }
                     }
 

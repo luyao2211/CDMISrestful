@@ -267,7 +267,7 @@ namespace CDMISrestful.Controllers
          /// </summary>
          /// <param name="DoctorId"></param>
          /// <returns></returns>
-        [Route("Api/v1/Users/GetCalendar")]
+        [Route("Api/v1/Users/Calendar")]
         [ModelValidationFilter]
         [RESTAuthorizeAttribute]
         [EnableQuery]
@@ -275,6 +275,18 @@ namespace CDMISrestful.Controllers
         {
             List<Calendar> ret = repository.GetCalendar(pclsCache, DoctorId);
             return ret;
+        }
+
+        /// <summary>
+        /// 日历表插入数据 syf 20151116
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        [Route("Api/v1/PlanInfo/Calendar")]
+        public HttpResponseMessage PostPsCalendarSetData(CalendarSetData item)
+        {
+            int ret = repository.PsCalendarSetData(pclsCache, item.DoctorId, item.DateTime, item.Period, item.SortNo, item.Description, item.Status, item.Redundancy, item.revUserId, item.TerminalName, new CommonFunction().getRemoteIPAddress(), item.DeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
         }
 
         /// <summary>

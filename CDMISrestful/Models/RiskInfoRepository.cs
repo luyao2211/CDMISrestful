@@ -1361,6 +1361,7 @@ namespace CDMISrestful.Models
             {
                 if (BaseList.Birthday != "" && BaseList.Birthday != "0" && BaseList.Birthday != null)
                 {
+
                     Input.Age = new UsersMethod().GetAgeByBirthDay(pclsCache, Convert.ToInt32(BaseList.Birthday));//年龄
                 }
                 if (BaseList.Gender != "" && BaseList.Gender != "0" && BaseList.Gender != null)

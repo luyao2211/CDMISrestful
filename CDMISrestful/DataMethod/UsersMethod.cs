@@ -699,7 +699,14 @@ namespace CDMISrestful.DataMethod
                 {
                     Input.Height = Int32.Parse(list[1]);
                     Input.Weight = Int32.Parse(list[0]);
-                    Input.AbdominalGirth = Int32.Parse(list[2]);
+                    if (list[2] == null)
+                    {
+                        Input.AbdominalGirth = 0;
+                    }
+                    else
+                    {
+                        Input.AbdominalGirth = Int32.Parse(list[2]);
+                    }
                     Input.BMI = Math.Round(Input.Weight / (Input.Height / 100.0) / (Input.Height / 100.0),2);
                     Input.Heartrate = Int32.Parse(list[3]);
                     Input.Parent = Int32.Parse(list[4]);

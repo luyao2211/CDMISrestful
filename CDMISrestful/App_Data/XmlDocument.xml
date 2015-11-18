@@ -1071,13 +1071,6 @@
             <param name="Module"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.PlanInfoController.PsCalendarSetData(CDMISrestful.DataModels.CalendarSetData)">
-            <summary>
-            日历表插入数据 syf 20151116
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
             <summary>
             根据收缩压获取血压等级说明 LY 2015-10-13
@@ -1128,7 +1121,7 @@
             <param name="Item"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.RiskInfoController.POSTPsParametersSetData(CDMISrestful.DataModels.Parameters)">
+        <member name="M:CDMISrestful.Controllers.RiskInfoController.PostPsParametersSetData(CDMISrestful.DataModels.Parameters)">
             <summary>
             Ps.Parameters  SetData WF20151027
             </summary>
@@ -1187,7 +1180,7 @@
             <param name="verification"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.ServiceController.PushNotification(System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:CDMISrestful.Controllers.ServiceController.GetNotification(System.String,System.String,System.String,System.String,System.String)">
             <summary>
             推送消息 通知   platform 是平台，不输入的时候默认为全部（安卓和ios）,可以单独输入android或者ios,不支持winphone
              Alias 是别名，用于定位推送，输入为空时会推送给全部用户
@@ -1330,6 +1323,13 @@
             获取专员日程安排
             </summary>
             <param name="DoctorId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.PostPsCalendarSetData(CDMISrestful.DataModels.CalendarSetData)">
+            <summary>
+            日历表插入数据 syf 20151116
+            </summary>
+            <param name="item"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.UsersController.GetHealthCoachList">

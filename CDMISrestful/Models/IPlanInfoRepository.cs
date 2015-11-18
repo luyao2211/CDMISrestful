@@ -45,6 +45,6 @@ namespace CDMISrestful.Models
         List<TasksForClick> GetTasksForClick(DataConnection pclsCache, string PlanNo, string ParentCode, string Date);
         List<ComplianceDate> GetComplianceListInC(DataConnection pclsCache, string PatientId, string StartDate, string EndDate, string Module);
 
-        int PsCalendarSetData(DataConnection pclsCache, string DoctorId, int DateTime, string Period, int SortNo, string Description, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+       
     }
 }

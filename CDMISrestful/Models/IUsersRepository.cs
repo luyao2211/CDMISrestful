@@ -55,6 +55,8 @@ namespace CDMISrestful.Models
 
         string GetBasicInfoDtlValue(DataConnection pclsCache, string UserId, string CategoryCode, string ItemCode, int ItemSeq);
 
+        int PsCalendarSetData(DataConnection pclsCache, string DoctorId, int DateTime, string Period, int SortNo, string Description, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+
         int SetComment(DataConnection pclsCache, string DoctorId, string CategoryCode, string Value, string Description, string SortNo, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
     }
 }
