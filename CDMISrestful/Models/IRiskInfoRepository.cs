@@ -25,5 +25,9 @@ namespace CDMISrestful.Models
         M3RiskInput GetM3RiskInput(DataConnection pclsCache, string UserId);
 
         M3Risk GetM3Risk(DataConnection pclsCache, string UserId);
+
+        M1Risk AddM1Risk(DataConnection pclsCache, string PatientId, M1RiskInput M1RiskInput, int RecordDate, int RecordTime, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
+
+        M3Risk AddM3Risk(DataConnection pclsCache, string PatientId, M3RiskInput M3RiskInput, int RecordDate, int RecordTime, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
     }
 }

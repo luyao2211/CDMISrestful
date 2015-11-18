@@ -697,26 +697,180 @@ namespace CDMISrestful.DataMethod
                 list = Ps.BasicInfoDetail.GetM1RiskInput(pclsCache.CacheConnectionObject, UserId);
                 if (list != null)
                 {
-                    Input.Height = Int32.Parse(list[1]);
-                    Input.Weight = Int32.Parse(list[0]);
-                    Input.AbdominalGirth = Int32.Parse(list[2]);
-                    Input.BMI = Math.Round(Input.Weight / (Input.Height / 100.0) / (Input.Height / 100.0),2);
-                    Input.Heartrate = Int32.Parse(list[3]);
-                    Input.Parent = Int32.Parse(list[4]);
-                    Input.Smoke = Int32.Parse(list[5]);
-                    Input.Stroke = Int32.Parse(list[6]);
-                    Input.Lvh = Int32.Parse(list[7]);
-                    Input.Diabetes = Int32.Parse(list[8]);
-                    Input.Treat = Int32.Parse(list[9]);
-                    Input.Heartattack = Int32.Parse(list[10]);
-                    Input.Af = Int32.Parse(list[11]);
-                    Input.Chd = Int32.Parse(list[12]);
-                    Input.Valve = Int32.Parse(list[13]);
-                    Input.Tcho = Convert.ToDouble(list[14]);
-                    Input.Creatinine = Convert.ToDouble(list[15]);
-                    Input.Hdlc = Convert.ToDouble(list[16]);
-                    Input.SBP = Int32.Parse(list[17]);
-                    Input.DBP = Int32.Parse(list[18]);
+                    #region
+                    if (list[1] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Height = Int32.Parse(list[1]);
+                    }
+                    
+                    if(list[0] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Weight = Int32.Parse(list[0]);
+                    }
+                    Input.BMI = Math.Round(Input.Weight / (Input.Height / 100.0) / (Input.Height / 100.0), 2);
+
+                    if (list[2] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.AbdominalGirth = Int32.Parse(list[2]);
+                    }
+
+                    if (list[3] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Heartrate = Int32.Parse(list[3]);
+                    }
+
+                    if (list[4] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Parent = Int32.Parse(list[4]);
+                    }
+
+                    if (list[5] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Smoke = Int32.Parse(list[5]);
+                    }
+
+                    if (list[6] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Stroke = Int32.Parse(list[6]);
+                    }
+
+                    if (list[7] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Lvh = Int32.Parse(list[7]);
+                    }
+
+                    if (list[8] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Diabetes = Int32.Parse(list[8]);
+                    }
+
+                    if (list[9] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Treat = Int32.Parse(list[9]);
+                    }
+
+                    if (list[10] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Heartattack = Int32.Parse(list[10]);
+                    }
+
+                    if (list[11] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Af = Int32.Parse(list[11]);
+                    }
+
+                    if (list[12] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Chd = Int32.Parse(list[12]);
+                    }
+
+                    if (list[13] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Valve = Int32.Parse(list[13]);
+                    }
+
+                    if (list[14] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Tcho = Convert.ToDouble(list[14]);
+                    }
+
+                    if (list[15] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Creatinine = Convert.ToDouble(list[15]);
+                    }
+
+                    if (list[16] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Hdlc = Convert.ToDouble(list[16]);
+                    }
+
+                    if (list[17] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.SBP = Int32.Parse(list[17]);
+                    }
+
+                    if (list[18] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.DBP = Int32.Parse(list[18]);
+                    }
+                    #endregion
+
                 }
                 return Input;
             }
@@ -753,20 +907,115 @@ namespace CDMISrestful.DataMethod
                 list = Ps.BasicInfoDetail.GetM3RiskInput(pclsCache.CacheConnectionObject, UserId);
                 if (list != null)
                 {
-                    Input.Height = Int32.Parse(list[1]);
-                    Input.Weight = Int32.Parse(list[0]);
-                    Input.BMI = Math.Round(Input.Weight / (Input.Height / 100.0) / (Input.Height / 100.0), 2);
-                    Input.Smoke = Int32.Parse(list[2]);
-                    Input.Diabetes = Int32.Parse(list[3]);
-                    Input.Creatinine = Convert.ToDouble(list[4]);
-                    Input.SBP = Int32.Parse(list[5]);
-                    Input.EF = Convert.ToDouble(list[6]);
-                    Input.NYHA = Int32.Parse(list[7]);
-                    Input.Lung = Int32.Parse(list[8]);
+                    if (list[1] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Height = Int32.Parse(list[1]);
+                    }
 
-                    Input.HF18 = Int32.Parse(list[9]);
-                    Input.Beta = Int32.Parse(list[10]);
-                    Input.AA = Int32.Parse(list[11]);
+                    if (list[0] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Weight = Int32.Parse(list[0]);
+                    }
+                    Input.BMI = Math.Round(Input.Weight / (Input.Height / 100.0) / (Input.Height / 100.0), 2);
+
+                    if (list[2] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Smoke = Int32.Parse(list[2]);
+                    }
+
+                    if (list[3] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Diabetes = Int32.Parse(list[3]);
+                    }
+
+                    if (list[4] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Creatinine = Convert.ToDouble(list[4]);
+                    }
+
+                    if (list[5] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.SBP = Int32.Parse(list[5]);
+                    }
+
+                    if (list[6] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.EF = Convert.ToDouble(list[6]);
+                    }
+
+                    if (list[7] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.NYHA = Int32.Parse(list[7]);
+                    }
+
+                    if (list[8] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Lung = Int32.Parse(list[8]);
+                    }
+
+                    if (list[9] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.HF18 = Int32.Parse(list[9]);
+                    }
+
+                    if (list[10] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.Beta = Int32.Parse(list[10]);
+                    }
+
+                    if (list[11] == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        Input.AA = Int32.Parse(list[11]);
+                    }
+                    
 
                 }
                 return Input;
@@ -903,37 +1152,31 @@ namespace CDMISrestful.DataMethod
 
         }
 
-        //public bool BasicInfoDetailSetData(DataConnection pclsCache, string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
-        //{
-        //    bool IsSaved = false;
-        //    try
-        //    {
-        //        if (!pclsCache.Connect())
-        //        {
-        //            //MessageBox.Show("Cache数据库连接失败");
-        //            return IsSaved;
+        public int BasicInfoDetailSetData(DataConnection pclsCache, string Patient, string CategoryCode, string ItemCode, int ItemSeq, string Value, string Description, int SortNo, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int IsSaved = 0;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return IsSaved;
 
-        //        }
-        //        int flag = (int)Ps.BasicInfoDetail.SetData(pclsCache.CacheConnectionObject, Patient, CategoryCode, ItemCode, ItemSeq, Value, Description, SortNo, revUserId, TerminalName, TerminalIP, DeviceType);
-        //        if (flag == 1)
-        //        {
-        //            IsSaved = true;
-        //        }
-        //        return IsSaved;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //MessageBox.Show(ex.ToString(), "保存失败！");
-        //        HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.BasicInfoDetailSetData", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-        //        return IsSaved;
-        //    }
-        //    finally
-        //    {
-        //        pclsCache.DisConnect();
-        //    }
-
-
-        //}
+                }
+                IsSaved = (int)Ps.BasicInfoDetail.SetData(pclsCache.CacheConnectionObject, Patient, CategoryCode, ItemCode, ItemSeq, Value, Description, SortNo, revUserId, TerminalName, TerminalIP, DeviceType);
+                return IsSaved;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "保存失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.BasicInfoDetailSetData", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return IsSaved;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
 
         #endregion
 
