@@ -100,6 +100,10 @@ namespace CDMISrestful.CommonLibrary
                     res.result = "数据未找到";
                     resp = request.CreateResponse(HttpStatusCode.NotFound, res);
                     break;
+                case 3:
+                    res.result = "有正在执行的计划，无法删除";
+                    resp = request.CreateResponse(HttpStatusCode.NotAcceptable, res);
+                    break;
                 default:
                     break;
             }

@@ -452,5 +452,17 @@ namespace CDMISrestful.Controllers
              return new ExceptionHandler().Common(Request, ret);
          }
 
+         /// <summary>
+          /// 输入患者Id和专员Id，取出对应模块编码和名称 SYF 20151119
+         /// </summary>
+         /// <param name="PatientId"></param>
+         /// <param name="DoctorId"></param>
+         /// <returns></returns>
+         [Route("Api/v1/Users/HModulesByID")]
+          public List<ModulesByPID> GetHModulesByID(string PatientId, string DoctorId)
+          {
+              return repository.GetHModulesByID(pclsCache, PatientId, DoctorId);
+          }
+
     }
 }
