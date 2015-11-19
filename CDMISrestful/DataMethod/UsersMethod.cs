@@ -1711,7 +1711,20 @@ namespace CDMISrestful.DataMethod
                         clt.Name = list1[i].Name;
                         clt.Comment = list1[i].Comment;
                         clt.Score = list1[i].Score;
-                        clt.CommentTime = list1[i].CommentTime;
+                        string[] DateAndTime = list1[i].CommentTime.Split(' ');//日期和时间分开
+                        string Date = DateAndTime[0];
+                        string[] YMD = Date.Split('/');//年月日分开
+                        string month = YMD[1];
+                        string day = YMD[2];
+                        if(month.Length<2)
+                        {
+                            month = "0" + month;
+                        }
+                        if (day.Length < 2)
+                        {
+                            day = "0" + day;
+                        }
+                        clt.CommentTime = YMD[0] + month + day +" " + DateAndTime[1];
 
                         if (clt.PatientId != "")
                         {
@@ -1928,6 +1941,7 @@ namespace CDMISrestful.DataMethod
                     item.Comment = cdr["Comment"].ToString();
                     item.Score = cdr["Score"].ToString();
                     item.CommentTime = cdr["CommentTime"].ToString();
+                    //string[] sArray = (item.CommentTime).Split("/");
                     items.Add(item);
                 }
                 return items;
@@ -1979,6 +1993,7 @@ namespace CDMISrestful.DataMethod
                     ModulesByPID NewLine = new ModulesByPID();
                     NewLine.CategoryCode = cdr["CategoryCode"].ToString();
                     NewLine.Modules = cdr["Modules"].ToString();
+                    NewLine.DoctorId = cdr["DoctorId"].ToString();
                     list.Add(NewLine);
                 }
                 return list;
@@ -2131,7 +2146,6 @@ namespace CDMISrestful.DataMethod
         {
             int ret = 0;
             int Status = -1;
-            GPlanInfo ret1 = new GPlanInfo();
             try
             {
                 if (!pclsCache.Connect())
@@ -2140,9 +2154,9 @@ namespace CDMISrestful.DataMethod
                 }
                 InterSystems.Data.CacheTypes.CacheSysList list = null;
                 list = Ps.Plan.GetExecutingPlan(pclsCache.CacheConnectionObject, PatientId);
-                if (list != null)//病人有正在执行的计划，但是没有对应该医生的正在执行的计划
+                if (list != null)//病人有正在执行的计划
                 {
-                    if ((ret1.Status != "3") && (ret1.DoctorId == DoctorId))//该病人对于当前医生来说，无正在执行的计划
+                    if ((list[5] != "3") && (list[6] == DoctorId))//该病人对于当前医生来说，无正在执行的计划
                     {
                         Status = (int)Ps.Appointment.GetStatusById(pclsCache.CacheConnectionObject, DoctorId, PatientId);//当Ps.Appointment预约表的Status为0时才删除
                         if (Status == 0)
@@ -2151,6 +2165,10 @@ namespace CDMISrestful.DataMethod
                             ret = (int)Ps.BasicInfoDetail.DeleteDataByItemCode(pclsCache.CacheConnectionObject, PatientId, CategoryCode, "Doctor", DoctorId);
                             ret = (int)Ps.DoctorInfoDetail.DeleteDataByItemCode(pclsCache.CacheConnectionObject, DoctorId, CategoryCode, "Patient", PatientId);
                         }
+                    }
+                    else if ((list[5] == "3") && (list[6] == DoctorId))
+                    {
+                        ret = 3;//有正在执行的计划
                     }
                 }
                 else
@@ -2167,7 +2185,7 @@ namespace CDMISrestful.DataMethod
                     }
                 }
 
-                return ret;
+                return ret;//2有正在执行的计划
             }
             catch (Exception ex)
             {
@@ -2278,6 +2296,10 @@ namespace CDMISrestful.DataMethod
             List<PatientsByStatus> list1 = new List<PatientsByStatus>();
             try
             {
+                if(Status == "{Status}")
+                {
+                    Status = "-1";
+                }
                 list1 = GetPatientsByStatus(pclsCache, healthCoachID, Status);
                 if (list1 != null)
                 {
@@ -2497,6 +2519,33 @@ namespace CDMISrestful.DataMethod
                 }
             }
             return ret;
+        }
+
+        /// <summary>
+        /// 输入患者Id和专员Id，取出对应模块编码和名称 SYF 20151119
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="PatientId"></param>
+        /// <param name="DoctorId"></param>
+        /// <returns></returns>
+        public List<ModulesByPID> GetHModulesByID(DataConnection pclsCache, string PatientId, string DoctorId)
+        {
+            List<ModulesByPID> list = new List<ModulesByPID>();
+           // List<ModulesByPID> ret = new List<ModulesByPID>();
+            list = new UsersMethod().GetHModulesByPID(pclsCache, PatientId);
+            if (list != null)
+            {
+                int i = 0;
+                //int j = 0;
+               for(;i<list.Count; i++)
+               {
+                   if(list[i].DoctorId != DoctorId)
+                   {
+                       list.Remove(list[i]);
+                   }
+               }
+            }
+            return list;
         }
         
         #endregion

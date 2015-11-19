@@ -878,5 +878,10 @@ namespace CDMISrestful.Models
         }
 
         #endregion
+
+        public List<ModulesByPID> GetHModulesByID(DataConnection pclsCache, string PatientId, string DoctorId)
+        {
+            return new UsersMethod().GetHModulesByID(pclsCache, PatientId, DoctorId);
+        }
     }
 }
