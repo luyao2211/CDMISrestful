@@ -1154,6 +1154,7 @@
             计算风险评估 SYF 2015-11-16
             </summary>
             <param name="UserId"></param>
+            <param name="Module"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.AddM1Risk(System.String,CDMISrestful.DataModels.M1RiskInput,System.Int32,System.Int32,System.String,System.String,System.String,System.Int32)">

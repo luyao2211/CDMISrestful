@@ -400,6 +400,10 @@ namespace CDMISrestful.Controllers
          [EnableQuery]
         public List<PatientListTable> GetPatientsPlan(string DoctorId, string Module, string VitalType, string VitalCode)
         {
+            if (Module == "{Module}")
+            {
+                Module = "";
+            }
             return repository.GetPatientsPlan(pclsCache, DoctorId, Module, VitalType, VitalCode);
         }
 

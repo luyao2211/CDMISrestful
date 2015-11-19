@@ -158,11 +158,12 @@ namespace CDMISrestful.Controllers
             return repository.GetM3RiskInput(pclsCache, UserId);
         }
 
-        /// <summary>
+      /// <summary>
         /// 计算风险评估 SYF 2015-11-16
-        /// </summary>
-        /// <param name="UserId"></param>
-        /// <returns></returns>
+      /// </summary>
+      /// <param name="UserId"></param>
+      /// <param name="Module"></param>
+      /// <returns></returns>
         [Route("Api/v1/RiskInfo/Risk")]
         public HttpResponseMessage GetRisk(string UserId, string Module)
         {
