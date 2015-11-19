@@ -291,6 +291,7 @@ namespace CDMISrestful.DataModels
         public string VitalUnit { get; set; }
         public string TargetOrigin { get; set; }
         public string TargetValue { get; set; }
+        public string SMSCount { get; set; }
 
     }
 
@@ -465,6 +466,9 @@ namespace CDMISrestful.DataModels
         public string AppointmentStatus { get; set; }
         public string Description { get; set; }
         public string ApplicationTime { get; set; }
+        public string AppointmentTime { get; set; }
+
+        
         public string AppointmentAdd { get; set; }
     }
 

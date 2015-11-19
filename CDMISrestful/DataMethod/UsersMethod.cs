@@ -2311,7 +2311,7 @@ namespace CDMISrestful.DataMethod
                         app.AppointmentStatus = list1[i].Status;
                         app.Description = list1[i].Description;
                         app.ApplicationTime = list1[i].ApplicationTime;
-                        app.ApplicationTime = list1[i].ApplicationTime;
+                        app.AppointmentTime = list1[i].AppointmentTime;
                         app.AppointmentAdd = list1[i].AppointmentAdd;
 
                         if (app.PatientID != "")

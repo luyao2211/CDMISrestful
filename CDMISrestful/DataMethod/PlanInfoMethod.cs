@@ -2733,6 +2733,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.TotalDays = cdr["TotalDays"].ToString();
                     NewLine.RemainingDays = cdr["RemainingDays"].ToString();
                     NewLine.Status = cdr["Status"].ToString();
+                   
                     if (cdr["ComplianceRate"].ToString() == "")
                     {
                         NewLine.ComplianceRate = 0;
@@ -2746,6 +2747,8 @@ namespace CDMISrestful.DataMethod
                     NewLine.VitalUnit = cdr["VitalUnit"].ToString();
                     NewLine.TargetOrigin = cdr["TargetOrigin"].ToString();
                     NewLine.TargetValue = cdr["TargetValue"].ToString();
+                    NewLine.SMSCount = cdr["SMSCount"].ToString();
+
                     list.Add(NewLine);
                 }
                 return list;

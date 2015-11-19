@@ -1455,6 +1455,14 @@
             <param name="ItemSeq"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetHModulesByID(System.String,System.String)">
+            <summary>
+            输入患者Id和专员Id，取出对应模块编码和名称 SYF 20151119
+            </summary>
+            <param name="PatientId"></param>
+            <param name="DoctorId"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.VitalInfoController.GetLatestPatientVitalSigns(System.String,System.String,System.String)">
             <summary>
             GetLatestPatientVitalSigns 获取病人某项生理参数最新值 GL 2015-10-12
@@ -2552,6 +2560,15 @@
             <param name="piTerminalName"></param>
             <param name="piTerminalIP"></param>
             <param name="piDeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetHModulesByID(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
+            <summary>
+            输入患者Id和专员Id，取出对应模块编码和名称 SYF 20151119
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="PatientId"></param>
+            <param name="DoctorId"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.VitalInfoMethod.SetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
