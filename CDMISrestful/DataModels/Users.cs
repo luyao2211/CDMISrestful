@@ -14,6 +14,9 @@ namespace CDMISrestful.DataModels
     {
         public string CategoryCode { get; set; }
         public string Modules { get; set; }
+
+        public string DoctorId { get; set; }
+
     }
 
     public class ForToken
