@@ -11,6 +11,7 @@ using ServiceStack.Redis;
 using System.Security.Cryptography;
 using System.Net;
 using System.IO;
+using CDMISrestful.DataMethod;
 
 namespace CDMISrestful.Controllers
 {
@@ -304,6 +305,11 @@ namespace CDMISrestful.Controllers
             if (HeaderContent != "#zjuBME319*")
                 return new ExceptionHandler().SetData(Request, ret);
             ret = repository.VitalSignFromZKY(pclsCache, VitalSigns);
+            if (ret == 1)
+            {
+                string UserId = new UsersMethod().GetIDByInput(pclsCache, "PhoneNo", VitalSigns.mobilephone);
+                string Note = repository.PushNotification("android", UserId, "新的体征信息已输入，请查看");
+            }
             return new ExceptionHandler().SetData(Request, ret);
         }
     }
