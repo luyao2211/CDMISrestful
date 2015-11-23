@@ -172,9 +172,9 @@ namespace CDMISrestful.Controllers
             List<LabTestList> ret = repository.GetLabTestList(pclsCache, UserId, VisitId);
             return ret;
         }
+
         [Route("Api/v1/ClinicInfo/GetDrugRecordList")]
         [ModelValidationFilter]
-
         //public HttpResponseMessage LogOn(string PwType, string username, string password, string role)
         public List<DrugRecordList> GetDrugRecordList(string UserId, string VisitId)
         {

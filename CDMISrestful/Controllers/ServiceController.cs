@@ -22,6 +22,10 @@ namespace CDMISrestful.Controllers
         DataConnection pclsCache = new DataConnection();
         /// <summary>
         /// 发送验证码短信 20151016 CSQ
+        /// smsType为verification时，不用输入content，发送验证码短信；
+        /// smsType为confirmtoPatient时，发送预约情况给病人，需要content；
+        /// smsType为confirmtoHealthCoach时，发送预约情况给专员，需要content。
+        /// content的内容示例： 王五，2015年11月11日，海军总医院（目标姓名，预约时间，预约地点）
         /// </summary>
         /// <param name="phoneNo"></param>
         /// <param name="smsType"></param>
