@@ -467,8 +467,6 @@ namespace CDMISrestful.DataModels
         public string Description { get; set; }
         public string ApplicationTime { get; set; }
         public string AppointmentTime { get; set; }
-
-        
         public string AppointmentAdd { get; set; }
     }
 
@@ -568,5 +566,6 @@ namespace CDMISrestful.DataModels
         public int piDeviceType { get; set; }
 
     }
+
 
 }

@@ -142,6 +142,9 @@ namespace CDMISrestful.Controllers
 
         /// <summary>
         /// 获取验证码 CSQ 20151021
+        /// 1：验证码正确
+        /// 2：验证码错误
+        /// 0：没有验证码或验证码已过期
         /// </summary>
         /// <param name="mobile"></param>
         /// <param name="smsType"></param>

@@ -116,3 +116,4 @@ F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\zh-Hans\
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\bin\zh-Hans\System.Web.Optimization.resources.dll
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\obj\Debug\CDMISrestful.dll
 F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\obj\Debug\CDMISrestful.pdb
+F:\Work\chronic disease management\github\CDMISrestful\CDMISrestful\obj\Debug\CDMISrestful.csprojResolveAssemblyReference.cache

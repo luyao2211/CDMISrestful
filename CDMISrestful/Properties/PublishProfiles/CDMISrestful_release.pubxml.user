@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/XmlDocument.xml">
-      <publishTime>11/19/2015 21:51:30</publishTime>
+      <publishTime>12/02/2015 18:28:04</publishTime>
     </File>
     <File Include="Areas/HelpPage/HelpPage.css">
       <publishTime>10/13/2015 19:27:06</publishTime>
@@ -322,7 +322,7 @@
       <publishTime>10/13/2015 19:27:06</publishTime>
     </File>
     <File Include="bin/CDMISrestful.dll">
-      <publishTime>11/19/2015 15:46:37</publishTime>
+      <publishTime>12/02/2015 18:28:11</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>10/13/2015 19:27:07</publishTime>

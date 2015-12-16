@@ -370,6 +370,7 @@ namespace CDMISrestful.Controllers
         /// <param name="CategoryCode"></param>
         /// <returns></returns>
         [Route("Api/v1/Users/RemoveHealthCoach")]
+         [HttpGet]
         public HttpResponseMessage RemoveHealthCoach(string PatientId, string DoctorId, string CategoryCode)
         {
             int ret = repository.RemoveHealthCoach(pclsCache, PatientId, DoctorId, CategoryCode);

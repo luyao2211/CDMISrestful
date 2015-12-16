@@ -96,5 +96,11 @@ namespace CDMISrestful.Models
         {
             return new MessageMethod().GetSMSCountForAll(pclsCache, DoctorId);        
         }
+
+
+        public List<PsNotification> PsNotificationGetDataByStatus(DataConnection pclsCache, string AccepterID, string NotificationType, string Status)
+        {
+            return new MessageMethod().PsNotificationGetDataByStatus(pclsCache, AccepterID, NotificationType, Status);
+        }
     }
 }

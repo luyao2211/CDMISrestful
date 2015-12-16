@@ -654,7 +654,7 @@ namespace CDMISrestful.DataMethod
                 if (list != null)
                 {
                     ret.UserName = list[0];
-                    ret.Birthday = list[1];
+                    ret.Age = list[1];
                     ret.Gender = list[2];
                     ret.BloodType = list[3];
                     ret.IDNo = list[4];
@@ -1724,7 +1724,7 @@ namespace CDMISrestful.DataMethod
                         {
                             day = "0" + day;
                         }
-                        clt.CommentTime = YMD[0] + month + day +" " + DateAndTime[1];
+                        clt.CommentTime = YMD[0] + "-" + month + "-" + day + " " + DateAndTime[1];
 
                         if (clt.PatientId != "")
                         {
@@ -2174,15 +2174,15 @@ namespace CDMISrestful.DataMethod
                 else
                 {
                     //该病人无正在执行的计划
-                    Status = (int)Ps.Appointment.GetStatusById(pclsCache.CacheConnectionObject, DoctorId, PatientId);//当Ps.Appointment预约表的Status为0时才删除
-                    if (Status == 0)
-                    {
-                        ret = (int)Ps.Appointment.Delete(pclsCache.CacheConnectionObject, DoctorId, PatientId);
+                   // Status = (int)Ps.Appointment.GetStatusById(pclsCache.CacheConnectionObject, DoctorId, PatientId);//当Ps.Appointment预约表的Status为0时才删除
+                   // if (Status == 0)
+                  //  {
+                       // ret = (int)Ps.Appointment.Delete(pclsCache.CacheConnectionObject, DoctorId, PatientId);
                         string Doctor_Id = " " + DoctorId.ToUpper();//数据库的数据Value这一项加了个空格,而且小写变大写
                         string Patient_Id = " " + PatientId.ToUpper();
                         ret = (int)Ps.BasicInfoDetail.DeleteDataByItemCode(pclsCache.CacheConnectionObject, PatientId, CategoryCode, "Doctor", Doctor_Id);
                         ret = (int)Ps.DoctorInfoDetail.DeleteDataByItemCode(pclsCache.CacheConnectionObject, DoctorId, CategoryCode, "Patient", Patient_Id);
-                    }
+                   // }
                 }
 
                 return ret;//2有正在执行的计划
@@ -2288,62 +2288,77 @@ namespace CDMISrestful.DataMethod
             }
         }
 
-
-
         public List<AppoitmentPatient> GetAppoitmentPatientList(DataConnection pclsCache, string healthCoachID, string Status)
         {
             List<AppoitmentPatient> list = new List<AppoitmentPatient>();
             List<PatientsByStatus> list1 = new List<PatientsByStatus>();
-            try
+
+            if (Status == "{Status}")
             {
-                if(Status == "{Status}")
+                Status = "-1";
+            }
+            list1 = GetPatientsByStatus(pclsCache, healthCoachID, Status);
+            if (list1 != null)
+            {
+                for (int i = 0; i < list1.Count; i++)
                 {
-                    Status = "-1";
-                }
-                list1 = GetPatientsByStatus(pclsCache, healthCoachID, Status);
-                if (list1 != null)
-                {
-                    for (int i = 0; i < list1.Count; i++)
+                    AppoitmentPatient app = new AppoitmentPatient();
+                    app.PatientID = list1[i].PatientId;
+                    app.module = list1[i].Module;
+                    app.AppointmentStatus = list1[i].Status;
+                    app.Description = list1[i].Description;
+                    //app.ApplicationTime = list1[i].ApplicationTime;
+                    string[] DateAndTime = list1[i].ApplicationTime.Split(' ');//日期和时间分开
+                    string Date = DateAndTime[0];
+                    string[] YMD = Date.Split('/');//年月日分开
+                    string month = YMD[1];
+                    string day = YMD[2];
+                    if (month.Length < 2)
                     {
-                        AppoitmentPatient app = new AppoitmentPatient();
-                        app.PatientID = list1[i].PatientId;
-                        app.module = list1[i].Module;
-                        app.AppointmentStatus = list1[i].Status;
-                        app.Description = list1[i].Description;
-                        app.ApplicationTime = list1[i].ApplicationTime;
-                        app.AppointmentTime = list1[i].AppointmentTime;
-                        app.AppointmentAdd = list1[i].AppointmentAdd;
-
-                        if (app.PatientID != "")
-                        {
-                            //list[i].imageURL = Ps.DoctorInfoDetail.GetValue(pclsCache.CacheConnectionObject, app.PatientID, "Contact", "Contact001_4", 1);
-                            app.imageURL = new UsersMethod().GetPatientValue(pclsCache, app.PatientID, "Contact", "Contact001_4", 1);//病人照片
-                            UserBasicInfo ret = new UserBasicInfo();
-                            ret = new UsersMethod().GetUserBasicInfo(pclsCache, app.PatientID);
-                            if (ret != null)
-                            {
-                                app.name = ret.UserName;
-
-                                app.age = ret.Age;
-                                //app.age = Convert.ToString(Ps.BasicInfo.GetAgeByBirthDay(pclsCache.CacheConnectionObject, Convert.ToInt32(ret.Birthday)));
-
-                                app.sex = ret.Gender;
-                            }
-                        }
-                        list.Add(app);
+                        month = "0" + month;
                     }
+                    if (day.Length < 2)
+                    {
+                        day = "0" + day;
+                    }
+                    app.ApplicationTime = YMD[0] + "-" + month + "-" + day + " " + DateAndTime[1];
+
+                    string[] DateAndTime1 = list1[i].AppointmentTime.Split(' ');//日期和时间分开
+                    string Date1 = DateAndTime1[0];
+                    string[] YMD1 = Date1.Split('/');//年月日分开
+                    string month1 = YMD1[1];
+                    string day1 = YMD1[2];
+                    if (month1.Length < 2)
+                    {
+                        month1 = "0" + month1;
+                    }
+                    if (day1.Length < 2)
+                    {
+                        day1 = "0" + day1;
+                    }
+                    app.AppointmentTime = YMD1[0] + "-" + month1 + "-" + day1 + " " + DateAndTime1[1];
+                    app.AppointmentAdd = list1[i].AppointmentAdd;
+
+                    if (app.PatientID != "")
+                    {
+                        //list[i].imageURL = Ps.DoctorInfoDetail.GetValue(pclsCache.CacheConnectionObject, app.PatientID, "Contact", "Contact001_4", 1);
+                        app.imageURL = new UsersMethod().GetPatientValue(pclsCache, app.PatientID, "Contact", "Contact001_4", 1);//病人照片
+                        UserBasicInfo ret = new UserBasicInfo();
+                        ret = new UsersMethod().GetUserBasicInfo(pclsCache, app.PatientID);
+                        if (ret != null)
+                        {
+                            app.name = ret.UserName;
+
+                            app.age = ret.Age;
+                            //app.age = Convert.ToString(Ps.BasicInfo.GetAgeByBirthDay(pclsCache.CacheConnectionObject, Convert.ToInt32(ret.Birthday)));
+
+                            app.sex = ret.Gender;
+                        }
+                    }
+                    list.Add(app);
                 }
-                return list;
             }
-            catch (Exception ex)
-            {
-                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UserMethod.GetAppoitmentPatientList", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return null;
-            }
-            finally
-            {
-                pclsCache.DisConnect();
-            }
+            return list;
         }
 
         /// <summary>
@@ -2464,7 +2479,7 @@ namespace CDMISrestful.DataMethod
             }
         }
 
-      
+
         ////GetDoctorDtlInfoMaxItemSeq CSQ 20151106
         //public static int GetDoctorDtlInfoMaxItemSeq(DataConnection pclsCache, string DoctorId, string CategoryCode, string ItemCode)
         //{
@@ -2531,22 +2546,23 @@ namespace CDMISrestful.DataMethod
         public List<ModulesByPID> GetHModulesByID(DataConnection pclsCache, string PatientId, string DoctorId)
         {
             List<ModulesByPID> list = new List<ModulesByPID>();
-           // List<ModulesByPID> ret = new List<ModulesByPID>();
+            // List<ModulesByPID> ret = new List<ModulesByPID>();
             list = new UsersMethod().GetHModulesByPID(pclsCache, PatientId);
             if (list != null)
             {
-                int i = 0;
-                //int j = 0;
-               for(;i<list.Count; i++)
-               {
-                   if(list[i].DoctorId != DoctorId)
-                   {
-                       list.Remove(list[i]);
-                   }
-               }
+                int i = list.Count;
+                //int j = list.Count;
+                for (; i > 0; i--)
+                {
+                    if (list[i - 1].DoctorId != DoctorId)
+                    {
+                        list.Remove(list[i - 1]);
+                    }
+                }
             }
             return list;
         }
+
         
         #endregion
     }

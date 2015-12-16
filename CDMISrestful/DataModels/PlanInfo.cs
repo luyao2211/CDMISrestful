@@ -627,15 +627,12 @@ namespace CDMISrestful.DataModels
         //public string BloodPressure_1 { get; set; }
         //public string BloodPressure_2 { get; set; }
         //public string Pulserate_1 { get; set; }
-
-
     }
 
     public class SignByPeriod
     {
         public string RecordDate { get; set; }
         public string RecordTime { get; set; }
-
         public string Value { get; set; }
         public string Unit { get; set; }
     }

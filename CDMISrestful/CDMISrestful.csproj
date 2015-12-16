@@ -257,6 +257,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Cache.Ps.LabTest.dll</HintPath>
     </Reference>
+    <Reference Include="Cache.Ps.Notification, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Cache.Ps.Notification.dll</HintPath>
+    </Reference>
     <Reference Include="Cache.Ps.OutPatientInfo, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Cache.Ps.OutPatientInfo.dll</HintPath>

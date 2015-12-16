@@ -300,5 +300,64 @@ namespace CDMISrestful.DataMethod
         
         #endregion
        
+       public List<PsNotification> PsNotificationGetDataByStatus(DataConnection pclsCache, string AccepterID, string NotificationType, string Status)
+        {
+            if (Status == "{Status}")
+                Status = "-1";
+            List<PsNotification> items = new List<PsNotification>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Notification.GetDataByStatus(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("AccepterID", CacheDbType.NVarChar).Value = AccepterID;
+                cmd.Parameters.Add("NotificationType", CacheDbType.NVarChar).Value = NotificationType;
+                cmd.Parameters.Add("Status", CacheDbType.NVarChar).Value = Status;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    PsNotification item = new PsNotification();
+                    item.AccepterID = cdr["AccepterID"].ToString();
+                    item.NotificationType = cdr["NotificationType"].ToString();
+                    item.SortNo = cdr["SortNo"].ToString();
+                    item.Title = cdr["Title"].ToString();
+                    item.Description = cdr["Description"].ToString();
+                    item.SendTime = cdr["SendTime"].ToString();
+                    item.SenderID = cdr["SenderID"].ToString();
+                    item.Status = cdr["Status"].ToString();
+
+                    items.Add(item);
+                }
+                return items;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "MessageMethod.PsNotificationGetDataByStatus", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+    
     }
 }

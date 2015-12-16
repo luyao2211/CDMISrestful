@@ -106,5 +106,12 @@ namespace CDMISrestful.Controllers
             return repository.GetSMSList(pclsCache, DoctorId, CategoryCode);
         }
 
+        [Route("Api/v1/MessageInfo/GetDataByStatus")]
+        [ModelValidationFilter]
+        public List<PsNotification> GetDataByStatus(string AccepterID, string NotificationType, string Status)
+        {
+            return repository.PsNotificationGetDataByStatus(pclsCache, AccepterID, NotificationType, Status);
+        }
+
     }
 }

@@ -883,5 +883,6 @@ namespace CDMISrestful.Models
         {
             return new UsersMethod().GetHModulesByID(pclsCache, PatientId, DoctorId);
         }
+
     }
 }
