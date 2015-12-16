@@ -52,6 +52,31 @@ namespace CDMISrestful.CommonLibrary
             }
         }
 
+        public HttpResponseMessage ChangeStatus(HttpRequestMessage request, int operationResult)
+        {
+            Result res = new Result();
+            res.result = "数据库连接失败";
+            //2 数据库连接失败
+            var resp = request.CreateResponse(HttpStatusCode.InternalServerError, res);
+
+            switch (operationResult)
+            {
+                case 1:
+                    //状态修改成功
+                    res.result = "状态修改成功";
+                    resp = request.CreateResponse(HttpStatusCode.OK, res);
+                    break;
+                case 0:
+                    //状态修改成功
+                    res.result = "状态修改失败";
+                    resp = request.CreateResponse(HttpStatusCode.InternalServerError, res);
+                    break;
+                default:
+                    break;
+            }
+            return resp;
+        }
+
         public HttpResponseMessage SetData(HttpRequestMessage request, int operationResult)
         {
             Result res = new Result();
