@@ -98,6 +98,17 @@ namespace CDMISrestful.Models
         }
 
 
+        public int PsNotificationSetData(DataConnection pclsCache, string AccepterID, string NotificationType, string Title, string Description, string SendTime, string SenderID, string Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            return new MessageMethod().PsNotificationSetData(pclsCache, AccepterID, NotificationType, Title, Description, SendTime, SenderID, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
+        }
+
+        public int PsNotificationChangeStatus(DataConnection pclsCache, string AccepterID, string NotificationType, int SortNo, string Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            return new MessageMethod().PsNotificationChangeStatus(pclsCache, AccepterID, NotificationType, SortNo, Status, revUserId, TerminalName, TerminalIP, DeviceType);
+        }
+
+
         public List<PsNotification> PsNotificationGetDataByStatus(DataConnection pclsCache, string AccepterID, string NotificationType, string Status)
         {
             return new MessageMethod().PsNotificationGetDataByStatus(pclsCache, AccepterID, NotificationType, Status);

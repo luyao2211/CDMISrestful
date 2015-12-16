@@ -16,6 +16,12 @@ namespace CDMISrestful.Models
         int GetSMSCountForOne(DataConnection pclsCache, string Reciever, string SendBy);
         List<Message> GetSMSList(DataConnection pclsCache, string DoctorId, string CategoryCode);
         int GetSMSCountForAll(DataConnection pclsCache, string DoctorId);
+
+
+        int PsNotificationSetData(DataConnection pclsCache, string AccepterID, string NotificationType, string Title, string Description, string SendTime, string SenderID, string Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+
+        int PsNotificationChangeStatus(DataConnection pclsCache, string AccepterID, string NotificationType, int SortNo, string Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+
         List<PsNotification> PsNotificationGetDataByStatus(DataConnection pclsCache, string AccepterID, string NotificationType, string Status);
 
     }
