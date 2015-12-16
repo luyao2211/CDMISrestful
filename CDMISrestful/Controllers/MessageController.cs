@@ -106,5 +106,52 @@ namespace CDMISrestful.Controllers
             return repository.GetSMSList(pclsCache, DoctorId, CategoryCode);
         }
 
+        /// <summary>
+        /// 提醒表PsNotification插入数据 syf 20151215
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <returns></returns>
+        [Route("Api/v1/MessageInfo/PostNotification")]
+        [ModelValidationFilter]
+        public HttpResponseMessage PostNotification(PsNotification Item)
+        {
+            int ret = repository.PsNotificationSetData(pclsCache, Item.AccepterID, Item.NotificationType, Item.Title, Item.Description, Item.SendTime, Item.SenderID, Item.Status, Item.Redundance, Item.piUserId, Item.piTerminalName, Item.piTerminalIP, Item.piDeviceType);
+            return new ExceptionHandler().SetData(Request, ret);
+        }
+
+        /// <summary>
+        /// 改变消息状态 SYF 20151215
+        /// </summary>
+        /// <param name="AccepterID"></param>
+        /// <param name="NotificationType"></param>
+        /// <param name="SortNo"></param>
+        /// <param name="Status"></param>
+        /// <param name="revUserId"></param>
+        /// <param name="TerminalName"></param>
+        /// <param name="TerminalIP"></param>
+        /// <param name="DeviceType"></param>
+        /// <returns></returns>
+        [Route("Api/v1/MessageInfo/ChangeStatus")]
+        [ModelValidationFilter]
+        public HttpResponseMessage ChangeStatus(string AccepterID, string NotificationType, int SortNo, string Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int ret = repository.PsNotificationChangeStatus(pclsCache, AccepterID, NotificationType, SortNo, Status, revUserId, TerminalName, TerminalIP, DeviceType);
+            return new ExceptionHandler().ChangeStatus(Request, ret);
+        }
+
+        /// <summary>
+        /// 根据Status取数据——SYF 20151215
+        /// </summary>
+        /// <param name="AccepterID"></param>
+        /// <param name="NotificationType"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
+        [Route("Api/v1/MessageInfo/GetDataByStatus")]
+        [ModelValidationFilter]
+        public List<PsNotification> GetDataByStatus(string AccepterID, string NotificationType, string Status)
+        {
+            return repository.PsNotificationGetDataByStatus(pclsCache, AccepterID, NotificationType, Status);
+        }
+
     }
 }

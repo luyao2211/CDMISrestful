@@ -299,6 +299,159 @@ namespace CDMISrestful.DataMethod
         }
         
         #endregion
-       
+
+        #region<Ps.Notification>
+
+        /// <summary>
+        /// 提醒表PsNotification插入数据 syf 20151215
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="AccepterID"></param>
+        /// <param name="NotificationType"></param>
+        /// <param name="Title"></param>
+        /// <param name="Description"></param>
+        /// <param name="SendTime"></param>
+        /// <param name="SenderID"></param>
+        /// <param name="Status"></param>
+        /// <param name="Redundancy"></param>
+        /// <param name="revUserId"></param>
+        /// <param name="TerminalName"></param>
+        /// <param name="TerminalIP"></param>
+        /// <param name="DeviceType"></param>
+        /// <returns></returns>
+        public int PsNotificationSetData(DataConnection pclsCache, string AccepterID, string NotificationType, string Title, string Description, string SendTime, string SenderID, string Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int ret = 0;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+
+                ret = (int)Ps.Notification.SetData(pclsCache.CacheConnectionObject, AccepterID, NotificationType, Title, Description, DateTime.Parse(SendTime), SenderID, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "MessageMethod.PsNotificationSetData", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// 改变消息状态 SYF 20151215
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="AccepterID"></param>
+        /// <param name="NotificationType"></param>
+        /// <param name="SortNo"></param>
+        /// <param name="Status"></param>
+        /// <param name="revUserId"></param>
+        /// <param name="TerminalName"></param>
+        /// <param name="TerminalIP"></param>
+        /// <param name="DeviceType"></param>
+        /// <returns></returns>
+        public int PsNotificationChangeStatus(DataConnection pclsCache, string AccepterID, string NotificationType, int SortNo, string Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int ret = 0;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+
+                ret = (int)Ps.Notification.ChangeStatus(pclsCache.CacheConnectionObject, AccepterID, NotificationType, SortNo, Status, revUserId, TerminalName, TerminalIP, DeviceType);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "MessageMethod.PsNotificationChangeStatus", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// 根据Status取数据——SYF 20151215
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="AccepterID"></param>
+        /// <param name="NotificationType"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
+        public List<PsNotification> PsNotificationGetDataByStatus(DataConnection pclsCache, string AccepterID, string NotificationType, string Status)
+        {
+            if (Status == "{Status}")
+                Status = "-1";
+            List<PsNotification> list = new List<PsNotification>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return null;
+                }
+
+                cmd = new CacheCommand();
+                cmd = Ps.Notification.GetDataByStatus(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("AccepterID", CacheDbType.NVarChar).Value = AccepterID;
+                cmd.Parameters.Add("NotificationType", CacheDbType.NVarChar).Value = NotificationType;
+                cmd.Parameters.Add("Status", CacheDbType.NVarChar).Value = Status;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    PsNotification NewLine = new PsNotification();
+                    NewLine.AccepterID = cdr["AccepterID"].ToString();
+                    NewLine.NotificationType = cdr["NotificationType"].ToString();
+                    NewLine.SortNo = cdr["SortNo"].ToString();
+                    NewLine.Title = cdr["Title"].ToString();
+                    NewLine.Description = cdr["Description"].ToString();
+                    NewLine.SendTime = cdr["SendTime"].ToString();
+                    NewLine.SenderID = cdr["SenderID"].ToString();
+                    NewLine.Status = cdr["Status"].ToString();
+
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "MessageMethod.PsNotificationGetDataByStatus", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+        #endregion
+
     }
 }
