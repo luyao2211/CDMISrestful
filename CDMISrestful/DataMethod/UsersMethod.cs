@@ -108,7 +108,6 @@ namespace CDMISrestful.DataMethod
             {
                 pclsCache.DisConnect();
             }
-
         }
 
         public bool CheckUserExist(DataConnection pclsCache, string UserId)
@@ -139,8 +138,6 @@ namespace CDMISrestful.DataMethod
             {
                 pclsCache.DisConnect();
             }
-
-
         }
 
         /// <summary>
@@ -629,8 +626,6 @@ namespace CDMISrestful.DataMethod
             {
                 pclsCache.DisConnect();
             }
-
-
         }
 
         /// <summary>
@@ -674,7 +669,6 @@ namespace CDMISrestful.DataMethod
             {
                 pclsCache.DisConnect();
             }
-
         }
 
         /// <summary>
@@ -1012,9 +1006,7 @@ namespace CDMISrestful.DataMethod
                     else
                     {
                         Input.AA = Int32.Parse(list[11]);
-                    }
-                    
-
+                    }                 
                 }
                 return Input;
             }
@@ -2051,6 +2043,8 @@ namespace CDMISrestful.DataMethod
                     item.SendByName = cdr["SendByName"].ToString();
                     item.Flag = cdr["Flag"].ToString();
                     item.ItemSeq = cdr["ItemSeq"].ToString();
+                    item.Count = cdr["Count"].ToString();
+
                     items.Add(item);
                 }
                 return items;
@@ -2114,6 +2108,7 @@ namespace CDMISrestful.DataMethod
                                 lt.SendDateTime = list1[j].SendDateTime;
                                 lt.SendByName = list1[j].SendByName;
                                 lt.Flag = list1[j].Flag;
+                                lt.Count = list1[j].Count;
 
                                 list.Add(lt);
                             }

@@ -435,6 +435,8 @@ namespace CDMISrestful.DataModels
         public string SendDateTime { get; set; }
         public string SendByName { get; set; }
         public string Flag { get; set; }
+        public string Count { get; set; }
+
 
     }
 
@@ -450,7 +452,7 @@ namespace CDMISrestful.DataModels
         public string SendDateTime { get; set; }
         public string SendByName { get; set; }
         public string Flag { get; set; }
-
+        public string Count { get; set; }
 
     }
 

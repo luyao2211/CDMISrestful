@@ -82,7 +82,7 @@ namespace CDMISrestful.Controllers
         public HttpResponseMessage GetSMSCount(string Reciever, string SendBy)
         {
             string ret = "0";
-            if (SendBy == "")
+            if (SendBy == "NULL")
             {
                 ret = repository.GetSMSCountForAll(pclsCache, Reciever).ToString();
             }
@@ -133,9 +133,9 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/MessageInfo/ChangeStatus")]
         [ModelValidationFilter]
-        public HttpResponseMessage ChangeStatus(string AccepterID, string NotificationType, int SortNo, string Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public HttpResponseMessage ChangeStatus(NotificationStatus item)
         {
-            int ret = repository.PsNotificationChangeStatus(pclsCache, AccepterID, NotificationType, SortNo, Status, revUserId, TerminalName, TerminalIP, DeviceType);
+            int ret = repository.PsNotificationChangeStatus(pclsCache, item.AccepterID, item.NotificationType, item.SortNo, item.Status, item.piUserId, item.piTerminalName, item.piTerminalIP, item.piDeviceType);
             return new ExceptionHandler().ChangeStatus(Request, ret);
         }
 
@@ -148,6 +148,7 @@ namespace CDMISrestful.Controllers
         /// <returns></returns>
         [Route("Api/v1/MessageInfo/GetDataByStatus")]
         [ModelValidationFilter]
+        [EnableQuery]
         public List<PsNotification> GetDataByStatus(string AccepterID, string NotificationType, string Status)
         {
             return repository.PsNotificationGetDataByStatus(pclsCache, AccepterID, NotificationType, Status);

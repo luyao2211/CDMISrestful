@@ -158,7 +158,7 @@ namespace CDMISrestful.Controllers
 
         /// <summary>
         /// 推送消息 通知   platform 是平台，不输入的时候默认为全部（安卓和ios）,可以单独输入android或者ios,不支持winphone
-        ///  Alias 是别名，用于定位推送，输入为空时会推送给全部用户
+        ///  Alias 是别名，用于定位推送，输入为空时会推送给全部用户 接受者Id
         ///  notification是要推送的消息内容 title是要推送的内容的标题，目前只有android可以用(platform必须填android，否则标题无效)， ID为发送者的UID
         /// </summary>
         /// <param name="platform"></param>

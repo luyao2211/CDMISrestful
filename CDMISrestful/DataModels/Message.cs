@@ -105,4 +105,17 @@ namespace CDMISrestful.DataModels
         public string piTerminalIP { get; set; }
         public int piDeviceType { get; set; }
     }
+
+
+    public class NotificationStatus
+    {
+        public string AccepterID { get; set; }
+        public string NotificationType { get; set; }
+        public int SortNo { get; set; }
+        public string Status { get; set; }
+        public string piUserId { get; set; }
+        public string piTerminalName { get; set; }
+        public string piTerminalIP { get; set; }
+        public int piDeviceType { get; set; }
+    }
 }

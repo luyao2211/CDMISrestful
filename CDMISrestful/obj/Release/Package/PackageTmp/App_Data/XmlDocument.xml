@@ -896,6 +896,36 @@
             <param name="CategoryCode"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.MessageController.PostNotification(CDMISrestful.DataModels.PsNotification)">
+            <summary>
+            提醒表PsNotification插入数据 syf 20151215
+            </summary>
+            <param name="Item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.MessageController.ChangeStatus(CDMISrestful.DataModels.NotificationStatus)">
+            <summary>
+            改变消息状态 SYF 20151215
+            </summary>
+            <param name="AccepterID"></param>
+            <param name="NotificationType"></param>
+            <param name="SortNo"></param>
+            <param name="Status"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.MessageController.GetDataByStatus(System.String,System.String,System.String)">
+            <summary>
+            根据Status取数据——SYF 20151215
+            </summary>
+            <param name="AccepterID"></param>
+            <param name="NotificationType"></param>
+            <param name="Status"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.ModuleInfoController.GetItemInfoByPIdAndModule(System.String,System.String)">
             <summary>
             输入PatientId和CategoryCode，获取患者已经购买的某个模块的详细信息 LY 2015-10-13
@@ -1815,6 +1845,50 @@
             获取某医生未读消息总数 GL 2015-10-10
             </summary>
             <param name="DoctorId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.MessageMethod.PsNotificationSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            提醒表PsNotification插入数据 syf 20151215
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="AccepterID"></param>
+            <param name="NotificationType"></param>
+            <param name="Title"></param>
+            <param name="Description"></param>
+            <param name="SendTime"></param>
+            <param name="SenderID"></param>
+            <param name="Status"></param>
+            <param name="Redundancy"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.MessageMethod.PsNotificationChangeStatus(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            改变消息状态 SYF 20151215
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="AccepterID"></param>
+            <param name="NotificationType"></param>
+            <param name="SortNo"></param>
+            <param name="Status"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.MessageMethod.PsNotificationGetDataByStatus(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String)">
+            <summary>
+            根据Status取数据——SYF 20151215
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="AccepterID"></param>
+            <param name="NotificationType"></param>
+            <param name="Status"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.ModuleInfoMethod.PsBasicInfoDetailSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
