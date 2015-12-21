@@ -97,6 +97,8 @@ namespace CDMISrestful.DataModels
         public string SendTime { get; set; }
         public string SenderID { get; set; }
 
+        public string SenderName { get; set; }
+
         public string Status { get; set; }
         public string Redundance { get; set; }
         public string piUserId { get; set; }

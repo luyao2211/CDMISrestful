@@ -422,6 +422,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.Description = cdr["Description"].ToString();
                     NewLine.SendTime = cdr["SendTime"].ToString();
                     NewLine.SenderID = cdr["SenderID"].ToString();
+                    NewLine.SenderName = cdr["SenderName"].ToString();
                     NewLine.Status = cdr["Status"].ToString();
 
                     list.Add(NewLine);
