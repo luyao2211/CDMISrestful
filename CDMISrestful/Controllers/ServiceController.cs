@@ -249,7 +249,18 @@ namespace CDMISrestful.Controllers
                     string strResult = streamReader.ReadToEnd();
                     streamReceive.Dispose();
                     streamReader.Dispose();
-
+                    int SetN = 0;
+                    string NotificationType = "";
+                    if (id == "Administrator")
+                    {
+                        NotificationType = "系统";
+                    }
+                    else
+                    {
+                        NotificationType = "用户";
+                    }
+                   var timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+                   SetN = new MessageMethod().PsNotificationSetData(pclsCache, Alias, NotificationType, title, notification, timestamp, id, "0", "", id, new CommonFunction().getTerminalName().ToString(), new CommonFunction().getRemoteIPAddress(), 0);
                     return strResult;
                 }
                 else
