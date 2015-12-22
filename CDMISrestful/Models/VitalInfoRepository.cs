@@ -14,7 +14,7 @@ namespace CDMISrestful.Models
     public class VitalInfoRepository : IVitalInfoRepository
     {    
         // 获取病人最新体征情况 GL 2015-10-10       
-        public string GetLatestPatientVitalSigns(DataConnection pclsCache, string UserId, string ItemType, string ItemCode)
+        public ValueTime GetLatestPatientVitalSigns(DataConnection pclsCache, string UserId, string ItemType, string ItemCode)
         {
             return new VitalInfoMethod().GetLatestPatientVitalSigns(pclsCache, UserId, ItemType, ItemCode);
         }

@@ -246,23 +246,29 @@ namespace CDMISrestful.DataMethod
         /// <param name="ItemType"></param>
         /// <param name="ItemCode"></param>
         /// <returns></returns>
-        public string GetLatestPatientVitalSigns(DataConnection pclsCache, string UserId, string ItemType, string ItemCode)
+        public ValueTime GetLatestPatientVitalSigns(DataConnection pclsCache, string UserId, string ItemType, string ItemCode)
         {
-            string ret = "";
+            ValueTime item = new ValueTime();
             try
             {
                 if (!pclsCache.Connect())
                 {
-                    return ret;
+                    return item;
                 }
-
-                ret = (string)Ps.VitalSigns.GetLatestPatientVitalSigns(pclsCache.CacheConnectionObject, UserId, ItemType, ItemCode);
-                return ret;
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Ps.VitalSigns.GetLatestPatientVitalSigns(pclsCache.CacheConnectionObject, UserId, ItemType, ItemCode);
+                if (list != null)
+                {
+                    item.Value = list[0];
+                    item.RecordDate = list[1];
+                    item.RecordTime = list[2];
+                }
+                return item;
             }
             catch (Exception ex)
             {
                 HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "VitalInfoMethod.GetLatestPatientVitalSigns", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
-                return ret;
+                return item;
             }
             finally
             {

@@ -258,9 +258,17 @@ namespace CDMISrestful.Models
                 Type = "mobilephone",
                 Name = PhoneNumber
             });
-            string Height = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Height", "Height_1");
-            string Weight = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Weight", "Weight_1");
-            string Waistline = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Waistline", "Waistline_1");
+            ValueTime H = new ValueTime();
+            H = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Height", "Height_1");
+            string Height = H.Value;
+
+            ValueTime W = new ValueTime();
+            W = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Weight", "Weight_1");
+            string Weight = W.Value;
+
+            ValueTime Wa = new ValueTime();
+            Wa = new VitalInfoRepository().GetLatestPatientVitalSigns(pclsCache, PatientId, "Waistline", "Waistline_1");
+            string Waistline = Wa.Value;
             if (Height == null)
                 Height = "";
             if (Weight == null)

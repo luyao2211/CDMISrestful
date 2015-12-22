@@ -215,4 +215,12 @@ namespace CDMISrestful.DataModels
         public string time { get; set; }
         public double oximetry { get; set; }
     }
+
+    public class ValueTime
+    {
+        public string Value { get; set; }
+        public string RecordDate { get; set; }
+
+        public string RecordTime { get; set; }
+    }
 }

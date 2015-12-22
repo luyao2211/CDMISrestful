@@ -13,6 +13,6 @@ namespace CDMISrestful.Models
         List<PatBasicInfoDetail> GetItemInfoByPIdAndModule(DataConnection pclsCache, string UserId, string CategoryCode);
 
         List<MstInfoItemByCategoryCode> GetMstInfoItemByCategoryCode(DataConnection pclsCache, string CategoryCode);
-        SynBasicInfo SynBasicInfoDetail(DataConnection pclsCache, string UserId);
+        SynBasicInfo SynBasicInfoDetail(DataConnection pclsCache, string UserId, string Module);
     }
 }

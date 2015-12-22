@@ -55,9 +55,9 @@ namespace CDMISrestful.Controllers
         /// <param name="UserId"></param>
         /// <returns></returns>
         [Route("Api/v1/ModuleInfo/{UserId}/SynInfo")]
-        public SynBasicInfo GetSynBasicInfoDetail(string UserId)
+        public SynBasicInfo GetSynBasicInfoDetail(string UserId, string Module)
         {
-            return repository.SynBasicInfoDetail(pclsCache, UserId);
+            return repository.SynBasicInfoDetail(pclsCache, UserId, Module);
         }
     }
 }
