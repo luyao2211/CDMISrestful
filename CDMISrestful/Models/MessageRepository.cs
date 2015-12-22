@@ -111,5 +111,10 @@ namespace CDMISrestful.Models
         {
             return new MessageMethod().PsNotificationGetDataByStatus(pclsCache, AccepterID, NotificationType, Status);
         }
+
+        public int PsNotificationGetUnreadNum(DataConnection pclsCache, string AccepterID, string NotificationType, string Status)
+        {
+            return new MessageMethod().PsNotificationGetUnreadNum(pclsCache, AccepterID, NotificationType, Status);
+        }
     }
 }

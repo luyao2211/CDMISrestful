@@ -152,6 +152,20 @@ namespace CDMISrestful.Controllers
         {
             return repository.PsNotificationGetDataByStatus(pclsCache, AccepterID, NotificationType, Status);
         }
+        
+         /// <summary>
+         /// 获取未读消息数量，Status填0为未读，施宇帆 20151222
+         /// </summary>
+         /// <param name="AccepterID"></param>
+         /// <param name="NotificationType"></param>
+         /// <param name="Status"></param>
+         /// <returns></returns>
+        public int GetUnreadNum(string AccepterID, string NotificationType, string Status)
+        {
+            int ret = repository.PsNotificationGetUnreadNum(pclsCache, AccepterID, NotificationType, Status);
+            return ret;
+        }
+
 
     }
 }
