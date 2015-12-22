@@ -468,5 +468,18 @@ namespace CDMISrestful.Controllers
               return repository.GetHModulesByID(pclsCache, PatientId, DoctorId);
           }
 
+         /// <summary>
+         /// 根据Type获取Value 施宇帆
+         /// </summary>
+         /// <param name="UserId"></param>
+         /// <param name="Type"></param>
+         /// <returns></returns>
+         [Route("Api/v1/Users/GetValueByType")]
+         public HttpResponseMessage GetValueByType(string UserId, string Type)
+         {
+             string ret = repository.GetValueByType(pclsCache, UserId, Type);
+             return new ExceptionHandler().Common(Request, ret);
+         }
+
     }
 }
