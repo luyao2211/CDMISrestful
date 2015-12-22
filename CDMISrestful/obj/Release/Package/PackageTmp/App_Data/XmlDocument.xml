@@ -926,6 +926,15 @@
             <param name="Status"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.MessageController.GetUnreadNum(System.String,System.String,System.String)">
+            <summary>
+            获取未读消息数量，Status填0为未读，施宇帆 20151222
+            </summary>
+            <param name="AccepterID"></param>
+            <param name="NotificationType"></param>
+            <param name="Status"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.ModuleInfoController.GetItemInfoByPIdAndModule(System.String,System.String)">
             <summary>
             输入PatientId和CategoryCode，获取患者已经购买的某个模块的详细信息 LY 2015-10-13
@@ -1242,7 +1251,7 @@
         <member name="M:CDMISrestful.Controllers.ServiceController.GetNotification(System.String,System.String,System.String,System.String,System.String)">
             <summary>
             推送消息 通知   platform 是平台，不输入的时候默认为全部（安卓和ios）,可以单独输入android或者ios,不支持winphone
-             Alias 是别名，用于定位推送，输入为空时会推送给全部用户
+             Alias 是别名，用于定位推送，输入为空时会推送给全部用户 接受者Id
              notification是要推送的消息内容 title是要推送的内容的标题，目前只有android可以用(platform必须填android，否则标题无效)， ID为发送者的UID
             </summary>
             <param name="platform"></param>
@@ -1884,6 +1893,16 @@
         <member name="M:CDMISrestful.DataMethod.MessageMethod.PsNotificationGetDataByStatus(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String)">
             <summary>
             根据Status取数据——SYF 20151215
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="AccepterID"></param>
+            <param name="NotificationType"></param>
+            <param name="Status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.MessageMethod.PsNotificationGetUnreadNum(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.String)">
+            <summary>
+            获取未读消息数 施宇帆 20151222
             </summary>
             <param name="pclsCache"></param>
             <param name="AccepterID"></param>

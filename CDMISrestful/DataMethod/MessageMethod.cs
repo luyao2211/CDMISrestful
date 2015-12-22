@@ -455,6 +455,40 @@ namespace CDMISrestful.DataMethod
             }
         }
 
+
+        /// <summary>
+        /// 获取未读消息数 施宇帆 20151222
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="AccepterID"></param>
+        /// <param name="NotificationType"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
+        public int PsNotificationGetUnreadNum(DataConnection pclsCache, string AccepterID, string NotificationType, string Status)
+        {
+            int ret = 0;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+
+                ret = (int)Ps.Notification.GetUnreadNum(pclsCache.CacheConnectionObject, AccepterID, NotificationType, Status);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "MessageMethod.PsNotificationGetUnreadNum", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
         #endregion
 
 

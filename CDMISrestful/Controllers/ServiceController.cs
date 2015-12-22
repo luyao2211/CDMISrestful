@@ -261,7 +261,7 @@ namespace CDMISrestful.Controllers
                     }
                    var timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
                    SetN = new MessageMethod().PsNotificationSetData(pclsCache, Alias, NotificationType, title, notification, timestamp, id, "0", "", id, new CommonFunction().getTerminalName().ToString(), new CommonFunction().getRemoteIPAddress(), 0);
-                    return strResult;
+                   return strResult + "_"+SetN;
                 }
                 else
                 {

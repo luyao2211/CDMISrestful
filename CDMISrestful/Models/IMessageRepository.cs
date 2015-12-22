@@ -23,6 +23,7 @@ namespace CDMISrestful.Models
         int PsNotificationChangeStatus(DataConnection pclsCache, string AccepterID, string NotificationType, int SortNo, string Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
 
         List<PsNotification> PsNotificationGetDataByStatus(DataConnection pclsCache, string AccepterID, string NotificationType, string Status);
+        int PsNotificationGetUnreadNum(DataConnection pclsCache, string AccepterID, string NotificationType, string Status);
 
     }
 }
