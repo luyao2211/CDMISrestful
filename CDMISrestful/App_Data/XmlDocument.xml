@@ -1509,6 +1509,14 @@
             <param name="DoctorId"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetValueByType(System.String,System.String)">
+            <summary>
+            根据Type获取Value 施宇帆
+            </summary>
+            <param name="UserId"></param>
+            <param name="Type"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.VitalInfoController.GetLatestPatientVitalSigns(System.String,System.String,System.String)">
             <summary>
             GetLatestPatientVitalSigns 获取病人某项生理参数最新值 GL 2015-10-12

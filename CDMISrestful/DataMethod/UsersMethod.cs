@@ -267,6 +267,30 @@ namespace CDMISrestful.DataMethod
             }
         }
 
+        public string GetValueByType(DataConnection pclsCache, string UserId, string Type)
+        {
+            string ret = "";
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+
+                ret = Cm.MstUserDetail.GetValueByType(pclsCache.CacheConnectionObject, UserId, Type);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetValueByType", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
         #endregion
 
         #region<CmMstUser>

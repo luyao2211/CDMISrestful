@@ -60,5 +60,7 @@ namespace CDMISrestful.Models
         int SetComment(DataConnection pclsCache, string DoctorId, string CategoryCode, string Value, string Description, string SortNo, string piUserId, string piTerminalName, string piTerminalIP, int piDeviceType);
 
         List<ModulesByPID> GetHModulesByID(DataConnection pclsCache, string PatientId, string DoctorId);
+
+        string GetValueByType(DataConnection pclsCache, string UserId, string Type);
     }
 }
