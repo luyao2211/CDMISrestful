@@ -161,6 +161,7 @@ namespace CDMISrestful.Controllers
          /// <param name="NotificationType"></param>
          /// <param name="Status"></param>
          /// <returns></returns>
+        [Route("Api/v1/MessageInfo/UnreadNums")]
         public int GetUnreadNum(string AccepterID, string NotificationType, string Status)
         {
             int ret = repository.PsNotificationGetUnreadNum(pclsCache, AccepterID, NotificationType, Status);

@@ -42,7 +42,6 @@ namespace CDMISrestful.Controllers
         [ModelValidationFilter]
         public HttpResponseMessage LogOn(LogOn logOn)
         {
-          
             //msg.url = "http://my.company.com/login";
 
             //if (SecurityManager.IsTokenValid(token))
