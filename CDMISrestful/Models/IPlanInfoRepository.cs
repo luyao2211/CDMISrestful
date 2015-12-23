@@ -45,6 +45,12 @@ namespace CDMISrestful.Models
         List<TasksForClick> GetTasksForClick(DataConnection pclsCache, string PlanNo, string ParentCode, string Date);
         List<ComplianceDate> GetComplianceListInC(DataConnection pclsCache, string PatientId, string StartDate, string EndDate, string Module);
 
+        List<LogTask> GetDTaskByPlanNo(DataConnection pclsCache, string PlanNo);
+
+        //LogPlan GetLogPlanInfo(DataConnection pclsCache, string PlanNo);
+
+        //List<LogTask> GetAllTaskByLogPlan(DataConnection pclsCache, string PlanNo, int piEdition);
+
        
     }
 }

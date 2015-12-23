@@ -3101,5 +3101,144 @@ namespace CDMISrestful.DataMethod
         //}
         #endregion
 
+        #region<Ps.Log表>
+        /// <summary>
+        /// 获取某一版本计划的信息 syf 20151222
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="PlanNo"></param>
+        /// <returns></returns>
+        public LogPlan GetLogPlanInfo(DataConnection pclsCache, string PlanNo)
+        {
+            try
+            {
+                LogPlan ret = new LogPlan();
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Ps.LogPlan.GetLogPlanInfo(pclsCache.CacheConnectionObject, PlanNo);
+                if (list != null)
+                {
+                    ret.PlanNo = list[0];
+                    ret.Edition = list[1];
+                    ret.PatientId = list[2];
+                    ret.StartDate = list[3];
+                    ret.EndDate = list[4];
+                    ret.Module = list[5];
+                    ret.Status = list[6];
+                    ret.DoctorId = list[7];
+                }
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetLogPlanInfo", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        public LogPlan GetLogPlanByEdition(DataConnection pclsCache, string PlanNo, int Edition)
+        {
+            try
+            {
+                LogPlan ret = new LogPlan();
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Ps.LogPlan.GetLogPlanByEdition(pclsCache.CacheConnectionObject, PlanNo, Edition);
+                if (list != null)
+                {
+                    ret.PlanNo = list[0];
+                    ret.Edition = list[1];
+                    ret.PatientId = list[2];
+                    ret.StartDate = list[3];
+                    ret.EndDate = list[4];
+                    ret.Module = list[5];
+                    ret.Status = list[6];
+                    ret.DoctorId = list[7];
+                }
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetLogPlanByEdition", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// 施宇帆 2015-12-22 获取某版本计划下所有任务的信息
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="PlanNo"></param>
+        /// <param name="piEdition"></param>
+        /// <returns></returns>
+        public List<LogTask> GetAllTaskByLogPlan(DataConnection pclsCache, string PlanNo, int piEdition)
+        {
+            List<LogTask> list = new List<LogTask>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.LogTask.GetAllTaskByLogPlan(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("PlanNo", CacheDbType.NVarChar).Value = PlanNo;
+                cmd.Parameters.Add("piEdition", CacheDbType.NVarChar).Value = piEdition;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    LogTask NewLine = new LogTask();
+                    NewLine.Type = cdr["Type"].ToString();
+                    NewLine.Code = cdr["Code"].ToString();
+                    NewLine.SortNo = cdr["SortNo"].ToString();
+                    NewLine.Edition = cdr["Edition"].ToString();
+                    NewLine.Instruction = cdr["Instruction"].ToString();
+
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetAllTaskByLogPlan", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+
+        #endregion
+
     }
 }
