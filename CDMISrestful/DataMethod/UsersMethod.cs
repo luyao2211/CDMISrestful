@@ -1572,6 +1572,7 @@ namespace CDMISrestful.DataMethod
                     ret.JobTitle = ret2.JobTitle;
                     ret.Level = ret2.Level;
                 }
+                ret.PatientNum = GetPatientNumByDoctorId(pclsCache, HealthCoachID);
                 return ret;
             }
             catch (Exception ex)
@@ -2637,5 +2638,83 @@ namespace CDMISrestful.DataMethod
         }
         
         #endregion
+
+        /// <summary>
+        /// DoctorId,CategoryCode→负责的患者 syf 20151223
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="DoctorId"></param>
+        /// <param name="CategoryCode"></param>
+        /// <returns></returns>
+        public List<PatientNum> GetPatientsByDoctorId(DataConnection pclsCache, string DoctorId, string CategoryCode)
+        {
+            List<PatientNum> items = new List<PatientNum>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.DoctorInfoDetail.GetPatientsByDoctorId(pclsCache.CacheConnectionObject);
+
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
+                cmd.Parameters.Add("CategoryCode", CacheDbType.NVarChar).Value = CategoryCode;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    PatientNum item = new PatientNum();
+                    item.PatientId = cdr["PatientId"].ToString();
+                    item.PatientName = cdr["PatientName"].ToString();
+                    items.Add(item);
+                }
+                return items;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetPatientsByDoctorId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// 获取某医生所负责的患者数量
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="DoctorId"></param>
+        /// <returns></returns>
+        public int GetPatientNumByDoctorId(DataConnection pclsCache, string DoctorId)
+        {
+            int ret = 0;
+            string[] Category = { "M1", "M2", "M3", "HM1", "HM2", "HM3" };
+            for (int i=0; i<Category.Length; i++)
+            {
+                List<PatientNum> items = new List<PatientNum>();
+                items = GetPatientsByDoctorId(pclsCache, DoctorId, Category[i]);
+                if(items != null)
+                {
+                    ret += items.Count;
+                }
+            }           
+            return ret;
+        }
     }
 }

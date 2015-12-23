@@ -386,6 +386,8 @@ namespace CDMISrestful.DataModels
 
         public string Level { get; set; }
 
+        public int PatientNum { get; set; }
+
     }
 
     public class DetailsByDoctorId
@@ -566,6 +568,13 @@ namespace CDMISrestful.DataModels
         public string piTerminalIP { get; set; }
 
         public int piDeviceType { get; set; }
+
+    }
+
+    public class PatientNum
+    {
+        public string PatientId { get; set; }
+        public string PatientName { get; set; }
 
     }
 
