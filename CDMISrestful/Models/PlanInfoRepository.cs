@@ -1120,75 +1120,81 @@ namespace CDMISrestful.Models
             //1为最新修改的PlanTask，2是修改前的
             LogPlan Plan1 = new LogPlan();
             Plan1 = new PlanInfoMethod().GetLogPlanInfo(pclsCache, PlanNo);
-            
-            int Edition1 = -1;
-            int Edition2 = -1;
-            Edition1 = Convert.ToInt32(Plan1.Edition);
-            if (Edition1 >= 1)
+            if (Plan1 == null)
             {
-                Edition2 = Edition1 - 1;
-
-
-                List<LogTask> list1 = new List<LogTask>();
-                List<LogTask> list2 = new List<LogTask>();
-                List<LogTask> list3 = new List<LogTask>();
-                List<LogTask> list4 = new List<LogTask>();
-                list1 = new PlanInfoMethod().GetAllTaskByLogPlan(pclsCache, PlanNo, Edition1);
-                list2 = new PlanInfoMethod().GetAllTaskByLogPlan(pclsCache, PlanNo, Edition2);
-                if((list1 != null)&&(list2 != null))
-                {
-                    #region<按顺序比>
-                //    int len = Math.Min(list1.Count, list2.Count);
-                //    for (int i = 0; i < len; i++)
-                //    {
-                //        if((list1[i].Code != list2[i].Code) || (list1[i].Type != list2[i].Type) ||(list1[i].Instruction != list2[i].Instruction))
-                //        {
-                //            list3.Add(list1[i]);
-                //            list3.Add(list2[i]);
-                //        }
-                //    }
-                //    //输出公共部分不同的
-
-                //    //其余多出来部分
-                //    if(list1.Count > len)
-                //    {
-                //        for(int j=len; j<list1.Count; j++)
-                //        {
-                //            list3.Add(list1[j]);
-                //        }
-                //    }
-                //    if (list2.Count > len)
-                //    {
-                //        for (int j=len ; j <list2.Count; j++)
-                //        {
-                //            list3.Add(list2[j]);
-                //        }
-                    //    }
-                 #endregion
-                    list3 = list1.Except(list2).ToList();
-                    list4 = list2.Except(list1).ToList();
-                    list3.AddRange(list4);
-                }
-
-                string EndDate1 = Plan1.EndDate;
-                LogPlan Plan2 = new LogPlan();
-                Plan2 = new PlanInfoMethod().GetLogPlanByEdition(pclsCache, PlanNo, Edition2);
-                string EndDate2 = Plan2.EndDate;
-                if (EndDate1 != EndDate2)
-                {
-                    LogTask ForEnd1 = new LogTask();
-                    LogTask ForEnd2 = new LogTask();
-                    ForEnd1.PlanEndDate = EndDate1;
-                    ForEnd2.PlanEndDate = EndDate2;
-                    list3.Add(ForEnd1);
-                    list3.Add(ForEnd2);
-                }
-                return list3;
-               
+                return null;
             }
             else
             {
-                return null;
+                int Edition1 = -1;
+                int Edition2 = -1;
+                Edition1 = Convert.ToInt32(Plan1.Edition);
+                if (Edition1 >= 1)
+                {
+                    Edition2 = Edition1 - 1;
+
+
+                    List<LogTask> list1 = new List<LogTask>();
+                    List<LogTask> list2 = new List<LogTask>();
+                    List<LogTask> list3 = new List<LogTask>();
+                    List<LogTask> list4 = new List<LogTask>();
+                    list1 = new PlanInfoMethod().GetAllTaskByLogPlan(pclsCache, PlanNo, Edition1);
+                    list2 = new PlanInfoMethod().GetAllTaskByLogPlan(pclsCache, PlanNo, Edition2);
+                    if ((list1 != null) && (list2 != null))
+                    {
+                        #region<按顺序比>
+                        //    int len = Math.Min(list1.Count, list2.Count);
+                        //    for (int i = 0; i < len; i++)
+                        //    {
+                        //        if((list1[i].Code != list2[i].Code) || (list1[i].Type != list2[i].Type) ||(list1[i].Instruction != list2[i].Instruction))
+                        //        {
+                        //            list3.Add(list1[i]);
+                        //            list3.Add(list2[i]);
+                        //        }
+                        //    }
+                        //    //输出公共部分不同的
+
+                        //    //其余多出来部分
+                        //    if(list1.Count > len)
+                        //    {
+                        //        for(int j=len; j<list1.Count; j++)
+                        //        {
+                        //            list3.Add(list1[j]);
+                        //        }
+                        //    }
+                        //    if (list2.Count > len)
+                        //    {
+                        //        for (int j=len ; j <list2.Count; j++)
+                        //        {
+                        //            list3.Add(list2[j]);
+                        //        }
+                        //    }
+                        #endregion
+                        list3 = list1.Except(list2).ToList();
+                        list4 = list2.Except(list1).ToList();
+                        list3.AddRange(list4);
+                    }
+
+                    string EndDate1 = Plan1.EndDate;
+                    LogPlan Plan2 = new LogPlan();
+                    Plan2 = new PlanInfoMethod().GetLogPlanByEdition(pclsCache, PlanNo, Edition2);
+                    string EndDate2 = Plan2.EndDate;
+                    if (EndDate1 != EndDate2)
+                    {
+                        LogTask ForEnd1 = new LogTask();
+                        LogTask ForEnd2 = new LogTask();
+                        ForEnd1.PlanEndDate = EndDate1;
+                        ForEnd2.PlanEndDate = EndDate2;
+                        list3.Add(ForEnd1);
+                        list3.Add(ForEnd2);
+                    }
+                    return list3;
+
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
