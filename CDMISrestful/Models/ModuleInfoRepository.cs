@@ -40,11 +40,11 @@ namespace CDMISrestful.Models
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        public SynBasicInfo SynBasicInfoDetail(DataConnection pclsCache, string UserId)
+        public SynBasicInfo SynBasicInfoDetail(DataConnection pclsCache, string UserId, string Module)
         {
             SynBasicInfo ret = new SynBasicInfo();
-            ret.ExamInfo = new ClinicInfoMethod().GetNewExam(pclsCache, UserId);
-            ret.LabTestInfo = new ClinicInfoMethod().GetNewLabTest(pclsCache, UserId);
+            ret.ExamInfo = new ClinicInfoMethod().GetNewExamForM1(pclsCache, UserId, Module);
+            ret.LabTestInfo = new ClinicInfoMethod().GetNewLabTest(pclsCache, UserId, Module);
             return ret;
         }
     }

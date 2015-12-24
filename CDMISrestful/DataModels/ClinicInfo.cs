@@ -216,6 +216,8 @@ namespace CDMISrestful.DataModels
         public string Name3 { get; set; }
         public string Value3 { get; set; }
 
+        public string Date { get; set; }
+
     }
 
     /// <summary>
@@ -226,6 +228,8 @@ namespace CDMISrestful.DataModels
         public string Code { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
+
+        public string Date { get; set; }
     }
 
 

@@ -712,6 +712,7 @@ namespace CDMISrestful.DataMethod
                 }
                 InterSystems.Data.CacheTypes.CacheSysList list = null;
                 list = Ps.BasicInfoDetail.GetM1RiskInput(pclsCache.CacheConnectionObject, UserId);
+                
                 if (list != null)
                 {
                     #region
@@ -721,7 +722,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Height = Int32.Parse(list[1]);
+                        string[] ItemAll = list[1].Split('|');//值和日期分开
+                        Input.Height = Convert.ToInt32(ItemAll[0]);
+                        Input.HeightTime = ItemAll[1] + " " + ItemAll[2];
                     }
                     
                     if(list[0] == null)
@@ -730,7 +733,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Weight = Int32.Parse(list[0]);
+                        string[] ItemAll = list[0].Split('|');//值和日期分开
+                        Input.Weight = Convert.ToInt32(ItemAll[0]);
+                        Input.WeightTime = ItemAll[1] + " " + ItemAll[2];
                     }
                     Input.BMI = Math.Round(Input.Weight / (Input.Height / 100.0) / (Input.Height / 100.0), 2);
 
@@ -740,7 +745,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.AbdominalGirth = Int32.Parse(list[2]);
+                        string[] ItemAll = list[2].Split('|');//值和日期分开
+                        Input.AbdominalGirth = Convert.ToInt32(ItemAll[0]);
+                        Input.AbdominalGirthTime = ItemAll[1];
                     }
 
                     if (list[3] == null)
@@ -749,7 +756,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Heartrate = Int32.Parse(list[3]);
+                        string[] ItemAll = list[3].Split('|');//值和日期分开
+                        Input.Heartrate = Convert.ToInt32(ItemAll[0]);
+                        Input.HeartrateTime = ItemAll[1];
                     }
 
                     if (list[4] == null)
@@ -758,7 +767,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Parent = Int32.Parse(list[4]);
+                        string[] ItemAll = list[4].Split('|');//值和日期分开
+                        Input.Parent = Convert.ToInt32(ItemAll[0]);
+                        Input.ParentTime = ItemAll[1];
                     }
 
                     if (list[5] == null)
@@ -767,7 +778,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Smoke = Int32.Parse(list[5]);
+                        string[] ItemAll = list[5].Split('|');//值和日期分开
+                        Input.Smoke = Convert.ToInt32(ItemAll[0]);
+                        Input.SmokeTime = ItemAll[1];
                     }
 
                     if (list[6] == null)
@@ -776,7 +789,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Stroke = Int32.Parse(list[6]);
+                        string[] ItemAll = list[6].Split('|');//值和日期分开
+                        Input.Stroke = Convert.ToInt32(ItemAll[0]);
+                        Input.StrokeTime = ItemAll[1];
                     }
 
                     if (list[7] == null)
@@ -785,7 +800,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Lvh = Int32.Parse(list[7]);
+                        string[] ItemAll = list[7].Split('|');//值和日期分开
+                        Input.Lvh = Convert.ToInt32(ItemAll[0]);
+                        Input.LvhTime = ItemAll[1];
                     }
 
                     if (list[8] == null)
@@ -794,7 +811,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Diabetes = Int32.Parse(list[8]);
+                        string[] ItemAll = list[8].Split('|');//值和日期分开
+                        Input.Diabetes = Convert.ToInt32(ItemAll[0]);
+                        Input.DiabetesTime = ItemAll[1];
                     }
 
                     if (list[9] == null)
@@ -803,7 +822,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Treat = Int32.Parse(list[9]);
+                        string[] ItemAll = list[9].Split('|');//值和日期分开
+                        Input.Treat = Convert.ToInt32(ItemAll[0]);
+                        Input.TreatTime = ItemAll[1];
                     }
 
                     if (list[10] == null)
@@ -812,7 +833,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Heartattack = Int32.Parse(list[10]);
+                        string[] ItemAll = list[10].Split('|');//值和日期分开
+                        Input.Heartattack = Convert.ToInt32(ItemAll[0]);
+                        Input.HeartattackTime = ItemAll[1];
                     }
 
                     if (list[11] == null)
@@ -821,7 +844,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Af = Int32.Parse(list[11]);
+                        string[] ItemAll = list[11].Split('|');//值和日期分开
+                        Input.Af = Convert.ToInt32(ItemAll[0]);
+                        Input.AfTime = ItemAll[1];
                     }
 
                     if (list[12] == null)
@@ -830,7 +855,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Chd = Int32.Parse(list[12]);
+                        string[] ItemAll = list[12].Split('|');//值和日期分开
+                        Input.Chd = Convert.ToInt32(ItemAll[0]);
+                        Input.ChdTime = ItemAll[1];
                     }
 
                     if (list[13] == null)
@@ -839,7 +866,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Valve = Int32.Parse(list[13]);
+                        string[] ItemAll = list[13].Split('|');//值和日期分开
+                        Input.Valve = Convert.ToInt32(ItemAll[0]);
+                        Input.ValveTime = ItemAll[1];
                     }
 
                     if (list[14] == null)
@@ -848,7 +877,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Tcho = Convert.ToDouble(list[14]);
+                        string[] ItemAll = list[14].Split('|');//值和日期分开
+                        Input.Tcho = Convert.ToDouble(ItemAll[0]);
+                        Input.TchoTime = ItemAll[1];
                     }
 
                     if (list[15] == null)
@@ -857,7 +888,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Creatinine = Convert.ToDouble(list[15]);
+                        string[] ItemAll = list[15].Split('|');//值和日期分开
+                        Input.Creatinine = Convert.ToDouble(ItemAll[0]);
+                        Input.CreatinineTime = ItemAll[1];
                     }
 
                     if (list[16] == null)
@@ -866,7 +899,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Hdlc = Convert.ToDouble(list[16]);
+                        string[] ItemAll = list[16].Split('|');//值和日期分开
+                        Input.Hdlc = Convert.ToDouble(ItemAll[0]);
+                        Input.HdlcTime = ItemAll[1];
                     }
 
                     if (list[17] == null)
@@ -875,7 +910,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.SBP = Int32.Parse(list[17]);
+                        string[] ItemAll = list[17].Split('|');//值和日期分开
+                        Input.SBP = Convert.ToInt32(ItemAll[0]);
+                        Input.SBPTime = ItemAll[1];
                     }
 
                     if (list[18] == null)
@@ -884,7 +921,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.DBP = Int32.Parse(list[18]);
+                        string[] ItemAll = list[18].Split('|');//值和日期分开
+                        Input.DBP = Convert.ToInt32(ItemAll[0]);
+                        Input.DBPTime = ItemAll[1];
                     }
                     #endregion
                 }
@@ -923,13 +962,16 @@ namespace CDMISrestful.DataMethod
                 list = Ps.BasicInfoDetail.GetM3RiskInput(pclsCache.CacheConnectionObject, UserId);
                 if (list != null)
                 {
+                    #region
                     if (list[1] == null)
                     {
                         return null;
                     }
                     else
                     {
-                        Input.Height = Int32.Parse(list[1]);
+                        string[] ItemAll = list[1].Split('|');//值和日期分开
+                        Input.Height = Convert.ToInt32(ItemAll[0]);
+                        Input.HeightTime = ItemAll[1] + " " + ItemAll[2];
                     }
 
                     if (list[0] == null)
@@ -938,7 +980,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Weight = Int32.Parse(list[0]);
+                        string[] ItemAll = list[0].Split('|');//值和日期分开
+                        Input.Weight = Convert.ToInt32(ItemAll[0]);
+                        Input.WeightTime = ItemAll[1] + " " + ItemAll[2];
                     }
                     Input.BMI = Math.Round(Input.Weight / (Input.Height / 100.0) / (Input.Height / 100.0), 2);
 
@@ -948,7 +992,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Smoke = Int32.Parse(list[2]);
+                        string[] ItemAll = list[2].Split('|');//值和日期分开
+                        Input.Smoke = Convert.ToInt32(ItemAll[0]);
+                        Input.SmokeTime = ItemAll[1];
                     }
 
                     if (list[3] == null)
@@ -957,7 +1003,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Diabetes = Int32.Parse(list[3]);
+                        string[] ItemAll = list[3].Split('|');//值和日期分开
+                        Input.Diabetes = Convert.ToInt32(ItemAll[0]);
+                        Input.DiabetesTime = ItemAll[1];
                     }
 
                     if (list[4] == null)
@@ -966,7 +1014,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Creatinine = Convert.ToDouble(list[4]);
+                        string[] ItemAll = list[4].Split('|');//值和日期分开
+                        Input.Creatinine = Convert.ToDouble(ItemAll[0]);
+                        Input.CreatinineTime = ItemAll[1];
                     }
 
                     if (list[5] == null)
@@ -975,7 +1025,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.SBP = Int32.Parse(list[5]);
+                        string[] ItemAll = list[5].Split('|');//值和日期分开
+                        Input.SBP = Convert.ToInt32(ItemAll[0]);
+                        Input.SBPTime = ItemAll[1];
                     }
 
                     if (list[6] == null)
@@ -984,7 +1036,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.EF = Convert.ToDouble(list[6]);
+                        string[] ItemAll = list[6].Split('|');//值和日期分开
+                        Input.EF = Convert.ToInt32(ItemAll[0]);
+                        Input.EFTime = ItemAll[1];
                     }
 
                     if (list[7] == null)
@@ -993,7 +1047,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.NYHA = Int32.Parse(list[7]);
+                        string[] ItemAll = list[7].Split('|');//值和日期分开
+                        Input.NYHA = Convert.ToInt32(ItemAll[0]);
+                        Input.NYHATime = ItemAll[1];
                     }
 
                     if (list[8] == null)
@@ -1002,7 +1058,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Lung = Int32.Parse(list[8]);
+                        string[] ItemAll = list[8].Split('|');//值和日期分开
+                        Input.Lung = Convert.ToInt32(ItemAll[0]);
+                        Input.LungTime = ItemAll[1];
                     }
 
                     if (list[9] == null)
@@ -1011,7 +1069,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.HF18 = Int32.Parse(list[9]);
+                        string[] ItemAll = list[9].Split('|');//值和日期分开
+                        Input.HF18 = Convert.ToInt32(ItemAll[0]);
+                        Input.HF18Time = ItemAll[1];
                     }
 
                     if (list[10] == null)
@@ -1020,7 +1080,9 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.Beta = Int32.Parse(list[10]);
+                        string[] ItemAll = list[10].Split('|');//值和日期分开
+                        Input.Beta = Convert.ToInt32(ItemAll[0]);
+                        Input.BetaTime = ItemAll[1];
                     }
 
                     if (list[11] == null)
@@ -1029,8 +1091,11 @@ namespace CDMISrestful.DataMethod
                     }
                     else
                     {
-                        Input.AA = Int32.Parse(list[11]);
-                    }                 
+                        string[] ItemAll = list[11].Split('|');//值和日期分开
+                        Input.AA = Convert.ToInt32(ItemAll[0]);
+                        Input.AATime = ItemAll[1];
+                    }
+                    #endregion
                 }
                 return Input;
             }
@@ -1500,6 +1565,7 @@ namespace CDMISrestful.DataMethod
                     ret.JobTitle = ret2.JobTitle;
                     ret.Level = ret2.Level;
                 }
+                ret.PatientNum = GetPatientNumByDoctorId(pclsCache, HealthCoachID);
                 return ret;
             }
             catch (Exception ex)
@@ -2584,5 +2650,83 @@ namespace CDMISrestful.DataMethod
 
         
         #endregion
+
+        /// <summary>
+        /// DoctorId,CategoryCode→负责的患者 syf 20151223
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="DoctorId"></param>
+        /// <param name="CategoryCode"></param>
+        /// <returns></returns>
+        public List<PatientNum> GetPatientsByDoctorId(DataConnection pclsCache, string DoctorId, string CategoryCode)
+        {
+            List<PatientNum> items = new List<PatientNum>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.DoctorInfoDetail.GetPatientsByDoctorId(pclsCache.CacheConnectionObject);
+
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
+                cmd.Parameters.Add("CategoryCode", CacheDbType.NVarChar).Value = CategoryCode;
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    PatientNum item = new PatientNum();
+                    item.PatientId = cdr["PatientId"].ToString();
+                    item.PatientName = cdr["PatientName"].ToString();
+                    items.Add(item);
+                }
+                return items;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.GetPatientsByDoctorId", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// 获取某医生所负责的患者数量
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="DoctorId"></param>
+        /// <returns></returns>
+        public int GetPatientNumByDoctorId(DataConnection pclsCache, string DoctorId)
+        {
+            int ret = 0;
+            string[] Category = { "M1", "M2", "M3", "HM1", "HM2", "HM3" };
+            for (int i=0; i<Category.Length; i++)
+            {
+                List<PatientNum> items = new List<PatientNum>();
+                items = GetPatientsByDoctorId(pclsCache, DoctorId, Category[i]);
+                if(items != null)
+                {
+                    ret += items.Count;
+                }
+            }           
+            return ret;
+        }
     }
 }

@@ -943,7 +943,7 @@
             <param name="CategoryCode"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Controllers.ModuleInfoController.GetSynBasicInfoDetail(System.String)">
+        <member name="M:CDMISrestful.Controllers.ModuleInfoController.GetSynBasicInfoDetail(System.String,System.String)">
             <summary>
             获取同步患者购买模块下的某些信息 LY 2015-10-14
             </summary>
@@ -1108,6 +1108,13 @@
             <param name="StartDate"></param>
             <param name="EndDate"></param>
             <param name="Module"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetDTaskByPlanNo(System.String)">
+            <summary>
+            获取计划修改前后的不同任务 syf 20151223
+            </summary>
+            <param name="PlanNo"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
@@ -1603,7 +1610,7 @@
             <param name="piVisitId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.DataMethod.ClinicInfoMethod.GetNewExam(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+        <member name="M:CDMISrestful.DataMethod.ClinicInfoMethod.GetNewExamForM1(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             CSQ 20150714 //20151012 SYF
             </summary>
@@ -1620,7 +1627,7 @@
             <param name="piVisitId"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.DataMethod.ClinicInfoMethod.GetNewLabTest(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+        <member name="M:CDMISrestful.DataMethod.ClinicInfoMethod.GetNewLabTest(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             得到某些最新的化验结果 LY 2015-10-14
             </summary>
@@ -2262,6 +2269,23 @@
             <param name="Module"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetLogPlanInfo(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            获取某一版本计划的信息 syf 20151222
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="PlanNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.PlanInfoMethod.GetAllTaskByLogPlan(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32)">
+            <summary>
+            施宇帆 2015-12-22 获取某版本计划下所有任务的信息
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="PlanNo"></param>
+            <param name="piEdition"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.DataMethod.RiskInfoMethod.PsTreatmentIndicatorsSetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             Ps.TreatmentIndicators.SetData GL 2015-10-10
@@ -2676,6 +2700,23 @@
             </summary>
             <param name="pclsCache"></param>
             <param name="PatientId"></param>
+            <param name="DoctorId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetPatientsByDoctorId(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
+            <summary>
+            DoctorId,CategoryCode→负责的患者 syf 20151223
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="DoctorId"></param>
+            <param name="CategoryCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.GetPatientNumByDoctorId(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            获取某医生所负责的患者数量
+            </summary>
+            <param name="pclsCache"></param>
             <param name="DoctorId"></param>
             <returns></returns>
         </member>
@@ -3227,7 +3268,7 @@
             <param name="CategoryCode"></param>
             <returns></returns>
         </member>
-        <member name="M:CDMISrestful.Models.ModuleInfoRepository.SynBasicInfoDetail(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+        <member name="M:CDMISrestful.Models.ModuleInfoRepository.SynBasicInfoDetail(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String)">
             <summary>
             同步患者购买模块下的某些信息 LY 2015-10-14
             </summary>
@@ -3244,6 +3285,14 @@
             <param name="EndDate"></param>
             <param name="ItemType"></param>
             <param name="ItemCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Models.PlanInfoRepository.GetDTaskByPlanNo(CDMISrestful.CommonLibrary.DataConnection,System.String)">
+            <summary>
+            获取计划修改前后的不同任务 syf 20151223
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="PlanNo"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.Models.RiskInfoRepository.GetDescription(CDMISrestful.CommonLibrary.DataConnection,System.Int32)">

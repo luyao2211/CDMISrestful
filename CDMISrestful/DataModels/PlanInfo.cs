@@ -679,5 +679,34 @@ namespace CDMISrestful.DataModels
         public int DeviceType { get; set; }
     }
 
+    public class LogPlan
+    {
+        public string PlanNo { get; set; }
+        public string Edition { get; set; }
+
+        public string PatientId { get; set; }
+        public string StartDate { get; set; }
+
+        public string EndDate { get; set; }
+        public string Module { get; set; }
+
+        public string Status { get; set; }
+        public string DoctorId { get; set; }
+
+    }
+
+    public class LogTask
+    {
+        public string Type { get; set; }
+        public string Code { get; set; }
+
+        public string SortNo { get; set; }
+        public string Edition { get; set; }
+
+        public string Instruction { get; set; }
+
+        public string PlanEndDate { get; set; }
+
+    }
 
 }

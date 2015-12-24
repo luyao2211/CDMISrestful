@@ -304,7 +304,16 @@ namespace CDMISrestful.Controllers
              return repository.GetComplianceListInC(pclsCache,PatientId, StartDate, EndDate, Module);
          }
 
-        
+         /// <summary>
+         /// 获取计划修改前后的不同任务 syf 20151223
+         /// </summary>
+         /// <param name="PlanNo"></param>
+         /// <returns></returns>
+         [Route("Api/v1/PlanInfo/GetDTaskByPlanNo")]
+         public List<LogTask> GetDTaskByPlanNo(string PlanNo)
+         {
+             return repository.GetDTaskByPlanNo(pclsCache, PlanNo);
+         }
 
         #region 暂时不用
         ///// <summary>

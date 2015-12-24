@@ -25,10 +25,11 @@ namespace CDMISrestful.Controllers
         /// <param name="ItemCode"></param>
         /// <returns></returns>
         [Route("Api/v1/VitalInfo/VitalSign")]
-        public HttpResponseMessage GetLatestPatientVitalSigns(string UserId, string ItemType, string ItemCode)
+        public ValueTime GetLatestPatientVitalSigns(string UserId, string ItemType, string ItemCode)
         {
-            string ret = repository.GetLatestPatientVitalSigns(pclsCache, UserId, ItemType, ItemCode);
-            return new ExceptionHandler().Common(Request, ret);
+            ValueTime ret = repository.GetLatestPatientVitalSigns(pclsCache, UserId, ItemType, ItemCode);
+            //return new ExceptionHandler().Common(Request, ret);
+            return ret;
         }
 
         /// <summary>

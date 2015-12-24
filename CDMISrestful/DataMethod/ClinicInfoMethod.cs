@@ -448,7 +448,7 @@ namespace CDMISrestful.DataMethod
         /// <param name="pclsCache"></param>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        public List<NewExam> GetNewExam(DataConnection pclsCache, string UserId)
+        public List<NewExam> GetNewExamForM1(DataConnection pclsCache, string UserId, string Module)
         {
             List<NewExam> list = new List<NewExam>();
             CacheCommand cmd = null;
@@ -460,7 +460,11 @@ namespace CDMISrestful.DataMethod
                     return null;
                 }
                 cmd = new CacheCommand();
-                cmd = Ps.Examination.GetNewExam(pclsCache.CacheConnectionObject);
+                if(Module == "M1")
+                {
+                    cmd = Ps.Examination.GetNewExamForM1(pclsCache.CacheConnectionObject);
+                }
+                
                 cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
 
                 cdr = cmd.ExecuteReader();
@@ -473,6 +477,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.Value2 = cdr["Value2"].ToString();
                     NewLine.Name3 = cdr["Name3"].ToString();
                     NewLine.Value3 = cdr["Value3"].ToString();
+                    NewLine.Date = cdr["Date"].ToString();
                     list.Add(NewLine);
                 }
                 return list;
@@ -649,7 +654,7 @@ namespace CDMISrestful.DataMethod
         /// <param name="pclsCache"></param>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        public List<NewLabTest> GetNewLabTest(DataConnection pclsCache, string UserId)
+        public List<NewLabTest> GetNewLabTest(DataConnection pclsCache, string UserId, string Module)
         {
             List<NewLabTest> list = new List<NewLabTest>();
             CacheCommand cmd = null;
@@ -661,7 +666,19 @@ namespace CDMISrestful.DataMethod
                     return null;
                 }
                 cmd = new CacheCommand();
-                cmd = Ps.LabTestDetails.GetNewLabTest(pclsCache.CacheConnectionObject);
+                if (Module == "M1")
+                {
+                    cmd = Ps.LabTestDetails.GetNewLabTestForM1(pclsCache.CacheConnectionObject);
+                }
+                else if(Module == "M2")
+                {
+                    cmd = Ps.LabTestDetails.GetNewLabTestForM2(pclsCache.CacheConnectionObject);
+                }
+                else if (Module == "M3")
+                {
+                    cmd = Ps.LabTestDetails.GetNewLabTestForM3(pclsCache.CacheConnectionObject);
+                }
+                
                 cmd.Parameters.Add("UserId", CacheDbType.NVarChar).Value = UserId;
                 cdr = cmd.ExecuteReader();
                 while (cdr.Read())
@@ -670,6 +687,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.Code = cdr["Code"].ToString();
                     NewLine.Name = cdr["Name"].ToString();
                     NewLine.Value = cdr["Value"].ToString();
+                    NewLine.Date = cdr["Date"].ToString();
                     list.Add(NewLine);
                 }
                 return list;
