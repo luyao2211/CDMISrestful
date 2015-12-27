@@ -388,6 +388,16 @@ namespace CDMISrestful.DataModels
 
         public int PatientNum { get; set; }
 
+        public int OnPlanPatientNum { get; set; }
+        public int DoneCalendarNum { get; set; }
+        public int AssessmentNum { get; set; }
+        public int MSGNum { get; set; }
+        public int AppointmentNum { get; set; }
+        public int Activedays { get; set; }
+        public string UnitCode { get; set; }
+        public string DeptCode { get; set; }
+
+
     }
 
     public class DetailsByDoctorId
@@ -542,9 +552,13 @@ namespace CDMISrestful.DataModels
         public string IDNo { get; set; }
         public string PhotoAddress { get; set; }
         public string UnitName { get; set; }
+
+        public string UnitCode { get; set; }
         public string JobTitle { get; set; }
         public string Level { get; set; }
         public string Dept { get; set; }
+
+        public string DeptCode { get; set; }
         public string ActivatePhotoAddr { get; set; }
         public string DeptName { get; set; }
 
@@ -554,6 +568,11 @@ namespace CDMISrestful.DataModels
         public string GeneralComment { get; set; }
         public string commentNum { get; set; }
         public string Description { get; set; }
+
+        public int AssessmentNum { get; set; }
+        public int MSGNum { get; set; }
+        public int AppointmentNum { get; set; }
+        public int Activedays { get; set; }
     }
 
     public class SetComment
