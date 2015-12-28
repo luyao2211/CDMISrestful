@@ -1559,13 +1559,35 @@ namespace CDMISrestful.DataMethod
                     ret.generalComment = ret2.GeneralComment;
                     ret.commentNum = ret2.commentNum;
                     ret.Description = ret2.Description;
-
                     ret.UnitName = ret2.UnitName;
+                    ret.UnitCode = ret2.UnitCode;
                     ret.Dept = ret2.DeptName;
+                    ret.DeptCode = ret2.DeptCode;
                     ret.JobTitle = ret2.JobTitle;
                     ret.Level = ret2.Level;
+                    ret.AssessmentNum = ret2.AssessmentNum;
+                    ret.MSGNum = ret2.MSGNum;
+                    ret.AppointmentNum = ret2.AppointmentNum;
+                    ret.Activedays = ret2.Activedays;
+
                 }
                 ret.PatientNum = GetPatientNumByDoctorId(pclsCache, HealthCoachID);
+                //管理病人数量
+                ret.OnPlanPatientNum = GetOnPlanPatientNumByDoctorId(pclsCache, HealthCoachID);
+                //管理病人中有正在计划的人数量
+                ret.DoneCalendarNum = 0;
+                List<Calendar> ListCal = new List<Calendar>();
+                ListCal = GetCalendar(pclsCache, HealthCoachID);
+                if(ListCal != null)
+                {
+                    for (int Cali = 0; Cali < ListCal.Count; Cali++)
+                    {
+                        if(ListCal[Cali].Status == 2)
+                        {
+                            ret.DoneCalendarNum++;
+                        }                        
+                    }
+                }
                 return ret;
             }
             catch (Exception ex)
@@ -2511,6 +2533,12 @@ namespace CDMISrestful.DataMethod
                     ret.GeneralComment = list[10];
                     ret.commentNum = list[11];
                     ret.Description = list[12];
+                    ret.AssessmentNum = Convert.ToInt32(list[13]);
+                    ret.MSGNum = Convert.ToInt32(list[14]);
+                    ret.AppointmentNum = Convert.ToInt32(list[15]);
+                    ret.Activedays = Convert.ToInt32(list[16]);
+                    ret.UnitCode = list[17];
+                    ret.DeptCode = list[18];
                 }
                 //DataCheck ZAM 2015-1-7
                 return ret;
@@ -2728,5 +2756,33 @@ namespace CDMISrestful.DataMethod
             }           
             return ret;
         }
+
+        public int GetOnPlanPatientNumByDoctorId(DataConnection pclsCache, string DoctorId)
+        {
+            int ret = 0;
+            string[] Category = { "M1", "M2", "M3", "HM1", "HM2", "HM3" };
+            for (int i = 0; i < Category.Length; i++)
+            {
+                List<PatientNum> items = new List<PatientNum>();
+                items = GetPatientsByDoctorId(pclsCache, DoctorId, Category[i]);
+                if (items != null)
+                {
+                    for(int MouN=1; i<items.Count; i++)
+                    {
+                        string PatId = items[i].PatientId;
+                        GPlanInfo GPlanInfo = new GPlanInfo();
+                        //string DocId = "";
+                        GPlanInfo  = new PlanInfoMethod().GetExecutingPlan(pclsCache, PatId);
+                        if((GPlanInfo != null) &&(DoctorId == GPlanInfo.DoctorId))
+                        {
+                            ret++;
+                        }
+                        
+                    }
+                }
+            }
+            return ret;
+        }
+
     }
 }
