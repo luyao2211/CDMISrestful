@@ -57,9 +57,7 @@ namespace CDMISrestful.DataModels
 
     public class M1RiskInput
     {
-        public int Age { get; set; }
-
-        
+        public int Age { get; set; }      
         public int Gender { get; set; }
         public int Height { get; set; }
         public string HeightTime { get; set; }
@@ -70,9 +68,7 @@ namespace CDMISrestful.DataModels
         public double BMI { get; set; }
         public int Heartrate { get; set; }
         public string HeartrateTime { get; set; }
-        
         public int Parent { get; set; }
-
         public string ParentTime { get; set; }
         public int Smoke { get; set; }
         public string SmokeTime { get; set; }
