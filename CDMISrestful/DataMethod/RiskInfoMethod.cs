@@ -35,7 +35,20 @@ namespace CDMISrestful.DataMethod
                 {
                     return ret;
                 }
-                ret = (int)Ps.TreatmentIndicators.SetData(pclsCache.CacheConnectionObject, UserId, SortNo, AssessmentType, AssessmentName, AssessmentTime, Result, revUserId, TerminalName, TerminalIP, DeviceType);               
+                ret = (int)Ps.TreatmentIndicators.SetData(pclsCache.CacheConnectionObject, UserId, SortNo, AssessmentType, AssessmentName, AssessmentTime, Result, revUserId, TerminalName, TerminalIP, DeviceType);
+                //if(ret == 1)
+                //{
+                //    int Ass = 0;
+                //    string Amt = "";
+                //    Amt = Ps.DoctorInfoDetail.GetValue(pclsCache.CacheConnectionObject, revUserId, "Score", "AssessmentNum", 1);
+                //    if(Amt != null)
+                //    {
+                //        Ass = Convert.ToInt32(Amt);
+                //        Ass++;
+                //    }
+                //    ret = (int)Ps.DoctorInfoDetail.SetData(pclsCache.CacheConnectionObject, revUserId, "Score", "AssessmentNum", 1, Convert.ToString(Ass), "", 1, revUserId, TerminalName, TerminalIP, DeviceType);
+
+                //}
                 return ret;
             }
             catch (Exception ex)

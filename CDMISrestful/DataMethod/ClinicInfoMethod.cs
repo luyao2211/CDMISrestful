@@ -687,7 +687,10 @@ namespace CDMISrestful.DataMethod
                     NewLine.Code = cdr["Code"].ToString();
                     NewLine.Name = cdr["Name"].ToString();
                     NewLine.Value = cdr["Value"].ToString();
-                    NewLine.Date = cdr["Date"].ToString();
+                    NewLine.Date = Convert.ToDateTime(cdr["Date"]);
+                    //string ForDate = Convert.ToString(NewLine.Date);
+                    //ForDate = ForDate.Replace("T", " ");
+                    //NewLine.Date = Convert.ToDateTime(ForDate);
                     list.Add(NewLine);
                 }
                 return list;

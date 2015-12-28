@@ -45,6 +45,7 @@ namespace CDMISrestful.Models
             SynBasicInfo ret = new SynBasicInfo();
             ret.ExamInfo = new ClinicInfoMethod().GetNewExamForM1(pclsCache, UserId, Module);
             ret.LabTestInfo = new ClinicInfoMethod().GetNewLabTest(pclsCache, UserId, Module);
+            
             return ret;
         }
     }
