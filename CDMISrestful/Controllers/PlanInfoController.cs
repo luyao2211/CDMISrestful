@@ -315,6 +315,17 @@ namespace CDMISrestful.Controllers
              return repository.GetDTaskByPlanNo(pclsCache, PlanNo);
          }
 
+         /// <summary>
+         /// 获取某计划所有任务的依从状态情况 施宇帆 20150104
+         /// </summary>
+         /// <param name="PlanNo"></param>
+         /// <returns></returns>
+         [Route("Api/v1/PlanInfo/GetTaskCompliance")]
+         public List<TaskCompliance> GetTaskCompliance(string PlanNo)
+         {
+             return repository.GetTaskCompliance(pclsCache, PlanNo);
+         }
+
         #region 暂时不用
         ///// <summary>
         ///// GetOverDuePlanList 获取健康专员负责的所有患者（最新结束但未达标的）计划列表 GL 2015-10-13

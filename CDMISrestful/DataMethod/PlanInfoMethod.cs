@@ -1664,6 +1664,60 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+
+        public List<ItemCompliance> GetItemCompliance(DataConnection pclsCache, string PlanNo, string CategoryCode, string Code)
+        {
+            List<ItemCompliance> list = new List<ItemCompliance>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.ComplianceDetail.GetItemCompliance(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("PlanNo", CacheDbType.NVarChar).Value = PlanNo;
+                cmd.Parameters.Add("CategoryCode", CacheDbType.NVarChar).Value = CategoryCode;
+                cmd.Parameters.Add("Code", CacheDbType.NVarChar).Value = Code;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    ItemCompliance NewLine = new ItemCompliance();
+                    NewLine.CategoryCode   = cdr["CategoryCode"].ToString();
+                    NewLine.Code           = cdr["Code"].ToString();
+                    NewLine.Name           = cdr["Name"].ToString();
+                    NewLine.Date           = Convert.ToInt32(cdr["Date"]);
+                    NewLine.Status         = cdr["Status"].ToString();
+                    list.Add(NewLine);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetItemCompliance", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
         #endregion
 
         #region<PsTask>
@@ -1838,6 +1892,59 @@ namespace CDMISrestful.DataMethod
             }
             finally
             {
+                pclsCache.DisConnect();
+            }
+        }
+
+        //syf 20150104 只输入PlanNo获取某个计划下的所有任务
+        public List<PsTask> GetAllTask(DataConnection pclsCache, string PlanNo)
+        {
+            List<PsTask> list = new List<PsTask>();
+
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Task.GetAllTask(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("PlanNo", CacheDbType.NVarChar).Value = PlanNo;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    list.Add(new PsTask
+                    {
+                        Type = cdr["Type"].ToString(),
+                        Code = cdr["Code"].ToString(),
+                        Name = cdr["Name"].ToString(),
+                        Instruction = cdr["Instruction"].ToString(),
+                    });
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetAllTask", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
                 pclsCache.DisConnect();
             }
         }
@@ -3239,6 +3346,58 @@ namespace CDMISrestful.DataMethod
 
 
         #endregion
+
+        //输入PlanNo获取该计划下所有任务的完成情况（即依从情况） 施宇帆 20150104
+        public List<TaskCompliance> GetTaskCompliance(DataConnection pclsCache, string PlanNo)
+        {
+
+            List<TaskCompliance> TaskCompliance = new List<TaskCompliance>();
+            try
+            {
+                List<PsTask> list1 = new List<PsTask>();
+                list1 = new PlanInfoMethod().GetAllTask(pclsCache, PlanNo);
+                if(list1 != null)
+                {
+                    for(int i=0; i<list1.Count; i++)
+                    {
+                        List<ItemCompliance> list2 = new List<ItemCompliance>();
+                        list2 = new PlanInfoMethod().GetItemCompliance(pclsCache, PlanNo, list1[i].Type, list1[i].Code);
+                        if(list2 != null)
+                        {
+                            TaskCompliance NewLine = new TaskCompliance();
+                            NewLine.AllDays = 0;
+                            NewLine.DoDays = 0;
+                            NewLine.UndoDays = 0;
+                            NewLine.CategoryCode = list2[0].CategoryCode;
+                            NewLine.Code = list2[0].Code;
+                            NewLine.Name = list2[2].Name;
+                            for(int j=0; j<list2.Count; j++)
+                            {
+                                if(list2[j].Status == "0")
+                                {
+                                    NewLine.UndoDays++;
+                                }
+                                else if(list2[j].Status == "1")
+                                {
+                                    NewLine.DoDays++;
+                                }
+                                NewLine.AllDays++;
+                            }
+                            TaskCompliance.Add(NewLine);
+                        }
+                    }
+                }
+                return TaskCompliance;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetTaskCompliance", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+            }
+        }
 
     }
 }

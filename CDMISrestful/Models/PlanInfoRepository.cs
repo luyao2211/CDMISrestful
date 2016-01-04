@@ -1109,6 +1109,11 @@ namespace CDMISrestful.Models
             return new PlanInfoMethod().GetComplianceListInC(pclsCache, PatientId, StartDate, EndDate, Module);
         }
 
+        public List<TaskCompliance> GetTaskCompliance(DataConnection pclsCache, string PlanNo)
+        {
+            return new PlanInfoMethod().GetTaskCompliance(pclsCache, PlanNo);
+        }
+
         /// <summary>
         /// 获取计划修改前后的不同任务 syf 20151223
         /// </summary>
