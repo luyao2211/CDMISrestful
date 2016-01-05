@@ -709,4 +709,30 @@ namespace CDMISrestful.DataModels
 
     }
 
+    public class ItemCompliance
+    {
+        public string CategoryCode { get; set; }
+        public string Code { get; set; }
+
+        public string Name { get; set; }
+        public int Date { get; set; }
+
+        public string Status { get; set; }
+
+    }
+
+    public class TaskCompliance
+    {
+        public string CategoryCode { get; set; }
+        public string Code { get; set; }
+
+        public string Name { get; set; }
+        public int AllDays { get; set; }
+
+        public int DoDays { get; set; }
+
+        public int UndoDays { get; set; }
+
+    }
+
 }

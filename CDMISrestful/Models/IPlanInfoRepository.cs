@@ -51,6 +51,8 @@ namespace CDMISrestful.Models
 
         //List<LogTask> GetAllTaskByLogPlan(DataConnection pclsCache, string PlanNo, int piEdition);
 
+        List<TaskCompliance> GetTaskCompliance(DataConnection pclsCache, string PlanNo);
+
        
     }
 }
