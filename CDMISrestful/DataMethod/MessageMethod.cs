@@ -39,7 +39,7 @@ namespace CDMISrestful.DataMethod
                     item.Time = cdr["Time"].ToString();
                     item.Content = cdr["Content"].ToString();
                     item.IDFlag = cdr["IDFlag"].ToString();
-                    item.SendDateTime = cdr["SendDateTime"].ToString();
+                    item.SendDateTime = cdr["SendDateTime"].ToString().Replace("-","/");
                     items.Add(item);
                 }
                 return items;
