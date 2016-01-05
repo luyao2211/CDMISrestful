@@ -3369,8 +3369,9 @@ namespace CDMISrestful.DataMethod
                             NewLine.DoDays = 0;
                             NewLine.UndoDays = 0;
                             NewLine.CategoryCode = list2[0].CategoryCode;
-                            NewLine.Code = list2[0].Code;
-                            NewLine.Name = list2[2].Name;
+                            NewLine.Code = list2[i].Code;
+                            NewLine.Name = list2[i].Name;
+                            NewLine.Instruction = list1[i].Instruction;
                             for(int j=0; j<list2.Count; j++)
                             {
                                 if(list2[j].Status == "0")

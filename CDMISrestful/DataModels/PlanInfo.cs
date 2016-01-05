@@ -733,6 +733,8 @@ namespace CDMISrestful.DataModels
 
         public int UndoDays { get; set; }
 
+        public string Instruction { get; set; }
+
     }
 
 }
