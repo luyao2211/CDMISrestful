@@ -3400,5 +3400,42 @@ namespace CDMISrestful.DataMethod
             }
         }
 
+        #region<CmMstTask>
+        public CmMstTaskN GetCmTaskItemInfo(DataConnection pclsCache, string CategoryCode, string Code)
+        {
+            try
+            {
+                CmMstTaskN ret = new CmMstTaskN();
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Cm.MstTask.GetCmTaskItemInfo(pclsCache.CacheConnectionObject, CategoryCode, Code);
+                if (list != null)
+                {
+                    ret.Name = list[0];
+                    ret.ParentCode = list[1];
+                    ret.Description = list[2];
+                    ret.GroupHeaderFlag = Convert.ToInt32(list[3]);
+                    ret.ControlType = Convert.ToInt32(list[4]);
+                    ret.DateTime = list[5];
+                    ret.UserId = list[6];
+                    ret.UserName = list[7];
+                }
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "PlanInfoMethod.GetCmTaskItemInfo", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+        #endregion
+
     }
 }

@@ -259,7 +259,9 @@ namespace CDMISrestful.Controllers
                     {
                         NotificationType = "用户";
                     }
-                   var timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+                   var NowDay = DateTime.Now.ToString("yyyy-MM-dd HHmmss");
+                   var NowTime = DateTime.Now.ToString("hh:mm:ss");
+                   var timestamp = NowDay + " " + NowTime;
                    SetN = new MessageMethod().PsNotificationSetData(pclsCache, Alias, NotificationType, title, notification, timestamp, id, "0", "", id, "system", new CommonFunction().getRemoteIPAddress(), 0);
                    return strResult + "_"+SetN;
                 }
