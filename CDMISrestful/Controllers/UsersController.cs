@@ -501,5 +501,18 @@ namespace CDMISrestful.Controllers
              return repository.ConsultationGetPatientsByStatus(pclsCache, DoctorId, Status);
          }
 
+
+         /// <summary>
+         /// 改变处理状态 syf 20160107
+         /// </summary>
+         /// <param name="item"></param>
+         /// <returns></returns>
+         [Route("Api/v1/Users/ConsultationChangeStatus")]
+         public HttpResponseMessage ConsultationChangeStatus(ConsultationChangeStatus item)
+         {
+             int ret = repository.ConsultationChangeStatus(pclsCache, item.DoctorId, item.PatientId, item.SortNo, item.Status, item.revUserId, item.TerminalName, item.TerminalIP, item.DeviceType);
+             return new ExceptionHandler().ChangeStatus(Request, ret);
+         }
+
     }
 }
