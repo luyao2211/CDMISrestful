@@ -483,7 +483,7 @@ namespace CDMISrestful.Controllers
           /// <param name="Consultation"></param>
           /// <returns></returns>
          [Route("Api/v1/Users/Consultation")]
-         public HttpResponseMessage PsConsultationSetData(Consultation Consultation)
+         public HttpResponseMessage PostConsultation(Consultation Consultation)
          {
              int ret = repository.PsConsultationSetData(pclsCache, Consultation.DoctorId, Consultation.PatientId, Consultation.ApplicationTime, Consultation.HealthCoachId, Consultation.Module, Consultation.Title, Consultation.Description, Consultation.ConsultTime, Consultation.Solution, Consultation.Emergency, Consultation.Status, Consultation.Redundancy, Consultation.revUserId, Consultation.TerminalName, Consultation.TerminalIP, Consultation.DeviceType);
              return new ExceptionHandler().SetData(Request, ret);
@@ -495,8 +495,8 @@ namespace CDMISrestful.Controllers
          /// <param name="DoctorId"></param>
          /// <param name="Status"></param>
          /// <returns></returns>
-         [Route("Api/v1/Users/Consultation")]
-         public List<ConsultationStatus> ConsultationGetPatientsByStatus(string DoctorId, int Status)
+         [Route("Api/v1/Users/Consultations")]
+         public List<ConsultationStatus> GetConsultationPatientsByStatus(string DoctorId, int Status)
          {
              return repository.ConsultationGetPatientsByStatus(pclsCache, DoctorId, Status);
          }

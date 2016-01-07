@@ -1117,6 +1117,13 @@
             <param name="PlanNo"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.PlanInfoController.GetTaskCompliance(System.String)">
+            <summary>
+            获取某计划所有任务的依从状态情况 施宇帆 20150104
+            </summary>
+            <param name="PlanNo"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.RiskInfoController.GetDescription(System.Int32)">
             <summary>
             根据收缩压获取血压等级说明 LY 2015-10-13

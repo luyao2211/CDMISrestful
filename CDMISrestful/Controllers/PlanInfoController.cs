@@ -320,7 +320,7 @@ namespace CDMISrestful.Controllers
          /// </summary>
          /// <param name="PlanNo"></param>
          /// <returns></returns>
-         [Route("Api/v1/PlanInfo/GetTaskCompliance")]
+         [Route("Api/v1/PlanInfo/TaskCompliances")]
          public List<TaskCompliance> GetTaskCompliance(string PlanNo)
          {
              return repository.GetTaskCompliance(pclsCache, PlanNo);
