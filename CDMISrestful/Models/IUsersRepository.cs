@@ -62,5 +62,9 @@ namespace CDMISrestful.Models
         List<ModulesByPID> GetHModulesByID(DataConnection pclsCache, string PatientId, string DoctorId);
 
         string GetValueByType(DataConnection pclsCache, string UserId, string Type);
+
+        int PsConsultationSetData(DataConnection pclsCache, string DoctorId, string PatientId, DateTime ApplicationTime, string HealthCoachId, string Module, string Title, string Description, DateTime ConsultTime, string Solution, int Emergency, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+
+        List<ConsultationStatus> ConsultationGetPatientsByStatus(DataConnection pclsCache, string DoctorId, int Status);
     }
 }

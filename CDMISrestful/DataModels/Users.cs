@@ -293,6 +293,8 @@ namespace CDMISrestful.DataModels
         public string TargetValue { get; set; }
         public string SMSCount { get; set; }
 
+        public string Module { get; set; }
+
     }
 
     public class PatBasicInfo
@@ -595,6 +597,52 @@ namespace CDMISrestful.DataModels
         public string PatientId { get; set; }
         public string PatientName { get; set; }
 
+    }
+
+    public class Consultation
+    {
+        public string DoctorId { get; set; }
+        public string PatientId { get; set; }
+        public DateTime ApplicationTime { get; set; }
+        public string HealthCoachId { get; set; }
+        public string Module { get; set; }
+
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime ConsultTime { get; set; }
+        public string Solution { get; set; }
+        public int Emergency { get; set; }
+
+        public int Status { get; set; }
+        public string Redundancy { get; set; }
+
+
+
+
+        public string revUserId { get; set; }
+        public string TerminalName { get; set; }
+        public string TerminalIP { get; set; }
+
+        public int DeviceType { get; set; }
+
+    }
+
+    public class ConsultationStatus
+    {
+        public string PatientId { get; set; }
+        public string PatientName { get; set; }
+        public int PatientGender { get; set; }
+        public int PatientAge { get; set; }
+        public string Module { get; set; }
+        public DateTime ApplicationTime { get; set; }
+        public string HealthCoachId { get; set; }
+        public string HealthCoachName { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime ConsultTime { get; set; }
+        public string Solution { get; set; }
+        public int Emergency { get; set; }
+        public int Status { get; set; }
     }
 
 }

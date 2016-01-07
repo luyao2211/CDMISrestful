@@ -2840,6 +2840,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.TotalDays = cdr["TotalDays"].ToString();
                     NewLine.RemainingDays = cdr["RemainingDays"].ToString();
                     NewLine.Status = cdr["Status"].ToString();
+                    
                    
                     if (cdr["ComplianceRate"].ToString() == "")
                     {
@@ -2855,6 +2856,7 @@ namespace CDMISrestful.DataMethod
                     NewLine.TargetOrigin = cdr["TargetOrigin"].ToString();
                     NewLine.TargetValue = cdr["TargetValue"].ToString();
                     NewLine.SMSCount = cdr["SMSCount"].ToString();
+                    NewLine.Module = cdr["Module"].ToString();
 
                     list.Add(NewLine);
                 }

@@ -805,7 +805,26 @@ namespace CDMISrestful.Models
         }
         public List<PatientListTable> GetPatientsPlan(DataConnection pclsCache, string DoctorId, string Module, string VitalType, string VitalCode)
         {
-            return planInfoMethod.GetPatientsPlan(pclsCache, DoctorId, Module, VitalType, VitalCode);
+
+            List<PatientListTable> items = new List<PatientListTable>();
+            if (Module == "{Module}")
+            {
+                string[] Mu = new string[] { "HM1", "HM2", "HM3" };
+                for (int i = 0; i<Mu.Length; i++)
+                {
+                    List<PatientListTable> item = new List<PatientListTable>();
+                    item = new PlanInfoMethod().GetPatientsPlan(pclsCache, DoctorId, Mu[i], VitalType, VitalCode);
+                    if (item != null)
+                    {
+                        items.AddRange(item);
+                    }
+                }
+            }
+            else
+            {
+                items = new PlanInfoMethod().GetPatientsPlan(pclsCache, DoctorId, Module, VitalType, VitalCode);
+            }
+            return items;
 
         }
 
@@ -887,6 +906,45 @@ namespace CDMISrestful.Models
         public string GetValueByType(DataConnection pclsCache, string UserId, string Type)
         {
             return new UsersMethod().GetValueByType(pclsCache, UserId, Type);
+        }
+
+        public int PsConsultationSetData(DataConnection pclsCache, string DoctorId, string PatientId, DateTime ApplicationTime, string HealthCoachId, string Module, string Title, string Description, DateTime ConsultTime, string Solution, int Emergency, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            return new UsersMethod().PsConsultationSetData(pclsCache, DoctorId, PatientId, ApplicationTime, HealthCoachId, Module, Title, Description, ConsultTime, Solution, Emergency, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
+        }
+
+        public List<ConsultationStatus> ConsultationGetPatientsByStatus(DataConnection pclsCache, string DoctorId, int Status)
+        {
+            List<ConsultationStatus> items = new List<ConsultationStatus>();
+            if(Status == 7)
+            {
+                for(int i=3; i>0; i--)
+                {
+                    List<ConsultationStatus> item = new List<ConsultationStatus>();
+                    item = new UsersMethod().ConsultationGetPatientsByStatus(pclsCache, DoctorId, i);
+                    if(item != null)
+                    {
+                        items.AddRange(item);
+                    }                   
+                }
+            }
+            else if(Status == 8)
+            {
+                for (int i=6; i>3; i--)
+                {
+                    List<ConsultationStatus> item = new List<ConsultationStatus>();
+                    item = new UsersMethod().ConsultationGetPatientsByStatus(pclsCache, DoctorId, i);
+                    if (item != null)
+                    {
+                        items.AddRange(item);
+                    }
+                }
+            }
+            else
+            {
+                items = new UsersMethod().ConsultationGetPatientsByStatus(pclsCache, DoctorId, Status);
+            }
+            return items;
         }
 
     }
