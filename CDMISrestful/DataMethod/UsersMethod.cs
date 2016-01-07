@@ -2885,6 +2885,44 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+
+        /// <summary>
+        /// syf Consultation改变状态 20160107
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="DoctorId"></param>
+        /// <param name="PatientId"></param>
+        /// <param name="SortNo"></param>
+        /// <param name="Status"></param>
+        /// <param name="revUserId"></param>
+        /// <param name="TerminalName"></param>
+        /// <param name="TerminalIP"></param>
+        /// <param name="DeviceType"></param>
+        /// <returns></returns>
+        public int ConsultationChangeStatus(DataConnection pclsCache, string DoctorId, string PatientId, int SortNo, int Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int ret = 0;
+
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return ret;
+                }
+
+                ret = (int)Ps.Consultation.ChangeStatus(pclsCache.CacheConnectionObject, DoctorId, PatientId, SortNo, Status, revUserId, TerminalName, TerminalIP, DeviceType);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "MessageMethod.ConsultationChangeStatus", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
         #endregion
 
     }

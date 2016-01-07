@@ -947,5 +947,10 @@ namespace CDMISrestful.Models
             return items;
         }
 
+        public int ConsultationChangeStatus(DataConnection pclsCache, string DoctorId, string PatientId, int SortNo, int Status, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            return new UsersMethod().ConsultationChangeStatus(pclsCache, DoctorId, PatientId, SortNo, Status, revUserId, TerminalName, TerminalIP, DeviceType);
+        }
+
     }
 }
