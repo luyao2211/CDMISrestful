@@ -616,7 +616,7 @@ namespace CDMISrestful.DataModels
         public int Status { get; set; }
         public string Redundancy { get; set; }
 
-
+        
 
 
         public string revUserId { get; set; }
@@ -624,6 +624,7 @@ namespace CDMISrestful.DataModels
         public string TerminalIP { get; set; }
 
         public int DeviceType { get; set; }
+
 
     }
 
@@ -643,6 +644,19 @@ namespace CDMISrestful.DataModels
         public string Solution { get; set; }
         public int Emergency { get; set; }
         public int Status { get; set; }
+    }
+
+    public class ConsultationChangeStatus
+    {
+        public string DoctorId { get; set; }
+        public string PatientId { get; set; }
+
+        public int SortNo { get; set; }
+        public int Status { get; set; }
+        public string revUserId { get; set; }
+        public string TerminalName { get; set; }
+        public string TerminalIP { get; set; }
+        public int DeviceType { get; set; }
     }
 
 }
