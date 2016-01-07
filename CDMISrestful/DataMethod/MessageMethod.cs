@@ -331,7 +331,7 @@ namespace CDMISrestful.DataMethod
                     return ret;
                 }
 
-                ret = (int)Ps.Notification.SetData(pclsCache.CacheConnectionObject, AccepterID, NotificationType, Title, Description, DateTime.Parse(SendTime), SenderID, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
+                ret = (int)Ps.Notification.SetData(pclsCache.CacheConnectionObject, AccepterID, NotificationType, Title, Description, Convert.ToDateTime(SendTime), SenderID, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
                 return ret;
             }
             catch (Exception ex)

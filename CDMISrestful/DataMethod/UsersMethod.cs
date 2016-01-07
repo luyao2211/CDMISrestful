@@ -2784,5 +2784,108 @@ namespace CDMISrestful.DataMethod
             return ret;
         }
 
+        #region<Ps.Consultation>
+        public int PsConsultationSetData(DataConnection pclsCache, string DoctorId, string PatientId, DateTime ApplicationTime, string HealthCoachId, string Module, string Title, string Description, DateTime ConsultTime, string Solution, int Emergency, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        {
+            int ret = 0;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    //MessageBox.Show("Cache数据库连接失败");
+                    return ret;
+
+                }
+                ret = (int)Ps.Consultation.SetData(pclsCache.CacheConnectionObject, DoctorId, PatientId, ApplicationTime, HealthCoachId, Module, Title, Description, ConsultTime, Solution, Emergency, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
+
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "保存失败！");
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.PsConsultationSetData", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ret;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// 根据DoctorId和Status取对应病人列表——SYF 20160107 Status 1：已申请 2：已短信通知 3：已查看 4：已处理 5：拒绝处理 6：申请作废/申请过期 （123未处理，用7表示；456已处理，用8表示）
+        /// </summary>
+        /// <param name="pclsCache"></param>
+        /// <param name="DoctorId"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
+        public List<ConsultationStatus> ConsultationGetPatientsByStatus(DataConnection pclsCache, string DoctorId, int Status)
+        {
+            List<ConsultationStatus> items = new List<ConsultationStatus>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Consultation.GetPatientsByStatus(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
+                cmd.Parameters.Add("Status", CacheDbType.Int).Value = Status;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    ConsultationStatus item = new ConsultationStatus();
+                    item.PatientId = cdr["PatientId"].ToString();
+                    item.PatientName = cdr["PatientName"].ToString();
+                    item.PatientGender = Convert.ToInt32(cdr["PatientGender"]);
+
+                    string ForAge = (cdr["PatientBirthday"].ToString()).Substring(0, 4);
+                    int PatientBirthday = Convert.ToInt32(ForAge);
+
+                    int NowDate = Convert.ToInt32(DateTime.Now.Year.ToString()) ;
+                    item.PatientAge = NowDate - PatientBirthday;
+                    item.Module = cdr["Module"].ToString();
+                    item.ApplicationTime = Convert.ToDateTime(cdr["ApplicationTime"]);
+                    item.HealthCoachId = cdr["HealthCoachId"].ToString();
+                    item.HealthCoachName = cdr["HealthCoachName"].ToString();
+                    item.Title = cdr["Title"].ToString();
+                    item.Description = cdr["Description"].ToString();
+                    item.ConsultTime = Convert.ToDateTime(cdr["ConsultTime"]);
+                    item.Solution = cdr["Solution"].ToString();
+                    item.Emergency = Convert.ToInt32(cdr["Emergency"]);
+                    item.Status = Convert.ToInt32(cdr["Status"]);
+
+                    items.Add(item);
+                }
+                return items;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.ConsultationGetPatientsByStatus", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+        #endregion
+
     }
 }

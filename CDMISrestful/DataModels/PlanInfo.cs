@@ -695,10 +695,14 @@ namespace CDMISrestful.DataModels
 
     }
 
-    public class LogTask
+    public class LogTask:IComparable
     {
+
+        public string TaskName { get; set; }
         public string Type { get; set; }
         public string Code { get; set; }
+
+
 
         public string SortNo { get; set; }
         public string Edition { get; set; }
@@ -706,6 +710,48 @@ namespace CDMISrestful.DataModels
         public string Instruction { get; set; }
 
         public string PlanEndDate { get; set; }
+
+        public class StudentListEquality : IEqualityComparer<LogTask>
+        {
+            public bool Equals(LogTask x, LogTask y)
+            {
+                if((x.Type==y.Type) && (x.Code==y.Code) && (x.Instruction==y.Instruction) && (x.PlanEndDate==y.PlanEndDate) )
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+
+            public int GetHashCode(LogTask obj)
+            {
+                if (obj == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return obj.ToString().GetHashCode();
+                }
+            }
+        }  
+
+       public int CompareTo(object obj) 
+       {
+            int result;
+            try
+            {
+                LogTask info = obj as LogTask;
+                return string.Compare(this.Code, info.Code);
+            }
+            catch (Exception ex)
+            { 
+                 throw new Exception(ex.Message); 
+            }
+        }
 
     }
 
@@ -732,6 +778,26 @@ namespace CDMISrestful.DataModels
         public int DoDays { get; set; }
 
         public int UndoDays { get; set; }
+
+        public string Instruction { get; set; }
+
+    }
+
+    public class CmMstTaskN
+    {
+        public string Name { get; set; }
+        public string ParentCode { get; set; }
+
+        public string Description { get; set; }
+        public int GroupHeaderFlag { get; set; }
+
+        public int ControlType { get; set; }
+
+        public string DateTime { get; set; }
+
+        public string UserId { get; set; }
+
+        public string UserName { get; set; }
 
     }
 

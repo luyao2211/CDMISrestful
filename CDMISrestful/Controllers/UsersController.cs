@@ -400,10 +400,6 @@ namespace CDMISrestful.Controllers
          [EnableQuery]
         public List<PatientListTable> GetPatientsPlan(string DoctorId, string Module, string VitalType, string VitalCode)
         {
-            if (Module == "{Module}")
-            {
-                Module = "";
-            }
             return repository.GetPatientsPlan(pclsCache, DoctorId, Module, VitalType, VitalCode);
         }
 
@@ -479,6 +475,30 @@ namespace CDMISrestful.Controllers
          {
              string ret = repository.GetValueByType(pclsCache, UserId, Type);
              return new ExceptionHandler().Common(Request, ret);
+         }
+
+          /// <summary>
+         /// PsConsultation表插入一条数据 SYF 2016-01-07
+          /// </summary>
+          /// <param name="Consultation"></param>
+          /// <returns></returns>
+         [Route("Api/v1/Users/Consultation")]
+         public HttpResponseMessage PsConsultationSetData(Consultation Consultation)
+         {
+             int ret = repository.PsConsultationSetData(pclsCache, Consultation.DoctorId, Consultation.PatientId, Consultation.ApplicationTime, Consultation.HealthCoachId, Consultation.Module, Consultation.Title, Consultation.Description, Consultation.ConsultTime, Consultation.Solution, Consultation.Emergency, Consultation.Status, Consultation.Redundancy, Consultation.revUserId, Consultation.TerminalName, Consultation.TerminalIP, Consultation.DeviceType);
+             return new ExceptionHandler().SetData(Request, ret);
+         }
+
+         /// <summary>
+         /// 根据DoctorId和Status取对应病人列表——SYF 20160107 Status 1：已申请 2：已短信通知 3：已查看 4：已处理 5：拒绝处理 6：申请作废/申请过期 （123未处理，用7表示；456已处理，用8表示）
+         /// </summary>
+         /// <param name="DoctorId"></param>
+         /// <param name="Status"></param>
+         /// <returns></returns>
+         [Route("Api/v1/Users/Consultation")]
+         public List<ConsultationStatus> ConsultationGetPatientsByStatus(string DoctorId, int Status)
+         {
+             return repository.ConsultationGetPatientsByStatus(pclsCache, DoctorId, Status);
          }
 
     }

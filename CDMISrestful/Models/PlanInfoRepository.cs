@@ -1175,15 +1175,57 @@ namespace CDMISrestful.Models
                         //        }
                         //    }
                         #endregion
-                        list3 = list1.Except(list2).ToList();
-                        list4 = list2.Except(list1).ToList();
+                        //for (int x = 0; x < list1.Count;x++ )
+                        //{
+                        //    list1[x].Edition = "1";
+                        //}
+                        //for (int y = 0; y < list2.Count; y++)
+                        //{
+                        //    list2[y].Edition = "1";
+                        //}
+                        list3 = list1.Except(list2, new CDMISrestful.DataModels.LogTask.StudentListEquality()).ToList();
+                        //if(list3 != null)
+                        //{
+                        //    for (int x = 0; x < list3.Count; x++)
+                        //    {
+                        //        list3[x].Edition = Convert.ToString(Edition1);
+                        //    }
+                        //}
+                        list4 = list2.Except(list1, new CDMISrestful.DataModels.LogTask.StudentListEquality()).ToList();
+                        //if (list4 != null)
+                        //{
+                        //    for (int x = 0; x < list4.Count; x++)
+                        //    {
+                        //        list4[x].Edition = Convert.ToString(Edition2);
+                        //    }
+                        //}
+
                         list3.AddRange(list4);
+
+                        if(list3 != null)
+                        {
+                            for(int z=0; z<list3.Count; z++)
+                            {
+                                //string ForName = "";
+                                CmMstTaskN CmMstTaskN = new CmMstTaskN();
+                                CmMstTaskN = new PlanInfoMethod().GetCmTaskItemInfo(pclsCache, list3[z].Type, list3[z].Code);
+                                if(CmMstTaskN != null)
+                                {
+                                    list3[z].TaskName = CmMstTaskN.Name;
+                                }
+                            }
+                        }
                     }
 
                     string EndDate1 = Plan1.EndDate;
                     LogPlan Plan2 = new LogPlan();
                     Plan2 = new PlanInfoMethod().GetLogPlanByEdition(pclsCache, PlanNo, Edition2);
-                    string EndDate2 = Plan2.EndDate;
+                    string EndDate2 = "";
+                    if(Plan2 != null)
+                    {
+                        EndDate2 = Plan2.EndDate;
+                    }
+                    
                     if (EndDate1 != EndDate2)
                     {
                         LogTask ForEnd1 = new LogTask();
@@ -1193,6 +1235,7 @@ namespace CDMISrestful.Models
                         list3.Add(ForEnd1);
                         list3.Add(ForEnd2);
                     }
+                    list3.Sort();
                     return list3;
 
                 }
