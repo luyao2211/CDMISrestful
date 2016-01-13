@@ -1531,6 +1531,28 @@
             <param name="Type"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.PostConsultation(CDMISrestful.DataModels.Consultation)">
+            <summary>
+            PsConsultation表插入一条数据 SYF 2016-01-07
+            </summary>
+            <param name="Consultation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.GetConsultationPatientsByStatus(System.String,System.Int32)">
+            <summary>
+            根据DoctorId和Status取对应病人列表——SYF 20160107 Status 1：已申请 2：已短信通知 3：已查看 4：已处理 5：拒绝处理 6：申请作废/申请过期 （123未处理，用7表示；456已处理，用8表示）
+            </summary>
+            <param name="DoctorId"></param>
+            <param name="Status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.ConsultationChangeStatus(CDMISrestful.DataModels.ConsultationChangeStatus)">
+            <summary>
+            改变处理状态 syf 20160107
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.VitalInfoController.GetLatestPatientVitalSigns(System.String,System.String,System.String)">
             <summary>
             GetLatestPatientVitalSigns 获取病人某项生理参数最新值 GL 2015-10-12
@@ -2725,6 +2747,30 @@
             </summary>
             <param name="pclsCache"></param>
             <param name="DoctorId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.ConsultationGetPatientsByStatus(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32)">
+            <summary>
+            根据DoctorId和Status取对应病人列表——SYF 20160107 Status 1：已申请 2：已短信通知 3：已查看 4：已处理 5：拒绝处理 6：申请作废/申请过期 （123未处理，用7表示；456已处理，用8表示）
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="DoctorId"></param>
+            <param name="Status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.ConsultationChangeStatus(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            syf Consultation改变状态 20160107
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="DoctorId"></param>
+            <param name="PatientId"></param>
+            <param name="SortNo"></param>
+            <param name="Status"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.VitalInfoMethod.SetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">

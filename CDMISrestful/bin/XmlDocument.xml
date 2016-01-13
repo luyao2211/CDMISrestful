@@ -1546,6 +1546,13 @@
             <param name="Status"></param>
             <returns></returns>
         </member>
+        <member name="M:CDMISrestful.Controllers.UsersController.ConsultationChangeStatus(CDMISrestful.DataModels.ConsultationChangeStatus)">
+            <summary>
+            改变处理状态 syf 20160107
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
         <member name="M:CDMISrestful.Controllers.VitalInfoController.GetLatestPatientVitalSigns(System.String,System.String,System.String)">
             <summary>
             GetLatestPatientVitalSigns 获取病人某项生理参数最新值 GL 2015-10-12
@@ -2749,6 +2756,21 @@
             <param name="pclsCache"></param>
             <param name="DoctorId"></param>
             <param name="Status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CDMISrestful.DataMethod.UsersMethod.ConsultationChangeStatus(CDMISrestful.CommonLibrary.DataConnection,System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            syf Consultation改变状态 20160107
+            </summary>
+            <param name="pclsCache"></param>
+            <param name="DoctorId"></param>
+            <param name="PatientId"></param>
+            <param name="SortNo"></param>
+            <param name="Status"></param>
+            <param name="revUserId"></param>
+            <param name="TerminalName"></param>
+            <param name="TerminalIP"></param>
+            <param name="DeviceType"></param>
             <returns></returns>
         </member>
         <member name="M:CDMISrestful.DataMethod.VitalInfoMethod.SetData(CDMISrestful.CommonLibrary.DataConnection,System.String,System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
