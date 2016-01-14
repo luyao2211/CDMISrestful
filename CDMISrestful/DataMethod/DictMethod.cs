@@ -847,5 +847,40 @@ namespace CDMISrestful.DataMethod
         }
 
         #endregion
+
+        #region<Cm.MonitorMethod>
+        public CmMonitorMethod GetMonitorMethodData(DataConnection pclsCache, string Type, string Code)
+        {
+            try
+            {
+                CmMonitorMethod item = new CmMonitorMethod();
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                InterSystems.Data.CacheTypes.CacheSysList list = null;
+                list = Cm.MonitorMethod.GetData(pclsCache.CacheConnectionObject, Type, Code);
+                if (list != null)
+                {
+                    item.TypeName = list[0];
+                    item.Name = list[1];
+                    item.Method = list[2];
+                    item.Description = list[3];
+                    item.SortNo = Convert.ToInt32(list[4]);
+                    item.Redundance = list[5];
+                }
+                return item;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "DictMethod.GetMonitorMethodData", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                pclsCache.DisConnect();
+            }
+        }
+        #endregion
     }
 }

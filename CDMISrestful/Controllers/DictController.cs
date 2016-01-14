@@ -140,8 +140,19 @@ namespace CDMISrestful.Controllers
         {
             return repository.GetDivisionDeptList(pclsCache, Type);
         }
-
-
+    
+        /// <summary>
+        /// 根据Type和Code获取CmMonitorMethod表中其他字段 syf 20160114
+        /// </summary>
+        /// <param name="Type"></param>
+        /// <param name="Code"></param>
+        /// <returns></returns>
+        [Route("Api/v1/Dict/MonitorMethod")]
+        [ModelValidationFilter]
+        public CmMonitorMethod GetMonitorMethodData(string Type, string Code)
+        {
+            return repository.GetMonitorMethodData(pclsCache, Type, Code);
+        }
 
     }
 }

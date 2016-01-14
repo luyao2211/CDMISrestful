@@ -2923,6 +2923,66 @@ namespace CDMISrestful.DataMethod
                 pclsCache.DisConnect();
             }
         }
+
+        public List<ConsultationDP> ConsultationGetDataByDP(DataConnection pclsCache, string DoctorId, string PatientId)
+        {
+            List<ConsultationDP> items = new List<ConsultationDP>();
+            CacheCommand cmd = null;
+            CacheDataReader cdr = null;
+            try
+            {
+                if (!pclsCache.Connect())
+                {
+                    return null;
+                }
+                cmd = new CacheCommand();
+                cmd = Ps.Consultation.GetDataByDP(pclsCache.CacheConnectionObject);
+                cmd.Parameters.Add("DoctorId", CacheDbType.NVarChar).Value = DoctorId;
+                cmd.Parameters.Add("PatientId", CacheDbType.NVarChar).Value = PatientId;
+
+                cdr = cmd.ExecuteReader();
+                while (cdr.Read())
+                {
+                    ConsultationDP item     = new ConsultationDP();
+                    item.SortNo             = Convert.ToInt32(cdr["SortNo"]);
+                    item.ApplicationTime    = Convert.ToDateTime(cdr["ApplicationTime"]);
+                    item.HealthCoachId      = cdr["HealthCoachId"].ToString();
+                    item.HealthCoachName    = cdr["HealthCoachName"].ToString();
+                    item.Module             = cdr["Module"].ToString();
+                    item.Title              = cdr["Title"].ToString();
+                    item.Description        = cdr["Description"].ToString();
+                    item.ConsultTime        = Convert.ToDateTime(cdr["ConsultTime"]);
+                    item.Solution           = cdr["Solution"].ToString();
+                    item.Emergency          = Convert.ToInt32(cdr["Emergency"]);
+                    item.Status             = Convert.ToInt32(cdr["Status"]);
+
+                    items.Add(item);
+                }
+                return items;
+            }
+            catch (Exception ex)
+            {
+                HygeiaComUtility.WriteClientLog(HygeiaEnum.LogType.ErrorLog, "UsersMethod.ConsultationGGetDataByDP", "数据库操作异常！ error information : " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return null;
+            }
+            finally
+            {
+                if ((cdr != null))
+                {
+                    cdr.Close();
+                    cdr.Dispose(true);
+                    cdr = null;
+                }
+                if ((cmd != null))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Dispose();
+                    cmd = null;
+                }
+                pclsCache.DisConnect();
+            }
+        }
+
         #endregion
 
     }

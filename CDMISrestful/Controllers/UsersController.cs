@@ -514,5 +514,17 @@ namespace CDMISrestful.Controllers
              return new ExceptionHandler().ChangeStatus(Request, ret);
          }
 
+         /// <summary>
+         /// 根据DoctorId,PatientId获取Ps.Consultation表中所有相关数据——SYF 20160114
+         /// </summary>
+         /// <param name="DoctorId"></param>
+         /// <param name="PatientId"></param>
+         /// <returns></returns>
+         [Route("Api/v1/Users/Consultation")]
+         public List<ConsultationDP> ConsultationGetDataByDP(string DoctorId, string PatientId)
+         {
+             return repository.ConsultationGetDataByDP(pclsCache, DoctorId, PatientId);
+         }
+
     }
 }

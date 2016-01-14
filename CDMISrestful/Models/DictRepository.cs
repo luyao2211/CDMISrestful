@@ -124,7 +124,10 @@ namespace CDMISrestful.Models
             return dictMethod.GetDivisionDeptList(pclsCache, Type);
         }
 
-
+        public CmMonitorMethod GetMonitorMethodData(DataConnection pclsCache, string Type, string Code)
+        {
+            return dictMethod.GetMonitorMethodData(pclsCache, Type, Code);
+        }
 
     }
 }
