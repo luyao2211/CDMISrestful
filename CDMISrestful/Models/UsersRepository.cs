@@ -964,5 +964,10 @@ namespace CDMISrestful.Models
             return new UsersMethod().ConsultationChangeStatus(pclsCache, DoctorId, PatientId, SortNo, Status, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
+        public List<ConsultationDP> ConsultationGetDataByDP(DataConnection pclsCache, string DoctorId, string PatientId)
+        {
+            return new UsersMethod().ConsultationGetDataByDP(pclsCache, DoctorId, PatientId);
+        }
+
     }
 }

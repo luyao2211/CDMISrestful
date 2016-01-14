@@ -22,5 +22,7 @@ namespace CDMISrestful.Models
         List<CmMstTask> GetMstTaskByParentCode(DataConnection pclsCache, string ParentCode);
         string GetNo(DataConnection pclsCache, int NumberingType, string TargetDate);
 
+        CmMonitorMethod GetMonitorMethodData(DataConnection pclsCache, string Type, string Code);
+
     }
 }

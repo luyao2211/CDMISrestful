@@ -102,4 +102,15 @@ namespace CDMISrestful.DataModels
       
     }
 
+    public class CmMonitorMethod
+    {
+        public string TypeName { get; set; }
+        public string Name { get; set; }
+        public string Method { get; set; }
+        public string Description { get; set; }
+        public int SortNo { get; set; }
+        public string Redundance { get; set; }
+
+    }
+
 }
