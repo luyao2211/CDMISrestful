@@ -824,7 +824,19 @@ namespace CDMISrestful.Models
             {
                 items = new PlanInfoMethod().GetPatientsPlan(pclsCache, DoctorId, Module, VitalType, VitalCode);
             }
-            return items;
+            for (int i = 0; i < items.Count; i++)
+            {
+                for(int j=i+1; j<items.Count; j++)
+                {
+                    if(items[i].PatientId == items[j].PatientId)
+                    {
+                        items[i].Module = items[i].Module + "/" + items[j].Module;
+                        items.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
+                return items;
 
         }
 
