@@ -2858,6 +2858,7 @@ namespace CDMISrestful.DataMethod
                     item.Solution = cdr["Solution"].ToString();
                     item.Emergency = Convert.ToInt32(cdr["Emergency"]);
                     item.Status = Convert.ToInt32(cdr["Status"]);
+                    item.SortNo = Convert.ToInt32(cdr["SortNo"]);
 
                     items.Add(item);
                 }
