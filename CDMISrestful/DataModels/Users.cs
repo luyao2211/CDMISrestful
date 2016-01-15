@@ -644,6 +644,8 @@ namespace CDMISrestful.DataModels
         public string Solution { get; set; }
         public int Emergency { get; set; }
         public int Status { get; set; }
+
+        public int SortNo { get; set; }
     }
 
     public class ConsultationChangeStatus
