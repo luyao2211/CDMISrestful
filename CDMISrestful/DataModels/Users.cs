@@ -603,6 +603,8 @@ namespace CDMISrestful.DataModels
     {
         public string DoctorId { get; set; }
         public string PatientId { get; set; }
+
+        public int SortNo { get; set; }
         public DateTime ApplicationTime { get; set; }
         public string HealthCoachId { get; set; }
         public string Module { get; set; }

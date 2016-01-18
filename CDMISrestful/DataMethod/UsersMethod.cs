@@ -2785,7 +2785,7 @@ namespace CDMISrestful.DataMethod
         }
 
         #region<Ps.Consultation>
-        public int PsConsultationSetData(DataConnection pclsCache, string DoctorId, string PatientId, DateTime ApplicationTime, string HealthCoachId, string Module, string Title, string Description, DateTime ConsultTime, string Solution, int Emergency, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int PsConsultationSetData(DataConnection pclsCache, string DoctorId, string PatientId, int SortNo, DateTime ApplicationTime, string HealthCoachId, string Module, string Title, string Description, DateTime ConsultTime, string Solution, int Emergency, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
             int ret = 0;
             try
@@ -2796,7 +2796,7 @@ namespace CDMISrestful.DataMethod
                     return ret;
 
                 }
-                ret = (int)Ps.Consultation.SetData(pclsCache.CacheConnectionObject, DoctorId, PatientId, ApplicationTime, HealthCoachId, Module, Title, Description, ConsultTime, Solution, Emergency, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
+                ret = (int)Ps.Consultation.SetData(pclsCache.CacheConnectionObject, DoctorId, PatientId, SortNo, ApplicationTime, HealthCoachId, Module, Title, Description, ConsultTime, Solution, Emergency, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
 
                 return ret;
             }

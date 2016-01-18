@@ -920,9 +920,9 @@ namespace CDMISrestful.Models
             return new UsersMethod().GetValueByType(pclsCache, UserId, Type);
         }
 
-        public int PsConsultationSetData(DataConnection pclsCache, string DoctorId, string PatientId, DateTime ApplicationTime, string HealthCoachId, string Module, string Title, string Description, DateTime ConsultTime, string Solution, int Emergency, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
+        public int PsConsultationSetData(DataConnection pclsCache, string DoctorId, string PatientId, int SortNo, DateTime ApplicationTime, string HealthCoachId, string Module, string Title, string Description, DateTime ConsultTime, string Solution, int Emergency, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType)
         {
-            return new UsersMethod().PsConsultationSetData(pclsCache, DoctorId, PatientId, ApplicationTime, HealthCoachId, Module, Title, Description, ConsultTime, Solution, Emergency, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
+            return new UsersMethod().PsConsultationSetData(pclsCache, DoctorId, PatientId, SortNo, ApplicationTime, HealthCoachId, Module, Title, Description, ConsultTime, Solution, Emergency, Status, Redundancy, revUserId, TerminalName, TerminalIP, DeviceType);
         }
 
         public List<ConsultationStatus> ConsultationGetPatientsByStatus(DataConnection pclsCache, string DoctorId, int Status)
