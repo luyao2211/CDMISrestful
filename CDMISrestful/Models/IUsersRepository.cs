@@ -63,7 +63,7 @@ namespace CDMISrestful.Models
 
         string GetValueByType(DataConnection pclsCache, string UserId, string Type);
 
-        int PsConsultationSetData(DataConnection pclsCache, string DoctorId, string PatientId, DateTime ApplicationTime, string HealthCoachId, string Module, string Title, string Description, DateTime ConsultTime, string Solution, int Emergency, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
+        int PsConsultationSetData(DataConnection pclsCache, string DoctorId, string PatientId, int SortNo, DateTime ApplicationTime, string HealthCoachId, string Module, string Title, string Description, DateTime ConsultTime, string Solution, int Emergency, int Status, string Redundancy, string revUserId, string TerminalName, string TerminalIP, int DeviceType);
 
         List<ConsultationStatus> ConsultationGetPatientsByStatus(DataConnection pclsCache, string DoctorId, int Status);
 

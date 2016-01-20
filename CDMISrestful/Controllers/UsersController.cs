@@ -478,14 +478,14 @@ namespace CDMISrestful.Controllers
          }
 
           /// <summary>
-         /// PsConsultation表插入一条数据 SYF 2016-01-07
+         /// PsConsultation表插入一条数据 SYF 2016-01-07 SortNo不填或者填0，数据库SortNo自增，正常填写则按提供的SortNo值插入
           /// </summary>
           /// <param name="Consultation"></param>
           /// <returns></returns>
          [Route("Api/v1/Users/Consultation")]
          public HttpResponseMessage PostConsultation(Consultation Consultation)
          {
-             int ret = repository.PsConsultationSetData(pclsCache, Consultation.DoctorId, Consultation.PatientId, Consultation.ApplicationTime, Consultation.HealthCoachId, Consultation.Module, Consultation.Title, Consultation.Description, Consultation.ConsultTime, Consultation.Solution, Consultation.Emergency, Consultation.Status, Consultation.Redundancy, Consultation.revUserId, Consultation.TerminalName, Consultation.TerminalIP, Consultation.DeviceType);
+             int ret = repository.PsConsultationSetData(pclsCache, Consultation.DoctorId, Consultation.PatientId, Consultation.SortNo, Consultation.ApplicationTime, Consultation.HealthCoachId, Consultation.Module, Consultation.Title, Consultation.Description, Consultation.ConsultTime, Consultation.Solution, Consultation.Emergency, Consultation.Status, Consultation.Redundancy, Consultation.revUserId, Consultation.TerminalName, Consultation.TerminalIP, Consultation.DeviceType);
              return new ExceptionHandler().SetData(Request, ret);
          }
 
